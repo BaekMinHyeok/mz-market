@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 // const { User } = require("./models");
-const { userService } = require("./services/user");
+const { user } = require("./services/user");
 // const postsRouter = require("./routes/posts");
 
 const app = express();
@@ -15,12 +15,12 @@ mongoose.connection.on("connected", () => {
 
 const middleware = async (req, res) => {
   res.send("OK");
-  // const newUser = new User();
-  // newUser.name = "minhyeok";
-  // newUser.email = "sihun@gmail.com";
-  // newUser.pw = "1234";
-  // await newUser.save();
-  await user.add({ name: "test", email: "test@gmail.com", pw: "1234" });
+  const check = await user.add({
+    name: "test",
+    email: "이메일중복테스트",
+    pw: "1234",
+  });
+  console.log(check);
 };
 
 app.get("/", middleware);
