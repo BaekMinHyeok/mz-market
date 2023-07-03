@@ -12,31 +12,11 @@ mongoose.connection.on("connected", () => {
   console.log("Successfully connected to MongoDB");
 });
 
-// const middleware = async (req, res) => {
-//   res.send("OK");
-//   const check = await user.register({
-//     name: "test2",
-//     email: "test2@gmail.com",
-//     pw: "1234",
-//   });
-//   console.log(check);
-// };
-
-// const middleware = async (req, res) => {
-//   res.send("OK");
-//   const check = await user.login({
-//     email: "test@gmail.com",
-//     pw: "1234",
-//   });
-//   console.log(check);
-// };
-
 const middleware = async (req, res) => {
   res.send("OK");
-  const check = await user.updatePw({
+  const check = await user.delete({
     email: "test@gmail.com",
-    pw: "1234",
-    newPw: "4321",
+    pw: "4321",
   });
   console.log(check);
 };
