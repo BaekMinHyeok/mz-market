@@ -1,13 +1,13 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const { User } = require("./models");
+// const { User } = require("./models");
+const { userService } = require("./services/user");
 // const postsRouter = require("./routes/posts");
 
 const app = express();
 
-mongoose.connect(
-  "mongodb+srv://elice_11:noback@cluster.ippvmlc.mongodb.net/test"
-);
+mongoose.connect(process.env.DATABASE);
 
 mongoose.connection.on("connected", () => {
   console.log("Successfully connected to MongoDB");
@@ -15,11 +15,12 @@ mongoose.connection.on("connected", () => {
 
 const middleware = async (req, res) => {
   res.send("OK");
-  const newUser = new User();
-  newUser.name = "minhyeok";
-  newUser.email = "sihun@gmail.com";
-  newUser.pw = "1234";
-  await newUser.save();
+  // const newUser = new User();
+  // newUser.name = "minhyeok";
+  // newUser.email = "sihun@gmail.com";
+  // newUser.pw = "1234";
+  // await newUser.save();
+  await user.add({ name: "test", email: "test@gmail.com", pw: "1234" });
 };
 
 app.get("/", middleware);
