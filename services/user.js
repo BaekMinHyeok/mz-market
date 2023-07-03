@@ -15,8 +15,7 @@ class UserService {
       throw new Error("중복되는 이메일 주소 입니다.");
     }
 
-    const newUser = await this.userModel.create({ name, email, pw });
-    return newUser;
+    return await this.userModel.create({ name, email, pw });
   }
 
   //로그인
@@ -35,6 +34,20 @@ class UserService {
     }
 
     //JWT 토큰 관련 추가 필요
+  }
+
+  //비밀 번호 변경
+  //이미 로그인이 된 상태에서만 호출해야함
+  async updatePw(userInfo) {
+    const { email, pw, newPw } = userInfo;
+
+    //비밀 번호 일치 여부 체크
+    const check = await this.userModel.find({ email: email });
+    if (check[0].pw !== pw) {
+      throw new Error("비밀번호가 일치하지 않습니다.");
+    }
+
+    return await this.userModel.updateOne({ pw: newPw });
   }
 }
 

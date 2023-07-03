@@ -22,11 +22,21 @@ mongoose.connection.on("connected", () => {
 //   console.log(check);
 // };
 
+// const middleware = async (req, res) => {
+//   res.send("OK");
+//   const check = await user.login({
+//     email: "test@gmail.com",
+//     pw: "1234",
+//   });
+//   console.log(check);
+// };
+
 const middleware = async (req, res) => {
   res.send("OK");
-  const check = await user.login({
+  const check = await user.updatePw({
     email: "test@gmail.com",
     pw: "1234",
+    newPw: "4321",
   });
   console.log(check);
 };
