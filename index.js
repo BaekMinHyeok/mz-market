@@ -23,12 +23,5 @@ const middleware = async (req, res) => {
 
 app.get("/", middleware);
 
-// app.get("/:name", async (req, res) => {
-//   const name = req.params.name;
-//   const user = await User.find({ name: name });
-//   res.send(user);
-// });
-
-// app.use("/posts", postsRouter);
 
 app.listen(3000);
