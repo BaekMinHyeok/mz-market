@@ -1,23 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const {
-  register,
-  login,
-  updatePw,
-  deleteAccount,
-} = require("../middlewares/user");
+const { register } = require("../middlewares/user");
+const path = require("path");
 
-router.get("/register", (req, res) => {
-  res.send(`
-        <form action="/api/register" method="post">
-          <input type="text" name="name" value=""> <br>
-          <input type="text" name="email" value=""> <br>
-          <input type="text" name="pw" value=""> <br>
-          <input type="submit" name="btn" value="회원가입">
-        </form>
-        `);
-});
-
+router.use("/register", serveStatic("join"));
 router.post("/register", register);
+
+// views폴더 내의 ${resource} 폴더 내의 모든 파일을 웹에 띄우며,
+// 이 때 ${resource}.html 을 기본 파일로 설정함.
+const serveStatic = (resource) => {
+  const resourcePath = path.join(__dirname, `../../views/${resource}`);
+  const option = { index: `${resource}.html` };
+
+  // express.static 은 express 가 기본으로 제공하는 함수임
+  return express.static(resourcePath, option);
+};
 
 module.exports = router;

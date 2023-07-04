@@ -1,13 +1,13 @@
 const { user } = require("../../services/user");
 
 const register = async (req, res) => {
-  const user = await user.register({
+  const check = await user.register({
     name: req.body.name,
     email: req.body.email,
     pw: req.body.pw,
   });
-  res.send(user);
-  console.log(user);
+  res.send(check);
+  console.log(check);
 };
 
 const login = async (req, res) => {
@@ -42,4 +42,4 @@ const deleteAccount = async (req, res) => {
   console.log(result);
 };
 
-module.exports = { register, login, updatePw, deleteAccount };
+module.exports = { register };
