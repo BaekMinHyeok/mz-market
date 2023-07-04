@@ -50,7 +50,7 @@ async function createAccount() {
     }
   } catch (error) {
     console.error("Error:", error);
-    alert(error);
+    alert("등록하는 동안 오류가 발생했습니다. 나중에 다시 시도 해 주세요.");
   }
 }
 

@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const api = require("./controller/routers/api");
 const app = express();
 
+app.use(express.static("./public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // <==== parse request body as JSON
 
