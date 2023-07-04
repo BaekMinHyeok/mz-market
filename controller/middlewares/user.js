@@ -17,6 +17,10 @@ const login = async (req, res) => {
   });
   res.cookie("token", token);
   console.log(token);
+
+  /**
+   * JWT 체크 추가해야됨
+   */
 };
 
 const updatePw = async (req, res) => {
@@ -38,4 +42,4 @@ const deleteAccount = async (req, res) => {
   console.log(result);
 };
 
-module.exports = { register };
+module.exports = { register, login, updatePw, deleteAccount };
