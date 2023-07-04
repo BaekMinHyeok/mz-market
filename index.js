@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 const api = require("./controller/routers/api");
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // <==== parse request body as JSON
+
 mongoose.connect(process.env.DATABASE);
 
 mongoose.connection.on("connected", () => {
