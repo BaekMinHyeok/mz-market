@@ -14,9 +14,9 @@ mongoose.connection.on("connected", () => {
 
 const middleware = async (req, res) => {
   res.send("OK");
-  const check = await user.delete({
-    email: "test@gmail.com",
-    pw: "4321",
+  const check = await user.login({
+    email: "test2@gmail.com",
+    pw: "1234",
   });
   console.log(check);
 };

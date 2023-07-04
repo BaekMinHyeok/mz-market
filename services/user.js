@@ -1,4 +1,6 @@
 const { User } = require("../models");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 class UserService {
   constructor(User) {
@@ -33,7 +35,19 @@ class UserService {
       throw new Error("비밀번호가 일치하지 않습니다.");
     }
 
-    //JWT 토큰 관련 추가 필요
+    //JWT 토큰 생성
+    const token = jwt.sign(
+      {
+        name: check[0].name,
+        email: check[0].email,
+      },
+      process.env.SECRET
+    );
+    return token;
+
+    /**
+     res.cookie('token', token);
+     */
   }
 
   //비밀번호 변경
