@@ -14,16 +14,31 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const token = await user.login({
-    email: req.body.email,
-    pw: req.body.pw,
-  });
-  res.cookie("token", token);
-  console.log(token);
+  try {
+    const token = await user.login({
+      email: req.body.email,
+      pw: req.body.pw,
+    });
+    res.cookie("token", token);
+    console.log(token);
+  } catch (error) {
+    res.send(error);
+  }
+};
 
-  /**
-   * JWT 체크 추가해야됨
-   */
+//Token 체크
+const auth = async (req, res, next) => {
+  try {
+    req.decoded = jwt.verify(req.headers.authorization, process.env.SECRET);
+    return next();
+  } catch (error) {
+    // 토큰의 키가 일치하지 않는 경우
+    if (error.name === "JsonWebTokenError") {
+      return res.json({
+        message: "유효하지 않은 토큰입니다.",
+      });
+    }
+  }
 };
 
 const updatePw = async (req, res) => {
