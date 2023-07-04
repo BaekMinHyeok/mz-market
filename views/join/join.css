@@ -45,6 +45,6 @@ label[for="password-check"] {
   margin-left: -72%;
 }
 
-p {
+.login-p {
   font-size: x-small;
 }
