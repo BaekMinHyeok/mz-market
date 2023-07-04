@@ -1,0 +1,116 @@
+.container {
+  width: 1200px;
+  padding: 300px 0 200px;
+  margin: auto;
+}
+
+.products_list_title_box {
+  padding-bottom: 60px;
+  margin-bottom: 120px;
+  border-bottom: 2px solid #d2d2d2;
+}
+
+.products_list_title_box .products_list_title {
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 27px;
+}
+
+.products_list_title_box .products_list_subtitle {
+  font-weight: 700;
+}
+
+.products_list_contents {
+}
+
+.products_list_contents .products_list_select_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 47px;
+}
+
+.products_list_contents .products_list_select_container > div > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 8px 20px;
+  border-radius: 50px;
+  border: 2px solid #000;
+  background: #fff;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.products_list_contents
+  .products_list_select_container
+  .products_list_select_container_left {
+  display: flex;
+  align-items: center;
+  gap: 27px;
+}
+
+.products_list_contents .products_list_content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+
+.products_list_contents .products_list_content .products_list_box {
+}
+
+.products_list_contents
+  .products_list_content
+  .products_list_box
+  .products_list_img {
+  width: 278px;
+  height: 278px;
+  border-radius: 20px;
+  background-color: #f2f2f2;
+  margin-bottom: 35px;
+}
+
+.products_list_contents
+  .products_list_content
+  .products_list_box
+  .products_list_content_title {
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.products_list_contents
+  .products_list_content
+  .products_list_box
+  .products_list_content_subtitle {
+  font-weight: 500;
+  color: #000;
+}
+
+.products_list_contents
+  .products_list_content
+  .products_list_box
+  .products_list_box_bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.products_list_contents
+  .products_list_content
+  .products_list_box
+  .products_list_box_bottom
+  .products_list_price {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.products_list_contents
+  .products_list_content
+  .products_list_box
+  .products_list_box_bottom
+  .products_list_review {
+  font-size: 14px;
+}
