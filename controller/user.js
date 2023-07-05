@@ -26,13 +26,15 @@ const login = async (req, res) => {
       pw: req.body.pw,
     });
     res.json({
-      code: 200,
       success: true,
-      token,
+      message: "로그인에 성공했습니다.",
+      token: token,
     });
   } catch (error) {
-    res.status(500).json({
-      error: "로그인에 실패했습니다.",
+    res.json({
+      success: false,
+      message: error,
+      token: undefined,
     });
   }
 };
