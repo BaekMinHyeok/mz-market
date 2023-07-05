@@ -1,15 +1,16 @@
-const { user } = require("../../services/user");
+const { user } = require("../services/user");
 
 const register = async (req, res) => {
   try {
-    const check = await user.register({
+    const newUser = await user.register({
       name: req.body.name,
       email: req.body.email,
       pw: req.body.pw,
     });
-    res.send(check);
+    res.send(newUser);
+    console.log(newUser);
   } catch (error) {
-    res.send(error);
+    res.status(500).send("이미 존재하는 이메일 주소 입니다.");
   }
 };
 
@@ -23,21 +24,6 @@ const login = async (req, res) => {
     console.log(token);
   } catch (error) {
     res.send(error);
-  }
-};
-
-//Token 체크
-const auth = async (req, res, next) => {
-  try {
-    req.decoded = jwt.verify(req.headers.authorization, process.env.SECRET);
-    return next();
-  } catch (error) {
-    // 토큰의 키가 일치하지 않는 경우
-    if (error.name === "JsonWebTokenError") {
-      return res.json({
-        message: "유효하지 않은 토큰입니다.",
-      });
-    }
   }
 };
 
@@ -60,4 +46,4 @@ const deleteAccount = async (req, res) => {
   console.log(result);
 };
 
-module.exports = { register };
+module.exports = { register, login, updatePw, deleteAccount };

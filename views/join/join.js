@@ -46,10 +46,11 @@ async function createAccount() {
     if (response.ok) {
       alert("회원가입이 성공하였습니다!");
     } else {
-      alert("회원가입이 실패하였습니다. 다시 시도해 주세요.");
+      const errorMessage = await response.text();
+      alert(`Error! ${errorMessage}`);
     }
   } catch (error) {
-    console.error("Error:", error);
+    console.error(error);
     alert("등록하는 동안 오류가 발생했습니다. 나중에 다시 시도 해 주세요.");
   }
 }

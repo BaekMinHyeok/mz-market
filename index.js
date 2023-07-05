@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const api = require("./controller/routers/api");
+const api = require("./routers/api");
+const page = require("./routers/page");
 const app = express();
 
 app.use(express.static("./public"));
@@ -14,6 +15,7 @@ mongoose.connection.on("connected", () => {
   console.log("Successfully connected to MongoDB");
 });
 
+app.use("/", page);
 app.use("/api", api);
 
 app.listen(3000);
