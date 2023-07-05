@@ -2,14 +2,20 @@ const { user } = require("../services/user");
 
 const register = async (req, res) => {
   try {
-    const newUser = await user.register({
+    await user.register({
       name: req.body.name,
       email: req.body.email,
       pw: req.body.pw,
     });
-    res.send(newUser);
+    res.json({
+      success: true,
+      message: "회원가입에 성공했습니다.",
+    });
   } catch (error) {
-    res.status(500).send("이미 존재하는 이메일 주소 입니다.");
+    res.json({
+      success: false,
+      message: error,
+    });
   }
 };
 

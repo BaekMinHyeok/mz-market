@@ -14,7 +14,8 @@ class UserService {
     //이메일 중복 체크
     const check = await this.userModel.find({ email: email });
     if (check.length !== 0) {
-      throw new Error("중복되는 이메일 주소 입니다.");
+      // throw new Error("중복되는 이메일 주소 입니다.");
+      throw "중복되는 이메일 주소 입니다.";
     }
 
     return await this.userModel.create({ name, email, pw });
