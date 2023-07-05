@@ -38,6 +38,7 @@ class UserService {
     //JWT 토큰 생성
     const token = jwt.sign(
       {
+        type: "JWT",
         name: check[0].name,
         email: check[0].email,
       },
