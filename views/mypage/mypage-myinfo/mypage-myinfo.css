@@ -1,36 +1,53 @@
-body{
-	margin-top: 100px;
-	line-height: 1.6
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
 }
-.container{
-	width: 500px;
-	margin: 0 auto;
+h1 {
+  margin-bottom: 50px;
 }
-
-ul.tabs{
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
+.tabs {
+  flex-direction: column;
 }
-ul.tabs li{
-	background: none;
-	color: #222;
-	display: inline-block;
-	padding: 10px 15px;
-	cursor: pointer;
+.input-container {
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-ul.tabs li.current{
-	background: #ededed;
-	color: #222;
+.input-container label {
+  margin-bottom: 1px;
+  display: block;
+  margin-left: -80%;
+  font-size: smaller;
 }
 
-.tab-content{
-	display: none;
-	background: #ededed;
-	padding: 15px;
+input, button.signup-button {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+.signup-button{
+  margin-top: 70px;
+  margin-bottom: 30px;
 }
 
-.tab-content.current{
-	display: inherit;
+label[for="name"] {
+  margin-left: -85%;
 }
+
+label[for="email"] {
+  margin-left: -83%;
+}
+
+label[for="password-check"] {
+  margin-left: -72%;
+}
+
+.login-p {
+  font-size: x-small;
+}
+
