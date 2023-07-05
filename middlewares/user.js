@@ -1,7 +1,8 @@
 //Token 체크
 const auth = async (req, res, next) => {
   try {
-    req.decoded = jwt.verify(req.headers.authorization, process.env.SECRET);
+    const decoded = jwt.verify(req.headers.authorization, process.env.SECRET);
+    req.email = decoded.email;
     return next();
   } catch (error) {
     // 토큰의 키가 일치하지 않는 경우
