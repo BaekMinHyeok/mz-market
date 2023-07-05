@@ -3,7 +3,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const api = require("./routers/api");
 const page = require("./routers/page");
-const upload = require("./middlewares/multerconfig");
 const app = express();
 
 app.use(express.static("./public"));
@@ -17,6 +16,6 @@ mongoose.connection.on("connected", () => {
 
 app.use("/", page);
 app.use("/api", api);
-app.post("/upload", upload);
+
 
 app.listen(3000);
