@@ -8,7 +8,6 @@ const register = async (req, res) => {
       pw: req.body.pw,
     });
     res.send(newUser);
-    console.log(newUser);
   } catch (error) {
     res.status(500).send("이미 존재하는 이메일 주소 입니다.");
   }
@@ -20,10 +19,15 @@ const login = async (req, res) => {
       email: req.body.email,
       pw: req.body.pw,
     });
-    res.cookie("token", token);
-    console.log(token);
+    res.json({
+      code: 200,
+      success: true,
+      token,
+    });
   } catch (error) {
-    res.send(error);
+    res.status(500).json({
+      error: "로그인에 실패했습니다.",
+    });
   }
 };
 
