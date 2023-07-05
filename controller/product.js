@@ -10,10 +10,26 @@ const registerProduct = async (req, res) => {
       description: req.body.description,
       price: req.body.price,
       category: req.body.category,
+      gender: req.body.gender,
     })
     res.send(newProduct);
   } catch(error) {
     //res.status(500).send("상품 등록에 실패했습니다.");
+  }
+};
+
+// 상품 업데이트
+const updateProduct = async (req, res) => {
+  try {
+    const productId = req.params.productId
+    const updatedInfo = req.body
+    const updatedProduct = await product.updateProduct(productId, updatedInfo);
+
+    res.send(updatedProduct)
+  } catch (err) {
+    // res.status(500).json({
+    //   error : "제품 업데이트에 실패했습니다.",
+    // })
   }
 };
 
@@ -27,15 +43,25 @@ const uploadImg = async (req, res) => {
       }
 
       const images = req.files;
+      const isRegister = req.body.isRegister
+      
 
       try {
-        const newProduct = await product.registerProduct({
+        let newProduct;
+        const productData = {
           name: req.body.name,
           description: req.body.description,
           price: req.body.price,
           category: req.body.category,
           images: images.map((image) => image.filename),
-        });
+          gender: req.body.gender,
+        }
+        
+        if(isRegister){
+        newProduct = await product.registerProduct(productData);
+      } else {
+        newProduct = await product.updateProduct(productData)
+      }
 
         return res.json(newProduct);
       } catch (error) {
@@ -72,20 +98,6 @@ const getProductByName = async (req, res) => {
   }
 };
 
-// 상품 업데이트
-const updateProduct = async (req, res) => {
-  try {
-    const productId = req.params.productId
-    const updatedInfo = req.body
-    const updatedProduct = await product.updateProduct(productId, updatedInfo);
-
-    res.send(updatedProduct)
-  } catch (err) {
-    // res.status(500).json({
-    //   error : "제품 업데이트에 실패했습니다.",
-    // })
-  }
-};
 
 // 상품 삭제
 
