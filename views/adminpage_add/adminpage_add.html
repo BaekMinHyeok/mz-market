@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../reset.css" type="text/css">
     <link rel="stylesheet" href="adminpage_add.css" type="text/css">
     <script src="../header/header.js"></script>
+    <script src="adminpage_add.js"></script>
+    <script src="adminpage_image selection.js"></script>
     <title>adminpage</title>
 </head>
 <body>
@@ -15,8 +17,8 @@
     <div class="admin-content">
         <h1>관리자 페이지</h1>
         <div class="admin-menu">
-            <p class ="list-btn">상품목록</p>
-            <p class ="add-btn">상품추가</p>
+            <p class="list-btn">상품목록</p>
+            <p class="add-btn">상품추가</p>
             <p>카테고리</p>
             <p>주문관리</p>
         </div>
@@ -24,36 +26,37 @@
             <p></p>
         </div>
         <div class="add-text">
-          <h2>상품 추가</h2>
-          <p>상품을 확인하고 추가할 수 있어요.</p>
+            <h2>상품 추가</h2>
+            <p>상품을 확인하고 추가할 수 있어요.</p>
         </div>
-          <h3>상품사진</h3>
+        <h3>상품사진</h3>
         <div class="add-text2">
-          <input class="rectangle" placeholder="상품 사진을 선택해주세요."></input>
-          <button class=picture-btn>업로드</button>
+            <input class="rectangle" id="imgInput" ></input>
+            <button class="img-btn" onclick="openFile()">업로드</button>
         </div>
-          <h3>상품명</h3>
-          <input class="rectangle" placeholder="상품 이름을 입력해주세요."></input>
-          <h3>상세 설명</h3>
-          <textarea class="textarea" placeholder="상품 설명을 입력해주세요."></textarea>
-          <h3>상품 가격</h3>
-          <input class="rectangle" placeholder="상품 가격을 입력해주세요."></input>
-          <h3>카테고리</h3>
-          <input class="rectangle" placeholder="카테고리를 선택해주세요."></input>
-          <div class="checkbox-container">
+        <h3>상품명</h3>
+        <input class="rectangle" placeholder="상품 이름을 입력해주세요."></input>
+        <h3>상세 설명</h3>
+        <textarea class="textarea" placeholder="상품 설명을 입력해주세요."></textarea>
+        <h3>상품 가격</h3>
+        <input class="rectangle" placeholder="상품 가격을 입력해주세요."></input>
+        <h3>카테고리</h3>
+        <input class="rectangle" id="checkvalue" placeholder="카테고리를 선택해주세요."></input>
+        <div class="checkbox-container">
             <label>
-              <input type="checkbox" name="outer"> 아우터
+                <input type="radio"  name="category" onclick="updateCategoryValue(this)"> 아우터
             </label>
             <label>
-              <input type="checkbox" name="top"> 상의
+                <input type="radio"  name="category" onclick="updateCategoryValue(this)"> 상의
             </label>
             <label>
-              <input type="checkbox" name="bottom"> 하의
+                <input type="radio"  name="category" onclick="updateCategoryValue(this)"> 하의
             </label>
             <label>
-              <input type="checkbox" name="etc"> 기타
+                <input type="radio"  name="category" onclick="updateCategoryValue(this)"> 기타
             </label>
-          </div>
+        </div>
+        <button id="save-btn">저장하기</button>
     </div>
 </body>
 </html>
