@@ -1,0 +1,100 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+  
+.admin-content {
+    margin: 0 280px;
+}
+.admin-menu {
+    display: flex;
+    gap: 124px;
+}
+.admin-menu p {
+    color: #000;
+    font-size: 20px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.line p {
+	width: calc(100% - 0px);
+  height: 2px;
+  background-color: #bfbfb0fe;
+  margin: 0; 
+  margin-top: 15px;
+  margin-bottom: 70px;
+}
+p.add-btn::after{
+    content: "";
+    display: block;
+    width: 10%;
+    height: 3px;
+    background-color: black;
+    position: absolute;
+    bottom: -69%;
+    
+}
+.admin-menu{
+    position: relative;
+}
+.add-text h2{
+    margin-bottom: 13px;
+}
+.add-text p{
+    margin-bottom: 70px;
+}
+.add-text2 {
+  display: flex; 
+  align-items: center; 
+}
+.rectangle {
+  width: calc(100% - 0px);
+  height: 52px;
+  border-radius: 15px;
+  border: 2px solid #E2E2E2;
+  background: #FFF;
+  margin-bottom: 15px;
+  margin-top: 20px; 
+  padding: 20px; 
+}
+.textarea{
+  width: calc(100% - 0px);
+  height: 338px;
+  border-radius: 15px;
+  border: 2px solid #E2E2E2;
+  background: #FFF;
+  margin-bottom: 15px;
+  vertical-align: top;
+  margin-top: 20px; 
+  padding: 20px; 
+}
+.picture-btn {
+  margin-left: 60px;
+  width: 103px;
+  height: 50px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  background: #D2D2D2;
+}
+h3{
+  margin-bottom: 10px;
+}
+.checkbox-container {
+  width: calc(100% - 0px);
+  height: 180px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  border: 2px solid #F2F2F2;
+  background: #FFF;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly; /* 수평 방향으로 균일하게 정렬 */
+}
+label {
+  margin-bottom: 20px; /* 원하는 간격을 설정하세요 */
+}
+
