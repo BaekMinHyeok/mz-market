@@ -18,7 +18,7 @@ async function editName() {
     const response = await fetch('/update-name', {
       method: 'PUT',
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, //header에 jwt토큰 추가
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ name: newName })
@@ -39,7 +39,7 @@ async function editEmail() {
     const response = await fetch('/update-email', {
       method: 'PUT',
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,//header에 jwt토큰 추가
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ email: newEmail })
@@ -67,7 +67,7 @@ async function editPassword() {
     const response = await fetch('/update-password', {
       method: 'PUT',
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, //header에 jwt토큰 추가
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ password: newPassword })
@@ -87,7 +87,7 @@ async function deleteAccount() {
     const response = await fetch('/delete-account', {
       method: 'DELETE',
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, //header에 jwt토큰 추가
         'Content-Type': 'application/json'
       }
     });
