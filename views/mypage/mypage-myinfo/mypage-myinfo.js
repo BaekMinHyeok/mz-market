@@ -1,4 +1,3 @@
-// Get references to the input fields and buttons
 const nameInput = document.querySelector('#name');
 const emailInput = document.querySelector('#email');
 const passwordInput = document.querySelector('#password');
@@ -8,127 +7,96 @@ const emailEditButton = document.querySelector('.email-edit');
 const passwordEditButton = document.querySelector('.password-edit');
 const deleteAccountButton = document.querySelector('.delete-account');
 
-// Add event listeners to the buttons
 nameEditButton.addEventListener('click', editName);
 emailEditButton.addEventListener('click', editEmail);
 passwordEditButton.addEventListener('click', editPassword);
 deleteAccountButton.addEventListener('click', deleteAccount);
 
-// Function to edit the name
-function editName() {
+async function editName() {
   const newName = nameInput.value;
-  // Send a request to the server to update the name using the JWT token in the header
-  // Example using fetch API:
-  fetch('/update-name', {
-    method: 'PUT',
-    headers: {
-      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ name: newName })
-  })
-  .then(response => {
-    // Handle the response
+  try {
+    const response = await fetch('/update-name', {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: newName })
+    });
     if (response.ok) {
-      // Name updated successfully
-      console.log('Name updated');
+      console.log('이름을 변경하였습니다.');
     } else {
-      // Error updating name
-      console.error('Failed to update name');
+      console.error('이름 변경에 실패했습니다.');
     }
-  })
-  .catch(error => {
-    console.error('An error occurred while updating name:', error);
-  });
+  } catch (error) {
+    console.error('이름 변경에 실패했습니다.:', error);
+  }
 }
 
-// Function to edit the email
-function editEmail() {
+async function editEmail() {
   const newEmail = emailInput.value;
-  // Send a request to the server to update the email using the JWT token in the header
-  // Example using fetch API:
-  fetch('/update-email', {
-    method: 'PUT',
-    headers: {
-      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ email: newEmail })
-  })
-  .then(response => {
-    // Handle the response
+  try {
+    const response = await fetch('/update-email', {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email: newEmail })
+    });
     if (response.ok) {
-      // Email updated successfully
-      console.log('Email updated');
+      console.log('이메일이 변경되었습니다.');
     } else {
-      // Error updating email
-      console.error('Failed to update email');
+      console.error('이메일변경에 실패하였습니다.');
     }
-  })
-  .catch(error => {
-    console.error('An error occurred while updating email:', error);
-  });
+  } catch (error) {
+    console.error('이메일변경에 실패했습니다:', error);
+  }
 }
 
-// Function to edit the password
-function editPassword() {
+async function editPassword() {
   const newPassword = passwordInput.value;
   const newPasswordCheck = passwordCheckInput.value;
 
   if (newPassword !== newPasswordCheck) {
-    // Password and password-check do not match
-    console.error('Passwords do not match');
+    console.error('비밀번호가 일치하지 않습니다!');
     return;
   }
 
-  // Send a request to the server to update the password using the JWT token in the header
-  // Example using fetch API:
-  fetch('/update-password', {
-    method: 'PUT',
-    headers: {
-      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ password: newPassword })
-  })
-  .then(response => {
-    // Handle the response
+  try {
+    const response = await fetch('/update-password', {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ password: newPassword })
+    });
     if (response.ok) {
-      // Password updated successfully
-      console.log('Password updated');
+      console.log('비밀번호를 변경하였습니다.');
     } else {
-      // Error updating password
-      console.error('Failed to update password');
+      console.error('비밀번호 변경에 실패하였습니다!');
     }
-  })
-  .catch(error => {
-    console.error('An error occurred while updating password:', error);
-  });
+  } catch (error) {
+    console.error('비밀번호 변경에 실패하였습니다:', error);
+  }
 }
 
-// Function to delete the account
-function deleteAccount() {
-  // Send a request to the server to delete the account using the JWT token in the header
-  // Example using fetch API:
-  fetch('/delete-account', {
-    method: 'DELETE',
-    headers: {
-      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => {
-    // Handle the response
+async function deleteAccount() {
+  try {
+    const response = await fetch('/delete-account', {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
+        'Content-Type': 'application/json'
+      }
+    });
     if (response.ok) {
-      // Account deleted successfully
-      console.log('Account deleted');
-      // Perform any necessary actions after deleting the account, such as redirecting to another page
+      console.log('회원탈퇴 되었습니다.');
     } else {
-      // Error deleting account
-      console.error('Failed to delete account');
+      console.error('회원탈퇴에 실패하였습니다!');
     }
-  })
-  .catch(error => {
-    console.error('An error occurred while deleting account:', error);
-  });
+  } catch (error) {
+    console.error('회원탈퇴에 실패하였습니다:', error);
+  }
 }
