@@ -3,7 +3,6 @@ const { Schema } = require("mongoose");
 const productSchema = new Schema({
   name: {
     type: String,
-    trim: true,
     required: true,
   },
   price: {
@@ -14,14 +13,19 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  size: {
+  size:{
     type: [String],
     required: true,
   },
-  category: {
+  category:{
     type: [String],
     required: true,
   },
+  image: {
+    type: String,
+    require: true,
+  },
+
 });
 
 module.exports = productSchema;
