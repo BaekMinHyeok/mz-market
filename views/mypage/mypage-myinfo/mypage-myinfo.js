@@ -1,187 +1,134 @@
-const jwt = require('jsonwebtoken');
-
+// Get references to the input fields and buttons
+const nameInput = document.querySelector('#name');
+const emailInput = document.querySelector('#email');
+const passwordInput = document.querySelector('#password');
+const passwordCheckInput = document.querySelector('#password-check');
 const nameEditButton = document.querySelector('.name-edit');
 const emailEditButton = document.querySelector('.email-edit');
 const passwordEditButton = document.querySelector('.password-edit');
-const secretKey = 'YOUR_SECRET_KEY';
+const deleteAccountButton = document.querySelector('.delete-account');
 
-// 수정 버튼 클릭 이벤트 리스너
+// Add event listeners to the buttons
 nameEditButton.addEventListener('click', editName);
 emailEditButton.addEventListener('click', editEmail);
 passwordEditButton.addEventListener('click', editPassword);
+deleteAccountButton.addEventListener('click', deleteAccount);
 
-// name 수정
-async function editName() {
-  const nameInput = document.querySelector('#name');
-  const nameValue = nameInput.value;
-
-  // 백엔드 API에 데이터 전송
-  const data = {
-    field: 'name',
-    value: nameValue
-  };
-
-  try {
-    const token = generateToken();
-    const response = await fetch('/api/edit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}` 
-      },
-      body: JSON.stringify(data)
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      console.log('이름을 변경하였습니다.');
+// Function to edit the name
+function editName() {
+  const newName = nameInput.value;
+  // Send a request to the server to update the name using the JWT token in the header
+  // Example using fetch API:
+  fetch('/update-name', {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: newName })
+  })
+  .then(response => {
+    // Handle the response
+    if (response.ok) {
+      // Name updated successfully
+      console.log('Name updated');
     } else {
-      console.error('Name edit failed:', result.error);
-      alert('이름 변경에 실패하였습니다.');
+      // Error updating name
+      console.error('Failed to update name');
     }
-  } catch (error) {
-    console.error('Name edit request error:', error);
-    alert('이름 변경에 실패하였습니다.');
-  }
+  })
+  .catch(error => {
+    console.error('An error occurred while updating name:', error);
+  });
 }
 
-// email 수정
-async function editEmail() {
-  const emailInput = document.querySelector('#email');
-  const emailValue = emailInput.value;
-
-  // 백엔드 API에 데이터 전송
-  const data = {
-    field: 'email',
-    value: emailValue
-  };
-
-  try {
-    const token = generateToken();
-    const response = await fetch('/api/edit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}` 
-      },
-      body: JSON.stringify(data)
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      console.log('이메일 변경에 성공하였습니다.');
+// Function to edit the email
+function editEmail() {
+  const newEmail = emailInput.value;
+  // Send a request to the server to update the email using the JWT token in the header
+  // Example using fetch API:
+  fetch('/update-email', {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email: newEmail })
+  })
+  .then(response => {
+    // Handle the response
+    if (response.ok) {
+      // Email updated successfully
+      console.log('Email updated');
     } else {
-      console.error('Email edit failed:', result.error);
-      alert('이메일 변경에 실패하였습니다.');
+      // Error updating email
+      console.error('Failed to update email');
     }
-  } catch (error) {
-    console.error('Email edit request error:', error);
-    alert('이메일 변경에 실패하였습니다.');
-  }
+  })
+  .catch(error => {
+    console.error('An error occurred while updating email:', error);
+  });
 }
 
-// Password 수정
-async function editPassword() {
-  const passwordInput = document.querySelector('#password');
-  const passwordCheckInput = document.querySelector('#password-check');
-  const passwordValue = passwordInput.value;
-  const passwordCheckValue = passwordCheckInput.value;
+// Function to edit the password
+function editPassword() {
+  const newPassword = passwordInput.value;
+  const newPasswordCheck = passwordCheckInput.value;
 
-  // 비밀번호가 일치하는지 확인(일치하지 않으면 조기 종료)
-  if (passwordValue !== passwordCheckValue) {
-    alert('비밀번호가 일치하지 않습니다.');
+  if (newPassword !== newPasswordCheck) {
+    // Password and password-check do not match
+    console.error('Passwords do not match');
     return;
   }
 
-  // 비밀번호가 일치하면 아래 코드 작동
-  const data = {
-    field: 'password',
-    value: passwordValue
-  };
-
-  try {
-    const token = generateToken();
-    const response = await fetch('/api/edit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}` 
-      },
-      body: JSON.stringify(data)
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      console.log('비밀번호를 변경하였습니다.');
+  // Send a request to the server to update the password using the JWT token in the header
+  // Example using fetch API:
+  fetch('/update-password', {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ password: newPassword })
+  })
+  .then(response => {
+    // Handle the response
+    if (response.ok) {
+      // Password updated successfully
+      console.log('Password updated');
     } else {
-      console.error('Password edit failed:', result.error);
-      alert('비밀번호 변경에 실패하였습니다.');
+      // Error updating password
+      console.error('Failed to update password');
     }
-  } catch (error) {
-    console.error('Password edit request error:', error);
-    alert('비밀번호 변경에 실패하였습니다.');
-  }
+  })
+  .catch(error => {
+    console.error('An error occurred while updating password:', error);
+  });
 }
 
-// 회원탈퇴
-async function deleteAccount() {
-  const confirmation = confirm("회원탈퇴를 하시겠습니까?");
-  if (confirmation) {
-    try {
-      const token = generateToken();
-      const response = await fetch("/deleteAccount", {
-        method: "DELETE",
-        headers: {
-          'Authorization': `Bearer ${token}` 
-        }
-      });
-
-      if (response.ok) {
-        alert("회원탈퇴 하였습니다.");
-        window.location.href = "/";
-      } else {
-        const errorData = await response.json();
-        console.log("Delete account request failed:", errorData);
-        alert("회원탈퇴에 실패하였습니다. 다시 시도해 주세요.");
-      }
-    } catch (error) {
-      console.log("An error occurred while deleting the account:", error);
-      alert("회원탈퇴에 실패하였습니다. 다시 시도해 주세요.");
+// Function to delete the account
+function deleteAccount() {
+  // Send a request to the server to delete the account using the JWT token in the header
+  // Example using fetch API:
+  fetch('/delete-account', {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Include the JWT token from local storage in the header
+      'Content-Type': 'application/json'
     }
-  }
-}
-
-// 회원탈퇴 이벤트 리스너
-const deleteAccountButton = document.querySelector(".delete-account");
-deleteAccountButton.addEventListener("click", deleteAccount);
-
-// placeholder에 사용자 데이터 Fetch
-async function fetchUserData() {
-  try {
-    const token = generateToken();
-    const response = await fetch('/api/user', {
-      headers: {
-        'Authorization': `Bearer ${token}` 
-      }
-    });
-    const userData = await response.json();
-
-    document.querySelector('.name').placeholder = userData.name;
-    document.querySelector('.email').placeholder = userData.email;
-    document.querySelector('.password').placeholder = userData.password;
-  } catch (error) {
-    console.error('Failed to fetch user data:', error);
-  }
-}
-
-fetchUserData();
-
-// 토큰 생성 함수
-function generateToken() {
-  // 생성한 토큰 유지시간
-  const token = jwt.sign({}, secretKey, { expiresIn: '1h' });
-  return token;
+  })
+  .then(response => {
+    // Handle the response
+    if (response.ok) {
+      // Account deleted successfully
+      console.log('Account deleted');
+      // Perform any necessary actions after deleting the account, such as redirecting to another page
+    } else {
+      // Error deleting account
+      console.error('Failed to delete account');
+    }
+  })
+  .catch(error => {
+    console.error('An error occurred while deleting account:', error);
+  });
 }
