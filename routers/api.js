@@ -7,7 +7,14 @@ const {
   getUser,
   deleteUser,
 } = require("../controller/user");
-const { registerProduct, uploadImg, getAllProduct, getProductByName, updateProduct, deleteProduct} = require("../controller/product");
+const {
+  registerProduct,
+  uploadImg,
+  getAllProduct,
+  getProductByName,
+  updateProduct,
+  deleteProduct
+} = require("../controller/product");
 
 router.post("/register", register); //회원 가입 
 router.post("/login", login); //로그인 
