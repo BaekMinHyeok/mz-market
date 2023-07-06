@@ -6,8 +6,10 @@ function openFile() {
 
   fileInput.addEventListener('change', function(event) {
     let selectedFile = event.target.files[0];
+    
     if (selectedFile) {
-      document.querySelector('#imgInput').value=selectedFile.name
+      document.querySelector('#imgInput').value = selectedFile.name;
+      document.querySelector('#selectedFile').value = selectedFile;
     }
   });
 
