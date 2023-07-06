@@ -50,12 +50,21 @@ const updatePw = async (req, res) => {
 };
 
 const deleteAccount = async (req, res) => {
-  const result = await user.login({
-    email: req.body.email,
-    pw: req.body.pw,
-  });
-  res.send(result);
-  console.log(result);
+  try {
+    await user.login({
+      email: req.body.email,
+      pw: req.body.pw,
+    });
+    res.json({
+      success: true,
+      message: "회원탈퇴에 성공했습니다.",
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+    });
+  }
 };
 
 module.exports = { register, login, updatePw, deleteAccount };

@@ -28,12 +28,12 @@ class UserService {
     //회원정보에 존재하는 이메일인지 체크
     const check = await this.userModel.find({ email: email });
     if (check.length === 0) {
-      throw new Error("존재하지 않는 이메일 주소 입니다.");
+      throw "존재하지 않는 이메일 주소 입니다.";
     }
 
     //비밀번호 일치 여부 체크
     if (check[0].pw !== pw) {
-      throw new Error("비밀번호가 일치하지 않습니다.");
+      throw "비밀번호가 일치하지 않습니다.";
     }
 
     //JWT 토큰 생성
@@ -73,7 +73,7 @@ class UserService {
     //비밀번호 일치 여부 체크
     const check = await this.userModel.find({ email: email });
     if (check[0].pw !== pw) {
-      throw new Error("비밀번호가 일치하지 않습니다.");
+      throw "비밀번호가 일치하지 않습니다.";
     }
 
     return await this.userModel.deleteOne({ email: email });
