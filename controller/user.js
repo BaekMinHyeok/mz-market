@@ -2,14 +2,20 @@ const { user } = require("../services/user");
 
 const register = async (req, res) => {
   try {
-    const newUser = await user.register({
+    await user.register({
       name: req.body.name,
       email: req.body.email,
       pw: req.body.pw,
     });
-    res.send(newUser);
+    res.json({
+      success: true,
+      message: "회원가입에 성공했습니다.",
+    });
   } catch (error) {
-    res.status(500).send("이미 존재하는 이메일 주소 입니다.");
+    res.json({
+      success: false,
+      message: error,
+    });
   }
 };
 
@@ -20,34 +26,77 @@ const login = async (req, res) => {
       pw: req.body.pw,
     });
     res.json({
-      code: 200,
       success: true,
-      token,
+      message: "로그인에 성공했습니다.",
+      token: token,
     });
   } catch (error) {
-    res.status(500).json({
-      error: "로그인에 실패했습니다.",
+    res.json({
+      success: false,
+      message: error,
+      token: undefined,
     });
   }
 };
 
-const updatePw = async (req, res) => {
-  const update = await user.login({
-    email: req.body.email,
-    pw: req.body.pw,
-    newPw: req.body.newPw,
-  });
-  res.send(update);
-  console.log(update);
+const updateUser = async (req, res) => {
+  try {
+    await user.updateUser({
+      email: req.body.email,
+      pw: req.body.pw,
+      newPw: req.body.newPw,
+      newName: req.body.newName,
+    });
+    res.json({
+      success: true,
+      message: "회원정보를 수정했습니다.",
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+    });
+  }
 };
 
-const deleteAccount = async (req, res) => {
-  const result = await user.login({
-    email: req.body.email,
-    pw: req.body.pw,
-  });
-  res.send(result);
-  console.log(result);
+const getUser = async (req, res) => {
+  try {
+    const userData = await user.getUser({
+      email: req.email,
+    });
+    res.json({
+      success: true,
+      message: "유저 정보를 조회합니다.",
+      user: userData,
+    });
+    /**
+     * 주문 관련 정보 추가 필요
+     */
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+      user: undefined,
+    });
+  }
 };
 
-module.exports = { register, login, updatePw, deleteAccount };
+const deleteUser = async (req, res) => {
+  try {
+    await user.delete({
+      email: req.body.email,
+      pw: req.body.pw,
+    });
+    res.json({
+      success: true,
+      message: "회원탈퇴에 성공했습니다.",
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+    });
+  }
+};
+
+module.exports = { register, login, updateUser, getUser, deleteUser };

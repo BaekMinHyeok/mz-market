@@ -42,7 +42,7 @@ async function loginBtnHandle() {
     });
 
     const result = await response.json();
-    // console.log(result);
+    console.log(result);
     if (result.success) {
       // 로그인 성공 시 JWT 토큰 처리
       const token = result.token;
