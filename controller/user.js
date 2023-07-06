@@ -41,7 +41,7 @@ const login = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const update = await user.login({
+    await user.updateUser({
       email: req.body.email,
       pw: req.body.pw,
       newPw: req.body.newPw,
@@ -49,7 +49,7 @@ const updateUser = async (req, res) => {
     });
     res.json({
       success: true,
-      message: "회원 정보를 수정했습니다.",
+      message: "회원정보를 수정했습니다.",
     });
   } catch (error) {
     res.json({
@@ -59,9 +59,31 @@ const updateUser = async (req, res) => {
   }
 };
 
-const deleteAccount = async (req, res) => {
+const getUser = async (req, res) => {
   try {
-    await user.login({
+    const userData = await user.getUser({
+      email: req.email,
+    });
+    res.json({
+      success: true,
+      message: "유저 정보를 조회합니다.",
+      user: userData,
+    });
+    /**
+     * 주문 관련 정보 추가 필요
+     */
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+      user: undefined,
+    });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    await user.delete({
       email: req.body.email,
       pw: req.body.pw,
     });
@@ -77,4 +99,4 @@ const deleteAccount = async (req, res) => {
   }
 };
 
-module.exports = { register, login, updateUser, deleteAccount };
+module.exports = { register, login, updateUser, getUser, deleteUser };

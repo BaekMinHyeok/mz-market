@@ -68,6 +68,17 @@ class UserService {
     await user.save();
   }
 
+  async getUser(userInfo) {
+    const { email } = userInfo;
+
+    const user = await this.userModel.findOne({ email: email });
+    if (!user) {
+      throw "사용자를 찾을 수 없습니다.";
+    }
+
+    return user;
+  }
+
   //회원 탈퇴
   async delete(userInfo) {
     const { email, pw } = userInfo;
