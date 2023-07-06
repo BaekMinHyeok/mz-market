@@ -8,7 +8,7 @@ const upload = require("../middlewares/multerconfig");
 const registerProduct = async (req, res) => {
   try {
     const image = uploadImg(req, res);
-    const newProduct = await product.registerProduct({
+    await product.registerProduct({
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
@@ -16,9 +16,15 @@ const registerProduct = async (req, res) => {
       gender: req.body.gender,
       images: image.map((img) => img.filename),
     });
-    res.send(newProduct);
+    res.json({
+      success: true,
+      message: "상품 등록에 성공했습니다.",
+    });
   } catch (error) {
-    //res.status(500).send("상품 등록에 실패했습니다.");
+    res.json({
+      success: false,
+      message: error,
+    });
   }
 };
 
@@ -47,18 +53,11 @@ const updateProduct = async (req, res) => {
 const uploadImg = async (req, res) => {
   try {
     //<input type="file" name="images" multiple> 속성이 필요
-    upload.array("images")(req, res, async (error) => {
-      if (error) {
-        // return res.status(500).json({ error: "이미지 업로드에 실패했습니다." });
-      }
+    upload.array("images")(req, res);
+    return req.files;
 
-      return req.files;
-    });
   } catch (error) {
-    res.json({
-      success: false,
-      message: error,
-    })
+    return error
   }
 };
 
@@ -69,11 +68,13 @@ const getAllProduct = async (req, res) => {
     res.json({
       success: true,
       message: "상품을 조회했습니다.",
+      products: allProduct,
     })
   } catch (error) {
     res.json({
       success: false,
       message: error,
+      products: undefined,
     })
   }
 };
@@ -85,9 +86,17 @@ const getProductByName = async (req, res) => {
       name: req.body.name,
     });
 
-    res.json(productByName);
-  } catch (err) {
-
+    res.json({
+      success: true,
+      message: "상품을 조회했습니다.",
+      productNames: productByName,
+    })
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+      productNames: undefined,
+    })
   }
 };
 
@@ -96,13 +105,17 @@ const getProductByName = async (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     const productId = req.params.productId;
-    const deletedProduct = await product.deleteProduct(productId);
+    await product.deleteProduct(productId);
 
-    res.send(deletedProduct);
-  } catch (err) {
-    // res.status(500).json({
-    //   error : "제품 삭제를 실패했습니다. "
-    // })
+    res.json({
+      success: true,
+      message: "상품 삭제에 성공했습니다.",
+    })
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+    })
   }
 };
 
