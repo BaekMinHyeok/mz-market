@@ -1,3 +1,5 @@
+import { putApi, deleteApi } from './api.js';
+
 const nameInput = document.querySelector('#name');
 const emailInput = document.querySelector('#email');
 const passwordInput = document.querySelector('#password');
@@ -15,14 +17,7 @@ deleteAccountButton.addEventListener('click', deleteAccount);
 async function editName() {
   const newName = nameInput.value;
   try {
-    const response = await fetch('/edit-name', {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, //header에 jwt토큰 추가
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ name: newName })
-    });
+    const response = await putApi('/edit-name', { name: newName });
     if (response.ok) {
       alert('이름을 변경하였습니다.');
     } else {
@@ -36,14 +31,7 @@ async function editName() {
 async function editEmail() {
   const newEmail = emailInput.value;
   try {
-    const response = await fetch('/edit-email', {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,//header에 jwt토큰 추가
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email: newEmail })
-    });
+    const response = await putApi('/edit-email', { email: newEmail });
     if (response.ok) {
       alert('이메일이 변경되었습니다.');
     } else {
@@ -64,14 +52,7 @@ async function editPassword() {
   }
 
   try {
-    const response = await fetch('/edit-password', {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, //header에 jwt토큰 추가
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ password: newPassword })
-    });
+    const response = await putApi('/edit-password', { password: newPassword });
     if (response.ok) {
       alert('비밀번호를 변경하였습니다.');
     } else {
@@ -84,13 +65,7 @@ async function editPassword() {
 
 async function deleteAccount() {
   try {
-    const response = await fetch('/delete-account', {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, //header에 jwt토큰 추가
-        'Content-Type': 'application/json'
-      }
-    });
+    const response = await deleteApi('/delete-account');
     if (response.ok) {
       alert('회원탈퇴 되었습니다.');
     } else {

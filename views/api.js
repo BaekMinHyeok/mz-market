@@ -23,7 +23,7 @@ export const getApi = async (path) => {
   }
 };
 
-export const postFileApi = async (path, data) => {
+export const postApi = async (path, data) => {
   try {
     const response = await fetch(path, {
       method: "POST",
