@@ -39,14 +39,24 @@ const login = async (req, res) => {
   }
 };
 
-const updatePw = async (req, res) => {
-  const update = await user.login({
-    email: req.body.email,
-    pw: req.body.pw,
-    newPw: req.body.newPw,
-  });
-  res.send(update);
-  console.log(update);
+const updateUser = async (req, res) => {
+  try {
+    const update = await user.login({
+      email: req.body.email,
+      pw: req.body.pw,
+      newPw: req.body.newPw,
+      newName: req.body.newName,
+    });
+    res.json({
+      success: true,
+      message: "회원 정보를 수정했습니다.",
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+    });
+  }
 };
 
 const deleteAccount = async (req, res) => {
@@ -67,4 +77,4 @@ const deleteAccount = async (req, res) => {
   }
 };
 
-module.exports = { register, login, updatePw, deleteAccount };
+module.exports = { register, login, updateUser, deleteAccount };
