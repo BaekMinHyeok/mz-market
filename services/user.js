@@ -14,10 +14,11 @@ class UserService {
     //이메일 중복 체크
     const check = await this.userModel.find({ email: email });
     if (check.length !== 0) {
-      throw new Error("중복되는 이메일 주소 입니다.");
+      // throw new Error("중복되는 이메일 주소 입니다.");
+      throw "중복되는 이메일 주소 입니다.";
     }
 
-    return await this.userModel.create({ name, email, pw });
+    await this.userModel.create({ name, email, pw });
   }
 
   //로그인
@@ -27,12 +28,12 @@ class UserService {
     //회원정보에 존재하는 이메일인지 체크
     const check = await this.userModel.find({ email: email });
     if (check.length === 0) {
-      throw new Error("존재하지 않는 이메일 주소 입니다.");
+      throw "존재하지 않는 이메일 주소 입니다.";
     }
 
     //비밀번호 일치 여부 체크
     if (check[0].pw !== pw) {
-      throw new Error("비밀번호가 일치하지 않습니다.");
+      throw "비밀번호가 일치하지 않습니다.";
     }
 
     //JWT 토큰 생성
@@ -45,24 +46,37 @@ class UserService {
       process.env.SECRET
     );
     return token;
-
-    /**
-     res.cookie('token', token);
-     */
   }
 
-  //비밀번호 변경
+  //회원정보 수정
   //이미 로그인이 된 상태에서만 호출해야함
-  async updatePw(userInfo) {
-    const { email, pw, newPw } = userInfo;
+  async updateUser(userInfo) {
+    const { email, pw, newPw, newName } = userInfo;
 
     //비밀번호 일치 여부 체크
-    const check = await this.userModel.find({ email: email });
-    if (check[0].pw !== pw) {
-      throw new Error("비밀번호가 일치하지 않습니다.");
+    const user = await this.userModel.findOne({ email: email });
+    if (!user) {
+      throw "사용자를 찾을 수 없습니다.";
     }
 
-    return await this.userModel.updateOne({ pw: newPw });
+    if (user.pw !== pw) {
+      throw "비밀번호가 일치하지 않습니다.";
+    }
+
+    user.pw = newPw;
+    user.name = newName;
+    await user.save();
+  }
+
+  async getUser(userInfo) {
+    const { email } = userInfo;
+
+    const user = await this.userModel.findOne({ email: email });
+    if (!user) {
+      throw "사용자를 찾을 수 없습니다.";
+    }
+
+    return user;
   }
 
   //회원 탈퇴
@@ -70,12 +84,16 @@ class UserService {
     const { email, pw } = userInfo;
 
     //비밀번호 일치 여부 체크
-    const check = await this.userModel.find({ email: email });
-    if (check[0].pw !== pw) {
-      throw new Error("비밀번호가 일치하지 않습니다.");
+    const user = await this.userModel.findOne({ email: email });
+    if (!user) {
+      throw "사용자를 찾을 수 없습니다.";
     }
 
-    return await this.userModel.deleteOne({ email: email });
+    if (user.pw !== pw) {
+      throw "비밀번호가 일치하지 않습니다.";
+    }
+
+    await this.userModel.deleteOne({ email: email });
   }
 }
 

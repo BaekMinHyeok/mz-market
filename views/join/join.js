@@ -42,13 +42,14 @@ async function createAccount() {
       },
       body: JSON.stringify(data),
     });
+    const result = await response.json();
 
-    if (response.ok) {
+    if (result.success) {
       alert("회원가입이 성공하였습니다!");
       location.href = "http://localhost:3000/user/sign_in";
     } else {
-      const errorMessage = await response.text();
-      alert(`Error! ${errorMessage}`);
+      const errorMessage = await result.message;
+      alert(errorMessage);
     }
   } catch (error) {
     console.error(error);
