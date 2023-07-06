@@ -17,7 +17,7 @@ const productSchema = new Schema({
     type: [String],
     required: true,
   },
-  category:{
+  category: {
     type: [String],
     required: true,
   },
@@ -25,7 +25,11 @@ const productSchema = new Schema({
     type: String,
     require: true,
   },
-
+  gender: {
+    type: String,
+    enum: ["men", "women"],
+    required: true,
+  },
 });
 
 module.exports = productSchema;
