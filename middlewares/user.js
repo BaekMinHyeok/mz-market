@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 //Token 체크
 const auth = async (req, res, next) => {
   try {
@@ -16,4 +16,6 @@ const auth = async (req, res, next) => {
   }
 };
 
-module.exports = { auth };
+module.exports = {
+  auth
+};

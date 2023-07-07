@@ -2,6 +2,9 @@ const express = require("express");
 const { auth } = require("../middlewares/user");
 const router = express.Router();
 const {
+  auth
+} = require("../middlewares/user");
+const {
   register,
   login,
   updateUser,
@@ -24,8 +27,8 @@ router.post("/get_user", auth, getUser); //유저정보 조회
 router.post("/delete_user", auth, deleteUser); //회원 탈퇴
 router.post("/registerProduct", auth, registerProduct); //상품등록
 // router.post("/uploadImg", uploadImg); //이미지 업로드
-router.get("/getAllProduct", getAllProduct); //모든 상품 목록 가져오기
-router.get("/getProductByName", getProductByName); //특정 상품의 상세 정보 가져오기
+router.get("/getAllProduct", getAllProduct); //모든 상품 목록
+router.get("/getProductByName", getProductByName); //상품 이름 검색
 router.put("/updateProduct", auth, updateProduct); //상품 업데이트
 router.delete("/deleteProduct", auth, deleteProduct); //상품 삭제
 
