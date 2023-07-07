@@ -1,4 +1,4 @@
-const { product } = require("../services/user");
+const { product } = require("../services/product");
 // const upload = multer({ dest: 'uploads/' });
 const upload = require("../middlewares/multerconfig");
 
@@ -17,13 +17,14 @@ const registerProduct = async (req, res) => {
 
     res.json({
       success: true,
-      message: "상품 등록에 성공했습니다."
+      message: "상품 등록에 성공했습니다.",
     });
   } catch (error) {
     res.json({
       success: false,
       message: error,
     });
+    console.log(error);
   }
 };
 
@@ -84,6 +85,8 @@ const getProductByName = async (req, res) => {
       name: req.body.name,
     });
 
+    console.log(productByName);
+    
     res.json({
       success: true,
       message: "상품을 조회했습니다.",
@@ -102,6 +105,7 @@ const getProductByName = async (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     const productId = req.params.productId; //:productId
+    // console.log(productId);
     await product.deleteProduct(productId);
 
     res.json({

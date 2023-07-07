@@ -16,7 +16,7 @@ const userSchema = new Schema({
     trim: true,
     required: true,
   },
-  //관리자 
+  //관리자
   admin: {
     type: Boolean,
     default: false,
