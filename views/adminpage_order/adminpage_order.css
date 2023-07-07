@@ -1,0 +1,66 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.admin-content {
+    margin: 0 280px;
+}
+
+.admin-menu {
+    display: flex;
+    gap: 124px;
+}
+
+
+
+.line p {
+    width: calc(100% - 0px);
+    height: 2px;
+    background-color: #bfbfb0fe;
+    margin: 0;
+    margin-top: 15px;
+}
+
+table {
+    margin-top: 45px;
+    width: calc(100% - 0px);
+    border-radius: 10px;
+    border: 3px solid #F2F2F2;
+    background: #FFF;
+    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.15);
+}
+
+td {
+    text-align: center;
+}
+
+#management::after {
+    content: "";
+    display: block;
+    width: 10%;
+    height: 3px;
+    background-color: black;
+    position: absolute;
+    bottom: -69%;
+
+}
+
+.admin-menu {
+    position: relative;
+}
+
+.page-btn {
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background-color: transparent;
+}
+
+.modifyBtn {
+    width: 30px;
+}
