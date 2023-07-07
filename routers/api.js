@@ -16,6 +16,11 @@ const {
   deleteProduct,
 } = require("../controller/product");
 
+/**
+ RESTful 하게 수정 필요 
+Ex) "/user" 라우트에 http method 값을 바꾸며 요청 
+ */
+
 router.post("/register", register); //회원 가입
 router.post("/login", login); //로그인
 router.post("/update_user", auth, updateUser); //유저정보 수정
