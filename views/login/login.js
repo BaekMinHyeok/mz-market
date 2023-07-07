@@ -51,6 +51,7 @@ async function loginBtnHandle() {
       localStorage.setItem("token", token);
 
       alert("로그인에 성공하였습니다.");
+      location.href = "http://localhost:3000/";
       // 원하는 작업 수행 (예: 페이지 리다이렉션)
     } else {
       alert(result.error); // 로그인 실패 시 에러 메시지 표시
