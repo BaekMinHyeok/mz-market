@@ -1,4 +1,4 @@
-const dataID = document.addEventListener("DOMContentLoaded", async function() {
+const data = document.addEventListener("DOMContentLoaded", async function() {
     // 데이터를 요청할 URL을 설정합니다.
     const url = "http://localhost:3000/api/getAllProduct";
     
@@ -24,9 +24,9 @@ const dataID = document.addEventListener("DOMContentLoaded", async function() {
     } catch (error) {
       console.error(error);
     }
-    return data.id;
+    return data;
 });
+data.
 
-
-export default dataID;
+export default data;
 

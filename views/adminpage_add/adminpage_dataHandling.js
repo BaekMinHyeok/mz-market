@@ -2,13 +2,9 @@ const savebtn = document.querySelector("#save-btn");
 
 savebtn.addEventListener("click", async function () {
   const productName = document.querySelector("#productName").value;
-  const productDescription = document.querySelector(
-    "#productDescription"
-  ).value;
+  const productDescription = document.querySelector("#productDescription" ).value;
   const productPrice = document.querySelector("#productPrice").value;
-  const selectedValue = document.querySelector(
-    ".radio-group input:checked"
-  ).value;
+  const selectedValue = document.querySelector(".radio-group input:checked").value;
   const categoryValue = document.querySelector("#checkvalue").value;
   const selectedFile = document.querySelector("#selectedFile").value; // 파일 객체 가져오기
 
@@ -35,13 +31,13 @@ savebtn.addEventListener("click", async function () {
     });
     const result = await response.json();
     console.log(result);
-  } catch (error) {}
-  // // 상품 데이터를 백엔드로 전송
-  // fetch("http://localhost:3000/api/registerProduct", {
-  //   method: "POST",
-  //   headers: {
-  //     Authorization: `Bearer ${token}`, // JWT 토큰을 헤더에 추가
-  //   },
-  //   body: JSON.stringify(productData),
-  // })
+  
+    if (result.success) {
+      console.log(result.message); 
+      console.log(result.message); 
+    }
+  } catch (error) {
+    console.log("Error:", error);
+    // 오류 처리 로직 추가
+  }
 });
