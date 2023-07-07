@@ -12,7 +12,6 @@ function openFile() {
       document.querySelector('#selectedFile').value = selectedFile;
     }
   });
-
   document.body.appendChild(fileInput);
   fileInput.click();
   document.body.removeChild(fileInput);
