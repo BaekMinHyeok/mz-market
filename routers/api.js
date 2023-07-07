@@ -10,7 +10,6 @@ const {
 } = require("../controller/user");
 const {
   registerProduct,
-  uploadImg,
   getAllProduct,
   getProductByName,
   updateProduct,
@@ -23,7 +22,6 @@ router.post("/update_user", auth, updateUser); //유저정보 수정
 router.post("/get_user", auth, getUser); //유저정보 조회
 router.post("/delete_user", auth, deleteUser); //회원 탈퇴
 router.post("/registerProduct", auth, registerProduct); //상품등록
-// router.post("/uploadImg", uploadImg); //이미지 업로드
 router.post("/getAllProduct", getAllProduct); //모든 상품 목록
 router.post("/getProductByName", getProductByName); //상품 이름 검색
 router.post("/updateProduct", auth, updateProduct); //상품 업데이트
