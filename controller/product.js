@@ -1,6 +1,4 @@
-const {
-  product
-} = require("../services/user");
+const { product } = require("../services/user");
 // const upload = multer({ dest: 'uploads/' });
 const upload = require("../middlewares/multerconfig");
 
@@ -39,13 +37,13 @@ const updateProduct = async (req, res) => {
 
     res.json({
       success: true,
-      message: "상품 업데이트에 성공했습니다."
-    })
+      message: "상품 업데이트에 성공했습니다.",
+    });
   } catch (error) {
     res.json({
       success: false,
       message: error,
-    })
+    });
   }
 };
 
@@ -55,9 +53,8 @@ const uploadImg = async (req, res) => {
     //<input type="file" name="images" multiple> 속성이 필요
     upload.array("images")(req, res);
     return req.files;
-
   } catch (error) {
-    return error
+    return error;
   }
 };
 
@@ -69,13 +66,13 @@ const getAllProduct = async (req, res) => {
       success: true,
       message: "상품을 조회했습니다.",
       products: allProduct,
-    })
+    });
   } catch (error) {
     res.json({
       success: false,
       message: error,
       products: undefined,
-    })
+    });
   }
 };
 
@@ -90,32 +87,31 @@ const getProductByName = async (req, res) => {
       success: true,
       message: "상품을 조회했습니다.",
       productNames: productByName,
-    })
+    });
   } catch (error) {
     res.json({
       success: false,
       message: error,
       productNames: undefined,
-    })
+    });
   }
 };
 
 // 상품 삭제
-
 const deleteProduct = async (req, res) => {
   try {
-    const productId = req.params.productId;
+    const productId = req.params.productId; //:productId
     await product.deleteProduct(productId);
 
     res.json({
       success: true,
       message: "상품 삭제에 성공했습니다.",
-    })
+    });
   } catch (error) {
     res.json({
       success: false,
       message: error,
-    })
+    });
   }
 };
 
@@ -127,12 +123,3 @@ module.exports = {
   updateProduct,
   deleteProduct,
 };
-
-module.exports = {
-  registerProduct,
-  uploadImg,
-  getAllProduct,
-  getProductByName,
-  updateProduct,
-  deleteProduct
-}
