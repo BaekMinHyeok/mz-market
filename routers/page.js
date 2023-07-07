@@ -10,10 +10,9 @@ router.use(
   "/admin/category/edit/:categoryId",
   serveStatic("adminpage_category")
 ); //관리자 페이지 카테고리 추가
-router.use("/admin/products/list/:productId ", serveStatic("adminpage_list")); //관리자 페이지 상품 목록
+router.use("/admin/products/list/", serveStatic("adminpage_list")); //관리자 페이지 상품 목록
 router.use("/admin/order_history ", serveStatic("adminpage_order")); //관리자 페이지 주문 관리
 router.use("/cart", serveStatic("cart")); //장바구니
-router.use("/admin/products/list/", serveStatic("adminpage_add")); //상품 목록
 router.use("/", serveStatic("main")); //메인 페이지
 router.use("/cart/order/", serveStatic("order")); //주문 페이지
 router.use("/cart/order/complete/:orderId", serveStatic("orderComplete")); //주문 완료 페이지

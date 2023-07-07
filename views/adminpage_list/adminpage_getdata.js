@@ -27,4 +27,6 @@ const dataID = document.addEventListener("DOMContentLoaded", async function() {
     return data.id;
 });
 
+
 export default dataID;
+
