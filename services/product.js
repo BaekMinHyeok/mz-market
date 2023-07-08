@@ -6,7 +6,7 @@ class ProductService {
     this.productModel = Product;
   }
 
-  //상품등록
+  //상품 등록
   async registerProduct(productInfo) {
     const { name, description, price, category, gender } = productInfo;
     let productId;
@@ -38,7 +38,7 @@ class ProductService {
     });
   }
 
-  // 상품 업데이트
+  // 상품 정보 수정
   async updateProduct(productId, updatedInfo) {
     const updatedProduct = await this.productModel.findByIdAndUpdate(
       productId,
@@ -50,7 +50,7 @@ class ProductService {
     return updatedProduct;
   }
 
-  // 모든 상품 목록 가져오기
+  // 상품 정보 조회
   async getAllProduct() {
     return await this.productModel.find();
   }

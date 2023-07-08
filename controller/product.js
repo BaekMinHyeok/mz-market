@@ -2,18 +2,20 @@ const { product } = require("../services/product");
 // const upload = multer({ dest: 'uploads/' });
 const upload = require("../middlewares/multerconfig");
 
-//상품등록
+// 상품 등록
 const registerProduct = async (req, res) => {
   try {
-    // const image = uploadImg(req, res);
-    await product.registerProduct({
+    const image = await uploadImg(req, res);
+    const productInfo = {
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
       category: req.body.category,
       gender: req.body.gender,
-      // images: image.map((img) => img.filename),
-    });
+      images: image.map((img) => img.filename),
+    };
+
+    await product.registerProduct(productInfo);
 
     res.json({
       success: true,
@@ -28,31 +30,9 @@ const registerProduct = async (req, res) => {
   }
 };
 
-// 상품 업데이트
-const updateProduct = async (req, res) => {
-  try {
-    const image = uploadImg(req, res);
-    const productId = req.params.productId;
-    const updatedInfo = req.body;
-    updatedInfo.images = image.map((img) => img.filename);
-    await product.updateProduct(productId, updatedInfo);
-
-    res.json({
-      success: true,
-      message: "상품 업데이트에 성공했습니다.",
-    });
-  } catch (error) {
-    res.json({
-      success: false,
-      message: error,
-    });
-  }
-};
-
-//multer 이미지 업로드
+// Multer 이미지 업로드
 const uploadImg = async (req, res) => {
   try {
-    //<input type="file" name="images" multiple> 속성이 필요
     upload.array("images")(req, res);
     return req.files;
   } catch (error) {
@@ -60,7 +40,7 @@ const uploadImg = async (req, res) => {
   }
 };
 
-// 모든 상품 목록
+// 모든 상품 목록 조회
 const getAllProduct = async (req, res) => {
   try {
     const allProduct = await product.getAllProduct();
@@ -78,7 +58,7 @@ const getAllProduct = async (req, res) => {
   }
 };
 
-// 상품 이름 검색
+// 상품 이름으로 검색
 const getProductByName = async (req, res) => {
   try {
     const productByName = await product.getProductByName({
@@ -86,7 +66,7 @@ const getProductByName = async (req, res) => {
     });
 
     console.log(productByName);
-    
+
     res.json({
       success: true,
       message: "상품을 조회했습니다.",
@@ -101,11 +81,31 @@ const getProductByName = async (req, res) => {
   }
 };
 
+// 상품 정보 업데이트
+const updateProduct = async (req, res) => {
+  try {
+    const image = await uploadImg(req, res);
+    const productId = req.params.productId;
+    const updatedInfo = req.body;
+    updatedInfo.images = image.map((img) => img.filename);
+    await product.updateProduct(productId, updatedInfo);
+
+    res.json({
+      success: true,
+      message: "상품 업데이트에 성공했습니다.",
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+    });
+  }
+};
+
 // 상품 삭제
 const deleteProduct = async (req, res) => {
   try {
-    const productId = req.params.productId; //:productId
-    // console.log(productId);
+    const productId = req.params.productId;
     await product.deleteProduct(productId);
 
     res.json({

@@ -6,6 +6,7 @@ class CategoryService {
     this.categoryModel = Category;
   }
 
+  //카테고리 등록
   async register(info) {
     const { name } = info;
     try {
@@ -17,6 +18,7 @@ class CategoryService {
     }
   }
 
+  //카테고리 수정
   async update(info) {
     const { name, newName } = info;
     const update = await this.categoryModel.findOne({ name: name });
@@ -24,14 +26,17 @@ class CategoryService {
     await update.save();
   }
 
+  //카테고리 조회
+  async getAll() {
+    await this.categoryModel.find();
+  }
+
+  //카테고리 삭제
   async delete(info) {
     const { name } = info;
     await this.categoryModel.deletOne({ name: name });
   }
 
-  async getAll() {
-    await this.categoryModel.find();
-  }
 }
 
 exports.category = new CategoryService(Category);

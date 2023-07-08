@@ -1,12 +1,10 @@
 const { user } = require("../services/user");
 
+// 회원가입
 const register = async (req, res) => {
   try {
-    await user.register({
-      name: req.body.name,
-      email: req.body.email,
-      pw: req.body.pw,
-    });
+    const { name, email, pw} = req.body;
+    await user.register({name,email,pw,})
     res.json({
       success: true,
       message: "회원가입에 성공했습니다.",
@@ -19,12 +17,11 @@ const register = async (req, res) => {
   }
 };
 
+// 로그인
 const login = async (req, res) => {
   try {
-    const token = await user.login({
-      email: req.body.email,
-      pw: req.body.pw,
-    });
+    const {email, pw} = req.body;
+    await user.login({email, pw})
     res.json({
       success: true,
       message: "로그인에 성공했습니다.",
@@ -39,14 +36,11 @@ const login = async (req, res) => {
   }
 };
 
+// 회원 정보 수정
 const updateUser = async (req, res) => {
   try {
-    await user.updateUser({
-      email: req.body.email,
-      pw: req.body.pw,
-      newPw: req.body.newPw,
-      newName: req.body.newName,
-    });
+    const {email, pw, newPw, newName} = req.body;
+    await user.updateUser({email, pw, newPw, newName})
     res.json({
       success: true,
       message: "회원정보를 수정했습니다.",
@@ -59,11 +53,11 @@ const updateUser = async (req, res) => {
   }
 };
 
+//회원 정보 조회
 const getUser = async (req, res) => {
   try {
-    const userData = await user.getUser({
-      email: req.email,
-    });
+    const {email} = req.body;
+    const userData = await user.getUser({email})
     res.json({
       success: true,
       message: "유저 정보를 조회합니다.",
@@ -80,13 +74,11 @@ const getUser = async (req, res) => {
     });
   }
 };
-
+// 회원 탈퇴
 const deleteUser = async (req, res) => {
   try {
-    await user.delete({
-      email: req.body.email,
-      pw: req.body.pw,
-    });
+    const {email, pw} = req.body;
+    await user.delete({email, pw})
     res.json({
       success: true,
       message: "회원탈퇴에 성공했습니다.",
