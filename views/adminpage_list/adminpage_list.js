@@ -1,10 +1,9 @@
-const modifyBtn = document.querySelector("#modifyBtn");
 const modalContainer = document.querySelector("#adminModalContainer");
 const productTable = document.getElementById("product-table");
 import fetchData from "./adminpage_getdata.js";
 
 // 클릭시 모달창 띄우기
-modifyBtn.addEventListener("click", function () {
+const modal = () => {
   // CSS 파일 가져오기
   const cssUrl = "modal/adminpage_modal.css";
   const cssLink = document.createElement("link");
@@ -25,7 +24,7 @@ modifyBtn.addEventListener("click", function () {
       scriptElement.src = jsUrl;
       document.body.appendChild(scriptElement);
     });
-});
+};
 
 document.addEventListener("DOMContentLoaded", async function () {
   try {
@@ -44,6 +43,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       </td>
       `;
       productTable.appendChild(newRow);
+    });
+
+    // id~ 여러개를 한번에 불러와서 반복문 돌면서 이벤트 동적으로 하나씩 추가
+    const modifyBtns = document.querySelectorAll("#modifyBtn");
+    modifyBtns.forEach((btn) => {
+      btn.addEventListener("click", modal);
     });
   } catch (error) {
     console.error(error);
