@@ -1,0 +1,148 @@
+.container {
+  width: 1200px;
+  padding: 300px 0 200px;
+  margin: auto;
+}
+
+/* 상단 타이틀 */
+
+.title_box {
+  margin-bottom: 87px;
+}
+
+.title_box .title {
+  font-size: 38px;
+  font-weight: 700;
+}
+
+/* 본문 */
+
+.order_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 왼쪽 배송지 정보 */
+.order_left {
+  width: 821px;
+}
+.order_content {
+  width: 786px;
+  border-radius: 23px;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.15);
+  padding: 86px 73px;
+}
+
+.order_content .address_title {
+  font-weight: 700;
+  font-size: 25px;
+  margin-bottom: 40px;
+}
+
+.order_content .input_box {
+  margin-bottom: 47px;
+}
+
+.order_content .input_box > label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.order_content .input_box input {
+  width: 100%;
+  height: 52px;
+  padding: 0 19px;
+  border-radius: 15px;
+  border: 2px solid #e2e2e2;
+  background: #fff;
+}
+
+.order_content .input_box .address_input_box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.order_content .input_box .address_input_box button {
+  width: 103px;
+  border-radius: 15px;
+  background: #d2d2d2;
+  font-weight: 700;
+  padding: 16px 22px;
+  margin-left: 20px;
+}
+
+.order_content .input_box .address_result_input {
+  margin-bottom: 25px;
+  cursor: auto;
+}
+
+.order_content .input_box .address_result_input:focus {
+  outline: none;
+}
+
+/* 우측 nav */
+
+.order_right {
+  width: 353px;
+  border-left: 2px solid #f2f2f2;
+}
+
+.order_nav {
+  margin-left: auto;
+  width: 295px;
+  padding: 48px 28px;
+  height: fit-content;
+  border-radius: 23px;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.15);
+}
+
+.order_nav .nav_title {
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 35px;
+}
+
+.order_nav .nav_order_info_box {
+  margin-bottom: 56px;
+}
+
+.order_nav .nav_order_info_box > div {
+  margin-bottom: 17px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.order_nav .nav_order_info_box > div > p {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.order_nav .nav_total_price_box {
+  margin-bottom: 39px;
+}
+
+.order_nav .nav_total_price_box .nav_total_price_title {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.order_nav .nav_total_price_box .nav_total_price {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.order_nav .nav_order_button {
+  padding: 18px;
+  width: 100%;
+  border-radius: 50px;
+  background: #f2f2f2;
+  font-weight: 700;
+}

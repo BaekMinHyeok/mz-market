@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../header/header.css" type="text/css"> -->
+    <link rel="stylesheet" href="http://localhost:3000/reset.css" type="text/css">
+    <link rel="stylesheet" href="./adminpage_add.css" type="text/css">
+    <!-- <script src="../header/header.js"></script> -->
+    <title>관리자 상품추가 페이지</title>
+</head>
+<body>
+    <object data="../header/header.html" width="100%" height="100%"></object> 
+
+    <div class="admin-content">
+        <h1>관리자 페이지</h1>
+        <div class="admin-menu">
+            <button class="page-btn" id="listpageBtn">상품목록</button>
+            <button class="page-btn" id="addpageBtn">상품추가</button>
+            <button class="page-btn" id="categoryBtn">카테고리</button>
+            <button class="page-btn" id="management">주문관리</button>
+        </div>
+        <div class="line">
+            <p></p>
+        </div>
+        <div class="add-text">
+            <h2>상품 추가</h2>
+            <p>상품을 확인하고 추가할 수 있어요.</p>
+        </div>
+        <h3>상품사진</h3>
+        <div class="add-text2">
+            <p id="selectedFile"></p>
+            <input class="rectangle" id="imgInput" ></input>
+            <button class="img-btn" onclick="openFile()">업로드</button>
+        </div>
+        <h3>상품명</h3>
+        <input class="rectangle" id = "productName" placeholder="상품 이름을 입력해주세요."></input>
+        <h3>상세 설명</h3>
+        <textarea class="textarea" id = "productDescription" placeholder="상품 설명을 입력해주세요."></textarea>
+        <h3>상품 가격</h3>
+        <input class="rectangle" id = "productPrice" placeholder="상품 가격을 입력해주세요."></input>
+        <h3 class="category">카테고리</h3>
+        <div class="radio-group">
+            <input type="radio" id="male" name="gender" value="men">
+            <label for="male">남자</label>
+            
+            <input type="radio" id="female" name="gender" value="women">
+            <label for="female">여자</label>
+          </div>
+        <input readonly="" class="rectangle" id="checkvalue" placeholder="카테고리를 선택해주세요."></input>
+        <div class="checkbox-container">
+            <label>
+                <input type="radio"  name="category" onclick="updateCategoryValue(this)"> 아우터
+            </label>
+            <label>
+                <input type="radio"  name="category" onclick="updateCategoryValue(this)"> 상의
+            </label>
+            <label>
+                <input type="radio"  name="category" onclick="updateCategoryValue(this)"> 하의
+            </label>
+            <label>
+                <input type="radio"  name="category" onclick="updateCategoryValue(this)"> 기타
+            </label>
+        </div>
+        <button id="save-btn">저장하기</button>
+    </div>
+
+
+    <script src="adminpage_add.js"></script>
+    <script src="adminpage_image selection.js"></script>
+    <script src="adminpage_dataHandling.js"></script>
+</body>
+</html>

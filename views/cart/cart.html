@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>장바구니</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="http://localhost:3000/reset.css" />
+    <link rel="stylesheet" href="cart.css" />
+  </head>
+  <body>
+    <div id="cart">
+      <!-- container -->
+      <div class="container">
+        <!-- 상단 타이틀 -->
+        <div class="title_box">
+          <h2 class="title">장바구니</h2>
+        </div>
+
+        <div class="subtitle_box">
+          <h2 class="subtitle">ㅇㅇㅇ님이 장바구니에 담은 상품들이에요.</h2>
+          <p class="subtitle_price">총 10,000,000원의 상품들을 담았어요.</p>
+          <button class="remove_all_button">전체 삭제</button>
+        </div>
+
+        <!-- 본문 -->
+
+        <div class="order_wrapper">
+          <div class="order_left">
+            <!-- 왼쪽 배송지 정보 -->
+            <ul class="order_content" id="orderInfo">
+              <!-- 상품 리스트 -->
+
+              <li class="order_product_list">
+                <div class="order_product_img"></div>
+                <div class="order_info_box">
+                  <!-- <div class="order_info_top"> -->
+                  <div class="order_product_info">
+                    <p class="product_name"></p>
+                    <p class="product_size"></p>
+                    <p class="product_price"></p>
+                    <!-- </div> -->
+
+                    <div class="order_product_edit_count">
+                      <button class="product_remove">
+                        <span class="material-symbols-outlined"> remove </span>
+                      </button>
+                      <p class="product_num">1</p>
+                      <button class="product_remove">
+                        <span class="material-symbols-outlined"> add </span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="order_info_bottom">
+                    <button class="order_remove_button">삭제하기</button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 오른쪽 네비게이션 -->
+          <div class="order_right">
+            <div class="order_nav">
+              <h3 class="nav_title">결제정보</h3>
+
+              <div class="nav_order_info_box">
+                <div class="nav_product_count">
+                  <p class="count_title">상품수</p>
+                  <span class="count"></span>
+                </div>
+
+                <div class="nav_product_price">
+                  <p class="price_title">총 상품금액</p>
+                  <span class="price"></span>
+                </div>
+
+                <div class="nav_product_deliver">
+                  <p class="deliver_title">배송비</p>
+                  <span class="deliver">3,000원</span>
+                </div>
+              </div>
+              <div class="nav_total_price_box">
+                <p class="nav_total_price_title">결제하실 금액</p>
+                <div class="nav_total_price"></div>
+              </div>
+
+              <button class="nav_order_button">주문하기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- container end -->
+    </div>
+
+    <!-- cart.js -->
+    <script src="cart.js" type="module"></script>
+  </body>
+</html>
