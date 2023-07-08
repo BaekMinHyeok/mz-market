@@ -11,10 +11,14 @@ class ProductService {
     const { name, description, price, category, gender } = productInfo;
     let productId;
     // 가장 최신 값 가져오기
-    const vl = this.productModel.findOne().sort({ _id: -1 }); // 1은 가장 오래된 값, -1은 가장 최근의 값
-    const data = await vl.exec();
-    productId = data.productId;
-    productId = productId === undefined ? 1 : data.productId + 1;
+    try {
+      const vl = this.productModel.findOne().sort({ _id: -1 }); // 1은 가장 오래된 값, -1은 가장 최근의 값
+      const data = await vl.exec();
+      productId = data.productId + 1;
+    } catch (error) {
+      productId = 1;
+    }
+    console.log(productId);
 
     try {
       await this.productModel.create({
