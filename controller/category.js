@@ -55,6 +55,7 @@ const deleteCategory = async (req, res) => {
   }
 };
 
+//카테고리 조회
 const getAllCategory = async (req, res) => {
   try {
     const allCategory = await category.getAll();
@@ -70,4 +71,12 @@ const getAllCategory = async (req, res) => {
       categorys: undefined,
     });
   }
+};
+
+
+module.exports = {
+  registerCategory,
+  updateCategory,
+  deleteCategory,
+  getAllCategory
 };

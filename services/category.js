@@ -1,4 +1,5 @@
 const { Category } = require("../models");
+require("dotenv").config();
 
 class CategoryService {
   constructor(Category) {
@@ -32,3 +33,5 @@ class CategoryService {
     await this.categoryModel.find();
   }
 }
+
+exports.category = new CategoryService(Category);
