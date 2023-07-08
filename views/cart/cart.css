@@ -1,0 +1,215 @@
+.container {
+  width: 1200px;
+  padding: 140px 0 200px;
+  margin: auto;
+}
+
+/* 상단 타이틀 */
+
+.title_box {
+  margin-bottom: 100px;
+}
+
+.title_box .title {
+  font-size: 38px;
+  font-weight: 700;
+}
+
+.subtitle_box {
+  padding: 93px 0 30px;
+  width: 100%;
+  border-top: 2px solid #d9d9d9;
+  border-bottom: 2px solid #d9d9d9;
+  margin-bottom: 90px;
+}
+
+.subtitle_box .subtitle {
+  font-weight: 700;
+  font-size: 35px;
+  margin-bottom: 35px;
+}
+
+.subtitle_box .subtitle_price {
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.subtitle_box .remove_all_button {
+  display: block;
+  margin-left: auto;
+  width: 121px;
+  padding: 14px;
+  font-weight: 700;
+  border-radius: 15px;
+  border: 2px solid #000;
+  background: #fff;
+  margin-left: auto;
+}
+
+.order_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 장바구니 목록 */
+.order_left {
+  width: 821px;
+}
+.order_content {
+  width: 786px;
+  border-radius: 23px;
+  /* border: 1px solid #e2e2e2; */
+  background: #fff;
+  /* box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.15); */
+  /* padding: 86px 73px; */
+}
+
+.order_product_list {
+  display: flex;
+  /* justify-content: space-between; */
+  margin-bottom: 80px;
+}
+
+.order_product_list .order_product_img {
+  border-radius: 20px;
+  background: #f2f2f2;
+  width: 275px;
+  height: 275px;
+  margin-right: 60px;
+}
+
+.order_product_list .order_info_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.order_product_list .order_info_box .order_info_top {
+  padding-top: 20px;
+  display: flex;
+}
+
+.order_product_list .order_info_box .order_product_info .product_name {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.order_product_list .order_info_box .order_product_info .product_size {
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+.order_product_list .order_info_box .order_product_info .product_price {
+  font-weight: 700;
+}
+
+.order_product_list .order_info_box .order_product_edit_count {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 60px;
+  width: 100px;
+  height: fit-content;
+}
+
+.order_product_list .order_info_box .order_product_edit_count button {
+  border-radius: 21px;
+  width: 21px;
+  height: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
+  background: #fff;
+}
+
+.order_product_list .order_info_box .order_product_edit_count button span {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.order_product_list .order_info_box .order_product_edit_count p {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.order_product_list .order_info_box .order_info_top .order_info_bottom {
+  margin-left: auto;
+}
+
+.order_product_list .order_info_box .order_info_bottom .order_remove_button {
+  display: block;
+  margin-left: auto;
+  width: 121px;
+  padding: 14px;
+  font-weight: 700;
+  border-radius: 15px;
+  border: 2px solid #000;
+  background: #fff;
+  margin-left: auto;
+}
+/* 우측 nav */
+
+.order_right {
+  width: 353px;
+  border-left: 2px solid #f2f2f2;
+}
+
+.order_nav {
+  position: sticky;
+  top: 100px;
+  margin-left: auto;
+  width: 295px;
+  padding: 48px 28px;
+  height: fit-content;
+  border-radius: 23px;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.15);
+}
+
+.order_nav .nav_title {
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 35px;
+}
+
+.order_nav .nav_order_info_box {
+  margin-bottom: 56px;
+}
+
+.order_nav .nav_order_info_box > div {
+  margin-bottom: 17px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.order_nav .nav_order_info_box > div > p {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.order_nav .nav_total_price_box {
+  margin-bottom: 39px;
+}
+
+.order_nav .nav_total_price_box .nav_total_price_title {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.order_nav .nav_total_price_box .nav_total_price {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.order_nav .nav_order_button {
+  padding: 18px;
+  width: 100%;
+  border-radius: 50px;
+  background: #f2f2f2;
+  font-weight: 700;
+}

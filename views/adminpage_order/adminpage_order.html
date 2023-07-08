@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../header/header.css" type="text/css"> -->
+    <link rel="stylesheet" href="http://localhost:3000/reset.css" type="text/css">
+    <link rel="stylesheet" href="adminpage_order.css" type="text/css">
+    <!-- <script src="../header/header.js"></script> -->
+    <title>관리자 상품목록 페이지</title>
+</head>
+
+<body>
+    <object data="../header/header.html" width="100%" height="100%"></object>
+    <div class="admin-content">
+        <h1>관리자 페이지</h1>
+        <div class="admin-menu">
+            <button class="page-btn" id="listpageBtn">상품목록</button>
+            <button class="page-btn" id="addpageBtn">상품추가</button>
+            <button class="page-btn" id="categoryBtn">카테고리</button>
+            <button class="page-btn" id="management">주문관리</button>
+        </div>
+        <div class="line">
+            <p></p>
+        </div>
+        <div class="product-list">
+            <table border="1">
+                <th>상품</th>
+                <th>상품명</th>
+                <th>카테고리</th>
+                <th>가격</th>
+                <th>편집 및 삭제</th>
+                <tr>
+                    <td>1번째 칸</td>
+                    <td>2번째 칸</td>
+                    <td>3번째 칸</td>
+                    <td><select id="category" name="category">
+                            <option value="">배송 준비</option>
+                            <option value="">배송 진행</option>
+                            <option value="">배송 완료</option>
+                        </select></td>
+                    <td>
+                        <img src="./imges/img2.png" alt="삭제버튼" class="delete-btn" id="deleteBtn">
+                    </td>
+                </tr>
+        </div>
+    </div>
+    <script src="adminpage_order.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상품 상세 페이지</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="http://localhost:3000/reset.css" />
+    <link rel="stylesheet" href="productsDetail.css" />
+  </head>
+  <body>
+    <div id="productDetail">
+      <div class="container">
+        <!-- 상단 상품 정보 및 장바구니 담기 -->
+        <div class="product_info_top">
+          <!-- 좌측 상품 이미지 -->
+          <div class="product_info_left">
+            <div class="product_info_image"></div>
+          </div>
+
+          <!-- 우측 상품 정보 -->
+          <div class="product_info_right">
+            <!-- 상품명 및 가격 -->
+            <h3 class="product_info_name"></h3>
+            <span class="product_info_price"></span>
+            <!-- 사이즈 -->
+            <div class="product_info_size_box">
+              <p>Size: <span class="product_info_size"></span></p>
+
+              <div class="product_info_size_button_container">
+                <button class="product_info_size_s on">S</button>
+                <button class="product_info_size_m">M</button>
+                <button class="product_info_size_l">L</button>
+              </div>
+            </div>
+
+            <div class="product_info_right_bottom">
+              <!-- 상품 갯수 -->
+              <div class="product_info_count_box">
+                <button class="product_info_count_remove_btn">
+                  <span class="material-symbols-outlined"> remove </span>
+                </button>
+                <p class="product_info_count_num">1</p>
+                <button class="product_info_count_add_btn">
+                  <span class="material-symbols-outlined"> add </span>
+                </button>
+              </div>
+
+              <!-- 상품 담기 -->
+              <button class="product_info_save_btn">상품 담기</button>
+            </div>
+          </div>
+          <!-- product_info_right end -->
+        </div>
+        <!-- 하단 상세 설명 및 리뷰  -->
+        <div class="product_info_bottom">
+          <div class="product_info_detail_text_box">
+            <p class="product_info_detail_text_title">상품 상세 설명 텍스트</p>
+            <p class="product_info_detail_text_contents"></p>
+          </div>
+          <!-- product_info_detail_text_box end -->
+
+          <!-- 리뷰 영역 -->
+          <div class="product_info_review_box">
+            <h4 class="product_info_review_title">리뷰 남기기</h4>
+
+            <div class="product_info_review_content">
+              <!-- 유저들이 남긴 리뷰 박스 -->
+              <div class="product_info_review_content_box">
+                <p class="product_info_review_username">사용자명</p>
+                <span class="product_info_review_date">2023. 07. 03</span>
+                <p class="product_info_review_text">
+                  Very nice feeling sweater. I like it better than a regular
+                  hoody because it is tailored to be a slimmer fit. Perfect for
+                  going out when you want to stay comfy. The head opening is a
+                  little tight which makes it a little.
+                </p>
+              </div>
+
+              <div class="product_info_review_content_box">
+                <p class="product_info_review_username">사용자명</p>
+                <span class="product_info_review_date">2023. 07. 03</span>
+                <p class="product_info_review_text">
+                  Very nice feeling sweater. I like it better than a regular
+                  hoody because it is tailored to be a slimmer fit. Perfect for
+                  going out when you want to stay comfy. The head opening is a
+                  little tight which makes it a little.
+                </p>
+              </div>
+
+              <div class="product_info_review_content_box">
+                <p class="product_info_review_username">사용자명</p>
+                <span class="product_info_review_date">2023. 07. 03</span>
+                <p class="product_info_review_text">
+                  Very nice feeling sweater. I like it better than a regular
+                  hoody because it is tailored to be a slimmer fit. Perfect for
+                  going out when you want to stay comfy. The head opening is a
+                  little tight which makes it a little.
+                </p>
+              </div>
+
+              <div class="product_info_review_content_box">
+                <p class="product_info_review_username">사용자명</p>
+                <span class="product_info_review_date">2023. 07. 03</span>
+                <p class="product_info_review_text">
+                  Very nice feeling sweater. I like it better than a regular
+                  hoody because it is tailored to be a slimmer fit. Perfect for
+                  going out when you want to stay comfy. The head opening is a
+                  little tight which makes it a little.
+                </p>
+              </div>
+            </div>
+            <!-- product_info_review_content end -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- productsDetail.js -->
+    <script src="productsDetail.js" type="module"></script>
+  </body>
+</html>
