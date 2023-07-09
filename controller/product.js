@@ -31,6 +31,27 @@ const registerProduct = async (req, res) => {
 };
 
 // Multer 이미지 업로드
+// 상품 업데이트
+const updateProduct = async (req, res) => {
+  try {
+    // const image = uploadImg(req, res);
+    const productId = req.params.productId;
+    const updatedInfo = req.body;
+    // updatedInfo.images = image.map((img) => img.filename);
+    await product.updateProduct(productId, updatedInfo);
+    res.json({
+      success: true,
+      message: "상품 업데이트에 성공했습니다.",
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+    });
+  }
+};
+
+//multer 이미지 업로드
 const uploadImg = async (req, res) => {
   try {
     upload.array("images")(req, res);
@@ -58,15 +79,30 @@ const getAllProduct = async (req, res) => {
   }
 };
 
+// productId로 상품 정보 조회
+const getProductById = async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    const productInfo = await product.getProductById(productId);
+    res.json({
+      success: true,
+      message: "상품을 조회했습니다.",
+      product: productInfo,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: "실패",
+      product: undefined,
+    });
+  }
+};
+
 // 상품 이름으로 검색
 const getProductByName = async (req, res) => {
   try {
-    const productByName = await product.getProductByName({
-      name: req.body.name,
-    });
-
-    console.log(productByName);
-
+    const searchQuery = req.params.search;
+    const productByName = await product.getProductByName(searchQuery);
     res.json({
       success: true,
       message: "상품을 조회했습니다.",
@@ -77,27 +113,6 @@ const getProductByName = async (req, res) => {
       success: false,
       message: error,
       productNames: undefined,
-    });
-  }
-};
-
-// 상품 정보 업데이트
-const updateProduct = async (req, res) => {
-  try {
-    const image = await uploadImg(req, res);
-    const productId = req.params.productId;
-    const updatedInfo = req.body;
-    updatedInfo.images = image.map((img) => img.filename);
-    await product.updateProduct(productId, updatedInfo);
-
-    res.json({
-      success: true,
-      message: "상품 업데이트에 성공했습니다.",
-    });
-  } catch (error) {
-    res.json({
-      success: false,
-      message: error,
     });
   }
 };
@@ -127,4 +142,5 @@ module.exports = {
   getProductByName,
   updateProduct,
   deleteProduct,
+  getProductById,
 };

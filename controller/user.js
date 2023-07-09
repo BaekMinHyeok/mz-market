@@ -1,4 +1,5 @@
 const { user } = require("../services/user");
+const jwt = require("jsonwebtoken");
 
 // 회원가입
 const register = async (req, res) => {
@@ -17,26 +18,7 @@ const register = async (req, res) => {
   }
 };
 
-// 로그인
-const login = async (req, res) => {
-  try {
-    const {email, pw} = req.body;
-    await user.login({email, pw})
-    res.json({
-      success: true,
-      message: "로그인에 성공했습니다.",
-      token: token,
-    });
-  } catch (error) {
-    res.json({
-      success: false,
-      message: error,
-      token: undefined,
-    });
-  }
-};
-
-// 회원 정보 수정
+//회원 정보 수정
 const updateUser = async (req, res) => {
   try {
     const {email, pw, newPw, newName} = req.body;
@@ -58,14 +40,18 @@ const getUser = async (req, res) => {
   try {
     const {email} = req.body;
     const userData = await user.getUser({email})
+    const decoded = jwt.verify(
+      req.headers.authorization.split(" ")[1],
+      process.env.SECRET
+    );
+    const userData = await user.getUser({
+      email: decoded.email,
+    });
     res.json({
       success: true,
       message: "유저 정보를 조회합니다.",
       user: userData,
     });
-    /**
-     * 주문 관련 정보 추가 필요
-     */
   } catch (error) {
     res.json({
       success: false,
@@ -74,11 +60,18 @@ const getUser = async (req, res) => {
     });
   }
 };
-// 회원 탈퇴
+
+//회원 탈퇴
 const deleteUser = async (req, res) => {
   try {
-    const {email, pw} = req.body;
-    await user.delete({email, pw})
+    const decoded = jwt.verify(
+      req.headers.authorization.split(" ")[1],
+      process.env.SECRET
+    );
+    await user.delete({
+      email: decoded.email,
+      pw: decoded.pw,
+    });
     res.json({
       success: true,
       message: "회원탈퇴에 성공했습니다.",
@@ -87,6 +80,26 @@ const deleteUser = async (req, res) => {
     res.json({
       success: false,
       message: error,
+    });
+  }
+};
+
+const login = async (req, res) => {
+  try {
+    const token = await user.login({
+      email: req.body.email,
+      pw: req.body.pw,
+    });
+    res.json({
+      success: true,
+      message: "로그인에 성공했습니다.",
+      token: token,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+      token: undefined,
     });
   }
 };

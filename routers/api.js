@@ -1,22 +1,10 @@
 const express = require("express");
-const {
-  auth
-} = require("../middlewares/user");
+const { auth } = require("../middlewares/user");
 const router = express.Router();
 //user
-const {
-  register,
-  login,
-  updateUser,
-  getUser,
-  deleteUser,
-} = require("../controller/user");
+const {register, login, updateUser,getUser, deleteUser,} = require("../controller/user");
 //product
-const {
-  registerProduct,
-  getAllProduct,
-  updateProduct,
-  deleteProduct,
+const {registerProduct, getAllProduct, updateProduct, deleteProduct,
 } = require("../controller/product");
 //category
 const {
@@ -38,19 +26,24 @@ const {
 Ex) "/user" 라우트에 http method 값을 바꾸며 요청 
  */
 
+//user
+router.post("/user", register); //회원 가입
+router.put("/user", auth, updateUser); //회원 정보 수정
+router.get("/user", auth, getUser); //회원 정보 조회
+router.delete("/user", auth, deleteUser); //회원 탈퇴
+
 //login
 router.post("/login", login); //로그인
-//user
-router.post("/register", register); //회원 가입
-router.put("/update_user", auth, updateUser); //회원정보 수정
-router.get("/get_user", auth, getUser); //회원정보 조회
-router.delete("/delete_user", auth, deleteUser); //회원 탈퇴
 
 //product
-router.post("/registerProduct", auth, registerProduct); //상품등록
-router.put("/updateProduct", auth, updateProduct); //상품 정보 수정
-router.get("/getAllProduct", getAllProduct); //상품 정보 조회
-router.delete("/deleteProduct/:productId", auth, deleteProduct); //상품 삭제
+router.post("/product", auth, registerProduct); //상품등록
+router.put("/product/:productId", auth, updateProduct); //상품 업데이트
+router.get("/product", getAllProduct); //모든 상품 목록
+router.get("/product/:productId", getProductById); //productId로 상품 정보 가져오기
+router.get("/product/search/:search", getProductByName); //상품 이름 검색
+
+router.delete("/product/:productId", auth, deleteProduct); //상품 삭제
+
 
 //category
 router.post("/registerCategory", auth, registerCategory); //카테고리 등록

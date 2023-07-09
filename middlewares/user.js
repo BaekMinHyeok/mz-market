@@ -2,11 +2,11 @@ const jwt = require("jsonwebtoken");
 //Token 체크
 const auth = async (req, res, next) => {
   try {
-    // const decoded = jwt.verify(
-    //   req.headers.authorization.split(" ")[1],
-    //   process.env.SECRET
-    // );
-    const decoded = jwt.verify(req.headers.authorization, process.env.SECRET);
+    const decoded = jwt.verify(
+      req.headers.authorization.split(" ")[1],
+      process.env.SECRET
+    );
+    // const decoded = jwt.verify(req.headers.authorization, process.env.SECRET);
     req.email = decoded.email;
     return next();
   } catch (error) {
