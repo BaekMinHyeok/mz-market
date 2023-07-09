@@ -18,7 +18,6 @@ class ProductService {
     } catch (error) {
       productId = 1;
     }
-    console.log(productId);
 
     try {
       await this.productModel.create({
@@ -44,19 +43,26 @@ class ProductService {
 
   // 상품 업데이트
   async updateProduct(productId, updatedInfo) {
-    const updatedProduct = await this.productModel.findByIdAndUpdate(
-      productId,
-      updatedInfo,
-      {
-        new: true,
-      }
-    );
-    return updatedProduct;
+    const product = await this.productModel.findOne({ productId: productId });
+
+    if (!product) {
+      throw "해당 제품을 찾을 수 없습니다.";
+    }
+
+    Object.assign(product, updatedInfo);
+    await product.save();
   }
 
   // 모든 상품 목록 가져오기
   async getAllProduct() {
     return await this.productModel.find();
+  }
+
+  // product Id로 특정 상품의 상세 정보 가져오기
+  async getProductById(productId) {
+    return await this.productModel.findOne({
+      productId: productId,
+    });
   }
 
   // 특정 상품의 상세 정보 가져오기
