@@ -103,6 +103,26 @@
   justify-content: space-between;
 }
 
+.order_product_list
+  .order_info_box
+  .order_product_info
+  .order_product_top
+  .selected_size {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.order_product_list
+  .order_info_box
+  .order_product_info
+  .order_product_top
+  .selected_size
+  span {
+  font-weight: 700;
+  font-size: 20px;
+}
+
 .order_product_list .order_info_box .order_product_info .product_name {
   font-size: 22px;
   font-weight: 700;
@@ -112,7 +132,6 @@
 .order_product_list .order_info_box .order_product_info .product_size {
   font-weight: 700;
   font-size: 20px;
-  margin-bottom: 25px;
 }
 
 .order_product_list .order_info_box .order_product_info .product_price {

@@ -1,11 +1,11 @@
 // 로컬 스토리지에서 장바구니 데이터 불러오기
 let cartData = localStorage.getItem("cart");
 let cartItems = [];
+cartItems = JSON.parse(cartData);
 
 console.log(cartData);
 const noList = document.querySelector(".empty_cart_message");
 console.log(noList);
-cartItems = JSON.parse(cartData);
 
 // 장바구니 데이터가 있는 경우 목록 생성
 if (cartData) {
@@ -22,7 +22,7 @@ if (cartData) {
         <div class="order_product_info">
           <div class="order_product_top">
             <p class="product_name">${item.name}</p>
-            <p class="product_size">Size: ${item.size}</p>
+            <div class ="selected_size"><span>Size :  &nbsp;</span><p class="product_size"> ${item.size}</p></div>
             <p class="product_price">${item.price}</p>
           </div>
           <div class="order_product_edit_count">
@@ -106,42 +106,11 @@ document.addEventListener("click", function (event) {
       (item) => !(item.name === productName && item.size === productSize)
     );
 
-    const deleteItems = cartItems.filter(
-      (item) => item.name === productName && item.size === productSize
-    );
-    // cartItems ==> 삭제하고 남은 전체 데이터
-    // 로컬스토리지에서 바로 삭제하는 기능 **************************************************
-
-    const keys = Object.keys(localStorage);
-
-    console.log("키값입니다" + keys);
-
-    // 특정 아이디 값
-    const targetName = "상품7";
-    const targetSize = "L";
-    const targetId = 4;
-
-    // 로컬 스토리지의 각 키에 대해 조건을 검사하여 해당 객체를 제거
-    keys.forEach((key) => {
-      const value = localStorage.getItem(key);
-      // cart 전체가 들어오지 않을까..?
-      console.log("*********************************** VALUE" + value);
-
-      if (value) {
-        const parsedValue = JSON.parse(value);
-        if (
-          parsedValue.name === targetName &&
-          parsedValue.size === targetSize
-        ) {
-          localStorage.removeItem(key);
-        }
-      }
-    });
-
     // 업데이트된 장바구니 데이터를 로컬 스토리지에 저장
     localStorage.setItem("cart", JSON.stringify(cartItems));
-
     console.log("상품 삭제하고 나서 카트 아이템 목록", cartItems);
+
+    updateTotalQuantityAndPrice();
   }
 });
 
@@ -194,6 +163,7 @@ function updateTotalQuantityAndPrice() {
   const priceElement = document.querySelector(".price");
   const deliverElement = document.querySelector(".deliver");
   const totalPriceElement = document.querySelector(".nav_total_price");
+  const totalPriceSubtitleElement = document.querySelector(".subtitle_price");
 
   const totalQuantity = calculateTotalQuantity();
   const totalPrice = calculateTotalPrice();
@@ -205,18 +175,9 @@ function updateTotalQuantityAndPrice() {
   priceElement.textContent = totalPrice.toString();
   deliverElement.textContent = deliveryFee.toString();
   totalPriceElement.textContent = finalPrice.toString();
+  totalPriceSubtitleElement.textContent =
+    "총 " + totalPrice.toString() + "원을 담았어요.";
 }
-
-// 수량 수정 시 총 상품 수량 및 합계 업데이트
-// document.addEventListener("click", function (event) {
-//   if (
-//     event.target.classList.contains("product_remove") ||
-//     event.target.classList.contains("product_add") ||
-//     event.target.classList.contains("order_remove_button")
-//   ) {
-//     updateTotalQuantityAndPrice(); // 총 상품 수량 및 금액 업데이트
-//   }
-// });
 
 function init() {
   updateTotalQuantityAndPrice();
