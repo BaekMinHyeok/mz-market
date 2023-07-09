@@ -34,7 +34,6 @@ savebtn.addEventListener("click", async function () {
   
     if (result.success) {
       console.log(result.message); 
-      console.log(result.message); 
     }
   } catch (error) {
     console.log("Error:", error);
