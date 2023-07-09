@@ -10,7 +10,7 @@ class CategoryService {
   async register(info) {
     const { name } = info;
     try {
-      this.categoryModel.create({
+      await this.categoryModel.create({
         name,
       });
     } catch (error) {
@@ -34,7 +34,7 @@ class CategoryService {
   //카테고리 삭제
   async delete(info) {
     const { name } = info;
-    await this.categoryModel.deletOne({ name: name });
+    return await this.categoryModel.deletOne({ name: name });
   }
 
 }

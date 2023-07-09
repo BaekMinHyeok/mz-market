@@ -22,7 +22,12 @@ const orderSchema = new Schema({
   comments: {
     type: String,
     require: false,
+  },
+  email: {
+    type: String,
+    require: true,
   }
+  
 });
 
 module.exports = orderSchema;

@@ -1,10 +1,25 @@
 const express = require("express");
-const { auth } = require("../middlewares/user");
+const {
+  auth
+} = require("../middlewares/user");
 const router = express.Router();
 //user
-const {register, login, updateUser,getUser, deleteUser,} = require("../controller/user");
+const {
+  register,
+  login,
+  updateUser,
+  getUser,
+  deleteUser,
+} = require("../controller/user");
 //product
-const {registerProduct, getAllProduct, updateProduct, deleteProduct,
+const {
+  registerProduct,
+  uploadImg,
+  getAllProduct,
+  getProductByName,
+  updateProduct,
+  deleteProduct,
+  getProductById,
 } = require("../controller/product");
 //category
 const {
@@ -18,6 +33,7 @@ const {
   registerOrder,
   updateOrder,
   getAllOrders,
+  getOrderByEmail,
   deleteOrder,
 } = require("../controller/order");
 
@@ -46,16 +62,17 @@ router.delete("/product/:productId", auth, deleteProduct); //상품 삭제
 
 
 //category
-router.post("/registerCategory", auth, registerCategory); //카테고리 등록
-router.put("/updateCategory", auth, updateCategory); //카테고리 업데이트
-router.get("/getAllCategory", auth, getAllCategory); //카테고리 조회
-router.delete("/deleteCategory", auth, deleteCategory); //카테고리 삭제
+router.post("/category", auth, registerCategory); //카테고리 등록
+router.put("/category", auth, updateCategory); //카테고리 업데이트
+router.get("/category", auth, getAllCategory); //카테고리 조회
+router.delete("/category", auth, deleteCategory); //카테고리 삭제
 
 //order
-router.post("/registerOrder", auth, registerOrder); //주문 등록
-router.put("/updateOrder", auth, updateOrder); //주문 정보 수정
-router.get("/getAllOrders", auth, getAllOrders); //주문 정보 조회
-router.delete("/deleteOrder", auth, deleteOrder); //주문 삭제
+router.post("/order", auth, registerOrder); //주문 등록
+router.put("/order", auth, updateOrder); //주문 정보 수정
+router.get("/order", auth, getAllOrders); //전체 주문 정보 조회
+router.get("/order/email", auth, getOrderByEmail); //이메일검색 주문 정보 조회
+router.delete("/order", auth, deleteOrder); //주문 정보 삭제
 
 
 module.exports = router;

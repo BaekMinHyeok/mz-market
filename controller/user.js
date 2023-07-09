@@ -38,8 +38,6 @@ const updateUser = async (req, res) => {
 //회원 정보 조회
 const getUser = async (req, res) => {
   try {
-    const {email} = req.body;
-    const userData = await user.getUser({email})
     const decoded = jwt.verify(
       req.headers.authorization.split(" ")[1],
       process.env.SECRET

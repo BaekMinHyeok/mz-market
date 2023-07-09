@@ -61,6 +61,28 @@ const getAllOrders = async (req, res) => {
   }
 };
 
+// 이메일검색 주문 정보 조회
+const getOrderByEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const orders = await order.getOrder(email);
+
+    res.json({
+      success: true,
+      message: "주문을 조회했습니다.",
+      orders: orders,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+      orders: undefined,
+    });
+  }
+};
+
+
+
 // 주문 삭제
 const deleteOrder = async (req, res) => {
   try {
@@ -83,5 +105,6 @@ module.exports = {
   registerOrder,
   updateOrder,
   getAllOrders,
+  getOrderByEmail,
   deleteOrder,
 };

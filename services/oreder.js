@@ -33,9 +33,16 @@ class OrderService {
     return update;
   }
 
-  //주문 조회
+  //주문 조회 (관리자)
   async getAll() {
     return await this.OrderModel.find();
+  }
+
+  // 이메일검색 주문 정보 조회
+  async getOrderByEmail(email) {
+    return await this.OrderModel.findOne({
+      email: email,
+    });
   }
 
   //주문 삭제
