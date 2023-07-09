@@ -23,7 +23,6 @@ const orderSchema = new Schema({
     type: String,
     require: false,
   }
-},
-);
+});
 
 module.exports = orderSchema;

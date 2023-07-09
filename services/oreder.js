@@ -1,6 +1,5 @@
 const { Order } = require("../models");
 require("dotenv").config();
-
 class OrderService {
   constructor(Order) {
     this.OrderModel = Order;
@@ -36,7 +35,7 @@ class OrderService {
 
   //주문 조회
   async getAll() {
-    await this.OrderModel.find();
+    return await this.OrderModel.find();
   }
 
   //주문 삭제

@@ -3,19 +3,17 @@ const { order } = require("../services/order");
 // 주문 등록
 const registerOrder = async (req, res) => {
   try {
-    const { name, description, price, category, gender } = req.body;
-    // const image = uploadImg(req, res);
+    const { name, phoneNumber, address, address2, comments } = req.body;
     await order.register({
       name,
-      description,
-      price,
-      category,
-      gender,
-      //  images: image.map((img) => img.filename)
+      phoneNumber,
+      address,
+      address2,
+      comments,
     });
     res.json({
       success: true,
-      message: "상품 등록에 성공했습니다.",
+      message: "주문 등록에 성공했습니다.",
     });
   } catch (error) {
     res.json({

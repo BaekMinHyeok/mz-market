@@ -1,6 +1,9 @@
 const express = require("express");
-const { auth } = require("../middlewares/user");
+const {
+  auth
+} = require("../middlewares/user");
 const router = express.Router();
+//user
 const {
   register,
   login,
@@ -8,13 +11,27 @@ const {
   getUser,
   deleteUser,
 } = require("../controller/user");
+//product
 const {
   registerProduct,
   getAllProduct,
-  getProductByName,
   updateProduct,
   deleteProduct,
 } = require("../controller/product");
+//category
+const {
+  registerCategory,
+  updateCategory,
+  deleteCategory,
+  getAllCategory,
+} = require("../controller/category");
+//order
+const {
+  registerOrder,
+  updateOrder,
+  getAllOrders,
+  deleteOrder,
+} = require("../controller/order");
 
 /**
  RESTful 하게 수정 필요 
