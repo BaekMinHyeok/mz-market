@@ -3,10 +3,13 @@ let cartData = localStorage.getItem("cart");
 let cartItems = [];
 
 console.log(cartData);
+const noList = document.querySelector(".empty_cart_message");
+console.log(noList);
+cartItems = JSON.parse(cartData);
 
 // 장바구니 데이터가 있는 경우 목록 생성
 if (cartData) {
-  cartItems = JSON.parse(cartData);
+  noList.style.display = "none";
   console.log("cartItems", cartItems);
 
   cartItems.forEach((item) => {
@@ -100,11 +103,44 @@ document.addEventListener("click", function (event) {
     console.log("삭제하는 상품 사이즈", productSize);
 
     cartItems = cartItems.filter(
-      (item) => item.name !== productName || item.size !== productSize
+      (item) => !(item.name === productName && item.size === productSize)
     );
+
+    const deleteItems = cartItems.filter(
+      (item) => item.name === productName && item.size === productSize
+    );
+    // cartItems ==> 삭제하고 남은 전체 데이터
+    // 로컬스토리지에서 바로 삭제하는 기능 **************************************************
+
+    const keys = Object.keys(localStorage);
+
+    console.log("키값입니다" + keys);
+
+    // 특정 아이디 값
+    const targetName = "상품7";
+    const targetSize = "L";
+    const targetId = 4;
+
+    // 로컬 스토리지의 각 키에 대해 조건을 검사하여 해당 객체를 제거
+    keys.forEach((key) => {
+      const value = localStorage.getItem(key);
+      // cart 전체가 들어오지 않을까..?
+      console.log("*********************************** VALUE" + value);
+
+      if (value) {
+        const parsedValue = JSON.parse(value);
+        if (
+          parsedValue.name === targetName &&
+          parsedValue.size === targetSize
+        ) {
+          localStorage.removeItem(key);
+        }
+      }
+    });
 
     // 업데이트된 장바구니 데이터를 로컬 스토리지에 저장
     localStorage.setItem("cart", JSON.stringify(cartItems));
+
     console.log("상품 삭제하고 나서 카트 아이템 목록", cartItems);
   }
 });
@@ -123,7 +159,6 @@ removeAllButton.addEventListener("click", function () {
 // 총 상품 수량 계산
 function calculateTotalQuantity() {
   const productNumElements = document.querySelectorAll(".product_num");
-  console.log(productNumElements.textContent);
   let totalQuantity = 0;
 
   productNumElements.forEach((element) => {
@@ -183,6 +218,8 @@ function updateTotalQuantityAndPrice() {
 //   }
 // });
 
-window.addEventListener("DOMContentLoaded", function () {
-  updateTotalQuantityAndPrice(); // 초기화 함수 호출
-});
+function init() {
+  updateTotalQuantityAndPrice();
+}
+
+init();
