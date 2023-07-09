@@ -15,6 +15,7 @@ const {
   updateProduct,
   deleteProduct,
   getProductById,
+  getProductOption,
 } = require("../controller/product");
 
 router.post("/user", register); //회원 가입
@@ -27,9 +28,8 @@ router.post("/login", login); //로그인
 router.post("/product", auth, registerProduct); //상품등록
 router.put("/product/:productId", auth, updateProduct); //상품 업데이트
 router.get("/product", getAllProduct); //모든 상품 목록
-router.get("/product/:productId", getProductById); //productId로 상품 정보 가져오기 
-
-router.post("/product/search/:search", getProductByName); //상품 이름  검색
+router.get("/product/:productId", getProductById); //productId로 상품 정보 가져오기
+router.get("/product/search/:search", getProductByName); //상품 이름 검색
 
 router.delete("/product/:productId", auth, deleteProduct); //상품 삭제
 

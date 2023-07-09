@@ -81,7 +81,6 @@ const getAllProduct = async (req, res) => {
 const getProductById = async (req, res) => {
   try {
     const productId = req.params.productId;
-    console.log(productId);
     const productInfo = await product.getProductById(productId);
     res.json({
       success: true,
@@ -100,12 +99,8 @@ const getProductById = async (req, res) => {
 // 상품 이름 검색
 const getProductByName = async (req, res) => {
   try {
-    const productByName = await product.getProductByName({
-      name: req.body.name,
-    });
-
-    console.log(productByName);
-
+    const searchQuery = req.params.search;
+    const productByName = await product.getProductByName(searchQuery);
     res.json({
       success: true,
       message: "상품을 조회했습니다.",

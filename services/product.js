@@ -66,11 +66,12 @@ class ProductService {
   }
 
   // 특정 상품의 상세 정보 가져오기
-  async getProductByName(productInfo) {
-    const { name } = productInfo;
-    return await this.productModel.findOne({
-      name: name,
+  async getProductByName(searchQuery) {
+    const regexQuery = new RegExp(searchQuery, "i"); //한글 검색 처리에 필요
+    const products = await this.productModel.find({
+      name: regexQuery,
     });
+    return products;
   }
 
   // 상품 삭제
