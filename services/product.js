@@ -11,10 +11,13 @@ class ProductService {
     const { name, description, price, category, gender } = productInfo;
     let productId;
     // 가장 최신 값 가져오기
-    const vl = this.productModel.findOne().sort({ _id: -1 }); // 1은 가장 오래된 값, -1은 가장 최근의 값
-    const data = await vl.exec();
-    productId = data.productId;
-    productId = productId === undefined ? 1 : data.productId + 1;
+    try {
+      const vl = this.productModel.findOne().sort({ _id: -1 }); // 1은 가장 오래된 값, -1은 가장 최근의 값
+      const data = await vl.exec();
+      productId = data.productId + 1;
+    } catch (error) {
+      productId = 1;
+    }
 
     try {
       await this.productModel.create({
@@ -40,14 +43,14 @@ class ProductService {
 
   // 상품 업데이트
   async updateProduct(productId, updatedInfo) {
-    const updatedProduct = await this.productModel.findByIdAndUpdate(
-      productId,
-      updatedInfo,
-      {
-        new: true,
-      }
-    );
-    return updatedProduct;
+    const product = await this.productModel.findOne({ productId: productId });
+
+    if (!product) {
+      throw "해당 제품을 찾을 수 없습니다.";
+    }
+
+    Object.assign(product, updatedInfo);
+    await product.save();
   }
 
   // 모든 상품 목록 가져오기
@@ -55,12 +58,20 @@ class ProductService {
     return await this.productModel.find();
   }
 
-  // 특정 상품의 상세 정보 가져오기
-  async getProductByName(productInfo) {
-    const { name } = productInfo;
+  // product Id로 특정 상품의 상세 정보 가져오기
+  async getProductById(productId) {
     return await this.productModel.findOne({
-      name: name,
+      productId: productId,
     });
+  }
+
+  // 특정 상품의 상세 정보 가져오기
+  async getProductByName(searchQuery) {
+    const regexQuery = new RegExp(searchQuery, "i"); //한글 검색 처리에 필요
+    const products = await this.productModel.find({
+      name: regexQuery,
+    });
+    return products;
   }
 
   // 상품 삭제

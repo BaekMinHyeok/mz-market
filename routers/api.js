@@ -14,17 +14,23 @@ const {
   getProductByName,
   updateProduct,
   deleteProduct,
+  getProductById,
+  getProductOption,
 } = require("../controller/product");
 
-router.post("/register", register); //회원 가입
+router.post("/user", register); //회원 가입
+router.put("/user", auth, updateUser); //회원 정보 수정
+router.get("/user", auth, getUser); //회원 정보 조회
+router.delete("/user", auth, deleteUser); //회원 탈퇴
+
 router.post("/login", login); //로그인
-router.post("/update_user", auth, updateUser); //유저정보 수정
-router.post("/get_user", auth, getUser); //유저정보 조회
-router.post("/delete_user", auth, deleteUser); //회원 탈퇴
-router.post("/registerProduct", auth, registerProduct); //상품등록
-router.post("/getAllProduct", getAllProduct); //모든 상품 목록
-router.post("/getProductByName", getProductByName); //상품 이름 검색
-router.post("/updateProduct", auth, updateProduct); //상품 업데이트
-router.post("/deleteProduct/:productId", auth, deleteProduct); //상품 삭제
+
+router.post("/product", auth, registerProduct); //상품등록
+router.put("/product/:productId", auth, updateProduct); //상품 업데이트
+router.get("/product", getAllProduct); //모든 상품 목록
+router.get("/product/:productId", getProductById); //productId로 상품 정보 가져오기
+router.get("/product/search/:search", getProductByName); //상품 이름 검색
+
+router.delete("/product/:productId", auth, deleteProduct); //상품 삭제
 
 module.exports = router;

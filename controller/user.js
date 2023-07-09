@@ -1,5 +1,7 @@
 const { user } = require("../services/user");
+const jwt = require("jsonwebtoken");
 
+//회원 가입
 const register = async (req, res) => {
   try {
     await user.register({
@@ -10,6 +12,74 @@ const register = async (req, res) => {
     res.json({
       success: true,
       message: "회원가입에 성공했습니다.",
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+    });
+  }
+};
+
+//회원 정보 수정
+const updateUser = async (req, res) => {
+  try {
+    await user.updateUser({
+      email: req.body.email,
+      pw: req.body.pw,
+      newPw: req.body.newPw,
+      newName: req.body.newName,
+    });
+    res.json({
+      success: true,
+      message: "회원정보를 수정했습니다.",
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+    });
+  }
+};
+
+//회원 정보 조회
+const getUser = async (req, res) => {
+  try {
+    const decoded = jwt.verify(
+      req.headers.authorization.split(" ")[1],
+      process.env.SECRET
+    );
+    const userData = await user.getUser({
+      email: decoded.email,
+    });
+    res.json({
+      success: true,
+      message: "유저 정보를 조회합니다.",
+      user: userData,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+      user: undefined,
+    });
+  }
+};
+
+//회원 탈퇴
+const deleteUser = async (req, res) => {
+  try {
+    const decoded = jwt.verify(
+      req.headers.authorization.split(" ")[1],
+      process.env.SECRET
+    );
+    await user.delete({
+      email: decoded.email,
+      pw: decoded.pw,
+    });
+    res.json({
+      success: true,
+      message: "회원탈퇴에 성공했습니다.",
     });
   } catch (error) {
     res.json({
@@ -35,66 +105,6 @@ const login = async (req, res) => {
       success: false,
       message: error,
       token: undefined,
-    });
-  }
-};
-
-const updateUser = async (req, res) => {
-  try {
-    await user.updateUser({
-      email: req.body.email,
-      pw: req.body.pw,
-      newPw: req.body.newPw,
-      newName: req.body.newName,
-    });
-    res.json({
-      success: true,
-      message: "회원정보를 수정했습니다.",
-    });
-  } catch (error) {
-    res.json({
-      success: false,
-      message: error,
-    });
-  }
-};
-
-const getUser = async (req, res) => {
-  try {
-    const userData = await user.getUser({
-      email: req.email,
-    });
-    res.json({
-      success: true,
-      message: "유저 정보를 조회합니다.",
-      user: userData,
-    });
-    /**
-     * 주문 관련 정보 추가 필요
-     */
-  } catch (error) {
-    res.json({
-      success: false,
-      message: error,
-      user: undefined,
-    });
-  }
-};
-
-const deleteUser = async (req, res) => {
-  try {
-    await user.delete({
-      email: req.body.email,
-      pw: req.body.pw,
-    });
-    res.json({
-      success: true,
-      message: "회원탈퇴에 성공했습니다.",
-    });
-  } catch (error) {
-    res.json({
-      success: false,
-      message: error,
     });
   }
 };

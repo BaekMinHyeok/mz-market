@@ -42,6 +42,7 @@ class UserService {
         type: "JWT",
         name: check[0].name,
         email: check[0].email,
+        pw: check[0].pw,
       },
       process.env.SECRET
     );
@@ -68,6 +69,7 @@ class UserService {
     await user.save();
   }
 
+  //회원 정보 조회
   async getUser(userInfo) {
     const { email } = userInfo;
 
