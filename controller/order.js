@@ -1,4 +1,4 @@
-const { order } = require("../services/order");
+const { order } = require("../services/oreder");
 
 // 주문 등록
 const registerOrder = async (req, res) => {
