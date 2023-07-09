@@ -1,3 +1,4 @@
+
 // 카테고리 선택 함수
 function updateCategoryValue(checkbox) {
   let checkvalue = document.getElementById("checkvalue");
@@ -27,7 +28,9 @@ function closeModal() {
 
 // 저장 버튼 클릭
 const saveBtn = document.getElementById("save-btn");
-saveBtn.addEventListener("click", function() {
+saveBtn.addEventListener("click",async function() {
+   
+    console.log(aa);
 
   // 확인 대화 상자 표시
   if (confirm("정말로 이 제품을 저장하시겠습니까?")) {
@@ -64,24 +67,26 @@ if (!productName || !productDescription || !productPrice || !selectedValue || !c
 }
     // 로컬 스토리지에서 JWT 토큰 가져오기
     const token = localStorage.getItem('token');
-
+    const productId = document.querySelector("#aa");
+    console.log("productId",productId)
 
     // 상품 데이터 객체 생성  
-    const productData = new FormData();
-    productData.append('productName', productName);
-    productData.append('productDescription', productDescription);
-    productData.append('productPrice', productPrice);
-    productData.append('selectedValue', selectedValue);
-    productData.append('categoryValue', categoryValue);
-    productData.append('selectedFile', selectedFile);
+    const productData = {
+      name: productName,
+      description: productDescription,
+      price: Number(productPrice),
+      category: categoryValue,
+      gender: selectedValue,
+    };
 
     // 백엔드로 상품 데이터 전송
-    fetch('/api/products/add', {
-      method: 'POST',
+    await fetch(`http://localhost:3000/api/product/${Number(productId)}`, {
+      method: 'PUT',
       headers: {
-        'Authorization': `Bearer ${token}`
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
-      body: productData
+      body: JSON.stringify(productData),
     })
     .then(response => response.json())
     .then(data => {

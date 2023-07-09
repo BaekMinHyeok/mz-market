@@ -5,11 +5,11 @@ const deleteData = async (productId) => {
     const response = await fetch(url, {
       method: "DELETE",
       headers: {
-        authorization:token
+        authorization: `Bearer ${token}`,
       }
     });
     
-    if (response.success) {
+    if (response.success) {3
       console.log(response.message);
     } 
   } catch (error) {
