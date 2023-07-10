@@ -1,7 +1,5 @@
 const express = require("express");
-const {
-  auth
-} = require("../middlewares/user");
+const { auth } = require("../middlewares/user");
 const router = express.Router();
 //user
 const {
@@ -36,11 +34,8 @@ const {
   getOrderByEmail,
   deleteOrder,
 } = require("../controller/order");
-
-/**
- RESTful 하게 수정 필요 
-Ex) "/user" 라우트에 http method 값을 바꾸며 요청 
- */
+//image
+const { uploadMiddleware } = require("../middlewares/image");
 
 //user
 router.post("/user", register); //회원 가입
@@ -60,7 +55,6 @@ router.get("/product/search/:search", getProductByName); //상품 이름 검색
 
 router.delete("/product/:productId", auth, deleteProduct); //상품 삭제
 
-
 //category
 router.post("/category", auth, registerCategory); //카테고리 등록
 router.put("/category", auth, updateCategory); //카테고리 업데이트
@@ -73,6 +67,5 @@ router.put("/order", auth, updateOrder); //주문 정보 수정
 router.get("/order", auth, getAllOrders); //전체 주문 정보 조회
 router.get("/order/email", auth, getOrderByEmail); //이메일검색 주문 정보 조회
 router.delete("/order", auth, deleteOrder); //주문 정보 삭제
-
 
 module.exports = router;
