@@ -5,16 +5,17 @@ const upload = require("../middlewares/multerconfig");
 // 상품 등록
 const registerProduct = async (req, res) => {
   try {
-    const image = await uploadImg(req, res);
+    // const image = await uploadImg(req, res);
+    console.log(req.file)
     const productInfo = {
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
       category: req.body.category,
       gender: req.body.gender,
-      images: image.map((img) => img.filename),
+      images: req.file,
     };
-
+    console.log(productInfo)
     await product.registerProduct(productInfo);
 
     res.json({
@@ -34,10 +35,10 @@ const registerProduct = async (req, res) => {
 // 상품 업데이트
 const updateProduct = async (req, res) => {
   try {
-    // const image = uploadImg(req, res);
+    const image = uploadImg(req, res);
     const productId = req.params.productId;
     const updatedInfo = req.body;
-    // updatedInfo.images = image.map((img) => img.filename);
+    updatedInfo.images = image.map((img) => img.filename);
     await product.updateProduct(productId, updatedInfo);
     res.json({
       success: true,
@@ -54,7 +55,7 @@ const updateProduct = async (req, res) => {
 //multer 이미지 업로드
 const uploadImg = async (req, res) => {
   try {
-    upload.array("images")(req, res);
+    upload.single("images")(req, res);
     return req.files;
   } catch (error) {
     return error;
