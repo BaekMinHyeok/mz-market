@@ -5,6 +5,9 @@ const nameError = document.getElementById("nameError");
 const phonenumInput = document.querySelector(".phonenum_input");
 const phonenumError = document.getElementById("phonenumError");
 
+const emailInput = document.querySelector(".email_input");
+const emailError = document.getElementById("emailError");
+
 const etcInput = document.querySelector(".etc_input");
 const paymentButton = document.getElementById("paymentButton");
 
@@ -60,8 +63,25 @@ function validatePhonenumInput() {
   }
 }
 
-// 이름 유효성 검사 실행
-nameInput.addEventListener("input", validateNameInput);
+// 이메일 검사
+function validateEmailInput() {
+  const emailValue = emailInput.value.trim();
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// 연락처 유효성 검사 실행
+  console.log(emailValue);
+
+  if (emailValue === "") {
+    emailError.textContent = "이메일을 입력해주세요.";
+    paymentButton.disabled = true;
+  } else if (!regex.test(emailValue)) {
+    emailError.textContent = "@을 포함하여 이메일 주소를 입력해주세요.";
+    paymentButton.disabled = true;
+  } else {
+    emailError.textContent = "";
+  }
+}
+
+// 유효성 검사 실행
+nameInput.addEventListener("input", validateNameInput);
 phonenumInput.addEventListener("input", validatePhonenumInput);
+emailInput.addEventListener("input", validateEmailInput);
