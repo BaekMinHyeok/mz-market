@@ -1,14 +1,11 @@
 const { user } = require("../services/user");
 const jwt = require("jsonwebtoken");
 
-//회원 가입
+// 회원가입
 const register = async (req, res) => {
   try {
-    await user.register({
-      name: req.body.name,
-      email: req.body.email,
-      pw: req.body.pw,
-    });
+    const { name, email, pw} = req.body;
+    await user.register({name,email,pw,})
     res.json({
       success: true,
       message: "회원가입에 성공했습니다.",
@@ -24,12 +21,8 @@ const register = async (req, res) => {
 //회원 정보 수정
 const updateUser = async (req, res) => {
   try {
-    await user.updateUser({
-      email: req.body.email,
-      pw: req.body.pw,
-      newPw: req.body.newPw,
-      newName: req.body.newName,
-    });
+    const {email, pw, newPw, newName} = req.body;
+    await user.updateUser({email, pw, newPw, newName})
     res.json({
       success: true,
       message: "회원정보를 수정했습니다.",
