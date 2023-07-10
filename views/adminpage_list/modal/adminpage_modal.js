@@ -67,7 +67,8 @@ if (!productName || !productDescription || !productPrice || !selectedValue || !c
 }
     // 로컬 스토리지에서 JWT 토큰 가져오기
     const token = localStorage.getItem('token');
-    const productId = document.querySelector("#aa");
+    const productId = document.querySelector("#aa").textContent;
+
     console.log("productId",productId)
 
     // 상품 데이터 객체 생성  
@@ -80,7 +81,7 @@ if (!productName || !productDescription || !productPrice || !selectedValue || !c
     };
 
     // 백엔드로 상품 데이터 전송
-    await fetch(`http://localhost:3000/api/product/${Number(productId)}`, {
+    await fetch(`http://localhost:3000/api/product/${parseInt(productId)}`, {
       method: 'PUT',
       headers: {
         authorization: `Bearer ${token}`,
@@ -92,6 +93,7 @@ if (!productName || !productDescription || !productPrice || !selectedValue || !c
     .then(data => {
       console.log(data);
       closeModal()
+      location.reload();
     })
     .catch(error => {
       console.error('데이터 전송 오류:', error);

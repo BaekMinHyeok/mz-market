@@ -1,0 +1,26 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: lightgray;
+  padding: 20px; 
+}
+
+.left-container {
+  margin-right: 25%; 
+}
+
+.menu-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: black; 
+  margin-right: 10px;
+}
+.logo-container {
+  margin-left: 140px; 
+}
+
+
+
+
