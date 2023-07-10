@@ -70,11 +70,10 @@
                     type="text"
                     class="address_input"
                     placeholder="주소를 입력해주세요."
+                    readonly
                   />
                   <button class="address_button">주소찾기</button>
                 </div>
-
-                <input type="text" class="address_result_input" readonly />
                 <input
                   type="text"
                   class="address_detail_input"
@@ -130,7 +129,8 @@
 
       <!-- container end -->
     </div>
-
+    <!-- 주소 찾기 외부 api -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <!-- order.js -->
     <script src="order.js" type="module"></script>
   </body>

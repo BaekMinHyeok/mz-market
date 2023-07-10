@@ -85,3 +85,16 @@ function validateEmailInput() {
 nameInput.addEventListener("input", validateNameInput);
 phonenumInput.addEventListener("input", validatePhonenumInput);
 emailInput.addEventListener("input", validateEmailInput);
+
+// 주소 찾기 api 연결
+const addressButton = document.querySelector(".address_button");
+function searchAddress() {
+  new daum.Postcode({
+    oncomplete: function (data) {
+      document.querySelector(".address_input").value = data.address; // 주소 넣기
+      document.querySelector(".address_detail_input").focus(); //상세입력 포커싱
+    },
+  }).open();
+}
+
+addressButton.addEventListener("click", searchAddress);

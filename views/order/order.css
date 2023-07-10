@@ -74,6 +74,10 @@
   margin-bottom: 25px;
 }
 
+.order_content .input_box .address_input_box input {
+  margin-bottom: 0;
+}
+
 .order_content .input_box .address_input_box button {
   width: 103px;
   border-radius: 15px;
