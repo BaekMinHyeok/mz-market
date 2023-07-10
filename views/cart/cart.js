@@ -118,8 +118,9 @@ document.addEventListener("click", function (event) {
 const removeAllButton = document.querySelector(".remove_all_button");
 removeAllButton.addEventListener("click", function () {
   const orderInfo = document.getElementById("orderInfo");
-  orderInfo.innerHTML = "";
-
+  orderInfo.innerHTML = `
+  <p class="empty_cart_message"> 장바구니에 담은 물건이 없어요</p>
+  `;
   // 장바구니 데이터 초기화
   cartItems = [];
   localStorage.removeItem("cart");
@@ -177,6 +178,64 @@ function updateTotalQuantityAndPrice() {
   totalPriceElement.textContent = finalPrice.toLocaleString() + "원";
   totalPriceSubtitleElement.textContent =
     "총 " + totalPrice.toLocaleString() + "원을 담았어요.";
+}
+
+// 주문하기 버튼 클릭
+const orderButton = document.querySelector(".nav_order_button");
+orderButton.addEventListener("click", placeOrder);
+
+function placeOrder() {
+  const orderItems = [];
+  // const orderItems = [...cartItems];
+
+  const productElements = document.querySelectorAll(".order_product_list");
+  productElements.forEach((productElement) => {
+    const productName =
+      productElement.querySelector(".product_name").textContent;
+    const productSize =
+      productElement.querySelector(".product_size").textContent;
+    const productPrice = parseInt(
+      productElement.querySelector(".product_price").textContent
+    );
+    const productQuantity = parseInt(
+      productElement.querySelector(".product_num").textContent
+    );
+
+    const orderItem = {
+      name: productName,
+      size: productSize,
+      price: productPrice,
+      quantity: productQuantity,
+    };
+
+    orderItems.push(orderItem);
+  });
+
+  const orderData = {
+    items: orderItems,
+  };
+
+  // 백엔드 api 임시 작성
+  fetch("api 입력", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(orderData),
+  })
+    .then((response) => {
+      if (response.ok) {
+        // 주문 성공
+        console.log("주문 및 결제 페이지로 이동");
+        // 주문 완료 후 처리할 로직 작성
+      } else {
+        // 주문 실패
+        console.log("주문을 처리하는 도중에 문제가 발생했습니다.");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 function init() {
