@@ -5,7 +5,7 @@ const deleteData = async (productId) => {
     const response = await fetch(url, {
       method: "DELETE",
       headers: {
-        authorization:token
+        authorization: `Bearer ${token}`,
       }
     });
     
