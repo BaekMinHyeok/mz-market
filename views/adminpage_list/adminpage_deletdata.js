@@ -9,7 +9,7 @@ const deleteData = async (productId) => {
       }
     });
     
-    if (response.success) {3
+    if (response.success) {
       console.log(response.message);
     } 
   } catch (error) {
