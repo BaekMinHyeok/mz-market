@@ -136,6 +136,46 @@ function searchAddress() {
 }
 addressButton.addEventListener("click", searchAddress);
 
+// 로컬스토리지에서 상품 정보 가져오기
+function getProductData() {
+  const productData = localStorage.getItem("cart");
+  console.log(productData);
+  return JSON.parse(productData);
+}
+
+/// 결제 정보 업데이트
+function updatePaymentInfo() {
+  const productData = getProductData();
+
+  if (productData && productData.length > 0) {
+    let productCount = 0;
+    let productPrice = 0;
+
+    // 상품 개수, 총 가격
+    for (const product of productData) {
+      productCount += product.quantity;
+      productPrice += product.price * product.quantity;
+    }
+
+    const deliveryFee = 3000;
+    const totalPrice = productPrice + deliveryFee;
+
+    document.querySelector(".count").textContent = `${productCount}개`;
+    document.querySelector(".price").textContent =
+      formatPrice(productPrice) + "원";
+    document.querySelector(".deliver").textContent =
+      formatPrice(deliveryFee) + "원";
+    document.querySelector(".nav_total_price").textContent =
+      formatPrice(totalPrice) + "원";
+  }
+}
+// 가격 포맷팅
+function formatPrice(price) {
+  return price.toLocaleString();
+}
+
+window.addEventListener("load", updatePaymentInfo);
+
 // 주문 정보 전송
 function submitOrder() {
   const name = nameInput.value.trim();
