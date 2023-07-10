@@ -1,25 +1,23 @@
-async function categoryGetData() {
+async function fetchData2() {
   // 데이터를 요청할 URL을 설정합니다.
   const url = "http://localhost:3000/api/category";
+  const token = localStorage.getItem("token")
   try {
-    const token = localStorage.getItem("token");
     const response = await fetch(url, {
       method: "GET",
-      headers:{
-        authorization: `Bearer ${token}`
+      headers: {
+        authorization: `Bearer ${token}`,
       }
     });
     const result = await response.json();
     console.log(result);
     if (result.success) {
-      console.log("데이터 요청이 성공적으로 처리되었습니다.");
+      console.log(result.message);
       return result;
-    } else {
-      throw new Error("데이터 요청에 실패했습니다.");
-    }
+    } 
   } catch (error) {
     throw new Error(error);
   }
 }
 
-export default categoryGetData;
+export { fetchData2 };

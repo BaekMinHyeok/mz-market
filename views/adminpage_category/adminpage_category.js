@@ -1,47 +1,154 @@
-// import categoryGetData from "./adminpage_getdata";
+//상품 카테고리 조회   
+async function getProductcategory() {
+
+    const url = "http://localhost:3000/api/category";
+    const token = localStorage.getItem("token");
+  
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+  
+      const result = await response.json();
+      console.log(result);
+  
+      if (result.success) {
+        console.log(result.message);
+        return result;
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+
+document.addEventListener("DOMContentLoaded", async function () {
+    try {
+        // 백에서 데이터 가져온 값 저장
+        const result = await getProductcategory();
+        console.log(result);
+        // 가져온 데이터 바탕으로 카테고리 리스트 랜더링
+        result.categorys.forEach(element => {
+        const categoryName=element.name;
+        console.log(categoryName);
+
+        const categoryList = document.querySelector(".categoryList");  
+        const div = document.createElement("div");
+        div.classList.add("add-text3");
+        div.innerHTML = `
+          <input readonly class="rectangle2" id="categoryInput" size="10" value="${categoryName}">
+          <button class="img-btn2" id="modifyBtn">수정</button>
+          <button class="img-btn3" id="deleteBtn">삭제</button>
+        `;
+        
+        categoryList.appendChild(div);  
+
+      });
+    } catch (error) {
+      console.error(error);
+    }
+});
+
+// 상품 카테고리 추가
+ async function addProductcategory(addInput){
+           // 로컬 스토리지에서 JWT 토큰 가져오기
+           const token = localStorage.getItem("token");
+           // 상품 데이터 객체 생성
+           const productData = {
+               name: addInput,
+           };
+           console.log(productData);
+           try {
+               const response = await fetch("http://localhost:3000/api/category", {
+                   method: "POST",
+                   headers: {
+                       authorization: `Bearer ${token}`,
+                       "Content-Type": "application/json",
+                   },
+                   body: JSON.stringify(productData),
+               });
+       
+               const result = await response.json();
+               console.log(result);
+         
+               if (result.success) {
+               console.log(result.message);
+               location.reload() 
+               }
+           } 
+           catch (error) {
+               console.error(error);
+           }
+ }
+
+
 
 const saveBtn = document.querySelector("#saveBtn");
 saveBtn.addEventListener("click", async function() {
     const addInput = document.querySelector("#addInput").value;
-    console.log(addInput);
-     
-    // 로컬 스토리지에서 JWT 토큰 가져오기
-    const token = localStorage.getItem("token");
+    try{
+        const result = await addProductcategory(addInput);
+    }catch(error){
+        console.log(error);
+    }
+});
 
-    // 상품 데이터 객체 생성
-    const productData = {
-        name: addInput,
-    };
 
-    console.log(productData);
-    try {
+// 상품 카테고리 수정 
+const modifyBtn = document.querySelector("#modifyBtn");
+modifyBtn.addEventListener("click", async function() {
+    const categoryInput = document.querySelector("#categoryInput");
+    const basicValue = categoryInput.value;
+  
+    if (modifyBtn.textContent === "수정") {
+      categoryInput.readOnly = false;
+      modifyBtn.textContent = "저장";
+    } else {
+      const modifiedValue = categoryInput.value;
+      const token = localStorage.getItem("token");
+  
+      const productData = {
+        name: basicValue,
+        newName: modifiedValue
+      };
+  
+      try {
         const response = await fetch("http://localhost:3000/api/category", {
-            method: "POST",
-            headers: {
-                authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(productData),
+          method: "POST",
+          headers: {
+            authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(productData)
         });
-
+  
         const result = await response.json();
         console.log(result);
   
         if (result.success) {
-        console.log(result.message); 
+          console.log(result.success);
+          categoryInput.readOnly = true;
+          modifyBtn.textContent = "수정";
         }
-    } 
-    catch (error) {
-        console.error(error);
+      } catch (error) {
+        console.error("통신 중 오류가 발생했습니다.", error);
+      }
     }
-});
+  });
+  
+  
 
-// 카테고리 조회 
-// document.addEventListener("DOMContentLoaded", async function () {
-//     try {
-//         const result = await categoryGetData();
-//         console.log("result", result);
-//     } catch (error) {
-//         console.error(error);
-//     }
-// });
+    //저장버튼 클릭시
+// const categorysaveBtn = document.querySelector("#saveBtn")
+// categorysaveBtn.addEventListener("click",function(){
+//         categoryInput.readOnly=true;
+//         categorysaveBtn.id = "modifyBtn";
+//         console.log(categorysaveBtn.id);
+//         modifyBtn.textContent="수정";
+        
+//         const editCategoryValue = categoryInput.value;
+//         console.log(editCategoryValue);
+// })
