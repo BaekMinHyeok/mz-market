@@ -26,6 +26,11 @@ const orderSchema = new Schema({
   email: {
     type: String,
     require: true,
+  },
+  status: {
+    type: String,
+    enum: ["ready", "shipping", "complete"],
+    require: true,
   }
   
 });

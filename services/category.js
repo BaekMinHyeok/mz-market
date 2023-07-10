@@ -23,18 +23,17 @@ class CategoryService {
     const { name, newName } = info;
     const update = await this.categoryModel.findOne({ name: name });
     update.name = newName;
-    await update.save();
+    return await update.save();
   }
 
   //카테고리 조회
   async getAll() {
-    await this.categoryModel.find();
+    return await this.categoryModel.find();
   }
 
   //카테고리 삭제
-  async delete(info) {
-    const { name } = info;
-    await this.categoryModel.deletOne({ name: name });
+  async delete(categoryId) {
+    return await this.categoryModel.deleteOne({ categoryId: categoryId });
   }
 
 }
