@@ -16,16 +16,16 @@ savebtn.addEventListener("click", async function () {
     name: productName,
     description: productDescription,
     price: Number(productPrice),
-    category: [categoryValue],
+    category: categoryValue,
     gender: selectedValue,
   };
   console.log(productData);
   try {
-    const response = await fetch("http://localhost:3000/api/registerProduct", {
+    const response = await fetch("http://localhost:3000/api/product", {
       method: "POST",
       headers: {
+        authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
-        authorization: token, // JWT 토큰을 헤더에 추가
       },
       body: JSON.stringify(productData),
     });
