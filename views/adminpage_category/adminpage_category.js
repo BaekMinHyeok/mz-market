@@ -43,10 +43,54 @@ document.addEventListener("DOMContentLoaded", async function () {
           <button class="img-btn2" id="modifyBtn">수정</button>
           <button class="img-btn3" id="deleteBtn">삭제</button>
         `;
-        
         categoryList.appendChild(div);  
-
       });
+      const modifyBtn = document.querySelectorAll("#modifyBtn");
+      modifyBtn.forEach(btn=>{
+        btn.addEventListener("click", async function() {
+            const categoryInput = document.querySelector("#categoryInput");
+            const basicValue = categoryInput.value;
+          
+            if (modifyBtn.textContent === "수정") {
+              categoryInput.readOnly = false;
+              modifyBtn.textContent = "저장";
+            } else {
+              const modifiedValue = categoryInput.value;
+              const token = localStorage.getItem("token");
+          
+              const productData = {
+                name: basicValue,
+                newName: modifiedValue
+              };
+          
+              try {
+                const response = await fetch("http://localhost:3000/api/category", {
+                  method: "POST",
+                  headers: {
+                    authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(productData)
+                });
+          
+                const result = await response.json();
+                console.log(result);
+          
+                if (result.success) {
+                  console.log(result.success);
+                  categoryInput.readOnly = true;
+                  modifyBtn.textContent = "수정";
+                }
+              } catch (error) {
+                console.error("통신 중 오류가 발생했습니다.", error);
+              }
+            }
+          });
+
+      })
+
+      
+      
     } catch (error) {
       console.error(error);
     }
@@ -98,57 +142,42 @@ saveBtn.addEventListener("click", async function() {
 
 
 // 상품 카테고리 수정 
-const modifyBtn = document.querySelector("#modifyBtn");
-modifyBtn.addEventListener("click", async function() {
-    const categoryInput = document.querySelector("#categoryInput");
-    const basicValue = categoryInput.value;
+// modifyBtn.addEventListener("click", async function() {
+//     const categoryInput = document.querySelector("#categoryInput");
+//     const basicValue = categoryInput.value;
   
-    if (modifyBtn.textContent === "수정") {
-      categoryInput.readOnly = false;
-      modifyBtn.textContent = "저장";
-    } else {
-      const modifiedValue = categoryInput.value;
-      const token = localStorage.getItem("token");
+//     if (modifyBtn.textContent === "수정") {
+//       categoryInput.readOnly = false;
+//       modifyBtn.textContent = "저장";
+//     } else {
+//       const modifiedValue = categoryInput.value;
+//       const token = localStorage.getItem("token");
   
-      const productData = {
-        name: basicValue,
-        newName: modifiedValue
-      };
+//       const productData = {
+//         name: basicValue,
+//         newName: modifiedValue
+//       };
   
-      try {
-        const response = await fetch("http://localhost:3000/api/category", {
-          method: "POST",
-          headers: {
-            authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(productData)
-        });
+//       try {
+//         const response = await fetch("http://localhost:3000/api/category", {
+//           method: "POST",
+//           headers: {
+//             authorization: `Bearer ${token}`,
+//             "Content-Type": "application/json"
+//           },
+//           body: JSON.stringify(productData)
+//         });
   
-        const result = await response.json();
-        console.log(result);
+//         const result = await response.json();
+//         console.log(result);
   
-        if (result.success) {
-          console.log(result.success);
-          categoryInput.readOnly = true;
-          modifyBtn.textContent = "수정";
-        }
-      } catch (error) {
-        console.error("통신 중 오류가 발생했습니다.", error);
-      }
-    }
-  });
-  
-  
-
-    //저장버튼 클릭시
-// const categorysaveBtn = document.querySelector("#saveBtn")
-// categorysaveBtn.addEventListener("click",function(){
-//         categoryInput.readOnly=true;
-//         categorysaveBtn.id = "modifyBtn";
-//         console.log(categorysaveBtn.id);
-//         modifyBtn.textContent="수정";
-        
-//         const editCategoryValue = categoryInput.value;
-//         console.log(editCategoryValue);
-// })
+//         if (result.success) {
+//           console.log(result.success);
+//           categoryInput.readOnly = true;
+//           modifyBtn.textContent = "수정";
+//         }
+//       } catch (error) {
+//         console.error("통신 중 오류가 발생했습니다.", error);
+//       }
+//     }
+//   });
