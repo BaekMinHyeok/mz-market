@@ -4,7 +4,7 @@ const { category } = require("../services/category");
 const registerCategory = async (req, res) => {
   try {
     const { name } = req.body;
-    await category.register({ name, newName });
+    await category.register({ name });
     res.json({
       success: true,
       message: "카테고리 생성을 성공했습니다.",
@@ -37,8 +37,10 @@ const updateCategory = async (req, res) => {
 //카테고리 삭제
 const deleteCategory = async (req, res) => {
   try {
-    const { name } = req.body;
-    await category.delete({ name });
+    const categoryId = req.params.categoryId
+    await category.deleteCategory(categoryId)
+    // const { name } = req.body;
+    // await category.delete({ name });
     res.json({
       success: true,
       message: "카테고리를 삭제했습니다.",
