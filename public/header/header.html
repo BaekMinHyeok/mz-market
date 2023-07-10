@@ -1,36 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="http://localhost:3000/header/header.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="http://localhost:3000/reset.css"
-      type="text/css"
-    />
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="header-container">
-      <div class="logo-container">
-        <button class="menu-button">Logo</button>
-      </div>
 
-      <div class="left-container">
-        <button class="menu-button">MEN</button>
-        <button class="menu-button">WOMEN</button>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="header.css" type="text/css">
+  <link rel="stylesheet" href="http://localhost:3000/reset.css" type="text/css" />
+  <title>Document</title>
+</head>
 
-      <div class="right-container">
-        <button class="menu-button">LOGIN</button>
-        <button class="menu-button">MYPAGE</button>
-        <button class="menu-button">CART</button>
-      </div>
+<body>
+  <div class="header-container">
+    <div class="logo-container">
+      <button class="menu-button" id="logoBtn">Logo</button>
     </div>
-  </body>
+
+    <div class="left-container">
+      <button class="menu-button" id="menBtn">MEN</button>
+      <button class="menu-button" id="womenBtn">WOMEN</button>
+    </div>
+
+    <div class="right-container">
+      <button class="menu-button" id="loginBtn">LOGIN</button>
+      <button class="menu-button" id="mypageBtn">MYPAGE</button>
+      <button class="menu-button" id="cartBtn">CART</button>
+    </div>
+  </div>
+  <script src="header.js"></script>
+</body>
+
 </html>

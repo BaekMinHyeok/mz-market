@@ -19,6 +19,24 @@ function updateCategoryValue(checkbox) {
     }
 }
 
+const headerContainer = document.getElementById('header-container');
+fetch("http://localhost:3000/header/header.html")
+    .then((res) => res.text())
+    .then((html) => {
+        headerContainer.innerHTML = html;
+        const cssLink = document.createElement("link");
+        cssLink.rel = "stylesheet";
+        cssLink.href = "http://localhost:3000/header/header.css";
+        document.head.appendChild(cssLink);
+         // CSS 파일 로드
+  
+
+        // JavaScript 파일 로드
 
 
+        
+    })
+    .catch((error) => {
+        console.error('Error fetching header content:', error);
+    });
 
