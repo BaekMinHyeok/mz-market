@@ -4,15 +4,15 @@ import fetchData from "./adminpage_getdata.js";
 import deleteData from "./adminpage_deletdata.js";
 const modal = (dataObj,dataId) => {
   // CSS 파일 가져오기
-  console.log("dataObj =",  dataObj);
-  console.log("dataId = ", dataId);
+  console.log("dataId = ",dataId,"타입",typeof dataId);
+  console.log("dataObj = ",dataObj,"타입",typeof dataObj);
 
   const cssUrl = "modal/adminpage_modal.css";
   const cssLink = document.createElement("link");
   cssLink.rel = "stylesheet";
   cssLink.href = cssUrl;
   document.head.appendChild(cssLink);
-  const filteredProducts = dataObj.products.filter((data) => data._id === dataId);
+  const filteredProducts = dataObj.products.filter((data) => data.productId === Number(dataId));
   console.log("filteredProducts =", filteredProducts);
   // HTML 파일 가져오기
   fetch("modal/adminpage_modal.html")
@@ -30,7 +30,15 @@ const modal = (dataObj,dataId) => {
       productPrice.value = filteredProducts[0].price;
       categoryValue.value = filteredProducts[0].category;
       
-        })
+
+
+
+
+      const dataIdElement = document.createElement('p'); // 새로운 p 요소 생성
+      dataIdElement.textContent = dataId;
+      dataIdElement.id = "aa"; // id 속성 설정
+      modalContainer.appendChild(dataIdElement);
+      })
     .then(() => {
       // JavaScript 파일 가져오기
       const jsUrl = "modal/adminpage_modal.js";
@@ -58,7 +66,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         <td>${data.category}</td>
         <td>${data.price}</td>
         <td>
-          <img src="./imges/img1.png" alt="수정버튼" class="modifyBtn" id="modifyBtn" data-product1="${data._id}">
+          <img src="./imges/img1.png" alt="수정버튼" class="modifyBtn" id="modifyBtn" data-product1="${data.productId}">
           <img src="./imges/img2.png" alt="삭제버튼" class="delete-btn" id="deleteBtn" data-product2="${data.productId}" data-product3="${data.name}">
       `;
       productTable.appendChild(newRow);
@@ -68,9 +76,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     modifyBtns.forEach((btn) => {
       btn.addEventListener("click", async function(event) {
         const dataId = event.target.dataset.product1;
-        console.log(dataId);
         const result = await fetchData();
-        console.log("result 타입",  result);
         modal(result,dataId);
       });
     });
