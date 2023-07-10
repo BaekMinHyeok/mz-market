@@ -1,0 +1,67 @@
+console.log("TEST");
+const nameInput = document.querySelector(".name_input");
+const nameError = document.getElementById("nameError");
+
+const phonenumInput = document.querySelector(".phonenum_input");
+const phonenumError = document.getElementById("phonenumError");
+
+const etcInput = document.querySelector(".etc_input");
+const paymentButton = document.getElementById("paymentButton");
+
+// 이름 검사
+function validateNameInput() {
+  const nameValue = nameInput.value.trim();
+  console.log(nameValue);
+  console.log(nameError);
+  const regex = /^[a-zA-Z가-힣]+$/;
+
+  if (nameValue === "") {
+    nameError.textContent = "이름을 입력해주세요.";
+    paymentButton.disabled = true;
+  } else if (!regex.test(nameValue)) {
+    nameError.textContent = "영문 혹은 한글만 입력해주세요.";
+    paymentButton.disabled = true;
+  } else {
+    nameError.textContent = "";
+    paymentButton.disabled = false;
+  }
+}
+
+// 연락처(전화번호) 검사
+function validatePhonenumInput() {
+  const phonenumValue = phonenumInput.value.trim();
+  const regex = /[0-9]/;
+
+  console.log(phonenumValue);
+
+  if (phonenumValue === "") {
+    phonenumError.textContent = "전화번호를 입력해주세요.";
+    console.log(phonenumValue);
+    paymentButton.disabled = true;
+
+    paymentButton.disabled = true;
+  } else if (!regex.test(phonenumValue)) {
+    phonenumError.textContent =
+      "숫자를 포함한 전화번호를 정확하게 입력해주세요.";
+    console.log(phonenumValue);
+
+    paymentButton.disabled = true;
+  } else {
+    phonenumError.textContent = "";
+    let phonenumReplaceValue = phonenumValue
+      .replace(/[^0-9]/g, "")
+      .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+    // console.log(phonenumReplaceValue);
+    phonenumInput.value = phonenumReplaceValue;
+    // console.log(phonenumReplaceValue);
+    paymentButton.disabled = false;
+
+    return phonenumValue;
+  }
+}
+
+// 이름 유효성 검사 실행
+nameInput.addEventListener("input", validateNameInput);
+
+// 연락처 유효성 검사 실행
+phonenumInput.addEventListener("input", validatePhonenumInput);
