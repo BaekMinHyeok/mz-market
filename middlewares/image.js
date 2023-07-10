@@ -1,11 +1,10 @@
 const uuid4 = require("uuid4");
 const multer = require("multer");
 const path = require("path");
-const serverPath = "http://localhost:3000";
 
 //이미지 파일 필터링
 const imageFilter = (req, file, cb) => {
-  const ext = paht.extname(file.originalname).toLowerCase();
+  const ext = path.extname(file.originalname).toLowerCase();
   if (ext === ".jpg" || ext === ".jpeg" || ext === ".png") {
     // 이미지 파일인 경우
     cb(null, true);
