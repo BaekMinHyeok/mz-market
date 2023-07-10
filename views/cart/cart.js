@@ -172,11 +172,11 @@ function updateTotalQuantityAndPrice() {
   const finalPrice = totalPrice + deliveryFee;
 
   countElement.textContent = totalQuantity.toString();
-  priceElement.textContent = totalPrice.toString();
+  priceElement.textContent = totalPrice.toLocaleString();
   deliverElement.textContent = deliveryFee.toString();
-  totalPriceElement.textContent = finalPrice.toString();
+  totalPriceElement.textContent = finalPrice.toLocaleString() + "원";
   totalPriceSubtitleElement.textContent =
-    "총 " + totalPrice.toString() + "원을 담았어요.";
+    "총 " + totalPrice.toLocaleString() + "원을 담았어요.";
 }
 
 function init() {
