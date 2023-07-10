@@ -8,6 +8,10 @@ const phonenumError = document.getElementById("phonenumError");
 const emailInput = document.querySelector(".email_input");
 const emailError = document.getElementById("emailError");
 
+const addressInput = document.querySelector(".address_input");
+const addressDetailInput = document.querySelector(".address_detail_input");
+const addressError = document.getElementById("addressError");
+
 const etcInput = document.querySelector(".etc_input");
 const paymentButton = document.getElementById("paymentButton");
 
@@ -26,7 +30,7 @@ function validateNameInput() {
     paymentButton.disabled = true;
   } else {
     nameError.textContent = "";
-    paymentButton.disabled = false;
+    enablePaymentButton();
   }
 }
 
@@ -57,9 +61,7 @@ function validatePhonenumInput() {
     // console.log(phonenumReplaceValue);
     phonenumInput.value = phonenumReplaceValue;
     // console.log(phonenumReplaceValue);
-    paymentButton.disabled = false;
-
-    return phonenumValue;
+    enablePaymentButton();
   }
 }
 
@@ -78,6 +80,40 @@ function validateEmailInput() {
     paymentButton.disabled = true;
   } else {
     emailError.textContent = "";
+    paymentButton.disabled = false;
+  }
+}
+
+// 주소 검사
+function validateAddressInput() {
+  const addressValue = addressInput.value.trim();
+  const addressDetailValue = addressDetailInput.value.trim();
+
+  if (addressValue === "" || addressDetailValue === "") {
+    addressError.textContent = "주소와 상세 주소를 모두 입력해주세요.";
+    paymentButton.disabled = true;
+  } else {
+    addressError.textContent = "";
+    enablePaymentButton();
+  }
+}
+
+// 결제하기 버튼 활성화
+function enablePaymentButton() {
+  const nameValue = nameInput.value.trim();
+  const phonenumValue = phonenumInput.value.trim();
+  const emailValue = emailInput.value.trim();
+  const addressValue = addressInput.value.trim();
+  const addressDetailValue = addressDetailInput.value.trim();
+
+  if (
+    nameValue !== "" &&
+    phonenumValue !== "" &&
+    emailValue !== "" &&
+    addressValue !== "" &&
+    addressDetailValue !== ""
+  ) {
+    paymentButton.disabled = false;
   }
 }
 
@@ -85,6 +121,8 @@ function validateEmailInput() {
 nameInput.addEventListener("input", validateNameInput);
 phonenumInput.addEventListener("input", validatePhonenumInput);
 emailInput.addEventListener("input", validateEmailInput);
+addressInput.addEventListener("input", validateAddressInput);
+addressDetailInput.addEventListener("input", validateAddressInput);
 
 // 주소 찾기 api 연결
 const addressButton = document.querySelector(".address_button");
@@ -96,5 +134,58 @@ function searchAddress() {
     },
   }).open();
 }
-
 addressButton.addEventListener("click", searchAddress);
+
+// 주문 정보 전송
+function submitOrder() {
+  const name = nameInput.value.trim();
+  const phonenumValue = phonenumInput.value.trim();
+  const address = addressInput.value.trim();
+  const addressDetail = addressDetailInput.value.trim();
+  const etc = etcInput.value.trim();
+
+  if (
+    name === "" ||
+    phonenumValue === "" ||
+    address === "" ||
+    addressDetail === ""
+  ) {
+    alert("이름, 연락처, 주소는 필수 입력 사항입니다.");
+    return;
+  }
+
+  const orderData = {
+    name: name,
+    phonenum: phonenumValue,
+    address: address + " " + addressDetail,
+    etc: etc,
+  };
+
+  // 백엔드 API 데이터 전송
+  // 하단 fetch는 임의로 작성만 했습니다. api.js 작성 완료되면 이후 수정
+  fetch("여기 주소를 넣어주세요...", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(orderData),
+  })
+    .then((response) => {
+      if (response.ok) {
+        alert("주문이 완료 되었습니다.");
+        // 성공
+      } else {
+        alert("오류가 발생했습니다.");
+        // 실패
+      }
+    })
+    .catch((error) => {
+      console.error("주문 내용 전송 오류:", error);
+      alert("오류가 발생했습니다.");
+    });
+}
+
+// 결제하기 버튼 클릭, 주문 정보 전송
+paymentButton.addEventListener("click", function () {
+  submitOrder();
+});
