@@ -34,14 +34,6 @@ class ProductService {
     }
   }
 
-  //multer 이미지 업로드
-  async uploadImg(productInfo) {
-    const { image } = productInfo;
-    return await this.productModel.findOne({
-      image,
-    });
-  }
-
   // 상품 정보 수정
   async updateProduct(productId, updatedInfo) {
     const product = await this.productModel.findOne({ productId: productId });
