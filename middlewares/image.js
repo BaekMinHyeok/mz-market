@@ -30,7 +30,7 @@ const upload = multer({
   fileFilter: imageFilter,
 });
 
-//<input type="file" name="myFile" />
-const uploadMiddleware = upload.single("myFile");
+//<input type="file" name="file" />
+const uploadMiddleware = upload.single("file");
 
 module.exports = { uploadMiddleware };

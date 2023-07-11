@@ -13,7 +13,7 @@ const registerOrder = async (req, res) => {
     });
     res.json({
       success: true,
-      message: "주문정보 업데이트에 성공했습니다.",
+      message: "주문 등록에 성공했습니다.",
     });
   } catch (error) {
     res.json({
@@ -33,7 +33,7 @@ const updateOrder = async (req, res) => {
 
     res.json({
       success: true,
-      message: "주문정보 업데이트에 성공했습니다..",
+      message: "주문정보 업데이트에 성공했습니다.",
     });
   } catch (error) {
     res.json({
@@ -64,8 +64,8 @@ const getAllOrders = async (req, res) => {
 // 이메일검색 주문 정보 조회
 const getOrderByEmail = async (req, res) => {
   try {
-    const { email } = req.body;
-    const orders = await order.getOrder(email);
+    const { email, phoneNumber } = req.body;
+    const orders = await order.getOrder(email, phoneNumber);
 
     res.json({
       success: true,

@@ -1,21 +1,21 @@
 const { product } = require("../services/product");
-// const upload = multer({ dest: 'uploads/' });
 const upload = require("../middlewares/multerconfig");
+const serverPath = "http://localhost:3000";
 
 // 상품 등록
 const registerProduct = async (req, res) => {
   try {
-    // const image = await uploadImg(req, res);
-    console.log(req.file)
+    const imgPath = serverPath + req.file.path.substring(6);
+    const data = JSON.parse(req.body.data);
     const productInfo = {
-      name: req.body.name,
-      description: req.body.description,
-      price: req.body.price,
-      category: req.body.category,
-      gender: req.body.gender,
-      images: req.file,
+      name: data.name,
+      description: data.description,
+      price: data.price,
+      category: data.category,
+      gender: data.gender,
+      images: imgPath,
     };
-    console.log(productInfo)
+    console.log(productInfo);
     await product.registerProduct(productInfo);
 
     res.json({

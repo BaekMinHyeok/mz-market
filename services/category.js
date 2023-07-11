@@ -28,13 +28,12 @@ class CategoryService {
 
   //카테고리 조회
   async getAll() {
-   return await this.categoryModel.find();
+    return await this.categoryModel.find();
   }
 
   //카테고리 삭제
-  async delete(info) {
-    const { name } = info;
-    return await this.categoryModel.deletOne({ name: name });
+  async delete(categoryId) {
+    return await this.categoryModel.deleteOne({ categoryId: categoryId });
   }
 
 }

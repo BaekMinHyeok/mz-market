@@ -47,8 +47,8 @@ router.delete("/user", auth, deleteUser); //회원 탈퇴
 router.post("/login", login); //로그인
 
 //product
-router.post("/product", auth, registerProduct); //상품등록
-router.put("/product/:productId", auth, updateProduct); //상품 업데이트
+router.post("/product", auth, uploadMiddleware, registerProduct); //상품등록
+router.put("/product/:productId", auth, uploadMiddleware, updateProduct); //상품 업데이트
 router.get("/product", getAllProduct); //모든 상품 목록
 router.get("/product/:productId", getProductById); //productId로 상품 정보 가져오기
 router.get("/product/search/:search", getProductByName); //상품 이름 검색
@@ -59,7 +59,7 @@ router.delete("/product/:productId", auth, deleteProduct); //상품 삭제
 router.post("/category", auth, registerCategory); //카테고리 등록
 router.put("/category", auth, updateCategory); //카테고리 업데이트
 router.get("/category", auth, getAllCategory); //카테고리 조회
-router.delete("/category", auth, deleteCategory); //카테고리 삭제
+router.delete("/category/:categoryId", auth, deleteCategory); //카테고리 삭제
 
 //order
 router.post("/order", auth, registerOrder); //주문 등록
