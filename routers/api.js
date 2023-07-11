@@ -35,6 +35,8 @@ const {
 } = require("../controller/order");
 //image
 const { uploadMiddleware } = require("../middlewares/image");
+const { authMail } = require("../controller/mail");
+router.post("/mail", authMail);
 
 //user
 router.post("/user", register); //회원 가입
