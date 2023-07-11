@@ -2,11 +2,11 @@
   display: flex;
   justify-content: space-between;
   background-color: lightgray;
-  padding: 20px; 
+  padding: 20px;
 }
 
 .left-container {
-  margin-right: 25%; 
+  margin-right: 25%;
 }
 
 .menu-button {
@@ -14,13 +14,10 @@
   border: none;
   outline: none;
   cursor: pointer;
-  color: black; 
+  color: black;
   margin-right: 10px;
 }
+
 .logo-container {
-  margin-left: 140px; 
+  margin-left: 140px;
 }
-
-
-
-
