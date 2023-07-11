@@ -3,7 +3,9 @@ import { dummyData } from "../main/dummy.js";
 // URL에서 상품 ID 가져옵니다..
 function getProductIdFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
-  return parseInt(urlParams.get("id"));
+  const productId = urlParams.get("productId");
+  console.log(productId);
+  return productId;
 }
 
 // 상품 정보를 상세 페이지에 표시
@@ -148,3 +150,6 @@ function init() {
 }
 
 init();
+
+// 페이지 로드 시 상세 페이지 정보를 표시
+window.addEventListener("DOMContentLoaded", showProductDetail);
