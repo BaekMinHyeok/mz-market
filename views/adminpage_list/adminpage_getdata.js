@@ -6,9 +6,7 @@ async function fetchData() {
       method: "GET",
     });
     const result = await response.json();
-    console.log(result);
     if (result.success) {
-      console.log(result.message);
       return result;
     } else {
       throw new Error("데이터 요청에 실패했습니다.");

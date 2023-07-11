@@ -16,11 +16,12 @@ document.addEventListener("DOMContentLoaded", async function (){
     }
 });
 
-
+//카테고리 데이터 가져오기 
 async function getProductcategory() {
+
     const url = "http://localhost:3000/api/category";
     const token = localStorage.getItem("token");
-    
+  
     try {
       const response = await fetch(url, {
         method: "GET",
@@ -40,65 +41,3 @@ async function getProductcategory() {
       throw new Error(error);
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function updateCategoryValue(checkbox) {
-    let checkvalue = document.getElementById("checkvalue");
-    let checkboxContainer = document.querySelector(".checkbox-container");
-    let saveBtn = document.getElementById("save-btn");
-
-    if (checkbox.checked) {
-        checkvalue.value = checkbox.parentNode.textContent.trim();
-      checkboxContainer.style.display = "none"; 
-    }
-    document.getElementById("checkvalue").addEventListener("click", function() {
-        let checkboxContainer = document.querySelector(".checkbox-container");
-        checkboxContainer.style.display = "flex";
-        saveBtn.style.display = "none"; 
-    });
-    if (checkvalue.value) {
-        saveBtn.style.display = "block";
-    } else {
-        saveBtn.style.display = "none";
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//헤더 파일 추가
-
-

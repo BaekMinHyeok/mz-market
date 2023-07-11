@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="adminpage_modal.css" type="text/html">
-
-	<title>adminpage</title>
-</head>
 
 <body>
 	<div class="modal">
@@ -23,7 +13,7 @@
 			<div class="add-text2">
 				<p id="selectedFile"></p>
 				<input class="rectangle" id="imgInput"></input>
-				<button class="img-btn" onclick="openFile()">업로드</button>
+				<button class="img-btn" onclick="openFile()">파일선택</button>
 			</div>
 			<h3>상품명</h3>
 			<input class="rectangle" id="productName" placeholder="상품 이름을 입력해주세요."></input>
@@ -41,25 +31,9 @@
 			</div>
 			<input class="rectangle" id="checkvalue" placeholder="카테고리를 선택해주세요."></input>
 			<div class="checkbox-container">
-				<label>
-					<input type="radio" name="category" onclick="updateCategoryValue(this)"> 아우터
-				</label>
-				<label>
-					<input type="radio" name="category" onclick="updateCategoryValue(this)"> 상의
-				</label>
-				<label>
-					<input type="radio" name="category" onclick="updateCategoryValue(this)"> 하의
-				</label>
-				<label>
-					<input type="radio" name="category" onclick="updateCategoryValue(this)"> 기타
-				</label>
 			</div>
 			<button id="save-btn">저장하기</button>
 		</div>
 	</div>
 	</div>
-	<script src="adminpage_modal.js"></script>
-	<script src="adminpage_img.js"></script>
-</body>
-
-</html>
+<!-- <script src="modal_getCategoryData.js"></script> -->

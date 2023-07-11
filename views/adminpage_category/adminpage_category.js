@@ -3,7 +3,7 @@ async function getProductcategory() {
 
     const url = "http://localhost:3000/api/category";
     const token = localStorage.getItem("token");
-  
+
     try {
       const response = await fetch(url, {
         method: "GET",
@@ -24,7 +24,6 @@ async function getProductcategory() {
     }
   }
 
-
   document.addEventListener("DOMContentLoaded", async function () {
     try {
       //조회후 데이터  출력하기
@@ -41,7 +40,7 @@ async function getProductcategory() {
         div.innerHTML = `
           <input readonly class="rectangle2" id="categoryInput" size="10" value="${categoryName}">
           <button class="img-btn2" id="modifyBtn">수정</button>
-          <button class="img-btn3" id="deleteBtn">삭제</button>
+          <button class="img-btn3" id="deleteBtn" data-name="${categoryName}">삭제</button>
         `;
         categoryList.appendChild(div);
       });
@@ -96,7 +95,7 @@ async function getProductcategory() {
       });
       //삭제 버튼 클릭시 
       const deleteBtn = document.querySelectorAll("#deleteBtn");
-      deleteBtn.forEach((btn,index)=>{
+      deleteBtn.forEach((btn)=>{
         btn.addEventListener("click",handleDeleteButtonClick)
       });
     } catch (error) {
@@ -106,7 +105,8 @@ async function getProductcategory() {
 
 
   async function handleDeleteButtonClick(event) {
-    const name = document.querySelector("#categoryInput").value;
+    const name = event.target.dataset.name;
+    
     console.log(name);
     event.target.parentElement.classList.remove("add-text3");
     event.target.parentElement.remove();
