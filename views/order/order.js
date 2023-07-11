@@ -178,8 +178,10 @@ window.addEventListener("load", updatePaymentInfo);
 
 // 주문 정보 전송
 function submitOrder() {
+  console.log("TEST");
+  const regex = /[^0-9]/g;
   const name = nameInput.value.trim();
-  const phonenumValue = phonenumInput.value.trim();
+  const phonenumValue = phonenumInput.value.replace(regex, "");
   const address = addressInput.value.trim();
   const addressDetail = addressDetailInput.value.trim();
   const etc = etcInput.value.trim();
@@ -196,30 +198,36 @@ function submitOrder() {
 
   const orderData = {
     name: name,
-    phonenum: phonenumValue,
-    address: address + " " + addressDetail,
-    etc: etc,
+    phoneNumber: phonenumValue,
+    address: address,
+    address2: addressDetail,
+    comments: etc,
   };
 
+  const token = localStorage.getItem("token");
+
   // 백엔드 API 데이터 전송
-  // 하단 fetch는 임의로 작성만 했습니다. api.js 작성 완료되면 이후 수정
-  fetch("여기 주소를 넣어주세요...", {
+  fetch("http://localhost:3000/api/order", {
     method: "POST",
     headers: {
+      authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(orderData),
   })
     .then((response) => {
       if (response.ok) {
+        console.log(orderData);
         alert("주문이 완료 되었습니다.");
+        // window.location.href = "/cart/order/complete/:orderId ";
         // 성공
       } else {
+        console.log(orderData);
         alert("오류가 발생했습니다.");
-        // 실패
       }
     })
     .catch((error) => {
+      console.log(orderData);
       console.error("주문 내용 전송 오류:", error);
       alert("오류가 발생했습니다.");
     });
