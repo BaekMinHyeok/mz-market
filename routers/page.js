@@ -13,7 +13,7 @@ router.use("/user/info", serveStatic("mypage-myinfo")); // 마이페이지-유�
 router.use("/admin/products/add", serveStatic("adminpage_add")); //관리자 페이지 상품 추가
 router.use("/admin/category/add", serveStatic("adminpage_category")); //관리자 페이지 카테고리 추가
 router.use("/admin/products/list/", serveStatic("adminpage_list")); //관리자 페이지 상품 목록
-router.use("/admin/order_history ", serveStatic("adminpage_order")); //관리자 페이지 주문 관리
+router.use("/admin/order_history", serveStatic("adminpage_order")); //관리자 페이지 주문 관리
 
 //cart
 router.use("/cart", serveStatic("cart")); //장바구니

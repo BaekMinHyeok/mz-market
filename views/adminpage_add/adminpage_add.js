@@ -18,7 +18,7 @@ function updateCategoryValue(checkbox) {
         saveBtn.style.display = "none";
     }
 }
-
+//헤더 파일 추가
 const headerContainer = document.getElementById('header-container');
 fetch("http://localhost:3000/header/header.html")
     .then((res) => res.text())

@@ -48,11 +48,11 @@ async function getProductcategory() {
       const modifyBtn = document.querySelectorAll("#modifyBtn");
       const categoryInput = document.querySelectorAll("#categoryInput");
 
-      modifyBtn.forEach((btn,index) => {
-        btn.addEventListener("click", async function () {
+        modifyBtn.forEach((btn,index) => {
           const indexCategory = categoryInput[index];
-          // 인풋값 유지// 원하는 값으로 변경
           const basicValue=indexCategory.value;
+          btn.addEventListener("click", async function () {
+     
           console.log(basicValue);
           if (btn.textContent === "수정") {
             indexCategory.readOnly = false;
@@ -124,6 +124,7 @@ async function getProductcategory() {
          
                if (result.success) {
                console.log(result.message);
+               location.reload()
                }
         } 
         catch (error) {
