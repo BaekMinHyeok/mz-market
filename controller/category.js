@@ -17,7 +17,7 @@ const registerCategory = async (req, res) => {
   }
 };
 
-//카테고리 업데이트
+//카테고리 수정
 const updateCategory = async (req, res) => {
   try {
     const { name, newName } = req.body;

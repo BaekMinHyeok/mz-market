@@ -27,11 +27,11 @@ const orderSchema = new Schema({
     type: String,
     require: true,
   },
-  status: {
-    type: String,
-    enum: ["ready", "shipping", "complete"],
-    require: true,
-  }
+  // status: {
+  //   type: String,
+  //   enum: ["ready", "shipping", "complete"],
+  //   require: true,
+  // }
   
 });
 

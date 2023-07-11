@@ -70,7 +70,7 @@ class ProductService {
 
   // 상품 삭제
   async deleteProduct(productId) {
-    return await this.productModel.deleteOne({ productId: productId });
+    return await this.productModel.deleteOne({ _id: productId });
   }
 }
 
