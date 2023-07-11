@@ -1,5 +1,4 @@
 const { product } = require("../services/product");
-const upload = require("../middlewares/multerconfig");
 const serverPath = "http://localhost:3000";
 
 // 상품 등록
@@ -15,7 +14,7 @@ const registerProduct = async (req, res) => {
       gender: data.gender,
       images: imgPath,
     };
-    console.log(productInfo);
+    // console.log(productInfo);
     await product.registerProduct(productInfo);
 
     res.json({
@@ -31,14 +30,13 @@ const registerProduct = async (req, res) => {
   }
 };
 
-// Multer 이미지 업로드
 // 상품 업데이트
 const updateProduct = async (req, res) => {
   try {
-    const image = uploadImg(req, res);
+    const imgPath = serverPath + req.file.path.substring(6);
     const productId = req.params.productId;
-    const updatedInfo = req.body;
-    updatedInfo.images = image.map((img) => img.filename);
+    const updatedInfo = JSON.parse(req.body.data);
+    updatedInfo.images = imgPath;
     await product.updateProduct(productId, updatedInfo);
     res.json({
       success: true,
@@ -49,16 +47,6 @@ const updateProduct = async (req, res) => {
       success: false,
       message: error,
     });
-  }
-};
-
-//multer 이미지 업로드
-const uploadImg = async (req, res) => {
-  try {
-    upload.single("images")(req, res);
-    return req.files;
-  } catch (error) {
-    return error;
   }
 };
 
@@ -138,7 +126,6 @@ const deleteProduct = async (req, res) => {
 
 module.exports = {
   registerProduct,
-  uploadImg,
   getAllProduct,
   getProductByName,
   updateProduct,
