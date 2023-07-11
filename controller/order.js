@@ -65,7 +65,7 @@ const getAllOrders = async (req, res) => {
 const getOrderByEmail = async (req, res) => {
   try {
     const { email, phoneNumber } = req.body;
-    const orders = await order.getOrder(email, phoneNumber);
+    const orders = await order.getOrderByEmail(email, phoneNumber);
 
     res.json({
       success: true,
@@ -87,7 +87,7 @@ const getOrderByEmail = async (req, res) => {
 const deleteOrder = async (req, res) => {
   try {
     const orderId = req.params.orderId;
-    await order.delete(orderId);
+    await order.deleteOrder(orderId);
 
     res.json({
       success: true,
