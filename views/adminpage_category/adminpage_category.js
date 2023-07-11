@@ -27,7 +27,6 @@ async function getProductcategory() {
 
   document.addEventListener("DOMContentLoaded", async function () {
     try {
-      // 백에서 데이터 가져온 값 저장
       const result = await getProductcategory();
       console.log(result);
   
@@ -47,20 +46,22 @@ async function getProductcategory() {
       });
   
       const modifyBtn = document.querySelectorAll("#modifyBtn");
-      const categoryInput = document.querySelector("#categoryInput");
-      const basicValue = categoryInput.value;
-      modifyBtn.forEach(btn => {
+      const basicValue = document.querySelector("#categoryInput").value;     
+      const categoryInput = document.querySelectorAll("#categoryInput");
+
+      modifyBtn.forEach((btn,index) => {
         btn.addEventListener("click", async function () {
-          const categoryInput = document.querySelector("#categoryInput");
-  
+          const indexCategory = categoryInput[index];
           // 인풋값 유지// 원하는 값으로 변경
           console.log(basicValue);
           console.log(btn.textContent);
+          
           if (btn.textContent === "수정") {
-            categoryInput.readOnly = false;
+            indexCategory.readOnly = false;
+            console.log(indexCategory.readOnly);
             btn.textContent = "저장";
           } else {
-            const modifiedValue = categoryInput.value; // 바뀐 인풋값
+            const modifiedValue = indexCategory.value; // 바뀐 인풋값
             const token = localStorage.getItem("token");
             console.log(modifiedValue);
   
@@ -126,7 +127,6 @@ async function getProductcategory() {
          
                if (result.success) {
                console.log(result.message);
-               location.reload() 
                }
         } 
         catch (error) {
