@@ -32,8 +32,8 @@ class CategoryService {
   }
 
   //카테고리 삭제
-  async delete(categoryId) {
-    return await this.categoryModel.deleteOne({ categoryId: categoryId });
+  async delete(name) {
+    return await this.categoryModel.deleteOne({ name: name });
   }
 
 }

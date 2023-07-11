@@ -37,8 +37,9 @@ const updateCategory = async (req, res) => {
 //카테고리 삭제
 const deleteCategory = async (req, res) => {
   try {
-    const categoryId = req.params.categoryId;
-    await category.delete(categoryId);
+    const name = req.params.name;
+    const regexQuery = new RegExp(name, "i"); //한글 검색 처리에 필요
+    await category.delete(regexQuery);
     res.json({
       success: true,
       message: "카테고리를 삭제했습니다.",

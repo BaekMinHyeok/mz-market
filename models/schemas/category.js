@@ -6,10 +6,6 @@ const userSchema = new Schema({
     trim: true,
     required: true,
   },
-  categoryId: {
-    type: Number,
-    required: true,
-  },
 });
 
 module.exports = userSchema;
