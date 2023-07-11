@@ -218,14 +218,21 @@ function submitOrder() {
     .then((response) => {
       if (response.ok) {
         console.log(orderData);
+        console.log(response.json());
         alert("주문이 완료 되었습니다.");
-        // window.location.href = "/cart/order/complete/:orderId ";
         // 성공
       } else {
         console.log(orderData);
         alert("오류가 발생했습니다.");
+        // 실패
       }
     })
+    // .then((data) => {
+    //   // 응답에서 orderId 추출
+    //   const orderId = data.orderId;
+    //   // 주문 완료 페이지로 이동
+    //   window.location.href = `/cart/order/complete/${orderId}`;
+    // })
     .catch((error) => {
       console.log(orderData);
       console.error("주문 내용 전송 오류:", error);
