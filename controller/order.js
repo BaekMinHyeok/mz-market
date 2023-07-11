@@ -1,15 +1,23 @@
 const { order } = require("../services/oreder");
+const { product } = require("../services/product");
 
 // 주문 등록
 const registerOrder = async (req, res) => {
   try {
-    const { name, phoneNumber, address, address2, comments } = req.body;
+    const { name, phoneNumber, address, address2, comments, productId} = req.body;
+    console.log(product);
+    const productInfo = await product.getProductById(productId);
+    if (!productInfo){
+      throw "상품을 찾을 수 없습니다.";
+    }
     await order.register({
       name,
       phoneNumber,
       address,
       address2,
       comments,
+      status: "ready",
+      productId,
     });
     res.json({
       success: true,
@@ -23,6 +31,30 @@ const registerOrder = async (req, res) => {
     console.log(error);
   }
 };
+
+
+// const registerOrder = async (req, res) => {
+//   try {
+//     const { name, phoneNumber, address, address2, comments } = req.body;
+//     await order.register({
+//       name,
+//       phoneNumber,
+//       address,
+//       address2,
+//       comments,
+//     });
+//     res.json({
+//       success: true,
+//       message: "주문 등록에 성공했습니다.",
+//     });
+//   } catch (error) {
+//     res.json({
+//       success: false,
+//       message: error,
+//     });
+//     console.log(error);
+//   }
+// };
 
 // 주문 정보 수정
 const updateOrder = async (req, res) => {

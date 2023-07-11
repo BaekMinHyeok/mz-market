@@ -1,13 +1,15 @@
 const { Order } = require("../models");
+const { Product } = require("../models");
 require("dotenv").config();
 class OrderService {
   constructor(Order) {
     this.OrderModel = Order;
+    this.ProductModel = Product;
   }
 
   //주문하기
   async register(info) {
-    const { name, phoneNumber, address, address2, comments } = info;
+    const { name, phoneNumber, address, address2, comments, productId } = info;
     try {
       await this.OrderModel.create({
         name,
@@ -15,11 +17,28 @@ class OrderService {
         address,
         address2,
         comments,
+        status: "ready",
+        productId: productId,
       });
     } catch (error) {
       return error;
     }
   }
+
+  // async register(info) {
+  //   const { name, phoneNumber, address, address2, comments } = info;
+  //   try {
+  //     await this.OrderModel.create({
+  //       name,
+  //       phoneNumber,
+  //       address,
+  //       address2,
+  //       comments,
+  //     });
+  //   } catch (error) {
+  //     return error;
+  //   }
+  // }
 
   //주문 정보 변경
   async update(orderId, updatedInfo) {
