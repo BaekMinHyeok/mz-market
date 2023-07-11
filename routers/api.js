@@ -59,7 +59,7 @@ router.delete("/product/:productId", auth, deleteProduct); //상품 삭제
 router.post("/category", auth, registerCategory); //카테고리 등록
 router.put("/category", auth, updateCategory); //카테고리 업데이트
 router.get("/category", auth, getAllCategory); //카테고리 조회
-router.delete("/category", auth, deleteCategory); //카테고리 삭제
+router.delete("/category/:categoryId", auth, deleteCategory); //카테고리 삭제
 
 //order
 router.post("/order", auth, registerOrder); //주문 등록
