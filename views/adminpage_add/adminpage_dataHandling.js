@@ -33,7 +33,7 @@ savebtn.addEventListener("click", async function () {
       method: "POST",
       headers: {
         authorization: `Bearer ${token}`,
-        // "Content-Type": "application/json",
+        "Content-Type": "application/json",
       },
       body: formData,
     });
