@@ -46,19 +46,16 @@ async function getProductcategory() {
       });
   
       const modifyBtn = document.querySelectorAll("#modifyBtn");
-      const basicValue = document.querySelector("#categoryInput").value;     
       const categoryInput = document.querySelectorAll("#categoryInput");
 
       modifyBtn.forEach((btn,index) => {
         btn.addEventListener("click", async function () {
           const indexCategory = categoryInput[index];
           // 인풋값 유지// 원하는 값으로 변경
+          const basicValue=indexCategory.value;
           console.log(basicValue);
-          console.log(btn.textContent);
-          
           if (btn.textContent === "수정") {
             indexCategory.readOnly = false;
-            console.log(indexCategory.readOnly);
             btn.textContent = "저장";
           } else {
             const modifiedValue = indexCategory.value; // 바뀐 인풋값
