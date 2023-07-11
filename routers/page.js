@@ -20,5 +20,6 @@ router.use("/cart", serveStatic("cart")); //장바구니
 router.use("/cart/order/", serveStatic("order")); //주문 페이지
 router.use("/cart/order/complete/:orderId", serveStatic("orderComplete")); //주문 완료 페이지
 router.use("/category/products/:productId", serveStatic("productsDetail")); //상품 상세 페이지
+// router.use("/category/products?id=${productId}", serveStatic("productsDetail")); //상품 상세 페이지
 
 module.exports = router;

@@ -1,13 +1,15 @@
 const { Order } = require("../models");
+const { Product } = require("../models");
 require("dotenv").config();
 class OrderService {
   constructor(Order) {
     this.OrderModel = Order;
+    this.ProductModel = Product;
   }
 
   //주문하기
   async register(info) {
-    const { name, phoneNumber, address, address2, comments } = info;
+    const { name, phoneNumber, address, address2, comments, productId } = info;
     try {
       await this.OrderModel.create({
         name,
@@ -15,20 +17,35 @@ class OrderService {
         address,
         address2,
         comments,
+        status: "ready",
+        productId: productId,
       });
     } catch (error) {
       return error;
     }
   }
 
+  // async register(info) {
+  //   const { name, phoneNumber, address, address2, comments } = info;
+  //   try {
+  //     await this.OrderModel.create({
+  //       name,
+  //       phoneNumber,
+  //       address,
+  //       address2,
+  //       comments,
+  //     });
+  //   } catch (error) {
+  //     return error;
+  //   }
+  // }
+
   //주문 정보 변경
   async update(orderId, updatedInfo) {
     const update = await this.OrderModel.findByIdAndUpdate(
-      orderId,
-      updatedInfo,
-      {
-        new: true,
-      }
+      { _id: orderId },
+      { $set: updatedInfo },
+      { new: true }
     );
     return update;
   }
@@ -39,14 +56,15 @@ class OrderService {
   }
 
   // 이메일검색 주문 정보 조회
-  async getOrderByEmail(email) {
+  async getOrderByEmail(email, phoneNumber) {
     return await this.OrderModel.findOne({
       email: email,
+      phoneNumber: phoneNumber,
     });
   }
 
   //주문 삭제
-  async delete(orderId) {
+  async deleteOrder(orderId) {
     return await this.OrderModel.deleteOne({ _id: orderId });
   }
 

@@ -35,6 +35,8 @@ const {
 } = require("../controller/order");
 //image
 const { uploadMiddleware } = require("../middlewares/image");
+const { authMail } = require("../controller/mail");
+router.post("/mail", authMail);
 
 //user
 router.post("/user", register); //회원 가입
@@ -61,10 +63,10 @@ router.get("/category", auth, getAllCategory); //카테고리 조회
 router.delete("/category/:name", auth, deleteCategory); //카테고리 삭제
 
 //order
-router.post("/order", auth, registerOrder); //주문 등록
-router.put("/order", auth, updateOrder); //주문 정보 수정
-router.get("/order", auth, getAllOrders); //전체 주문 정보 조회
-router.get("/order/email", auth, getOrderByEmail); //이메일검색 주문 정보 조회
-router.delete("/order", auth, deleteOrder); //주문 정보 삭제
+router.post("/order", registerOrder); //주문 등록
+router.put("/order/:orderId", updateOrder); //주문 정보 수정
+router.get("/order", getAllOrders); //전체 주문 정보 조회
+router.get("/order/email", getOrderByEmail); //이메일검색 주문 정보 조회
+router.delete("/order/:orderId", deleteOrder); //주문 정보 삭제
 
 module.exports = router;
