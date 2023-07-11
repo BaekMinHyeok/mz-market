@@ -26,7 +26,7 @@ const productSchema = new Schema({
     enum: ["men", "women"],
     required: true,
   },
-  image: {
+  images: {
     type: String,
     required: false,
   },

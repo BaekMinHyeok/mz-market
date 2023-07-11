@@ -8,7 +8,7 @@ class ProductService {
 
   //상품 등록
   async registerProduct(productInfo) {
-    const { name, description, price, category, gender, image } = productInfo;
+    const { name, description, price, category, gender, images } = productInfo;
     let productId;
     // 가장 최신 값 가져오기
     try {
@@ -27,7 +27,7 @@ class ProductService {
         price,
         category,
         gender,
-        image,
+        images,
       });
     } catch (error) {
       return error;
