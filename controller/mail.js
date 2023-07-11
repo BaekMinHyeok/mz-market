@@ -29,7 +29,7 @@ const authMail = async (req, res) => {
   });
 
   let mailOptions = await transporter.sendMail({
-    from: `곰방`,
+    from: `noback`,
     to: req.body.email,
     subject: "회원가입을 위한 인증번호를 입력해주세요.",
     html: emailTemplete,
