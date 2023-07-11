@@ -44,6 +44,7 @@ class ProductService {
 
     Object.assign(product, updatedInfo);
     await product.save();
+    
   }
 
   // 상품 정보 조회

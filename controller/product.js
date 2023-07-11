@@ -1,5 +1,4 @@
 const { product } = require("../services/product");
-const upload = require("../middlewares/multerconfig");
 const serverPath = "http://localhost:3000";
 
 // 상품 등록
@@ -15,7 +14,7 @@ const registerProduct = async (req, res) => {
       gender: data.gender,
       images: imgPath,
     };
-    console.log(productInfo);
+    // console.log(productInfo);
     await product.registerProduct(productInfo);
 
     res.json({
@@ -127,7 +126,6 @@ const deleteProduct = async (req, res) => {
 
 module.exports = {
   registerProduct,
-  uploadImg,
   getAllProduct,
   getProductByName,
   updateProduct,

@@ -12,7 +12,6 @@ const {
 //product
 const {
   registerProduct,
-  uploadImg,
   getAllProduct,
   getProductByName,
   updateProduct,
