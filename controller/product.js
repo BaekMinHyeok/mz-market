@@ -33,10 +33,16 @@ const registerProduct = async (req, res) => {
 // 상품 업데이트
 const updateProduct = async (req, res) => {
   try {
-    const imgPath = serverPath + req.file.path.substring(6);
+    const { file } = req;
+    const path = file && file.path;
+
+    // const imgPath = serverPath + req.file.path.substring(6);
     const productId = req.params.productId;
     const updatedInfo = JSON.parse(req.body.data);
-    updatedInfo.images = imgPath;
+
+    //충래님 짱이에요
+    if (path) updatedInfo.images = serverPath + path.substring(6);
+
     await product.updateProduct(productId, updatedInfo);
     res.json({
       success: true,
@@ -124,6 +130,23 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const getProductByGender = async (req, res) => {
+  try {
+    const gender = req.params.gender;
+    const productInfo = await product.getProductByGender(gender);
+    res.json({
+      success: true,
+      message: "상품을 조회했습니다.",
+      product: productInfo,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+    });
+  }
+};
+
 module.exports = {
   registerProduct,
   getAllProduct,
@@ -131,4 +154,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   getProductById,
+  getProductByGender,
 };

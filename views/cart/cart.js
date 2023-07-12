@@ -172,9 +172,9 @@ function updateTotalQuantityAndPrice() {
 
   const finalPrice = totalPrice + deliveryFee;
 
-  countElement.textContent = totalQuantity.toString();
-  priceElement.textContent = totalPrice.toLocaleString();
-  deliverElement.textContent = deliveryFee.toString();
+  countElement.textContent = totalQuantity.toString() + "개";
+  priceElement.textContent = totalPrice.toLocaleString() + "원";
+  deliverElement.textContent = deliveryFee.toString() + "원";
   totalPriceElement.textContent = finalPrice.toLocaleString() + "원";
   totalPriceSubtitleElement.textContent =
     "총 " + totalPrice.toLocaleString() + "원을 담았어요.";
@@ -185,57 +185,64 @@ const orderButton = document.querySelector(".nav_order_button");
 orderButton.addEventListener("click", placeOrder);
 
 function placeOrder() {
-  const orderItems = [];
-  // const orderItems = [...cartItems];
+  const productDetailURL = "http://localhost:3000/cart/order";
+  console.log(productDetailURL);
+  window.location.href = productDetailURL;
 
-  const productElements = document.querySelectorAll(".order_product_list");
-  productElements.forEach((productElement) => {
-    const productName =
-      productElement.querySelector(".product_name").textContent;
-    const productSize =
-      productElement.querySelector(".product_size").textContent;
-    const productPrice = parseInt(
-      productElement.querySelector(".product_price").textContent
-    );
-    const productQuantity = parseInt(
-      productElement.querySelector(".product_num").textContent
-    );
+  // const orderItems = [];
+  // // const orderItems = [...cartItems];
 
-    const orderItem = {
-      name: productName,
-      size: productSize,
-      price: productPrice,
-      quantity: productQuantity,
-    };
+  // const productElements = document.querySelectorAll(".order_product_list");
+  // productElements.forEach((productElement) => {
+  //   const productName =
+  //     productElement.querySelector(".product_name").textContent;
+  //   const productSize =
+  //     productElement.querySelector(".product_size").textContent;
+  //   const productPrice = parseInt(
+  //     productElement.querySelector(".product_price").textContent
+  //   );
+  //   const productQuantity = parseInt(
+  //     productElement.querySelector(".product_num").textContent
+  //   );
 
-    orderItems.push(orderItem);
-  });
+  //   const orderItem = {
+  //     name: productName,
+  //     size: productSize,
+  //     price: productPrice,
+  //     quantity: productQuantity,
+  //   };
 
-  const orderData = {
-    items: orderItems,
-  };
+  //   orderItems.push(orderItem);
+  // });
 
-  // 백엔드 api 임시 작성
-  fetch("api 입력", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(orderData),
-  })
-    .then((response) => {
-      if (response.ok) {
-        // 주문 성공
-        console.log("주문 및 결제 페이지로 이동");
-        // 주문 완료 후 처리할 로직 작성
-      } else {
-        // 주문 실패
-        console.log("주문을 처리하는 도중에 문제가 발생했습니다.");
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  // const orderData = {
+  //   items: orderItems,
+  // };
+
+  // // 백엔드 api 임시 작성
+  // fetch("api 입력", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(orderData),
+  // })
+  //   .then((response) => {
+  //     if (response.ok) {
+  //       // 주문 성공
+  //       console.log("주문 및 결제 페이지로 이동");
+  //       const productDetailURL = "http://localhost:3000/cart/order";
+  //       console.log(productDetailURL);
+  //       window.location.href = productDetailURL;
+  //     } else {
+  //       // 주문 실패
+  //       alert("주문을 처리하는 도중에 문제가 발생했습니다.");
+  //       console.log("주문을 처리하는 도중에 문제가 발생했습니다.");
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     console.error(error);
+  //   });
 }
 
 function init() {

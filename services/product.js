@@ -44,7 +44,6 @@ class ProductService {
 
     Object.assign(product, updatedInfo);
     await product.save();
-    
   }
 
   // 상품 정보 조회
@@ -59,6 +58,19 @@ class ProductService {
     });
   }
 
+  async getProductByGender(gender) {
+    return await this.productModel.find({
+      gender: gender,
+    });
+  }
+
+  // order에 prodcut _id값 보내기
+  async getProductByObjectId(objectId) {
+    return await this.productModel.findOne({
+      _id: objectId,
+    });
+  }
+
   // 특정 상품의 상세 정보 가져오기
   async getProductByName(searchQuery) {
     const regexQuery = new RegExp(searchQuery, "i"); //한글 검색 처리에 필요
@@ -70,7 +82,7 @@ class ProductService {
 
   // 상품 삭제
   async deleteProduct(productId) {
-    return await this.productModel.deleteOne({ productId: productId });
+    return await this.productModel.deleteOne({ _id: productId });
   }
 }
 

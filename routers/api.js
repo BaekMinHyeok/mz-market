@@ -17,6 +17,7 @@ const {
   updateProduct,
   deleteProduct,
   getProductById,
+  getProductByGender,
 } = require("../controller/product");
 //category
 const {
@@ -35,6 +36,9 @@ const {
 } = require("../controller/order");
 //image
 const { uploadMiddleware } = require("../middlewares/image");
+const { authMail } = require("../controller/mail");
+const { adminAuth } = require("../middlewares/admin");
+router.post("/mail", authMail);
 
 //user
 router.post("/user", register); //회원 가입
@@ -46,25 +50,25 @@ router.delete("/user", auth, deleteUser); //회원 탈퇴
 router.post("/login", login); //로그인
 
 //product
-router.post("/product", auth, uploadMiddleware, registerProduct); //상품등록
-router.put("/product/:productId", auth, uploadMiddleware, updateProduct); //상품 업데이트
+router.post("/product", adminAuth, uploadMiddleware, registerProduct); //상품등록
+router.put("/product/:productId", adminAuth, uploadMiddleware, updateProduct); //상품 업데이트
 router.get("/product", getAllProduct); //모든 상품 목록
 router.get("/product/:productId", getProductById); //productId로 상품 정보 가져오기
 router.get("/product/search/:search", getProductByName); //상품 이름 검색
-
-router.delete("/product/:productId", auth, deleteProduct); //상품 삭제
+router.get("/product/gender/:gender", getProductByGender); //성별로 데이터 리턴 
+router.delete("/product/:productId", adminAuth, deleteProduct); //상품 삭제
 
 //category
-router.post("/category", auth, registerCategory); //카테고리 등록
-router.put("/category", auth, updateCategory); //카테고리 업데이트
-router.get("/category", auth, getAllCategory); //카테고리 조회
-router.delete("/category/:name", auth, deleteCategory); //카테고리 삭제
+router.post("/category", adminAuth, registerCategory); //카테고리 등록
+router.put("/category", adminAuth, updateCategory); //카테고리 업데이트
+router.get("/category", adminAuth, getAllCategory); //카테고리 조회
+router.delete("/category/:name", adminAuth, deleteCategory); //카테고리 삭제
 
 //order
-router.post("/order", auth, registerOrder); //주문 등록
-router.put("/order", auth, updateOrder); //주문 정보 수정
-router.get("/order", auth, getAllOrders); //전체 주문 정보 조회
-router.get("/order/email", auth, getOrderByEmail); //이메일검색 주문 정보 조회
-router.delete("/order", auth, deleteOrder); //주문 정보 삭제
+router.post("/order", registerOrder); //주문 등록
+router.put("/order/:orderId", updateOrder); //주문 정보 수정
+router.get("/order", getAllOrders); //전체 주문 정보 조회
+router.get("/order/email", getOrderByEmail); //이메일검색 주문 정보 조회
+router.delete("/order/:orderId", deleteOrder); //주문 정보 삭제
 
 module.exports = router;
