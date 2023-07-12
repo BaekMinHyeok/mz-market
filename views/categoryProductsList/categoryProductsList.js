@@ -1,145 +1,119 @@
-import { dummyData } from "../main/dummy.js";
+// 카테고리 링크 클릭
+function handleCategoryClick(event, category) {
+  event.preventDefault();
 
-console.log(dummyData);
+  const productTitle = document.querySelector(".product_title");
+  const productSubtitle = document.querySelector(".product_subtitle");
+  const productList = document.querySelector(".products_list_wrapper");
 
-const categorySelect = document.getElementById("category");
-const productList = document.querySelector(".products_list_wrapper");
+  if (category === "men") {
+    productTitle.textContent = "남성 상품";
+    productSubtitle.textContent = "남성 상품 목록입니다.";
+    fetchProducts("/api/product/gender/men", productList);
 
-const productTitle = document.querySelector(".product_title");
-const productSubtitle = document.querySelector(".product_subtitle");
-const productListWrapper = document.querySelector(".products_list_wrapper");
+    history.pushState(null, "", "/category/men");
+  } else if (category === "women") {
+    productTitle.textContent = "여성 상품";
+    productSubtitle.textContent = "여성 상품 목록입니다.";
+    fetchProducts("/api/product/gender/women", productList);
 
-// categorySelect.addEventListener("change", filterProductsByCategory);
-
-// 카테고리별 상품 목록 필터링 및 표시
-// function filterProductsByCategory(gender) {
-//   const products = dummyData.filter((product) => product.gender === gender);
-
-//   if (gender === "여성") {
-//     productTitle.textContent = "여성 의류";
-//     productSubtitle.textContent =
-//       "여성 의류 설명 텍스트가 들어가는 자리입니다.";
-//   } else if (gender === "남성") {
-//     productTitle.textContent = "남성 의류";
-//     productSubtitle.textContent =
-//       "남성 의류 설명 텍스트가 들어가는 자리입니다.";
-//   }
-
-//   const selectedCategory = categorySelect.value;
-
-//   // 선택된 카테고리 값에 따라 상품 목록 필터링 => 서버
-//   const filteredProducts = products.filter((product) =>
-//     product.category.includes(selectedCategory)
-//   );
-
-//   console.log(products);
-//   console.log(filteredProducts);
-
-//   // 상품 목록 HTML 초기화
-//   productList.innerHTML = "";
-
-//   // 필터링된 상품 목록 표시
-//   filteredProducts.forEach((product) => {
-//     const productItem = document.createElement("li");
-//     productItem.className = "product";
-
-//     productItem.innerHTML = `
-//       <div class="product_img">
-//         <img src="${product.image}" alt="${product.name}" />
-//       </div>
-//       <div class="product_text_box">
-//         <h3 class="product_name">${product.name}</h3>
-//         <p class="product_text">${product.description}</p>
-//         <div class="product_text_box_bottom">
-//           <p class="product_price">${product.price}원</p>
-//           <p class="product_review">리뷰 개수</p>
-//         </div>
-//       </div>
-//     `;
-
-//     productList.appendChild(productItem);
-//   });
-// }
-
-// 상품 표시 함수
-function showProducts(gender) {
-  const products = dummyData.filter((product) => product.gender === gender);
-
-  if (gender === "여성") {
-    productTitle.textContent = "여성 의류";
-    productSubtitle.textContent =
-      "여성 의류 설명 텍스트가 들어가는 자리입니다.";
-  } else if (gender === "남성") {
-    productTitle.textContent = "남성 의류";
-    productSubtitle.textContent =
-      "남성 의류 설명 텍스트가 들어가는 자리입니다.";
+    history.pushState(null, "", "/category/women");
   }
+}
 
-  productListWrapper.innerHTML = "";
+// 카테고리 링크 클릭 이벤트 리스너
+const menLink = document.querySelector('a[href="/category/men"]');
+menLink.addEventListener("click", (event) => handleCategoryClick(event, "men"));
 
-  console.log(gender);
+const womenLink = document.querySelector('a[href="/category/women"]');
+womenLink.addEventListener("click", (event) =>
+  handleCategoryClick(event, "women")
+);
 
-  products.forEach((product) => {
-    const productElement = document.createElement("li");
-    productElement.classList.add("product");
+// 상품 리스트 가져오기
+function fetchProducts(url, productList) {
+  // 기존 상품 리스트 초기화
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("DATA", data);
+      const fragment = document.createDocumentFragment();
 
-    productElement.innerHTML = `
-      <div class="product_img">
-        <img src="${product.image}" alt="${product.name}" />
-      </div>
+      data.product.forEach((product) => {
+        const listItem = createProductItem(product);
+        console.log("listItem", listItem);
+        fragment.appendChild(listItem);
+      });
 
-      <div class="product_text_box">
-        <h3 class="product_name">${product.name}</h3>
-        <p class="product_text">${product.description}</p>
+      productList.innerHTML = "";
+      productList.appendChild(fragment);
 
-        <div class="product_text_box_bottom">
-          <p class="product_price">${product.price}원</p>
-          <p class="product_review">50개의 리뷰</p>
-        </div>
-      </div>
-    `;
-
-    productElement.addEventListener("click", () => {
-      showProductDetail(product.id);
+      // 상품 리스트 아이템 클릭 이벤트 리스너 등록
+      const productItems = productList.querySelectorAll(".product");
+      productItems.forEach((item) => {
+        const productId = item.dataset.productId;
+        console.log(productId);
+        item.addEventListener("click", () => showProductDetail(productId));
+      });
+    })
+    .catch((error) => {
+      console.log("Error:", error);
     });
-
-    productListWrapper.appendChild(productElement);
-  });
 }
 
-// function createCategoryOptions() {
-//   const categorySelect = document.getElementById("category");
-//   const categories = ["아우터", "상의", "하의"];
+// 상품 아이템 생성
+function createProductItem(product) {
+  const listItem = document.createElement("li");
+  listItem.classList.add("product");
 
-//   categories.forEach((category) => {
-//     const option = document.createElement("option");
-//     option.value = category;
-//     option.textContent = category;
-//     categorySelect.appendChild(option);
-//   });
-// }
+  const productImg = document.createElement("div");
+  productImg.classList.add("product_img");
 
-// 초기화
-function init() {
-  // createCategoryOptions();
-  const categoryProductsList = document.getElementById(
-    "category_products_list"
-  );
-  const urlParams = new URLSearchParams(window.location.search);
-  const gender = urlParams.get("gender");
+  const img = document.createElement("img");
+  img.src = product.images;
+  productImg.appendChild(img);
 
-  // filterProductsByCategory(gender);
+  listItem.appendChild(productImg);
 
-  categoryProductsList.style.display = "block";
-  showProducts(gender);
+  const productTextBox = document.createElement("div");
+  productTextBox.classList.add("product_text_box");
+  listItem.appendChild(productTextBox);
+
+  const productName = document.createElement("h3");
+  productName.classList.add("product_name");
+  productName.textContent = product.name;
+  productTextBox.appendChild(productName);
+
+  const productText = document.createElement("p");
+  productText.classList.add("product_text");
+  productText.textContent = product.description;
+  productTextBox.appendChild(productText);
+
+  const productTextBoxBottom = document.createElement("div");
+  productTextBoxBottom.classList.add("product_text_box_bottom");
+  productTextBox.appendChild(productTextBoxBottom);
+
+  const productPrice = document.createElement("p");
+  productPrice.classList.add("product_price");
+  productPrice.textContent = product.price.toLocaleString() + "원";
+  productTextBoxBottom.appendChild(productPrice);
+
+  const productReview = document.createElement("p");
+  productReview.classList.add("product_review");
+  productReview.textContent = "50개의 리뷰";
+  productTextBoxBottom.appendChild(productReview);
+
+  listItem.setAttribute("data-product-id", product.productId);
+
+  return listItem;
 }
 
-// 상세 페이지로 이동
 function showProductDetail(productId) {
-  console.log("Test");
+  console.log("상세페이지 이동 함수 테스트");
+  console.log(productId);
 
-  // window.location.href = `/category/products/:productId`;
-  window.location.href = `./../productsDetail/productsDetail.html?id=${productId}`;
+  // 상세 페이지로 이동할 URL
+  const productDetailURL = `/category/products/${productId}`;
+  console.log(productDetailURL);
+  window.location.href = productDetailURL;
 }
-
-init();
