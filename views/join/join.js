@@ -78,7 +78,7 @@ joinButton.addEventListener("click", createAccount);
 let authCode;
 authButton.addEventListener("click", async () => {
   authButton.disabled = true;
-  alert("메일을 발송했습니다.");
+  startTimer();
   const email = document.querySelector("#email").value;
   const data = {
     email: email,
@@ -108,3 +108,31 @@ completeButton.addEventListener("click", () => {
 login.addEventListener("click", () => {
   location.href = "http://localhost:3000/user/sign_in";
 });
+
+function startTimer() {
+  let button = authButton;
+  let time = 180; // 초 단위로 초기화 (3분 = 3 * 60 = 180초)
+
+  // 타이머 갱신 함수
+  function updateTimer() {
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    // 버튼의 텍스트를 갱신하여 남은 시간을 표시
+    button.textContent = `${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
+
+    // 1초마다 시간 감소
+    time--;
+
+    // 타이머 종료 시
+    if (time < 0) {
+      clearInterval(timerInterval); // 타이머 중지
+      authButton.disabled = false;
+      authButton.textContent = "메일 발송";
+    }
+  }
+  // 1초마다 updateTimer 함수 호출
+  let timerInterval = setInterval(updateTimer, 1000);
+}
