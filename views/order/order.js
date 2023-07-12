@@ -157,6 +157,8 @@ function updatePaymentInfo() {
       productPrice += product.price * product.quantity;
     }
 
+    localStorage.setItem("totalPrice", productPrice);
+
     const deliveryFee = 3000;
     const totalPrice = productPrice + deliveryFee;
 
@@ -179,6 +181,22 @@ window.addEventListener("load", updatePaymentInfo);
 // 주문 정보 전송
 function submitOrder() {
   console.log("TEST");
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  const productCount = cart.reduce(
+    (total, product) => total + product.quantity,
+    0
+  );
+  const productPrice = cart.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0
+  );
+  const nameArray = cart.map((product) => product.name);
+
+  if (!cart || cart.length === 0) {
+    alert("장바구니에 상품이 없습니다.");
+    return;
+  }
+
   const regex = /[^0-9]/g;
   const name = nameInput.value.trim();
   const phonenumValue = phonenumInput.value.replace(regex, "");
@@ -199,11 +217,16 @@ function submitOrder() {
 
   const orderData = {
     name: name,
-    phoneNumber: phonenumValue,
+    phoneNumber: Number(phonenumValue),
     address: address,
     address2: addressDetail,
     comments: etc,
+    productName: nameArray,
+    price: productPrice + 3000,
+    quantity: productCount,
   };
+
+  console.log("orderData@@@@@@@@@@@@@@@@@@@@@", orderData);
 
   const token = localStorage.getItem("token");
 
