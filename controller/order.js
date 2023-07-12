@@ -19,6 +19,7 @@ const registerOrder = async (req, res) => {
       quantity,
       productName
     });
+  
     res.json({
       success: true,
       message: "주문 등록에 성공했습니다.",
