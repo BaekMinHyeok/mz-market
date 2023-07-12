@@ -1,4 +1,4 @@
-import { getApi, putApi, deleteApi } from "../../api.js";
+import { getApi, putApi, deleteApi } from "../api.js";
 
 const orderlistContainer = document.querySelector("#orderlistContainer");
 
