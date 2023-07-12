@@ -17,6 +17,7 @@ const {
   updateProduct,
   deleteProduct,
   getProductById,
+  getProductByGender,
 } = require("../controller/product");
 //category
 const {
@@ -54,7 +55,7 @@ router.put("/product/:productId", adminAuth, uploadMiddleware, updateProduct); /
 router.get("/product", getAllProduct); //모든 상품 목록
 router.get("/product/:productId", getProductById); //productId로 상품 정보 가져오기
 router.get("/product/search/:search", getProductByName); //상품 이름 검색
-
+router.get("/product/gender/:gender", getProductByGender); //성별로 데이터 리턴 
 router.delete("/product/:productId", adminAuth, deleteProduct); //상품 삭제
 
 //category

@@ -24,7 +24,7 @@ h1 {
 
 input,
 button.signup-button {
-  width: 300px;
+  width: 278px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 20px;
@@ -37,8 +37,23 @@ button.auth-button {
   border-radius: 20px;
 }
 
+button.auth-complete-button {
+  width: 35%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+#email {
+  width: 63%;
+}
+
 #auth {
   width: 63%;
+}
+
+#signupBtn {
+  margin-top: 10px;
 }
 
 .signup-button {
