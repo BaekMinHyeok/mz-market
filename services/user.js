@@ -43,6 +43,7 @@ class UserService {
         name: check[0].name,
         email: check[0].email,
         pw: check[0].pw,
+        admin: check[0].admin,
       },
       process.env.SECRET
     );
