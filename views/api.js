@@ -1,6 +1,6 @@
 const getHeaders = (isFile = false) => {
   return {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
+    Authorization: `${localStorage.getItem("token")}`,
     "Content-Type": isFile ? "multipart/form-data" : "application/json",
   };
 };
@@ -11,7 +11,7 @@ export const getApi = async (path) => {
       headers: getHeaders(),
     });
 
-    if (response.ok) {
+    if (response) {
       const data = await response.json();
       return data;
     } else {
@@ -31,7 +31,7 @@ export const postApi = async (path, data) => {
       headers: getHeaders(true),
     });
 
-    if (response.ok) {
+    if (response) {
       const result = await response.json();
       return result;
     } else {
@@ -51,7 +51,7 @@ export const putApi = async (path, data) => {
       headers: getHeaders(),
     });
 
-    if (response.ok) {
+    if (response) {
       console.log("Data updated successfully.");
     } else {
       throw new Error("Failed to update data.");
@@ -69,7 +69,7 @@ export const deleteApi = async (path) => {
       headers: getHeaders(),
     });
 
-    if (response.ok) {
+    if (response) {
       console.log("Data deleted successfully.");
     } else {
       throw new Error("Failed to delete data.");

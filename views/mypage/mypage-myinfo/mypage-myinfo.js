@@ -18,7 +18,7 @@ async function editName() {
   const newName = nameInput.value;
   try {
     const response = await putApi('/edit-name', { name: newName });
-    if (response.ok) {
+    if (response) {
       alert('이름을 변경하였습니다.');
     } else {
       alert('이름 변경에 실패했습니다.');
@@ -32,7 +32,7 @@ async function editEmail() {
   const newEmail = emailInput.value;
   try {
     const response = await putApi('/edit-email', { email: newEmail });
-    if (response.ok) {
+    if (response) {
       alert('이메일이 변경되었습니다.');
     } else {
       alert('이메일변경에 실패하였습니다.');
@@ -53,7 +53,7 @@ async function editPassword() {
 
   try {
     const response = await putApi('/edit-password', { password: newPassword });
-    if (response.ok) {
+    if (response) {
       alert('비밀번호를 변경하였습니다.');
     } else {
       alert('비밀번호 변경에 실패하였습니다!');
@@ -66,7 +66,7 @@ async function editPassword() {
 async function deleteAccount() {
   try {
     const response = await deleteApi('/delete-account');
-    if (response.ok) {
+    if (response) {
       alert('회원탈퇴 되었습니다.');
     } else {
       alert('회원탈퇴에 실패하였습니다!');
