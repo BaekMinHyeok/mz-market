@@ -1,6 +1,6 @@
 const getHeaders = (isFile = false) => {
   return {
-    Authorization: `${localStorage.getItem("token")}`,
+    authorization: `Bearer ${localStorage.getItem("token")}`,
     "Content-Type": isFile ? "multipart/form-data" : "application/json",
   };
 };

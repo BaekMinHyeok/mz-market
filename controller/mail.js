@@ -28,21 +28,22 @@ const authMail = async (req, res) => {
     },
   });
 
-  let mailOptions = await transporter.sendMail({
+  let mailOptions = {
     from: `noback`,
     to: req.body.email,
     subject: "회원가입을 위한 인증번호를 입력해주세요.",
     html: emailTemplete,
-  });
+  };
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error);
-    }
+  try {
+    const info = await transporter.sendMail(mailOptions);
     console.log("Finish sending email : " + info.response);
     res.send(authNum);
     transporter.close();
-  });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Failed to send email.");
+  }
 };
 
 module.exports = { authMail };

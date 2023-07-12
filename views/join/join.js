@@ -1,11 +1,18 @@
 const joinButton = document.querySelector(".signup-button");
+const authButton = document.querySelector(".auth-button");
+const completeButton = document.querySelector(".auth-complete-button");
 const header = document.getElementById("header-container");
+const auth = document.getElementById("auth");
+const login = document.querySelector(".login-p");
 
-fetch("http://localhost:3000/header/header.html")
-  .then((res) => res.text())
-  .then((html) => {
-    header.innerHTML = html;
-  });
+joinButton.disabled = true;
+completeButton.disabled = true;
+
+// fetch("http://localhost:3000/header/header.html")
+//   .then((res) => res.text())
+//   .then((html) => {
+//     header.innerHTML = html;
+//   });
 
 async function createAccount() {
   const name = document.querySelector("#name").value;
@@ -42,7 +49,7 @@ async function createAccount() {
 
   // 요청
   try {
-    const response = await fetch("http://localhost:3000/api/register", {
+    const response = await fetch("http://localhost:3000/api/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,6 +58,8 @@ async function createAccount() {
     });
     const result = await response.json();
 
+    console.log(data);
+    console.log(result);
     if (result.success) {
       alert("회원가입이 성공하였습니다!");
       location.href = "http://localhost:3000/user/sign_in";
@@ -65,3 +74,37 @@ async function createAccount() {
 }
 
 joinButton.addEventListener("click", createAccount);
+
+let authCode;
+authButton.addEventListener("click", async () => {
+  authButton.disabled = true;
+  alert("메일을 발송했습니다.");
+  const email = document.querySelector("#email").value;
+  const data = {
+    email: email,
+  };
+
+  try {
+    const response = await fetch("http://localhost:3000/api/mail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    authCode = await response.json();
+    console.log(authCode);
+    completeButton.disabled = false;
+  } catch (error) {}
+});
+
+completeButton.addEventListener("click", () => {
+  if (auth.value == authCode) {
+    alert("인증에 성공했습니다!");
+    joinButton.disabled = false;
+  }
+});
+
+login.addEventListener("click", () => {
+  location.href = "http://localhost:3000/user/sign_in";
+});
