@@ -47,7 +47,7 @@ body {
 
 .checkbox-container {
   width: calc(100% - 0px);
-  height: 140px;
+  height: 280px;
   flex-shrink: 0;
   border-radius: 15px;
   border: 2px solid #F2F2F2;

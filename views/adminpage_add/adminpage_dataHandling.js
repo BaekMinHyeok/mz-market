@@ -2,16 +2,22 @@ const savebtn = document.querySelector("#save-btn");
 
 savebtn.addEventListener("click", async function () {
   const productName = document.querySelector("#productName").value;
-  const productDescription = document.querySelector(
-    "#productDescription"
-  ).value;
+  const productDescription = document.querySelector("#productDescription").value;
   const productPrice = document.querySelector("#productPrice").value;
-  const selectedValue = document.querySelector(
-    ".radio-group input:checked"
-  ).value;
+  const selectedValue = document.querySelector(".radio-group input:checked").value;
   const categoryValue = document.querySelector("#checkvalue").value;
   const selectedFile = document.querySelector("#selectedFile").value; // 파일 객체 가져오기
-
+  if (
+    !productName ||
+    !productDescription ||
+    !productPrice ||
+    !selectedValue ||
+    !categoryValue ||
+    !selectedFile
+  ) {
+    alert("값을 모두 입력해주세요.");
+    return;
+  }
   // 로컬 스토리지에서 JWT 토큰 가져오기
   const token = localStorage.getItem("token");
 
@@ -41,6 +47,8 @@ savebtn.addEventListener("click", async function () {
     console.log(result);
 
     if (result.success) {
+      alert("저장되었습니다.");
+      location.reload()
       console.log(result.message);
     }
   } catch (error) {
