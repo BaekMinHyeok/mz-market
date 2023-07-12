@@ -1,6 +1,10 @@
 const { Schema } = require("mongoose");
 
 const orderSchema = new Schema({
+  orderId: {
+    type: Number,
+    required: true,
+  },
   name: {
     type: String,
     trim: true,
