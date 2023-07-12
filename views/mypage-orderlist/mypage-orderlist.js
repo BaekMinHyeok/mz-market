@@ -1,116 +1,106 @@
-import { getApi, putApi, deleteApi } from "../api.js";
+import { getApi, putApi, deleteApi } from "http://localhost:3000/api.js";
 
-const orderlistContainer = document.querySelector("#orderlistContainer");
 
-addAllEvents();
-insertOrders();
-fetchOrderData();
+const orderList = document.querySelector(".orderlist");
 
-async function fetchOrderData() {
+document.addEventListener("DOMContentLoaded", async function () {
   try {
-    const orderData = await getApi("/api/order/data");
-    const orderNumberElement = document.querySelector(".order-number");
-    const orderStatus = document.querySelector(".order-status");
+    const result = await getApi("http://localhost:3000/api/order/email");
+    console.log(result);
+    result.products.forEach((data) => {
+      console.log(data);
+      const newOrderlist = document.createElement("li");
 
-    orderNumberElement.textContent = orderData.orderNumber;
-    orderStatus.textContent = orderData.orderStatus;
-  } catch (error) {
-    console.error("Error fetching order data:", error);
-  }
-}
-
-function addAllEvents() {
-  orderlistContainer.addEventListener("click", handleOrderListClick);
-}
-
-async function insertOrders() {
-  try {
-    const orders = await getApi("/api/orderlist");
-
-    for (const order of orders) {
-      const { _id, productName, productSize, quantity, productPrice, productStatus } = order;
-
-      orderlistContainer.insertAdjacentHTML(
-        "beforeend",
-        `
-        <li class="order-list" data-order-id="${_id}">
+      newOrderlist.innerHTML = `
+        <li class="order-list">
           <div class="order-list-img"></div>
           <div class="order-list-box">
             <div class="order-list-info">
-              <p class="product-name">${productName}</p>
-              <p class="product-size">${productSize}</p>
-              <button class="minus-quantity"><i class="fa-regular fa-circle-minus"></i></button>
-              <p class="product-quantity">${quantity}</p>
-              <button class="plus-quantity"><i class="fa-solid fa-circle-plus"></i></button>
-              <p class="product-price">${productPrice}원</p>
+              <p class="product-name">${data.name}</p>
+              <p class="product-size">${data.size}</p>
+              <button class="minus-quantity">
+                <i class="fa-regular fa-circle-minus"></i>
+              </button>
+               ${data.name}
+              <button class="plus-quantity">
+                <i class="fa-solid fa-circle-plus"></i>
+              </button>
+              <p class="product-status">${data.price}</p>
             </div>
-            <p class="product-status">${productStatus}</p>
           </div>
+          <button class="edit-button">수정하기</button>
+          <button class="delete-button">삭제하기</button>
         </li>
-      `
-      );
-    }
+      `;
+
+      //수량 추가,감소 버튼과 수정하기 및 취소하기 버튼
+      const minusQuantityButton = newOrderlist.querySelector(".minus-quantity");
+      const plusQuantityButton = newOrderlist.querySelector(".plus-quantity");
+      const editButton = newOrderlist.querySelector(".edit-button");
+      const deleteButton = newOrderlist.querySelector(".delete-button");
+
+      // minusQuantityButton.addEventListener("click", () => {
+      //   decreaseQuantity(data.);
+      // });
+
+      // plusQuantityButton.addEventListener("click", () => {
+      //   increaseQuantity(data.);
+      // });
+
+      // editButton.addEventListener("click", () => {
+      //   sendQuantityUpdateRequest(data.id, data..innerText);
+      // });
+
+      // deleteButton.addEventListener("click", () => {
+      //   deleteOrder(newOrderlist);
+      // });
+
+      orderList.appendChild(newOrderlist);
+    });
   } catch (error) {
-    console.error("Error inserting orders:", error);
+    console.error("Failed to fetch order data:", error);
   }
-}
+});
 
-function handleOrderListClick(event) {
-  const target = event.target;
+// function decreaseQuantity(data.) {
+//   let quantity = parseInt(data..innerText);
+//   if (quantity > 1) {
+//     quantity--;
+//     data..innerText = quantity;
+//   }
+// }
 
-  if (target.classList.contains("minus-quantity")) {
-    const quantityElement = target.nextElementSibling;
-    const quantity = parseInt(quantityElement.textContent);
+// function increaseQuantity(data.) {
+//   let quantity = parseInt(data..innerText);
+//   quantity++;
+//   data..innerText = quantity;
+// }
 
-    if (quantity > 1) {
-      quantityElement.textContent = quantity - 1;
-    }
-  } else if (target.classList.contains("plus-quantity")) {
-    const quantityElement = target.previousElementSibling;
-    const quantity = parseInt(quantityElement.textContent);
+// async function sendQuantityUpdateRequest(orderId, quantity) {
+//   try {
+//     const response = await putApi(`http://localhost:3000/api/order/:orderId`, {
+//       quantity: parseInt(quantity)
+//     });
+//     if (response) {
+//       alert("Quantity updated successfully.");
+//     } else {
+//       alert("Failed to update quantity.");
+//     }
+//   } catch (error) {
+//     alert("Failed to update quantity:", error);
+//   }
+// }
 
-    quantityElement.textContent = quantity + 1;
-  } else if (target.classList.contains("edit-button")) {
-    const orderListItem = target.closest(".order-list");
-    const orderId = orderListItem.dataset.orderId;
-    const quantityElement = orderListItem.querySelector(".product-quantity");
-    const newQuantity = parseInt(quantityElement.textContent);
-
-    // Send a request to update the quantity
-    updateOrderQuantity(orderId, newQuantity);
-  } else if (target.classList.contains("delete-button")) {
-    const orderListItem = target.closest(".order-list");
-    const orderId = orderListItem.dataset.orderId;
-    const confirmation = confirm("주문을 취소하시겠습니까?");
-
-    if (confirmation) {
-      // Send a request to delete the order
-      deleteOrder(orderId);
-    }
-  }
-}
-
-async function updateOrderQuantity(orderId, newQuantity) {
-  try {
-    const data = { quantity: newQuantity };
-    await putApi(`/api/orders/${orderId}`, data);
-
-    alert("수량이 업데이트되었습니다.");
-  } catch (error) {
-    console.error("Error updating quantity:", error);
-    alert("수량을 업데이트하는 중에 오류가 발생했습니다. 다시 시도해주세요.");
-  }
-}
-
-async function deleteOrder(orderId) {
-  try {
-    await deleteApi(`/api/orders/${orderId}`);
-    alert("주문이 취소되었습니다.");
-
-    const orderListItem = orderlistContainer.querySelector(`[data-order-id="${orderId}"]`);
-    orderListItem.remove();
-  } catch (error) {
-    console.error("Error deleting order:", error);
-    alert("주문을 취소하는 중에 오류가 발생했습니다. 다시 시도해주세요.");
-  }
-}
+// async function deleteOrder(orderElement) {
+//   const confirmation = confirm("주문을 삭제하시겠습니까?");
+//   if (confirmation) {
+//     try {
+//       const orderId = orderElement.dataset.orderId; 
+//       await deleteApi(`http://localhost:3000/api/order/:orderId`);
+//       orderElement.remove();
+//       alert("주문이 삭제되었습니다.");
+//     } catch (error) {
+//       console.error("Failed to delete the order:", error);
+//     }
+//   }
+// }
