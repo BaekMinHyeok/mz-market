@@ -76,7 +76,6 @@ function handleOrderListClick(event) {
     const quantityElement = orderListItem.querySelector(".product-quantity");
     const newQuantity = parseInt(quantityElement.textContent);
 
-    // Send a request to update the quantity
     updateOrderQuantity(orderId, newQuantity);
   } else if (target.classList.contains("delete-button")) {
     const orderListItem = target.closest(".order-list");
@@ -84,7 +83,6 @@ function handleOrderListClick(event) {
     const confirmation = confirm("주문을 취소하시겠습니까?");
 
     if (confirmation) {
-      // Send a request to delete the order
       deleteOrder(orderId);
     }
   }
