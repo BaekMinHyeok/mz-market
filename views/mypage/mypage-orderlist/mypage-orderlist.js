@@ -108,7 +108,14 @@ async function insertOrders() {
             <p class="product-status">${statusText}</p>
           </div>
           <div class="column is-2">
-            <button class="button" id="deleteButton-${_id}">Cancel order</button>
+            ${
+              status === "Product being prepared" || status === "Item shipping"
+                ? `
+                  <button class="button edit-button">수정하기</button>
+                  <button class="button delete-button">삭제하기</button>
+                `
+                : ""
+            }
           </div>
         </div>
       `
@@ -130,10 +137,38 @@ async function insertOrders() {
         await Api.putApi(`/api/orders/${_id}`, data);
       });
 
-      deleteButton.addEventListener("click", () => {
-        orderIdToDelete = _id;
-        openModal();
-      });
+      if (status === "Product being prepared" || status === "Item shipping") {
+        const editButton = document.querySelector(`#editButton-${_id}`);
+        const deleteButton = document.querySelector(`#deleteButton-${_id}`);
+
+        editButton.addEventListener("click", async () => {
+          const newQuantity = prompt("Enter the new quantity:");
+          if (newQuantity !== null && newQuantity !== "") {
+            try {
+              const data = {
+                quantity: parseInt(newQuantity), 
+              };
+              const response = await Api.putApi(`/api/orders/${_id}`, data);
+              if (response.success) {
+                const quantityElement = document.querySelector(`#quantity-${_id}`);
+                quantityElement.textContent = newQuantity;
+              } else {
+                console.error("Failed to update quantity:", response.error);
+                alert("Failed to update quantity. Please try again.");
+              }
+            } catch (error) {
+              console.error("Error updating quantity:", error);
+              alert("An error occurred while updating quantity. Please try again.");
+            }
+          }
+        });
+        
+
+        deleteButton.addEventListener("click", () => {
+          orderIdToDelete = _id;
+          openModal();
+        });
+      }
     }
 
     const ordersCount = document.querySelector("#ordersCount");
