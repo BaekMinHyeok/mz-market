@@ -1,33 +1,46 @@
-import { dummyData } from "../main/dummy.js";
-
 // URL에서 상품 ID 가져옵니다..
 function getProductIdFromURL() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const productId = urlParams.get("productId");
+  const path = window.location.pathname;
+  const pathArray = path.split("/");
+  // console.log(pathArray);
+  const productId = pathArray[pathArray.length - 2];
   console.log(productId);
   return productId;
 }
+
+// API 호출 (상품 번호)
+const token = localStorage.getItem("token");
 
 // 상품 정보를 상세 페이지에 표시
 async function showProductDetail() {
   const productId = getProductIdFromURL();
 
   try {
-    // const response = await fetch(`endpoint`);
+    const response = await fetch(
+      `http://localhost:3000/api/product/${productId}`,
+      {
+        method: "GET",
+        headers: {
+          // authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-    // if(!response.ok){
-    //   throw new Error("상품 가져오기 실패")
-    // }
+    if (!response.ok) {
+      throw new Error("상품 가져오기 실패");
+    }
 
-    // const product = await response.json();
+    const product = (await response.json()).product;
 
-    // 페이지를 이동할 때마다 api를 호출해야 하는 건가요..?
-    // 24번 줄 코드는 더미데이터 활용한 임시 코드입니다. API연결 후 삭제
-    const product = dummyData.find((item) => item.id === productId);
+    const replacePrice = product.price.toLocaleString();
+    console.log(replacePrice);
+
+    console.log(product);
 
     const productImage = document.querySelector(".product_info_image");
     const imageElement = document.createElement("img");
-    imageElement.src = product.image;
+    imageElement.src = product.images;
     productImage.appendChild(imageElement);
 
     const productName = document.querySelector(".product_info_name");
@@ -37,7 +50,7 @@ async function showProductDetail() {
     );
 
     productName.textContent = product.name;
-    productPrice.textContent = `${product.price}원`;
+    productPrice.textContent = `${replacePrice} 원`;
     productDescription.textContent = product.description;
 
     const sizeButtons = document.querySelectorAll(
@@ -111,9 +124,16 @@ function addToCart(product, selectedSize, quantity) {
     // 장바구니에 이미 있는 상품이면 수량 증가
     cart[existingProductIndex].quantity += quantity;
   } else {
+    console.log(
+      product.productId,
+      product.name,
+      product.price,
+      selectedSize,
+      quantity
+    );
     // 장바구니에 새로운 상품 추가
     const newProduct = {
-      id: product.id,
+      id: product.productId,
       name: product.name,
       price: product.price,
       size: selectedSize,
@@ -145,11 +165,17 @@ function addToCart(product, selectedSize, quantity) {
   alert("상품을 장바구니에 담았어요.");
 }
 
+// 상품 정보를 상세 페이지에 표시
+async function showProductDetailPage() {
+  const productId = getProductIdFromURL();
+  await showProductDetail(productId);
+}
+
 function init() {
-  showProductDetail();
+  showProductDetailPage();
 }
 
 init();
 
 // 페이지 로드 시 상세 페이지 정보를 표시
-window.addEventListener("DOMContentLoaded", showProductDetail);
+// window.addEventListener("DOMContentLoaded", showProductDetailPage);
