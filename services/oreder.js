@@ -9,7 +9,16 @@ class OrderService {
 
   //주문하기
   async register(info) {
-    const { name, phoneNumber, address, address2, comments, price, quantity, productName } = info;
+    const {
+      name,
+      phoneNumber,
+      address,
+      address2,
+      comments,
+      price,
+      quantity,
+      productName,
+    } = info;
     let orderId;
     // 가장 최신 값 가져오기
     try {
@@ -31,8 +40,9 @@ class OrderService {
         status: "ready",
         price,
         quantity,
-        productName
+        productName,
       });
+      return orderId;
     } catch (error) {
       return error;
     }
