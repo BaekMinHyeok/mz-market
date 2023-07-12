@@ -42,7 +42,6 @@ const modal = async (dataObj, dataId) => {
     dataIdElement.style.display = "none";
     modalContainer.appendChild(dataIdElement);
 
-
     const categoryList= await getProductcategory();
     console.log(categoryList.categorys);
 
@@ -72,7 +71,7 @@ const modal = async (dataObj, dataId) => {
     // document.body.appendChild(scriptElement2);
 
     // CSS 가져오기
-    const cssUrl = "modal/adminpage_modal.css";
+    const cssUrl = "modal/adminpage_modal.xcss";
     const cssLink = document.createElement("link");
     cssLink.rel = "stylesheet";
     cssLink.href = cssUrl;
