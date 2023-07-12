@@ -9,7 +9,7 @@ class OrderService {
 
   //주문하기
   async register(info) {
-    const { name, phoneNumber, address, address2, comments, productId } = info;
+    const { name, phoneNumber, address, address2, comments, objectId, price, quantity } = info;
     try {
       await this.OrderModel.create({
         name,
@@ -18,27 +18,14 @@ class OrderService {
         address2,
         comments,
         status: "ready",
-        productId: productId,
+        product: objectId,
+        price,
+        quantity
       });
     } catch (error) {
       return error;
     }
   }
-
-  // async register(info) {
-  //   const { name, phoneNumber, address, address2, comments } = info;
-  //   try {
-  //     await this.OrderModel.create({
-  //       name,
-  //       phoneNumber,
-  //       address,
-  //       address2,
-  //       comments,
-  //     });
-  //   } catch (error) {
-  //     return error;
-  //   }
-  // }
 
   //주문 정보 변경
   async update(orderId, updatedInfo) {

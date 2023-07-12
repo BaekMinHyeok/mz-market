@@ -32,11 +32,17 @@ const orderSchema = new Schema({
     enum: ["ready", "shipping", "complete"],
     require: true,
   },
-  product:{
-    type: Schema.Types.ObjectId,
-    ref: "Product",
-    required: true,
+  price: {
+    type: Number,
+    trim: true,
+    require: true,
+  },
+  quantity: {
+    type: Number,
+    trim: true,
+    require: true,
   }
+ 
   
 });
 
