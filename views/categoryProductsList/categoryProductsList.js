@@ -8,13 +8,13 @@ function handleCategoryClick(event, category) {
 
   if (category === "men") {
     productTitle.textContent = "남성 상품";
-    productSubtitle.textContent = "남성 상품 설명 텍스트";
+    productSubtitle.textContent = "남성 상품 목록입니다.";
     fetchProducts("/api/product/gender/men", productList);
 
     history.pushState(null, "", "/category/men");
   } else if (category === "women") {
     productTitle.textContent = "여성 상품";
-    productSubtitle.textContent = "여성 상품 설명 텍스트";
+    productSubtitle.textContent = "여성 상품 목록입니다.";
     fetchProducts("/api/product/gender/women", productList);
 
     history.pushState(null, "", "/category/women");
@@ -47,6 +47,14 @@ function fetchProducts(url, productList) {
 
       productList.innerHTML = "";
       productList.appendChild(fragment);
+
+      // 상품 리스트 아이템 클릭 이벤트 리스너 등록
+      const productItems = productList.querySelectorAll(".product");
+      productItems.forEach((item) => {
+        const productId = item.dataset.productId;
+        console.log(productId);
+        item.addEventListener("click", () => showProductDetail(productId));
+      });
     })
     .catch((error) => {
       console.log("Error:", error);
@@ -95,5 +103,17 @@ function createProductItem(product) {
   productReview.textContent = "50개의 리뷰";
   productTextBoxBottom.appendChild(productReview);
 
+  listItem.setAttribute("data-product-id", product.productId);
+
   return listItem;
+}
+
+function showProductDetail(productId) {
+  console.log("상세페이지 이동 함수 테스트");
+  console.log(productId);
+
+  // 상세 페이지로 이동할 URL
+  const productDetailURL = `/category/products/${productId}`;
+  console.log(productDetailURL);
+  window.location.href = productDetailURL;
 }
