@@ -9,8 +9,10 @@ const deleteData = async (orderId) => {
           authorization: `Bearer ${token}`,
         }
       });
-      if (response.success) {
-        console.log(response.message);
+      const result = await response.json();
+      console.log(result);
+      if (result.success) {
+        console.log(result.message);
       }else{
         console.log("오류");
       }

@@ -23,9 +23,15 @@ async function getProductcategory() {
       throw new Error(error);
     }
   }
+  
 
   document.addEventListener("DOMContentLoaded", async function () {
     try {
+
+      const saveBtn = document.querySelector("#saveBtn")
+      saveBtn.addEventListener("click",function(){
+        alert("aa");
+      })
       //조회후 데이터  출력하기
       const result = await getProductcategory();
       console.log(result);

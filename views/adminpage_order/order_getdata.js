@@ -12,10 +12,12 @@ async function fetchData() {
       const result = await response.json();
       const orderList = document.querySelector(".orderList");
 
-      result.orders.forEach(data=>{
+      result.orders.forEach((data,index)=>{
+
         const tr = document.createElement("tr");
+  
         tr.innerHTML = `
-          <td>${data.orderId}</td>
+          <td>${index+1}</td>
           <td>${data.name}</td>
           <td>${data.productName}</td>
           <td>${data.price}</td>
