@@ -71,6 +71,13 @@ class OrderService {
     });
   }
 
+  // 이메일로 주문 조회
+  async getOrderUser(email) {
+    return await this.OrderModel.find({
+      email: email,
+    });
+  }
+
   //주문 삭제
   async deleteOrder(orderId) {
     return await this.OrderModel.deleteOne({ _id: orderId });
