@@ -6,32 +6,27 @@ const { product } = require("../services/product");
 
 const registerOrder = async (req, res) => {
   try {
-    const { name, phoneNumber, address, address2, comments, objectId, price, quantity} = req.body;
-    const productInfo = await product.getProductByObjectId(objectId);
-    if (!productInfo){
-      throw "상품을 찾을 수 없습니다.";
-    }
+    const { orderId, name, phoneNumber, address, address2, comments, price, quantity, productName} = req.body;
     await order.register({
+      orderId,
       name,
       phoneNumber,
       address,
       address2,
       comments,
       status: "ready",
-      product: [objectId],
       price,
-      quantity
+      quantity,
+      productName
     });
     res.json({
       success: true,
       message: "주문 등록에 성공했습니다.",
-      orders: productInfo
     });
   } catch (error) {
     res.json({
       success: false,
       message: error,
-      orders: undefined
     });
     console.log(error);
   }

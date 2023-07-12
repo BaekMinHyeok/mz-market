@@ -45,8 +45,11 @@ const orderSchema = new Schema({
     type: Number,
     trim: true,
     require: true,
+  },
+  productName: {
+    type: [String],
+    require: true,
   }
- 
   
 });
 
