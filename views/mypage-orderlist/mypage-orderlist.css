@@ -1,0 +1,88 @@
+  /* Styling for the orderlist */
+  .orderlist-container {
+    margin-top: 2rem;
+  }
+
+  .order-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .order-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .order-status {
+    font-size: 1rem;
+  }
+
+  .orderlist-edit {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .edit-button,
+  .delete-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Styling for the order list items */
+  .order-list {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .order-list-img {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+  }
+
+  .order-list-box {
+    flex: 1;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .order-list-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .product-name {
+    font-weight: bold;
+  }
+
+  .product-size {
+    font-size: 0.9rem;
+  }
+
+  .minus-quantity,
+  .plus-quantity {
+    padding: 0.3rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  .product-price {
+    font-weight: bold;
+  }
+
+  .product-status {
+    font-size: 0.9rem;
+  }
+</style>
+<script src="mypage-orderlist.js" type="module" defer></script>

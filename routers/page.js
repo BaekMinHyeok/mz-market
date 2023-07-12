@@ -7,7 +7,8 @@ router.use("/", serveStatic("main")); //메인 페이지
 //user
 router.use("/user/sign_up", serveStatic("join")); //회원 가입
 router.use("/user/sign_in", serveStatic("login")); // 로그인
-router.use("/user/info", serveStatic("mypage-myinfo")); // 마이페이지-유저정보
+router.use("/user/info/", serveStatic("mypage-myinfo")); // 마이페이지-유저정보
+router.use("/user/order_history/", serveStatic("mypage-orderlist")); // 마이페이지-유저정보
 
 //admin
 router.use("/admin/products/add", serveStatic("adminpage_add")); //관리자 페이지 상품 추가
