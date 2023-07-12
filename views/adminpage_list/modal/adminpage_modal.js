@@ -1,7 +1,7 @@
 // 카테고리 선택 함수
 function updateCategoryValue(checkbox) {
-  let checkvalue = document.getElementById("checkvalue");
-  let checkboxContainer = document.querySelector(".checkbox-container");
+  const checkvalue = document.getElementById("checkvalue");
+  const checkboxContainer = document.querySelector(".checkbox-container");
   const saveBtn = document.getElementById("save-btn");
 
   if (checkbox.checked) {
@@ -21,93 +21,99 @@ function updateCategoryValue(checkbox) {
 
 /// 모달창 제거
 function closeModal() {
-  let modal = document.querySelector(".modal");
-  modal.remove();
+  const modal = document.querySelector("#adminModalContainer");
+  const fragement = document.createDocumentFragment();
+  modal.replaceChildren(fragement);
 }
 
 // 저장 버튼 클릭
+function addEventSaveBtn (){
 const saveBtn = document.getElementById("save-btn");
 saveBtn.addEventListener("click", async function () {
-  console.log(aa);
-
   // 확인 대화 상자 표시
   if (confirm("정말로 이 제품을 저장하시겠습니까?")) {
     const productName = document.getElementById("productName").value;
-    const productDescription =
-      document.getElementById("productDescription").value;
+    const productDescription = document.getElementById("productDescription").value;
     const productPrice = document.getElementById("productPrice").value;
-    const selectedValue =
-      document.querySelector(".radio-group input:checked")?.value || null;
+    const selectedValue = document.querySelector(".radio-group input:checked")?.value || null;
     const categoryValue = document.getElementById("checkvalue").value;
     const selectedFile = document.getElementById("selectedFile").value;
-
+    //가독성 높이기
     if (
       !productName ||
       !productDescription ||
       !productPrice ||
       !selectedValue ||
-      !categoryValue ||
-      !selectedFile
+      !categoryValue 
     ) {
       // 비어 있는 필드를 콘솔에 출력
       if (!productName) {
-        console.log("productName 필드가 비어 있습니다.");
+        alert(" 상품명 필드가 비어 있습니다.");
+        return;
       }
       if (!productDescription) {
-        console.log("productDescription 필드가 비어 있습니다.");
+        alert(" 상세설명 필드가 비어 있습니다.");
+        return;
       }
       if (!productPrice) {
-        console.log("productPrice 필드가 비어 있습니다.");
+        alert(" 상품가격 필드가 비어 있습니다.");
+        return;
       }
       if (!selectedValue) {
-        console.log("selectedValue 필드가 비어 있습니다.");
+        alert(" 성별 카테고리 필드가 비어 있습니다.");
+        return;
       }
       if (!categoryValue) {
-        console.log("categoryValue 필드가 비어 있습니다.");
+        alert(" 상품 카테고리 필드가 비어 있습니다.");
+        return;
       }
-      if (!selectedFile) {
-        console.log("selectedFile 필드가 비어 있습니다.");
-      }
-
-      alert("모든 필드에 값을 입력해주세요.");
-      return;
     }
-    // 로컬 스토리지에서 JWT 토큰 가져오기
-    const token = localStorage.getItem("token");
-    const productId = document.querySelector("#aa").textContent;
 
-    console.log("productId", productId);
+    try {
+      // 로컬 스토리지에서 JWT 토큰 가져오기
+      const token = localStorage.getItem("token");
+      const productId = document.querySelector("#productId").textContent;
 
-    // 상품 데이터 객체 생성
-    const productData = {
-      name: productName,
-      description: productDescription,
-      price: Number(productPrice),
-      category: categoryValue,
-      gender: selectedValue,
-    };
+      console.log("productId", productId);
 
-    const formData = new FormData();
-    formData.append("file", selectedFile);
-    formData.append("data", JSON.stringify(productData));
+      // 상품 데이터 객체 생성
+      const productData = {
+        name: productName,
+        description: productDescription,
+        price: Number(productPrice),
+        category: categoryValue,
+        gender: selectedValue,
+      };
 
-    // 백엔드로 상품 데이터 전송
-    await fetch(`http://localhost:3000/api/product/${parseInt(productId)}`, {
-      method: "PUT",
-      headers: {
-        authorization: `Bearer ${token}`,
-        // "Content-Type": "application/json",
-      },
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        closeModal();
-        location.reload();
-      })
-      .catch((error) => {
-        console.error("데이터 전송 오류:", error);
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+      formData.append("data", JSON.stringify(productData));
+
+      // 백엔드로 상품 데이터 전송
+      const response = await fetch(`http://localhost:3000/api/product/${parseInt(productId)}`, {
+        method: "PUT",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+        body: formData,
       });
+
+      const data = await response.json();
+      console.log(data);
+      closeModal();
+      location.reload();
+    } catch (error) {
+      console.error("데이터 전송 오류:", error);
+    }
   }
 });
+
+
+}
+
+
+
+
+
+
+
