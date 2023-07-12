@@ -6,7 +6,6 @@ const { product } = require("../services/product");
 const registerOrder = async (req, res) => {
   try {
     const {
-      orderId,
       name,
       phoneNumber,
       address,
@@ -24,9 +23,7 @@ const registerOrder = async (req, res) => {
       productName.push(productInfo.name);
     }
     // console.log(productName);
-
-    const orderInfo = await order.register({
-      orderId,
+    const orderId = await order.register({
       name,
       phoneNumber,
       address,
@@ -37,10 +34,12 @@ const registerOrder = async (req, res) => {
       quantity,
       productName,
     });
+    // console.log(orderId);
     res.json({
       success: true,
       message: "주문 등록에 성공했습니다.",
       productId: productId,
+      orderId: orderId,
     });
   } catch (error) {
     res.json({
