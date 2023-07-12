@@ -1,5 +1,6 @@
 const deleteData = async (orderId) => {
-    const url = `http://localhost:3000/api/product/${orderId}`;
+    console.log(orderId);
+    const url = `http://localhost:3000/api/order/${orderId}`;
     const token = localStorage.getItem("token")
     try {
       const response = await fetch(url, {
@@ -8,10 +9,11 @@ const deleteData = async (orderId) => {
           authorization: `Bearer ${token}`,
         }
       });
-      
       if (response.success) {
         console.log(response.message);
-      } 
+      }else{
+        console.log("오류");
+      }
     } catch (error) {
       console.error(error);
     }

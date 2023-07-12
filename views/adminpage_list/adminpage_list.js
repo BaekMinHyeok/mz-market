@@ -71,7 +71,7 @@ const modal = async (dataObj, dataId) => {
     // document.body.appendChild(scriptElement2);
 
     // CSS 가져오기
-    const cssUrl = "modal/adminpage_modal.xcss";
+    const cssUrl = "modal/adminpage_modal.css";
     const cssLink = document.createElement("link");
     cssLink.rel = "stylesheet";
     cssLink.href = cssUrl;
