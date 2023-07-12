@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../header/header.css" type="text/css"> -->
     <link rel="stylesheet" href="http://localhost:3000/reset.css" type="text/css">
     <link rel="stylesheet" href="adminpage_order.css" type="text/css">
-    <!-- <script src="../header/header.js"></script> -->
     <title>관리자 상품목록 페이지</title>
 </head>
 
@@ -26,27 +24,20 @@
         </div>
         <div class="product-list">
             <table border="1">
-                <th>상품</th>
-                <th>상품명</th>
-                <th>카테고리</th>
-                <th>가격</th>
-                <th>편집 및 삭제</th>
-                <tr>
-                    <td>1번째 칸</td>
-                    <td>2번째 칸</td>
-                    <td>3번째 칸</td>
-                    <td><select id="category" name="category">
-                            <option value="">배송 준비</option>
-                            <option value="">배송 진행</option>
-                            <option value="">배송 완료</option>
-                        </select></td>
-                    <td>
-                        <img src="./imges/img2.png" alt="삭제버튼" class="delete-btn" id="deleteBtn">
-                    </td>
-                </tr>
+                <tbody class="orderList">
+                  <th>번호</th>
+                  <th>이름</th>
+                  <th>주문상품</th>
+                  <th>주문총액</th>
+                  <th>배송상태</th>
+                  <th>삭제</th>
+                </tbody>
+                </table>
         </div>
     </div>
-    <script src="adminpage_order.js"></script>
+    <script src="adminpage_order.js" type="module"></script>
+    <script src="move.js"></script>
+    <script src="/header/header.js"></script>
 </body>
 
 </html>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="http://localhost:3000/reset.css" type="text/css">
+	<link rel="stylesheet" href="/reset.css" type="text/css">
 	<link rel="stylesheet" href="./adminpage_category.css" type="text/css">
+
 	<title>관리자 카테고리 페이지</title>
 </head>
 
@@ -28,30 +28,15 @@
 		</div>
 		<h3>카테고리 추가</h3>
 		<div class="add-text2">
-			<input class="rectangle" id="imgInput"></input>
-			<button class="category" onclick="openFile()">업로드</button>
+			<input class="rectangle" id="addInput">
+			<button class="category" id="saveBtn">추가</button>
 		</div>
 		<h3>기존 카테고리</h3>
-		<div class="add-text3">
-			<input class="rectangle2" id="imgInput" size="10"></input>
-			<button class="img-btn2" onclick="openFile()">수정</button>
-			<button class="img-btn3" onclick="openFile()">삭제</button>
+		<div class="categoryList">
 		</div>
-		<div class="add-text3">
-			<input class="rectangle2" id="imgInput" size="10"></input>
-			<button class="img-btn2" onclick="openFile()">수정</button>
-			<button class="img-btn3" onclick="openFile()">삭제</button>
-		</div>
-		<div class="add-text3">
-			<input class="rectangle2" id="imgInput" size="10"></input>
-			<button class="img-btn2" onclick="openFile()">수정</button>
-			<button class="img-btn3" onclick="openFile()">삭제</button>
-		</div>
-		<div class="add-text3">
-			<input class="rectangle2" id="imgInput" size="10"></input>
-			<button class="img-btn2" onclick="openFile()">수정</button>
-			<button class="img-btn3" onclick="openFile()">삭제</button>
-		</div>
+		<script type="module" src="adminpage_category.js"></script>
+		<script src="move.js"></script>
+		<script src="/header/header.js"></script>
 </body>
 
 </html>

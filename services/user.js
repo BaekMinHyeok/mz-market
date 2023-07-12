@@ -10,15 +10,17 @@ class UserService {
   //회원가입
   async register(userInfo) {
     const { name, email, pw } = userInfo;
-
     //이메일 중복 체크
     const check = await this.userModel.find({ email: email });
     if (check.length !== 0) {
       // throw new Error("중복되는 이메일 주소 입니다.");
       throw "중복되는 이메일 주소 입니다.";
     }
-
-    await this.userModel.create({ name, email, pw });
+    try {
+      await this.userModel.create({ name, email, pw });
+    } catch (error) {
+      throw error;
+    }
   }
 
   //로그인
@@ -42,6 +44,8 @@ class UserService {
         type: "JWT",
         name: check[0].name,
         email: check[0].email,
+        pw: check[0].pw,
+        admin: check[0].admin,
       },
       process.env.SECRET
     );
@@ -68,6 +72,7 @@ class UserService {
     await user.save();
   }
 
+  //회원 정보 조회
   async getUser(userInfo) {
     const { email } = userInfo;
 

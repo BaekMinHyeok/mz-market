@@ -1,7 +1,5 @@
-import { dummyData } from "./dummy.js";
-
 // swiper slider
-new Swiper(".swiper", {
+const swiper = new Swiper(".swiper", {
   autoplay: {
     delay: 3500,
   },
@@ -20,80 +18,118 @@ new Swiper(".swiper", {
   },
 });
 
-console.log(dummyData);
+// 상품을 렌더링하는 함수
+function renderProduct(product) {
+  const productElement = document.createElement("li");
+  productElement.classList.add("product");
+  const replacePrice = product.price.toLocaleString();
+  productElement.innerHTML = `
+    <div class="product_img">
+      <img src="${product.images}" alt="${product.name}"/>
+    </div>
+    <div class="product_text_box">
+      <h3 class="product_name">${product.name}</h3>
+      <p class="product_text">
+        ${product.description}
+      </p>
+      <div class="product_text_box_bottom">
+        <p class="product_price">${replacePrice}원</p>
+        <p class="product_review">50개의 리뷰</p>
+      </div>
+    </div>
+  `;
+  productElement.addEventListener("click", () => {
+    showProductDetail(product.productId);
+  });
 
-// 성별에 따라 상품 리스트를 렌더링 하는 함수
-function renderProductList(gender) {
-  const productList = document.createElement("ul");
-  productList.classList.add("products_list_wrapper");
-  console.log(productList);
+  return productElement;
+}
 
-  const filteredProducts = dummyData.filter(
+// 성별에 따라 상품 리스트 렌더링
+function renderProductList(products, gender, containerSelector) {
+  const container = document.querySelector(containerSelector);
+  container.innerHTML = "";
+
+  const filteredProducts = products.filter(
     (product) => product.gender === gender
   );
+
   const productsToRender = filteredProducts.slice(0, 4);
 
   productsToRender.forEach((product) => {
-    const productElement = document.createElement("li");
-    productElement.classList.add("product");
-    productElement.innerHTML = `
-                <div class="product_img">
-                  <img src="${product.image}" alt="${product.name}"/>
-                </div>
-                  <div class="product_text_box">
-                    <h3 class="product_name">${product.name}</h3>
-                    <p class="product_text">
-                      ${product.description}
-                    </p>
-    
-                    <div class="product_text_box_bottom">
-                      <p class="product_price">${product.price}원</p>
-                      <p class="product_review">50개의 리뷰</p>
-                    </div>
-                  </div>
-          `;
-    productElement.addEventListener("click", () => {
-      showProductDetail(product.id);
+    const productElement = renderProduct(product);
+    container.appendChild(productElement);
+  });
+}
+
+// 새로운 상품 목록을 렌더링
+function renderNewProductList(products) {
+  const container = document.querySelector(".products_list_wrapper");
+  container.innerHTML = "";
+
+  const newProductsToRender = products.slice(0, 4);
+
+  console.log("NEWWWWW", newProductsToRender);
+
+  newProductsToRender.reverse().forEach((product) => {
+    const productElement = renderProduct(product);
+    container.appendChild(productElement);
+  });
+}
+
+const token = localStorage.getItem("token");
+
+function showProductDetail(productId) {
+  console.log("상세페이지 이동 함수 테스트");
+  console.log(productId);
+
+  // 상세 페이지로 이동할 URL
+  const productDetailURL = `http://localhost:3000/category/products/${productId}`;
+  console.log(productDetailURL);
+  window.location.href = productDetailURL;
+}
+
+// API 호출 (상품 전체)
+async function fetchProductList() {
+  try {
+    const response = await fetch("http://localhost:3000/api/product", {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
     });
 
-    productList.appendChild(productElement);
-  });
-
-  return productList;
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } else {
+      throw new Error("API 호출 에러");
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
-const femaleProductList = renderProductList("여성");
-const maleProductList = renderProductList("남성");
+// 렌더
+async function init() {
+  try {
+    const products = await fetchProductList();
+    // console.log(products.products);
 
-const femaleProductSection = document.querySelector(".female_product_list");
-const maleProductSection = document.querySelector(".male_product_list");
+    // 새로운 상품 목록 렌더링
+    renderNewProductList(products.products);
 
-femaleProductSection.appendChild(femaleProductList);
-maleProductSection.appendChild(maleProductList);
+    // 여성 상품 리스트 렌더링
+    renderProductList(products.products, "women", ".female_product_list");
 
-// 상세 페이지로 이동
-function showProductDetail(productId) {
-  console.log("Test");
-
-  // window.location.href = `/category/products/:productId`;
-  window.location.href = `./../productsDetail/productsDetail.html?id=${productId}`;
+    // 남성 상품 리스트 렌더링
+    renderProductList(products.products, "men", ".male_product_list");
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-// // API 호출 (임의 작성)
-// async function fetchProductList() {
-//   try {
-//       const response = await fetch('endpoint');
-//       const data = await response.json();
-//       return data;
-//   } catch (error) {
-//       console.error('상품 리스트 가져오기 실패.', error);
-//   }
-// }
-
-// // 렌더
-//    async function init() {
-//     const products = await fetchProductList();
-//     renderProductList(products);
-// }
-
-// init();
+init();

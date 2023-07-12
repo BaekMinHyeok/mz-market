@@ -22,13 +22,41 @@ h1 {
   font-size: smaller;
 }
 
-input, button.signup-button {
-  width: 300px;
+input,
+button.signup-button {
+  width: 278px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 20px;
 }
-.signup-button{
+
+button.auth-button {
+  width: 35%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+button.auth-complete-button {
+  width: 35%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+#email {
+  width: 63%;
+}
+
+#auth {
+  width: 63%;
+}
+
+#signupBtn {
+  margin-top: 10px;
+}
+
+.signup-button {
   margin-top: 70px;
   margin-bottom: 30px;
 }

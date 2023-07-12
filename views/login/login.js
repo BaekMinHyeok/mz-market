@@ -1,6 +1,7 @@
 const loginButton = document.querySelector(".login-button");
 const emailInput = document.querySelector("#email");
 const passwordInput = document.querySelector("#password");
+const register = document.querySelector(".signup-button");
 
 // 로그인 버튼에 클릭 이벤트 리스너 추가
 loginButton.addEventListener("click", loginBtnHandle);
@@ -67,3 +68,7 @@ function validateEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
+
+register.addEventListener("click", () => {
+  location.href = "http://localhost:3000/user/sign_up";
+});
