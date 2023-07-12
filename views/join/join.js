@@ -1,4 +1,11 @@
 const joinButton = document.querySelector(".signup-button");
+const header = document.getElementById("header-container");
+
+fetch("http://localhost:3000/header/header.html")
+  .then((res) => res.text())
+  .then((html) => {
+    header.innerHTML = html;
+  });
 
 async function createAccount() {
   const name = document.querySelector("#name").value;

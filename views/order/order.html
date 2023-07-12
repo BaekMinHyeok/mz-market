@@ -9,6 +9,7 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
     <link rel="stylesheet" href="http://localhost:3000/reset.css" />
+    <!-- <link rel="stylesheet" href="/public/reset.css" /> -->
     <link rel="stylesheet" href="order.css" />
   </head>
   <body>
@@ -30,40 +31,55 @@
 
               <!-- 이름 -->
               <div class="input_box">
-                <label for="" class="name">이름</label>
+                <label for="name_input" class="name">이름</label>
                 <input
                   type="text"
                   class="name_input"
                   placeholder="이름을 입력해주세요."
+                  maxlength="20"
                 />
+                <p class="error_message" id="nameError"></p>
               </div>
               <!-- 연락처 -->
               <div class="input_box">
-                <label for="" class="phonenum">연락처</label>
+                <label for="phonenum_input" class="phonenum">연락처</label>
                 <input
                   type="text"
                   class="phonenum_input"
                   placeholder="전화번호를 입력해주세요."
+                  maxlength="13"
                 />
+                <p class="error_message" id="phonenumError"></p>
+              </div>
+              <!-- 이메일 -->
+              <div class="input_box">
+                <label for="email_input" class="email">이메일</label>
+                <input
+                  type="text"
+                  class="email_input"
+                  placeholder="이메일을 입력해주세요."
+                  maxlength="50"
+                />
+                <p class="error_message" id="emailError"></p>
               </div>
               <!-- 주소 -->
               <div class="input_box">
-                <label for="" class="address">주소</label>
+                <label for="address_input" class="address">주소</label>
                 <div class="address_input_box">
                   <input
                     type="text"
                     class="address_input"
                     placeholder="주소를 입력해주세요."
+                    readonly
                   />
                   <button class="address_button">주소찾기</button>
                 </div>
-
-                <input type="text" class="address_result_input" readonly />
                 <input
                   type="text"
                   class="address_detail_input"
                   placeholder="상세 주소를 입력해주세요."
                 />
+                <p class="error_message" id="addressError"></p>
               </div>
 
               <!-- 요청사항 -->
@@ -86,12 +102,12 @@
               <div class="nav_order_info_box">
                 <div class="nav_product_count">
                   <p class="count_title">상품수</p>
-                  <span class="count">1개</span>
+                  <span class="count"><p>개</p></span>
                 </div>
 
                 <div class="nav_product_price">
                   <p class="price_title">상품금액</p>
-                  <span class="price">10,000,000원</span>
+                  <span class="price"></span>
                 </div>
 
                 <div class="nav_product_deliver">
@@ -101,10 +117,12 @@
               </div>
               <div class="nav_total_price_box">
                 <p class="nav_total_price_title">결제하실 금액</p>
-                <div class="nav_total_price">10,003,000원</div>
+                <div class="nav_total_price"></div>
               </div>
 
-              <button class="nav_order_button">결제하기</button>
+              <button id="paymentButton" class="nav_order_button" disabled>
+                결제하기
+              </button>
             </div>
           </div>
         </div>
@@ -112,5 +130,9 @@
 
       <!-- container end -->
     </div>
+    <!-- 주소 찾기 외부 api -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!-- order.js -->
+    <script src="order.js" type="module"></script>
   </body>
 </html>

@@ -1,19 +1,21 @@
 const { product } = require("../services/product");
-// const upload = multer({ dest: 'uploads/' });
-const upload = require("../middlewares/multerconfig");
+const serverPath = "http://localhost:3000";
 
-//상품등록
+// 상품 등록
 const registerProduct = async (req, res) => {
   try {
-    // const image = uploadImg(req, res);
-    await product.registerProduct({
-      name: req.body.name,
-      description: req.body.description,
-      price: req.body.price,
-      category: req.body.category,
-      gender: req.body.gender,
-      // images: image.map((img) => img.filename),
-    });
+    const imgPath = serverPath + req.file.path.substring(6);
+    const data = JSON.parse(req.body.data);
+    const productInfo = {
+      name: data.name,
+      description: data.description,
+      price: data.price,
+      category: data.category,
+      gender: data.gender,
+      images: imgPath,
+    };
+    // console.log(productInfo);
+    await product.registerProduct(productInfo);
 
     res.json({
       success: true,
@@ -31,12 +33,17 @@ const registerProduct = async (req, res) => {
 // 상품 업데이트
 const updateProduct = async (req, res) => {
   try {
-    const image = uploadImg(req, res);
-    const productId = req.params.productId;
-    const updatedInfo = req.body;
-    updatedInfo.images = image.map((img) => img.filename);
-    await product.updateProduct(productId, updatedInfo);
+    const { file } = req;
+    const path = file && file.path;
 
+    // const imgPath = serverPath + req.file.path.substring(6);
+    const productId = req.params.productId;
+    const updatedInfo = JSON.parse(req.body.data);
+
+    //충래님 짱이에요
+    if (path) updatedInfo.images = serverPath + path.substring(6);
+
+    await product.updateProduct(productId, updatedInfo);
     res.json({
       success: true,
       message: "상품 업데이트에 성공했습니다.",
@@ -49,18 +56,7 @@ const updateProduct = async (req, res) => {
   }
 };
 
-//multer 이미지 업로드
-const uploadImg = async (req, res) => {
-  try {
-    //<input type="file" name="images" multiple> 속성이 필요
-    upload.array("images")(req, res);
-    return req.files;
-  } catch (error) {
-    return error;
-  }
-};
-
-// 모든 상품 목록
+// 모든 상품 목록 조회
 const getAllProduct = async (req, res) => {
   try {
     const allProduct = await product.getAllProduct();
@@ -78,15 +74,30 @@ const getAllProduct = async (req, res) => {
   }
 };
 
-// 상품 이름 검색
+// productId로 상품 정보 조회
+const getProductById = async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    const productInfo = await product.getProductById(productId);
+    res.json({
+      success: true,
+      message: "상품을 조회했습니다.",
+      product: productInfo,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: "실패",
+      product: undefined,
+    });
+  }
+};
+
+// 상품 이름으로 검색
 const getProductByName = async (req, res) => {
   try {
-    const productByName = await product.getProductByName({
-      name: req.body.name,
-    });
-
-    console.log(productByName);
-    
+    const searchQuery = req.params.search;
+    const productByName = await product.getProductByName(searchQuery);
     res.json({
       success: true,
       message: "상품을 조회했습니다.",
@@ -104,8 +115,7 @@ const getProductByName = async (req, res) => {
 // 상품 삭제
 const deleteProduct = async (req, res) => {
   try {
-    const productId = req.params.productId; //:productId
-    // console.log(productId);
+    const productId = req.params.productId;
     await product.deleteProduct(productId);
 
     res.json({
@@ -120,11 +130,29 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const getProductByGender = async (req, res) => {
+  try {
+    const gender = req.params.gender;
+    const productInfo = await product.getProductByGender(gender);
+    res.json({
+      success: true,
+      message: "상품을 조회했습니다.",
+      product: productInfo,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+    });
+  }
+};
+
 module.exports = {
   registerProduct,
-  uploadImg,
   getAllProduct,
   getProductByName,
   updateProduct,
   deleteProduct,
+  getProductById,
+  getProductByGender,
 };
