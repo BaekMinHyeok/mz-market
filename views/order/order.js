@@ -190,9 +190,10 @@ function submitOrder() {
     name === "" ||
     phonenumValue === "" ||
     address === "" ||
-    addressDetail === ""
+    addressDetail === "" ||
+    etc === ""
   ) {
-    alert("이름, 연락처, 주소는 필수 입력 사항입니다.");
+    alert("모두 입력해주세요.");
     return;
   }
 
@@ -220,18 +221,16 @@ function submitOrder() {
         console.log(orderData);
         console.log(response.json());
         alert("주문이 완료 되었습니다.");
-        // 성공
       } else {
         console.log(orderData);
         alert("오류가 발생했습니다.");
-        // 실패
       }
     })
     // .then((data) => {
     //   // 응답에서 orderId 추출
     //   const orderId = data.orderId;
     //   // 주문 완료 페이지로 이동
-    //   window.location.href = `/cart/order/complete/${orderId}`;
+    //   window.location.href = `http://localhost:3000/cart/order/complete/${orderId}`;
     // })
     .catch((error) => {
       console.log(orderData);
