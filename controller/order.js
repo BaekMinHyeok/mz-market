@@ -3,7 +3,6 @@ const { product } = require("../services/product");
 
 // 주문 등록
 
-
 const registerOrder = async (req, res) => {
   try {
     const {
@@ -134,7 +133,7 @@ const updateStatus = async (req, res) => {
   } catch (error) {
     res.json({
       success: false,
-      message: error,s
+      message: error,
     });
   }
 };
