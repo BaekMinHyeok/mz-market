@@ -190,7 +190,7 @@ function submitOrder() {
     (total, product) => total + product.price * product.quantity,
     0
   );
-  const nameArray = cart.map((product) => product.name);
+  const productIdArray = cart.map((product) => product.productId);
 
   if (!cart || cart.length === 0) {
     alert("장바구니에 상품이 없습니다.");
@@ -221,7 +221,7 @@ function submitOrder() {
     address: address,
     address2: addressDetail,
     comments: etc,
-    productName: nameArray,
+    productId: productIdArray,
     price: productPrice + 3000,
     quantity: productCount,
   };
@@ -241,22 +241,23 @@ function submitOrder() {
   })
     .then((response) => {
       if (response.ok) {
-        console.log(orderData);
-        console.log(response.json());
         alert("주문이 완료 되었습니다.");
+        console.log(orderData);
+        return response.json();
       } else {
         console.log(orderData);
         alert("오류가 발생했습니다.");
       }
     })
-    // .then((data) => {
-    //   // 응답에서 orderId 추출
-    //   const orderId = data.orderId;
-    //   // 주문 완료 페이지로 이동
-    //   window.location.href = `http://localhost:3000/cart/order/complete/${orderId}`;
-    // })
+    .then((data) => {
+      // 응답에서 orderId 추출
+      console.log("DATA", data);
+      const orderId = data.orderId;
+      // 주문 완료 페이지로 이동
+      window.location.href = `http://localhost:3000/cart/order/complete/${orderId}`;
+    })
     .catch((error) => {
-      console.log(orderData);
+      // console.log(orderData);
       console.error("주문 내용 전송 오류:", error);
       alert("오류가 발생했습니다.");
     });
