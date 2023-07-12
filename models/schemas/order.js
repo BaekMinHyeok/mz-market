@@ -13,42 +13,42 @@ const orderSchema = new Schema({
   phoneNumber: {
     type: Number,
     trim: true,
-    require: true,
+    required: true,
   },
   address: {
     type: String,
-    require: true,
+    required: true,
   },
   address2: {
     type: String,
-    require: false,
+    required: false,
   },
   comments: {
     type: String,
-    require: false,
+    required: false,
   },
   email: {
     type: String,
-    require: true,
+    required: true,
   },
   status: {
     type: String,
     enum: ["ready", "shipping", "complete"],
-    require: true,
+    required: true,
   },
   price: {
     type: Number,
     trim: true,
-    require: true,
+    required: true,
   },
   quantity: {
     type: Number,
     trim: true,
-    require: true,
+    required: true,
   },
   productName: {
     type: [String],
-    require: true,
+    required: true,
   }
   
 });

@@ -1,23 +1,35 @@
 .header-container {
   display: flex;
   justify-content: space-between;
-  background-color: lightgray;
-  padding: 20px;
-}
-
-.left-container {
-  margin-right: 25%;
-}
-
-.menu-button {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  color: black;
-  margin-right: 10px;
+  align-items: center;
+  width: 1900px;
+  height: 90px;
+  background-color: #cccccc;
 }
 
 .logo-container {
-  margin-left: 140px;
+  margin-left: 280px;
+}
+
+.left-container {
+  margin-right: 400px;
+}
+
+.left-container .a:not(:last-child) {
+  margin-right: 30px;
+}
+
+.right-container {
+  margin-right: 130px;
+}
+
+.right-container .a:not(:last-child) {
+  margin-right: 20px;
+}
+
+.a {
+  font-weight: bold;
+  font-size: 18px;
+  color: black;
+  text-decoration: none;
 }
