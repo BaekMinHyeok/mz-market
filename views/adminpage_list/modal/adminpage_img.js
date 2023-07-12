@@ -9,6 +9,7 @@ function openFile() {
     const selectedFile = event.target.files[0];
       
     if (selectedFile) {
+        //p 태그로 바꾸기
         document.querySelector('#imgInput').value = selectedFile.name;
         document.querySelector('#selectedFile').value = selectedFile;
       }
