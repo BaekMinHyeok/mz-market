@@ -1,0 +1,98 @@
+const dummyData = [
+  {
+    id: 0,
+    name: "상품1",
+    price: 10000,
+    description: "이 상품은 상세 설명입니다.",
+    category: ["상의"],
+    image: "상품1.jpg",
+    gender: "남성",
+  },
+  {
+    id: 1,
+    name: "상품2",
+    price: 20000,
+    description:
+      "이 상품은 상세 설명입니다. 이 상품은 상세 설명입니다. 이 상품은 상세 설명입니다.",
+    category: ["기타"],
+    image: "상품2.jpg",
+    gender: "여성",
+  },
+  {
+    id: 2,
+    name: "상품3",
+    price: 30000,
+    description: "이 상품은 상세 설명입니다.이 상품은 상세 설명입니다.",
+    category: ["하의"],
+    image: "상품3.jpg",
+    gender: "남성",
+  },
+  {
+    id: 3,
+    name: "상품4",
+    price: 20000,
+    description: "이 상품은 상세 설명입니다. 이 상품은 상세 설명입니다.",
+    category: ["상의"],
+    image: "상품4.jpg",
+    gender: "여성",
+  },
+  {
+    id: 4,
+    name: "상품5",
+    price: 60000,
+    description: "이 상품은 상세 설명입니다. 이 상품은 상세 설명입니다.",
+    category: ["하의"],
+    image: "상품5.jpg",
+    gender: "남성",
+  },
+  {
+    id: 5,
+    name: "상품6",
+    price: 20000,
+    description:
+      "이 상품은 상세 설명입니다.이 상품은 상세 설명입니다.이 상품은 상세 설명입니다.",
+    category: ["아우터"],
+    image: "상품6.jpg",
+    gender: "여성",
+  },
+  {
+    id: 6,
+    name: "상품7",
+    price: 580000,
+    description:
+      "이 상품은 상세 설명입니다.이 상품은 상세 설명입니다.이 상품은 상세 설명입니다.이 상품은 상세 설명입니다.이 상품은 상세 설명입니다.이 상품은 상세 설명입니다..",
+    category: ["하의"],
+    image: "상품7.jpg",
+    gender: "남성",
+  },
+  {
+    id: 7,
+    name: "상품8",
+    price: 25000,
+    description: "이 상품은 상세 설명입니다. 이 상품은 상세 설명입니다.",
+    category: ["상의"],
+    image: "상품8.jpg",
+    gender: "여성",
+  },
+  {
+    id: 8,
+    name: "상품9",
+    price: 20000,
+    description: "이 상품은 상세 설명입니다.",
+    category: ["하의"],
+    image: "상품9.jpg",
+    gender: "여성",
+  },
+  {
+    id: 9,
+    name: "상품10",
+    price: 20000,
+    description:
+      "이 상품은 상세 설명입니다.이 상품은 상세 설명입니다.이 상품은 상세 설명입니다.이 상품은 상세 설명입니다.이 상품은 상세 설명입니다.이 상품은 상세 설명입니다.",
+    category: ["하의"],
+    image: "상품10.jpg",
+    gender: "여성",
+  },
+];
+
+export { dummyData };

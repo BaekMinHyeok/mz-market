@@ -18,7 +18,11 @@ async function editName() {
   const newName = nameInput.value;
   try {
     const response = await putApi('/edit-name', { name: newName });
+<<<<<<< HEAD
     if (response) {
+=======
+    if (response.ok) {
+>>>>>>> c138950e9dab782294f688c796db2393646ea09a
       alert('이름을 변경하였습니다.');
     } else {
       alert('이름 변경에 실패했습니다.');
@@ -32,7 +36,11 @@ async function editEmail() {
   const newEmail = emailInput.value;
   try {
     const response = await putApi('/edit-email', { email: newEmail });
+<<<<<<< HEAD
     if (response) {
+=======
+    if (response.ok) {
+>>>>>>> c138950e9dab782294f688c796db2393646ea09a
       alert('이메일이 변경되었습니다.');
     } else {
       alert('이메일변경에 실패하였습니다.');
@@ -53,7 +61,11 @@ async function editPassword() {
 
   try {
     const response = await putApi('/edit-password', { password: newPassword });
+<<<<<<< HEAD
     if (response) {
+=======
+    if (response.ok) {
+>>>>>>> c138950e9dab782294f688c796db2393646ea09a
       alert('비밀번호를 변경하였습니다.');
     } else {
       alert('비밀번호 변경에 실패하였습니다!');
@@ -66,7 +78,11 @@ async function editPassword() {
 async function deleteAccount() {
   try {
     const response = await deleteApi('/delete-account');
+<<<<<<< HEAD
     if (response) {
+=======
+    if (response.ok) {
+>>>>>>> c138950e9dab782294f688c796db2393646ea09a
       alert('회원탈퇴 되었습니다.');
     } else {
       alert('회원탈퇴에 실패하였습니다!');

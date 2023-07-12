@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .container {
   width: 1200px;
   padding: 140px 0 200px;
@@ -85,3 +86,41 @@
 .order-list .order-list-box .order-list-info .product-price {
   font-weight: 500;
 }
+=======
+body{
+	margin-top: 100px;
+	line-height: 1.6
+}
+.container{
+	width: 500px;
+	margin: 0 auto;
+}
+
+ul.tabs{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+ul.tabs li{
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+ul.tabs li.current{
+	background: #ededed;
+	color: #222;
+}
+
+.tab-content{
+	display: none;
+	background: #ededed;
+	padding: 15px;
+}
+
+.tab-content.current{
+	display: inherit;
+}
+>>>>>>> c138950e9dab782294f688c796db2393646ea09a

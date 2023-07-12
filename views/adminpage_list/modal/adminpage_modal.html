@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="adminpage_modal.css" type="text/html">
+
+	<title>adminpage</title>
+</head>
+
+<body>
+	<div class="modal">
+		<div class="modal-content">
+			<span class="close-button" onclick="closeModal()">X</span>
+			<div class="admin-content">
+			</div>
+			<div class="add-text">
+				<h2>상품 추가</h2>
+				<p>상품을 확인하고 추가할 수 있어요.</p>
+			</div>
+			<h3>상품사진</h3>
+			<div class="add-text2">
+				<p id="selectedFile"></p>
+				<input class="rectangle" id="imgInput"></input>
+				<button class="img-btn" onclick="openFile()">업로드</button>
+			</div>
+			<h3>상품명</h3>
+			<input class="rectangle" id="productName" placeholder="상품 이름을 입력해주세요."></input>
+			<h3>상세 설명</h3>
+			<textarea class="textarea" id="productDescription" placeholder="상품 설명을 입력해주세요."></textarea>
+			<h3>상품 가격</h3>
+			<input class="rectangle" id="productPrice" placeholder="상품 가격을 입력해주세요."></input>
+			<h3 class="category">카테고리</h3>
+			<div class="radio-group">
+				<input type="radio" id="male" name="gender" value="men">
+				<label for="male">남자</label>
+
+				<input type="radio" id="female" name="gender" value="women">
+				<label for="female">여자</label>
+			</div>
+			<input class="rectangle" id="checkvalue" placeholder="카테고리를 선택해주세요."></input>
+			<div class="checkbox-container">
+				<label>
+					<input type="radio" name="category" onclick="updateCategoryValue(this)"> 아우터
+				</label>
+				<label>
+					<input type="radio" name="category" onclick="updateCategoryValue(this)"> 상의
+				</label>
+				<label>
+					<input type="radio" name="category" onclick="updateCategoryValue(this)"> 하의
+				</label>
+				<label>
+					<input type="radio" name="category" onclick="updateCategoryValue(this)"> 기타
+				</label>
+			</div>
+			<button id="save-btn">저장하기</button>
+		</div>
+	</div>
+	</div>
+	<script src="adminpage_modal.js"></script>
+	<script src="adminpage_img.js"></script>
+</body>
+
+</html>
