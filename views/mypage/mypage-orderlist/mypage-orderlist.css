@@ -1,126 +1,88 @@
-<<<<<<< HEAD
-.container {
-  width: 1200px;
-  padding: 140px 0 200px;
-  margin: auto;
-}
+  /* Styling for the orderlist */
+  .orderlist-container {
+    margin-top: 2rem;
+  }
 
-/* 주문내역 목록 */
-.order_left {
-  width: 821px;
-}
-.order_content {
-  width: 786px;
-  border-radius: 23px;
-  background: #fff;
-}
+  .order-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
 
-.order_content .empty_cart_message {
-  text-align: center;
-  font-size: 20px;
-  font-weight: 600;
-  padding-top: 50px;
-}
+  .order-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
 
-.order-list {
-  display: flex;
-  margin-left: 200px;
-  margin-bottom: 80px;
-}
+  .order-status {
+    font-size: 1rem;
+  }
 
-.order-list .order-list-img {
-  border-radius: 20px;
-  background: #f2f2f2;
-  width: 100px;
-  height: 100px;
-  margin-right: 60px;
-}
+  .orderlist-edit {
+    display: flex;
+    gap: 1rem;
+  }
 
-.order-list .order-list-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex: 1;
-}
+  .edit-button,
+  .delete-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
-.order-list .order-list-box .order-list-top {
-  padding-top: 20px;
-  display: flex;
-}
+  /* Styling for the order list items */
+  .order-list {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #ccc;
+  }
 
-.order-list .order-list-box .order-list-info {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
+  .order-list-img {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+  }
 
-.order-list
-  .order-list-box
-  .order-list-info
-  .order-list-top {
-  display: flex;
-  align-items: center;
-  margin-bottom: 25px;
-}
+  .order-list-box {
+    flex: 1;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-.order-list
-  .order-list-box
-  .order-list-info
-  .order-list-top
-  span {
-  font-weight: 700;
-  font-size: 20px;
-}
+  .order-list-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
-.order-list .order-list-box .order-list-info .product-name {
-  font-size: 17px;
-  font-weight: 500;
-  margin-bottom: 10px;
-}
+  .product-name {
+    font-weight: bold;
+  }
 
-.order-list .order-list-box .order-list-info .product-size {
-  font-weight: 500;
-  font-size: 20px;
-}
+  .product-size {
+    font-size: 0.9rem;
+  }
 
-.order-list .order-list-box .order-list-info .product-price {
-  font-weight: 500;
-}
-=======
-body{
-	margin-top: 100px;
-	line-height: 1.6
-}
-.container{
-	width: 500px;
-	margin: 0 auto;
-}
+  .minus-quantity,
+  .plus-quantity {
+    padding: 0.3rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
 
-ul.tabs{
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
-}
-ul.tabs li{
-	background: none;
-	color: #222;
-	display: inline-block;
-	padding: 10px 15px;
-	cursor: pointer;
-}
+  .product-price {
+    font-weight: bold;
+  }
 
-ul.tabs li.current{
-	background: #ededed;
-	color: #222;
-}
-
-.tab-content{
-	display: none;
-	background: #ededed;
-	padding: 15px;
-}
-
-.tab-content.current{
-	display: inherit;
-}
->>>>>>> c138950e9dab782294f688c796db2393646ea09a
+  .product-status {
+    font-size: 0.9rem;
+  }
+</style>
+<script src="mypage-orderlist.js" type="module" defer></script>
