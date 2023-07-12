@@ -3,12 +3,27 @@ const { product } = require("../services/product");
 
 // 주문 등록
 
-
 const registerOrder = async (req, res) => {
   try {
-    const { orderId, name, phoneNumber, address, address2, comments, price, quantity, productName} = req.body;
-    await order.register({
-      orderId,
+    const {
+      name,
+      phoneNumber,
+      address,
+      address2,
+      comments,
+      price,
+      quantity,
+      productId,
+    } = req.body;
+
+    let productName = [];
+    for (const prId of productId) {
+      const productInfo = await product.getProductById(prId);
+      // console.log(productInfo.name);
+      productName.push(productInfo.name);
+    }
+    // console.log(productName);
+    const orderId = await order.register({
       name,
       phoneNumber,
       address,
@@ -17,11 +32,14 @@ const registerOrder = async (req, res) => {
       status: "ready",
       price,
       quantity,
-      productName
+      productName,
     });
+    // console.log(orderId);
     res.json({
       success: true,
       message: "주문 등록에 성공했습니다.",
+      productId: productId,
+      orderId: orderId,
     });
   } catch (error) {
     res.json({
@@ -120,7 +138,7 @@ const updateStatus = async (req, res) => {
   } catch (error) {
     res.json({
       success: false,
-      message: error,s
+      message: error,
     });
   }
 };
