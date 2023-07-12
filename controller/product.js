@@ -130,6 +130,23 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const getProductByGender = async (req, res) => {
+  try {
+    const gender = req.params.gender;
+    const productInfo = await product.getProductByGender(gender);
+    res.json({
+      success: true,
+      message: "상품을 조회했습니다.",
+      product: productInfo,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+    });
+  }
+};
+
 module.exports = {
   registerProduct,
   getAllProduct,
@@ -137,4 +154,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   getProductById,
+  getProductByGender,
 };
