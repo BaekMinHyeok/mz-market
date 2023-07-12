@@ -51,7 +51,6 @@ const updateOrder = async (req, res) => {
   }
 };
 
-
 // 주문 정보 조회
 const getAllOrders = async (req, res) => {
   try {
@@ -90,8 +89,6 @@ const getOrderByEmail = async (req, res) => {
   }
 };
 
-
-
 // 주문 삭제
 const deleteOrder = async (req, res) => {
   try {
@@ -110,10 +107,29 @@ const deleteOrder = async (req, res) => {
   }
 };
 
+const updateStatus = async (req, res) => {
+  try {
+    const orderId = req.body.orderId;
+    const status = req.body.status;
+    await order.updateStatus(orderId, status);
+
+    res.json({
+      success: true,
+      message: "배송 상태를 업데이트 했습니다.",
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,s
+    });
+  }
+};
+
 module.exports = {
   registerOrder,
   updateOrder,
   getAllOrders,
   getOrderByEmail,
   deleteOrder,
+  updateStatus,
 };

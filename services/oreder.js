@@ -66,7 +66,17 @@ class OrderService {
     return await this.OrderModel.deleteOne({ _id: orderId });
   }
 
-  
+  //배송 상태 수정
+  async updateStatus(orderId, status) {
+    const order = await this.OrderModel.findeOne(orderId);
+
+    if (!order) {
+      throw "주문 정보를 찾을 수 없습니다.";
+    }
+
+    order.status = status;
+    await order.save();
+  }
 }
 
 exports.order = new OrderService(Order);
