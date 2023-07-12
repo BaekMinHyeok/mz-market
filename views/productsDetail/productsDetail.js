@@ -133,6 +133,7 @@ function addToCart(product, selectedSize, quantity) {
     );
     // 장바구니에 새로운 상품 추가
     const newProduct = {
+      productId: product.productId,
       name: product.name,
       price: product.price,
       size: selectedSize,
