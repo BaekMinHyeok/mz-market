@@ -2,6 +2,8 @@ const { order } = require("../services/oreder");
 const { product } = require("../services/product");
 
 // 주문 등록
+
+
 const registerOrder = async (req, res) => {
   try {
     const { name, phoneNumber, address, address2, comments, objectId, price, quantity} = req.body;
@@ -16,7 +18,7 @@ const registerOrder = async (req, res) => {
       address2,
       comments,
       status: "ready",
-      product: objectId,
+      product: [objectId],
       price,
       quantity
     });
@@ -34,7 +36,6 @@ const registerOrder = async (req, res) => {
     console.log(error);
   }
 };
-
 
 // 주문 정보 수정
 const updateOrder = async (req, res) => {
