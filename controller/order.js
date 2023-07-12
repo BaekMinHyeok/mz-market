@@ -4,9 +4,18 @@ const { product } = require("../services/product");
 // 주문 등록
 const registerOrder = async (req, res) => {
   try {
-    const { name, phoneNumber, address, address2, comments, objectId, price, quantity} = req.body;
+    const {
+      name,
+      phoneNumber,
+      address,
+      address2,
+      comments,
+      objectId,
+      price,
+      quantity,
+    } = req.body;
     const productInfo = await product.getProductByObjectId(objectId);
-    if (!productInfo){
+    if (!productInfo) {
       throw "상품을 찾을 수 없습니다.";
     }
     await order.register({
@@ -18,23 +27,22 @@ const registerOrder = async (req, res) => {
       status: "ready",
       product: objectId,
       price,
-      quantity
+      quantity,
     });
     res.json({
       success: true,
       message: "주문 등록에 성공했습니다.",
-      orders: productInfo
+      orders: productInfo,
     });
   } catch (error) {
     res.json({
       success: false,
       message: error,
-      orders: undefined
+      orders: undefined,
     });
     console.log(error);
   }
 };
-
 
 // 주문 정보 수정
 const updateOrder = async (req, res) => {
@@ -54,7 +62,6 @@ const updateOrder = async (req, res) => {
     });
   }
 };
-
 
 // 주문 정보 조회
 const getAllOrders = async (req, res) => {
@@ -94,8 +101,6 @@ const getOrderByEmail = async (req, res) => {
   }
 };
 
-
-
 // 주문 삭제
 const deleteOrder = async (req, res) => {
   try {
@@ -114,10 +119,29 @@ const deleteOrder = async (req, res) => {
   }
 };
 
+const updateStatus = async (req, res) => {
+  try {
+    const orderId = req.body.orderId;
+    const status = req.body.status;
+    await order.updateStatus(orderId, status);
+
+    res.json({
+      success: true,
+      message: "배송 상태를 업데이트 했습니다.",
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,s
+    });
+  }
+};
+
 module.exports = {
   registerOrder,
   updateOrder,
   getAllOrders,
   getOrderByEmail,
   deleteOrder,
+  updateStatus,
 };

@@ -9,7 +9,16 @@ class OrderService {
 
   //주문하기
   async register(info) {
-    const { name, phoneNumber, address, address2, comments, objectId, price, quantity } = info;
+    const {
+      name,
+      phoneNumber,
+      address,
+      address2,
+      comments,
+      objectId,
+      price,
+      quantity,
+    } = info;
     try {
       await this.OrderModel.create({
         name,
@@ -20,7 +29,7 @@ class OrderService {
         status: "ready",
         product: objectId,
         price,
-        quantity
+        quantity,
       });
     } catch (error) {
       return error;
@@ -55,7 +64,17 @@ class OrderService {
     return await this.OrderModel.deleteOne({ _id: orderId });
   }
 
-  
+  //배송 상태 수정
+  async updateStatus(orderId, status) {
+    const order = await this.OrderModel.findeOne(orderId);
+
+    if (!order) {
+      throw "주문 정보를 찾을 수 없습니다.";
+    }
+
+    order.status = status;
+    await order.save();
+  }
 }
 
 exports.order = new OrderService(Order);
