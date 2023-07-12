@@ -9,25 +9,27 @@ class OrderService {
 
   //주문하기
   async register(info) {
-    const {
-      name,
-      phoneNumber,
-      address,
-      address2,
-      comments,
-      objectId,
-      price,
-      quantity,
-    } = info;
+    const { name, phoneNumber, address, address2, comments, objectId, price, quantity } = info;
+    let orderId;
+    // 가장 최신 값 가져오기
+    try{
+      const vl = this.OrderModel.findOne().sort({ _id: -1 });
+      const data = await vl.exec();
+      orderId = data.orderId + 1;
+    } catch (error){
+      orderId = 1;
+    }
+
     try {
       await this.OrderModel.create({
+        orderId,
         name,
         phoneNumber,
         address,
         address2,
         comments,
         status: "ready",
-        product: objectId,
+        product: [objectId],
         price,
         quantity,
       });

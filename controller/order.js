@@ -2,6 +2,8 @@ const { order } = require("../services/oreder");
 const { product } = require("../services/product");
 
 // 주문 등록
+
+
 const registerOrder = async (req, res) => {
   try {
     const {
@@ -25,7 +27,7 @@ const registerOrder = async (req, res) => {
       address2,
       comments,
       status: "ready",
-      product: objectId,
+      product: [objectId],
       price,
       quantity,
     });
