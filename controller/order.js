@@ -112,6 +112,29 @@ const getOrderByEmail = async (req, res) => {
   }
 };
 
+// 이메일검색 주문 정보 조회
+const getOrderUser = async (req, res) => {
+  try {
+    const decoded = jwt.verify(
+      req.headers.authorization.split(" ")[1],
+      process.env.SECRET
+    );
+    const orders = await order.getOrderUser(decoded.email);
+    console.log(orders);
+    res.json({
+      success: true,
+      message: "주문정보를 조회했습니다.",
+      orders: orders,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+      orders: undefined,
+    });
+  }
+};
+
 // 주문 삭제
 const deleteOrder = async (req, res) => {
   try {
@@ -156,4 +179,5 @@ module.exports = {
   getOrderByEmail,
   deleteOrder,
   updateStatus,
+  getOrderUser,
 };

@@ -34,6 +34,7 @@ const {
   getOrderByEmail,
   deleteOrder,
   updateStatus,
+  getOrderUser,
 } = require("../controller/order");
 //image
 const { uploadMiddleware } = require("../middlewares/image");
@@ -70,7 +71,8 @@ router.post("/order", registerOrder); //주문 등록
 router.put("/order/:orderId", updateOrder); //주문 정보 수정
 router.put("/order/status/update", updateStatus); //배송 상태 수정
 router.get("/order", getAllOrders); //전체 주문 정보 조회
-router.get("/order/email", getOrderByEmail); //이메일검색 주문 정보 조회
+router.get("/order/email", getOrderByEmail); //이메일검색 & 전화번호 주문 정보 조회
+router.get("/order/user", getOrderUser); //이메일검색 주문 정보 조회
 router.delete("/order/:orderId", deleteOrder); //주문 정보 삭제
 
 module.exports = router;
