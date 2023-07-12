@@ -22,13 +22,26 @@ h1 {
   font-size: smaller;
 }
 
-input, button.signup-button {
+input,
+button.signup-button {
   width: 300px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 20px;
 }
-.signup-button{
+
+button.auth-button {
+  width: 35%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+#auth {
+  width: 63%;
+}
+
+.signup-button {
   margin-top: 70px;
   margin-bottom: 30px;
 }
