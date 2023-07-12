@@ -11,6 +11,7 @@ async function fetchData() {
       });
       const result = await response.json();
       const orderList = document.querySelector(".orderList");
+      
 
       result.orders.forEach((data,index)=>{
 
@@ -31,12 +32,13 @@ async function fetchData() {
           <td>
             <img src="./imges/img2.png" alt="삭제버튼" class="delete-btn" id="deleteBtn" data-orderid="${data._id}">
           </td>`;
-        orderList.appendChild(tr);
+          orderList.appendChild(tr);
+          const selectElement = tr.querySelector("#shipping");
+          selectElement.value = data.status;
       })
       if(result.success){
         return result;
       }
-  
     }catch(error){
       console.log(error)
     }

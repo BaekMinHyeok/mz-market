@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         trElement.remove();
         await deleteData(orderId);
         });
-
     });
   }catch(err){
     console.log(err);
