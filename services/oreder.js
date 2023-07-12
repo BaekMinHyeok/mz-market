@@ -1,13 +1,15 @@
 const { Order } = require("../models");
+const { Product } = require("../models");
 require("dotenv").config();
 class OrderService {
   constructor(Order) {
     this.OrderModel = Order;
+    this.ProductModel = Product;
   }
 
   //주문하기
   async register(info) {
-    const { name, phoneNumber, address, address2, comments } = info;
+    const { name, phoneNumber, address, address2, comments, objectId, price, quantity } = info;
     try {
       await this.OrderModel.create({
         name,
@@ -15,6 +17,10 @@ class OrderService {
         address,
         address2,
         comments,
+        status: "ready",
+        product: objectId,
+        price,
+        quantity
       });
     } catch (error) {
       return error;
