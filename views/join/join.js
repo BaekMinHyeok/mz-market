@@ -3,6 +3,7 @@ const authButton = document.querySelector(".auth-button");
 const completeButton = document.querySelector(".auth-complete-button");
 const header = document.getElementById("header-container");
 const auth = document.getElementById("auth");
+const login = document.querySelector(".login-p");
 
 joinButton.disabled = true;
 completeButton.disabled = true;
@@ -97,9 +98,13 @@ authButton.addEventListener("click", async () => {
   } catch (error) {}
 });
 
-completeButton.addEventListener("click", async () => {
+completeButton.addEventListener("click", () => {
   if (auth.value == authCode) {
     alert("인증에 성공했습니다!");
     joinButton.disabled = false;
   }
+});
+
+login.addEventListener("click", () => {
+  location.href = "http://localhost:3000/user/sign_in";
 });

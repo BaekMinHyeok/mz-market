@@ -51,6 +51,11 @@ button.auth-complete-button {
 #auth {
   width: 63%;
 }
+
+#signupBtn {
+  margin-top: 10px;
+}
+
 .signup-button {
   margin-top: 70px;
   margin-bottom: 30px;
