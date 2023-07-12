@@ -1,5 +1,6 @@
 const { order } = require("../services/oreder");
 const { product } = require("../services/product");
+const jwt = require("jsonwebtoken");
 
 // 주문 등록
 
@@ -15,6 +16,11 @@ const registerOrder = async (req, res) => {
       quantity,
       productId,
     } = req.body;
+
+    const decoded = jwt.verify(
+      req.headers.authorization.split(" ")[1],
+      process.env.SECRET
+    );
 
     let productName = [];
     for (const prId of productId) {
@@ -33,12 +39,11 @@ const registerOrder = async (req, res) => {
       price,
       quantity,
       productName,
+      email: decoded.email
     });
-    // console.log(orderId);
     res.json({
       success: true,
       message: "주문 등록에 성공했습니다.",
-      productId: productId,
       orderId: orderId,
     });
   } catch (error) {
@@ -125,6 +130,7 @@ const deleteOrder = async (req, res) => {
   }
 };
 
+//배송 상태 수정
 const updateStatus = async (req, res) => {
   try {
     const orderId = req.body.orderId;
