@@ -9,14 +9,23 @@ class OrderService {
 
   //주문하기
   async register(info) {
-    const { name, phoneNumber, address, address2, comments, objectId, price, quantity } = info;
+    const {
+      name,
+      phoneNumber,
+      address,
+      address2,
+      comments,
+      price,
+      quantity,
+      productName,
+    } = info;
     let orderId;
     // 가장 최신 값 가져오기
-    try{
+    try {
       const vl = this.OrderModel.findOne().sort({ _id: -1 });
       const data = await vl.exec();
       orderId = data.orderId + 1;
-    } catch (error){
+    } catch (error) {
       orderId = 1;
     }
 
@@ -29,10 +38,11 @@ class OrderService {
         address2,
         comments,
         status: "ready",
-        product: [objectId],
         price,
         quantity,
+        productName,
       });
+      return orderId;
     } catch (error) {
       return error;
     }
@@ -61,6 +71,13 @@ class OrderService {
     });
   }
 
+  // 이메일로 주문 조회
+  async getOrderUser(email) {
+    return await this.OrderModel.find({
+      email: email,
+    });
+  }
+
   //주문 삭제
   async deleteOrder(orderId) {
     return await this.OrderModel.deleteOne({ _id: orderId });
@@ -68,14 +85,15 @@ class OrderService {
 
   //배송 상태 수정
   async updateStatus(orderId, status) {
-    const order = await this.OrderModel.findeOne(orderId);
-
-    if (!order) {
+    console.log(orderId);
+    const order_ = await this.OrderModel.findOne({ orderId: orderId });
+    console.log("order", order_);
+    if (!order_) {
       throw "주문 정보를 찾을 수 없습니다.";
     }
 
-    order.status = status;
-    await order.save();
+    order_.status = status;
+    await order_.save();
   }
 }
 

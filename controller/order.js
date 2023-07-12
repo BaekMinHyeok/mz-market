@@ -1,8 +1,7 @@
 const { order } = require("../services/oreder");
 const { product } = require("../services/product");
-
+const jwt = require("jsonwebtoken");
 // 주문 등록
-
 
 const registerOrder = async (req, res) => {
   try {
@@ -12,35 +11,40 @@ const registerOrder = async (req, res) => {
       address,
       address2,
       comments,
-      objectId,
       price,
       quantity,
+      productId,
     } = req.body;
-    const productInfo = await product.getProductByObjectId(objectId);
-    if (!productInfo) {
-      throw "상품을 찾을 수 없습니다.";
+
+    let productName = [];
+    for (const prId of productId) {
+      const productInfo = await product.getProductById(prId);
+      // console.log(productInfo.name);
+      productName.push(productInfo.name);
     }
-    await order.register({
+    // console.log(productName);
+    const orderId = await order.register({
       name,
       phoneNumber,
       address,
       address2,
       comments,
       status: "ready",
-      product: [objectId],
       price,
       quantity,
+      productName,
     });
+    // console.log(orderId);
     res.json({
       success: true,
       message: "주문 등록에 성공했습니다.",
-      orders: productInfo,
+      productId: productId,
+      orderId: orderId,
     });
   } catch (error) {
     res.json({
       success: false,
       message: error,
-      orders: undefined,
     });
     console.log(error);
   }
@@ -103,6 +107,29 @@ const getOrderByEmail = async (req, res) => {
   }
 };
 
+// 이메일검색 주문 정보 조회
+const getOrderUser = async (req, res) => {
+  try {
+    const decoded = jwt.verify(
+      req.headers.authorization.split(" ")[1],
+      process.env.SECRET
+    );
+    const orders = await order.getOrderUser(decoded.email);
+    console.log(orders);
+    res.json({
+      success: true,
+      message: "주문정보를 조회했습니다.",
+      orders: orders,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error,
+      orders: undefined,
+    });
+  }
+};
+
 // 주문 삭제
 const deleteOrder = async (req, res) => {
   try {
@@ -134,7 +161,7 @@ const updateStatus = async (req, res) => {
   } catch (error) {
     res.json({
       success: false,
-      message: error,s
+      message: error,
     });
   }
 };
@@ -146,4 +173,5 @@ module.exports = {
   getOrderByEmail,
   deleteOrder,
   updateStatus,
+  getOrderUser,
 };

@@ -65,9 +65,9 @@ class ProductService {
   }
 
   // order에 prodcut _id값 보내기
-  async getProductByObjectId(objectId) {
+  async getProductName(name) {
     return await this.productModel.findOne({
-      _id: objectId,
+      name: name,
     });
   }
 
