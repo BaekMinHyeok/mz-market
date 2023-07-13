@@ -10,17 +10,18 @@
 </head>
 
 <body>
-	<object data="../header/header.html" width="100%" height="100%"></object>
-	<div class="admin-content">
+  <section class="admin-content">
+    <div class="admin-wrap">
+      <object data="../header/header.html" width="100%" height="100%"></object>
+	<div class="admin-wrap">
 		<h1>관리자 페이지</h1>
 		<div class="admin-menu">
-			<button class="page-btn" id="listpageBtn">상품목록</button>
-			<button class="page-btn" id="addpageBtn">상품추가</button>
-			<button class="page-btn" id="categoryBtn">카테고리</button>
-			<button class="page-btn" id="management">주문관리</button>
-		</div>
-		<div class="line">
-			<p></p>
+      <ul>
+        <li><button class="page-btn" id="listpageBtn">상품목록</button></li>
+        <li><button class="page-btn" id="addpageBtn">상품추가</button></li>
+        <li><button class="page-btn" id="categoryBtn">카테고리</button></li>
+        <li><button class="page-btn" id="management">주문관리</button></li>
+      </ul>	
 		</div>
 		<div class="add-text">
 			<h2>카테고리</h2>
@@ -34,6 +35,9 @@
 		<h3>기존 카테고리</h3>
 		<div class="categoryList">
 		</div>
+    </div>
+  </section>
+	
 		<script type="module" src="adminpage_category.js"></script>
 		<script src="move.js"></script>
 		<script src="/header/header.js"></script>
