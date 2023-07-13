@@ -4,7 +4,6 @@ const orderList = document.querySelector("#orderlistContainer");
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const result = await getApi("http://localhost:3000/api/order/user");
-    // console.log(result);
     result.orders.reverse().forEach((data) => {
       const newOrderlist = document.createElement("div");
       newOrderlist.classList.add("order-container");
@@ -68,21 +67,21 @@ document.addEventListener("DOMContentLoaded", async function () {
       const editButton = newOrderlist.querySelector(".edit-button");
       const deleteButton = newOrderlist.querySelector(".delete-button");
 
-      // minusQuantityButton.addEventListener("click", () => {
-      //   decreaseQuantity(data.);
-      // });
+      minusQuantityButton.addEventListener("click", () => {
+        decreaseQuantity(data.);
+      });
 
-      // plusQuantityButton.addEventListener("click", () => {
-      //   increaseQuantity(data.);
-      // });
+      plusQuantityButton.addEventListener("click", () => {
+        increaseQuantity(data.);
+      });
 
-      // editButton.addEventListener("click", () => {
-      //   sendQuantityUpdateRequest(data.id, data..innerText);
-      // });
+      editButton.addEventListener("click", () => {
+        sendQuantityUpdateRequest(data.id, data..innerText);
+      });
 
-      // deleteButton.addEventListener("click", () => {
-      //   deleteOrder(newOrderlist);
-      // });
+      deleteButton.addEventListener("click", () => {
+        deleteOrder(newOrderlist);
+      });
     });
   } catch (error) {
     console.error("Failed to fetch order data:", error);
@@ -98,45 +97,45 @@ async function getPrice(data) {
   return productPrice;
 }
 
-// function decreaseQuantity(data.) {
-//   let quantity = parseInt(data..innerText);
-//   if (quantity > 1) {
-//     quantity--;
-//     data..innerText = quantity;
-//   }
-// }
+function decreaseQuantity(data.) {
+  let quantity = parseInt(data..innerText);
+  if (quantity > 1) {
+    quantity--;
+    data..innerText = quantity;
+  }
+}
 
-// function increaseQuantity(data.) {
-//   let quantity = parseInt(data..innerText);
-//   quantity++;
-//   data..innerText = quantity;
-// }
+function increaseQuantity(data.) {
+  let quantity = parseInt(data..innerText);
+  quantity++;
+  data..innerText = quantity;
+}
 
-// async function sendQuantityUpdateRequest(orderId, quantity) {
-//   try {
-//     const response = await putApi(`http://localhost:3000/api/order/:orderId`, {
-//       quantity: parseInt(quantity)
-//     });
-//     if (response) {
-//       alert("Quantity updated successfully.");
-//     } else {
-//       alert("Failed to update quantity.");
-//     }
-//   } catch (error) {
-//     alert("Failed to update quantity:", error);
-//   }
-// }
+async function sendQuantityUpdateRequest(orderId, quantity) {
+  try {
+    const response = await putApi(`http://localhost:3000/api/order/:orderId`, {
+      quantity: parseInt(quantity)
+    });
+    if (response) {
+      alert("Quantity updated successfully.");
+    } else {
+      alert("Failed to update quantity.");
+    }
+  } catch (error) {
+    alert("Failed to update quantity:", error);
+  }
+}
 
-// async function deleteOrder(orderElement) {
-//   const confirmation = confirm("주문을 삭제하시겠습니까?");
-//   if (confirmation) {
-//     try {
-//       const orderId = orderElement.dataset.orderId;
-//       await deleteApi(`http://localhost:3000/api/order/:orderId`);
-//       orderElement.remove();
-//       alert("주문이 삭제되었습니다.");
-//     } catch (error) {
-//       console.error("Failed to delete the order:", error);
-//     }
-//   }
-// }
+async function deleteOrder(orderElement) {
+  const confirmation = confirm("주문을 삭제하시겠습니까?");
+  if (confirmation) {
+    try {
+      const orderId = orderElement.dataset.orderId;
+      await deleteApi(`http://localhost:3000/api/order/:orderId`);
+      orderElement.remove();
+      alert("주문이 삭제되었습니다.");
+    } catch (error) {
+      console.error("Failed to delete the order:", error);
+    }
+  }
+}
