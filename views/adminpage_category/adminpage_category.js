@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       const indexCategory = categoryInput[index];
       const indexmodifyBtn = modifyBtn[index];
       const basicValue = indexCategory.value;
+
       btn.addEventListener("click", async function () {
         console.log(basicValue);
         console.log(btn.textContent);
@@ -70,7 +71,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           console.log(productData.newName);
 
           try {
-            const response = await fetch("http://localhost:3000/api/category", {
+            await fetch("http://localhost:3000/api/category", {
               method: "PUT",
               headers: {
                 authorization: `Bearer ${token}`,
@@ -83,6 +84,8 @@ document.addEventListener("DOMContentLoaded", async function () {
               console.log(result.message);
               indexCategory.readOnly = true;
               indexmodifyBtn.textContent = "수정";
+              alert(`${basicValue}에서 
+${modifiedValue}으로 수정되었습니다.`);
             }
           } catch (error) {
             console.error("통신 중 오류가 발생했습니다.", error);
@@ -102,27 +105,29 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 async function handleDeleteButtonClick(event) {
   const name = event.target.dataset.name;
+  const confirmDelete = confirm(`${name} 카테고리를 삭제하시겠습니까??`);
 
-  console.log(name);
-  event.target.parentElement.classList.remove("add-text3");
-  event.target.parentElement.remove();
+  if (confirmDelete) {
+    event.target.parentElement.classList.remove("add-text3");
+    event.target.parentElement.remove();
 
-  const url = `http://localhost:3000/api/category/${name}`;
-  const token = localStorage.getItem("token");
-  try {
-    const response = await fetch(url, {
-      method: "DELETE",
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    });
+    const url = `http://localhost:3000/api/category/${name}`;
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
 
-    if (response.success) {
-      location.reload();
-      console.log(response.message);
+      if (response.success) {
+        location.reload();
+        console.log(response.message);
+      }
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error);
   }
 }
 
@@ -157,8 +162,8 @@ async function addProductcategory(addInput) {
   }
 }
 
-const saveBtn = document.querySelector("#saveBtn");
-saveBtn.addEventListener("click", async function () {
+const addBtn = document.querySelector("#saveBtn");
+addBtn.addEventListener("click", async function () {
   const addInput = document.querySelector("#addInput").value;
   const confirmAdd = confirm(`${addInput} 카테고리를 추가하시겠습니까??`);
   if (confirmAdd) {

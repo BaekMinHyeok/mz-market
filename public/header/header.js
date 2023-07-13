@@ -55,7 +55,7 @@ async function adminCheck() {
       },
     });
 
-    const result = res3.json();
+    const result = await res3.json();
     console.log(result);
     if (result.success) {
       console.log(result.success);

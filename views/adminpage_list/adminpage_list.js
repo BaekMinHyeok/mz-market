@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     result.products.forEach((data) => {
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
-        <td><img src="${data.images}" alt="이미지"></td>
+        <td><img id="IMG" src="${data.images}" alt="이미지"></td>
         <td>${data.name}</td>
         <td>${data.category}</td>
         <td>${data.price}</td>
