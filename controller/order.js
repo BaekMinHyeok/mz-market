@@ -58,6 +58,7 @@ const registerOrder = async (req, res) => {
       message: "주문 등록에 성공했습니다.",
       orderId: orderId,
     });
+    console.log(register)
   } catch (error) {
     res.json({
       success: false,
