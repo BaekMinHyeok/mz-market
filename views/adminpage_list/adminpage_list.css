@@ -86,16 +86,6 @@ td {
   text-align: center;
 }
 
-#listpageBtn::after {
-  content: "";
-  display: block;
-  width: 10%;
-  height: 3px;
-  background-color: black;
-  position: absolute;
-  bottom: -69%;
-}
-
 .admin-menu {
   position: relative;
 }
@@ -157,4 +147,9 @@ td {
 }
 button {
   cursor: pointer;
+}
+
+#IMG {
+  width: 80px;
+  height: 80px;
 }

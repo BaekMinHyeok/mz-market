@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   try {
     //주문 조회
     const result = await fetchData();
+    console.log(result);
     //주문 수정
     const selectElement = document.querySelectorAll("#shipping");
     selectElement.forEach((select, index) => {
