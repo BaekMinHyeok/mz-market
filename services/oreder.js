@@ -18,7 +18,10 @@ class OrderService {
       price,
       quantity,
       productName,
-      email
+      email,
+      productId,
+      productCount,
+      productSize,
     } = info;
     let orderId;
     // 가장 최신 값 가져오기
@@ -42,7 +45,10 @@ class OrderService {
         price,
         quantity,
         productName,
-        email
+        email,
+        productId,
+        productCount,
+        productSize,
       });
       return orderId;
     } catch (error) {

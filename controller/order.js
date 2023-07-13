@@ -15,6 +15,8 @@ const registerOrder = async (req, res) => {
       price,
       quantity,
       productId,
+      productCount,
+      productSize,
     } = req.body;
 
     const decoded = jwt.verify(
@@ -40,6 +42,9 @@ const registerOrder = async (req, res) => {
       quantity,
       productName,
       email: decoded.email,
+      productId,
+      productCount,
+      productSize,
     });
     res.json({
       success: true,
