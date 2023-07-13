@@ -1,4 +1,8 @@
-import { getApi, putApi, deleteApi } from "http://localhost:3000/api.js";
+import {
+  getApi,
+  putApi,
+  deleteApi
+} from "http://localhost:3000/api.js";
 
 const orderList = document.querySelector("#orderlistContainer");
 document.addEventListener("DOMContentLoaded", async function () {
@@ -15,6 +19,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (data.status === "complete") status = "배송이 완료되었습니다.";
 
       newOrderlist.innerHTML = `
+      <div class="order-title">
       <div class="order-info">
         <div>
           <h1 class="order-number">주문 번호: ${data.orderId}</h1>
@@ -22,6 +27,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         <div>
           <p class="order-status">${status}</p>
         </div>
+      </div>
         <div class="orderlist-edit">
           ${
             data.status !== "complete"

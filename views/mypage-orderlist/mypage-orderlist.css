@@ -1,88 +1,123 @@
-  /* Styling for the orderlist */
-  .orderlist-container {
-    margin-top: 2rem;
-  }
+/* Styling for the orderlist */
+.section{
+  padding: 20px 0;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+.container-title{
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
 
-  .order-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
+.tabs li{
+  width: 100%;
+}
 
-  .order-number {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
+.tabs li.is-active a {
+  border-bottom-color: #000;
+  color: #000;
+}
 
-  .order-status {
-    font-size: 1rem;
-  }
+.order-container{
+  border: 5px solid #F2F2F2;
+  border-radius: 10px;
+  margin-top: 40px;
+}
 
-  .orderlist-edit {
-    display: flex;
-    gap: 1rem;
-  }
+.order-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #F2F2F2;
+  padding: 0 1rem;
+}
 
-  .edit-button,
-  .delete-button {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+.orderlist-container {
+  margin-top: 2rem;
+}
 
-  /* Styling for the order list items */
-  .order-list {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    border-bottom: 1px solid #ccc;
-  }
+.order-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
 
-  .order-list-img {
-    width: 100px;
-    height: 100px;
-    background-color: #ccc;
-  }
+.order-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
 
-  .order-list-box {
-    flex: 1;
-    margin-left: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+.order-status {
+  font-size: 1rem;
+}
 
-  .order-list-info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
+.orderlist-edit {
+  display: flex;
+  gap: 1rem;
+}
 
-  .product-name {
-    font-weight: bold;
-  }
+.edit-button,
+.delete-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-  .product-size {
-    font-size: 0.9rem;
-  }
+/* Styling for the order list items */
+.order-list {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
 
-  .minus-quantity,
-  .plus-quantity {
-    padding: 0.3rem;
-    border: none;
-    background: none;
-    cursor: pointer;
-  }
+.order-list-img {
+  width: 100px;
+  height: 100px;
+  background-color: #ccc;
+}
 
-  .product-price {
-    font-weight: bold;
-  }
+.order-list-box {
+  flex: 1;
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-  .product-status {
-    font-size: 0.9rem;
-  }
-</style>
-<script src="mypage-orderlist.js" type="module" defer></script>
+.order-list-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.product-name {
+  font-weight: bold;
+}
+
+.product-size {
+  font-size: 0.9rem;
+}
+
+.minus-quantity,
+.plus-quantity {
+  padding: 0.3rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.product-price {
+  font-weight: bold;
+}
+
+.product-status {
+  font-size: 0.9rem;
+}
+
