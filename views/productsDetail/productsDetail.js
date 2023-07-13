@@ -113,7 +113,7 @@ function addToCart(product, selectedSize, quantity) {
 
   // 장바구니에서 동일한 상품 찾기
   const existingProductIndex = cart.findIndex(
-    (item) => item.id === product.id && item.size === selectedSize
+    (item) => item.id === product.productId && item.size === selectedSize
   );
 
   // 배열에서 해당 상품을 찾았는지 ==> 이 조건은 동일한 상품인 경우
@@ -122,7 +122,7 @@ function addToCart(product, selectedSize, quantity) {
     cart[existingProductIndex].quantity += quantity;
   } else {
     console.log(
-      product.productId,
+      "productID" + product.productId,
       product.name,
       product.price,
       selectedSize,
@@ -135,6 +135,7 @@ function addToCart(product, selectedSize, quantity) {
       price: product.price,
       size: selectedSize,
       quantity: quantity,
+      productImage: product.images,
     };
     cart.push(newProduct);
   }
