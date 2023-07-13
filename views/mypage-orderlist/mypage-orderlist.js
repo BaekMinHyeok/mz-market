@@ -48,11 +48,11 @@ document.addEventListener("DOMContentLoaded", async function () {
               <p class="product-name">${product.productName}</p>
               <p class="product-size">${product.productSize}</p>
               <button class="minus-quantity">
-                <i class="fa-regular fa-circle-minus"></i>
+                <i class="fa-solid fa-minus"></i>
               </button>
               <p class="product-price">${product.productCount}개</p>
               <button class="plus-quantity">
-                <i class="fa-solid fa-circle-plus"></i>
+                <i class="fa-solid fa-plus"></i>
               </button>
               <p class="product-status">${product.productPrice}원</p>
             </div>
@@ -156,3 +156,9 @@ async function deleteOrder(orderElement) {
     }
   }
 }
+
+// Add event listener to the "Edit my info" button
+const myInfoButton = document.getElementById("mypage-myinfo");
+myInfoButton.addEventListener("click", () => {
+  window.location.href = "http://localhost:3000/user/info";
+});
