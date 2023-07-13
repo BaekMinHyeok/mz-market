@@ -1,9 +1,15 @@
-import { getApi, putApi, deleteApi } from "http://localhost:3000/api.js";
+import {
+  getApi,
+  putApi,
+  deleteApi,
+} from "http://kdt-sw-5-team11.elicecoding.com/api.js";
 
 const orderList = document.querySelector("#orderlistContainer");
 document.addEventListener("DOMContentLoaded", async function () {
   try {
-    const result = await getApi("http://localhost:3000/api/order/user");
+    const result = await getApi(
+      "http://kdt-sw-5-team11.elicecoding.com/api/order/user"
+    );
     // console.log(result);
     if (result.success) {
       result.orders.reverse().forEach((data) => {
@@ -130,9 +136,12 @@ function increaseQuantity(quantityElement) {
 
 async function sendQuantityUpdateRequest(orderId, quantity) {
   try {
-    const response = await putApi(`http://localhost:3000/api/order/:orderId`, {
-      quantity: quantity,
-    });
+    const response = await putApi(
+      `http://kdt-sw-5-team11.elicecoding.com/api/order/:orderId`,
+      {
+        quantity: quantity,
+      }
+    );
     if (response) {
       alert("Quantity updated successfully.");
     } else {
@@ -148,7 +157,9 @@ async function deleteOrder(orderElement) {
   if (confirmation) {
     try {
       const orderId = orderElement.querySelector(".order-number").innerText;
-      await deleteApi(`http://localhost:3000/api/order/:orderId`);
+      await deleteApi(
+        `http://kdt-sw-5-team11.elicecoding.com/api/order/:orderId`
+      );
       orderElement.remove();
       alert("주문이 삭제되었습니다.");
     } catch (error) {

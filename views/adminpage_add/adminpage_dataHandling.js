@@ -2,9 +2,13 @@ const savebtn = document.querySelector("#save-btn");
 
 savebtn.addEventListener("click", async function () {
   const productName = document.querySelector("#productName").value;
-  const productDescription = document.querySelector("#productDescription").value;
+  const productDescription = document.querySelector(
+    "#productDescription"
+  ).value;
   const productPrice = document.querySelector("#productPrice").value;
-  const selectedValue = document.querySelector(".radio-group input:checked").value;
+  const selectedValue = document.querySelector(
+    ".radio-group input:checked"
+  ).value;
   const categoryValue = document.querySelector("#checkvalue").value;
   const selectedFile = document.querySelector("#selectedFile").value; // 파일 객체 가져오기
   if (
@@ -35,20 +39,23 @@ savebtn.addEventListener("click", async function () {
   formData.append("data", JSON.stringify(productData));
   // console.log(productData);
   try {
-    const response = await fetch("http://localhost:3000/api/product", {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${token}`,
-        // "Content-Type": "application/json",
-      },
-      body: formData,
-    });
+    const response = await fetch(
+      "http://kdt-sw-5-team11.elicecoding.com/api/product",
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${token}`,
+          // "Content-Type": "application/json",
+        },
+        body: formData,
+      }
+    );
     const result = await response.json();
     console.log(result);
 
     if (result.success) {
       alert("저장되었습니다.");
-      location.reload()
+      location.reload();
       console.log(result.message);
     }
   } catch (error) {

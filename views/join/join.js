@@ -8,7 +8,7 @@ const login = document.querySelector(".login-p");
 joinButton.disabled = true;
 completeButton.disabled = true;
 
-// fetch("http://localhost:3000/header/header.html")
+// fetch("http://kdt-sw-5-team11.elicecoding.com/header/header.html")
 //   .then((res) => res.text())
 //   .then((html) => {
 //     header.innerHTML = html;
@@ -49,20 +49,23 @@ async function createAccount() {
 
   // 요청
   try {
-    const response = await fetch("http://localhost:3000/api/user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      "http://kdt-sw-5-team11.elicecoding.com/api/user",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
     const result = await response.json();
 
     console.log(data);
     console.log(result);
     if (result.success) {
       alert("회원가입이 성공하였습니다!");
-      location.href = "http://localhost:3000/user/sign_in";
+      location.href = "http://kdt-sw-5-team11.elicecoding.com/user/sign_in";
     } else {
       const errorMessage = await result.message;
       alert(errorMessage);
@@ -85,13 +88,16 @@ authButton.addEventListener("click", async () => {
   };
 
   try {
-    const response = await fetch("http://localhost:3000/api/mail", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      "http://kdt-sw-5-team11.elicecoding.com/api/mail",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
     authCode = await response.json();
     console.log(authCode);
     completeButton.disabled = false;
@@ -106,7 +112,7 @@ completeButton.addEventListener("click", () => {
 });
 
 login.addEventListener("click", () => {
-  location.href = "http://localhost:3000/user/sign_in";
+  location.href = "http://kdt-sw-5-team11.elicecoding.com/user/sign_in";
 });
 
 function startTimer() {
