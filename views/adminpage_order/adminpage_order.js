@@ -4,8 +4,8 @@ import ModifyData from "./order_Modify.js";
 document.addEventListener("DOMContentLoaded", async function () {
   try{
         //주문 조회
-       const result = await fetchData();
-      console.log(result);
+        const result = await fetchData();
+        console.log(result);
         //주문 수정
         const selectElement = document.querySelectorAll("#shipping");
         console.log(selectElement);
