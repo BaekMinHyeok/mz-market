@@ -27,6 +27,9 @@ h1 {
   text-align: center;
   transition: 1s;
 }
+.admin-menu li:hover button{
+  color: #000;
+}
 
 .admin-menu li:nth-child(4)::after {
   content: "";

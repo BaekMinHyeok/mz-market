@@ -38,7 +38,9 @@ h1 {
   top: -1px;
 
 }
-
+.admin-menu li:hover button{
+  color: #000;
+}
 .admin-menu li:hover::after {
   content: "";
   display: block;
@@ -159,4 +161,7 @@ button {
 #product-table tr td:nth-child(1) img{
   width: 60px;
   height: 60px;
+}
+#product-table tr td:nth-child(5) img{
+  cursor: pointer;
 }
