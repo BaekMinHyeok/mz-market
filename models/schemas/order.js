@@ -49,8 +49,19 @@ const orderSchema = new Schema({
   productName: {
     type: [String],
     required: true,
-  }
-  
+  },
+  productId: {
+    type: [Number],
+    required: true,
+  },
+  productCount: {
+    type: [Number],
+    required: true,
+  },
+  productSize: {
+    type: [String],
+    required: true,
+  },
 });
 
 module.exports = orderSchema;

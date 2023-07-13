@@ -39,7 +39,7 @@ const registerOrder = async (req, res) => {
       price,
       quantity,
       productName,
-      email: decoded.email
+      email: decoded.email,
     });
     res.json({
       success: true,
@@ -119,8 +119,9 @@ const getOrderUser = async (req, res) => {
       req.headers.authorization.split(" ")[1],
       process.env.SECRET
     );
+    // console.log(decoded);
     const orders = await order.getOrderUser(decoded.email);
-    console.log(orders);
+    // console.log(orders);
     res.json({
       success: true,
       message: "주문정보를 조회했습니다.",

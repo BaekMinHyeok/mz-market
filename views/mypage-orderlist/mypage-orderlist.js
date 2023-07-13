@@ -1,38 +1,67 @@
 import { getApi, putApi, deleteApi } from "http://localhost:3000/api.js";
 
-
-const orderList = document.querySelector(".orderlist");
+const orderList = document.querySelector("#orderlistContainer");
 
 document.addEventListener("DOMContentLoaded", async function () {
   try {
-    const result = await getApi("http://localhost:3000/api/order/email");
-    console.log(result);
-    result.products.forEach((data) => {
-      console.log(data);
-      const newOrderlist = document.createElement("li");
+    const result = await getApi("http://localhost:3000/api/order/user");
+    result.orders.reverse().forEach((data) => {
+      const newOrderlist = document.createElement("div");
+      newOrderlist.classList.add("order-container");
+
+      let status;
+      if (data.status === "ready") status = "배송 준비 중입니다.";
+      if (data.status === "shipping") status = "배송이 시작되었습니다.";
+      if (data.status === "complete") status = "배송이 완료되었습니다.";
 
       newOrderlist.innerHTML = `
+      <div class="order-info">
+        <div>
+          <h1 class="order-number">주문 번호: ${data.orderId}</h1>
+        </div>
+        <div>
+          <p class="order-status">${status}</p>
+        </div>
+        <div class="orderlist-edit">
+          ${
+            data.status !== "complete"
+              ? '<button class="edit-button">수정하기</button>'
+              : ""
+          }
+          ${
+            data.status !== "complete"
+              ? '<button class="delete-button">취소하기</button>'
+              : ""
+          }
+        </div>
+      </div>
+      `;
+
+      data.productName.forEach((product) => {
+        newOrderlist.innerHTML += `
+        <ul class="orderlist">
         <li class="order-list">
-          <div class="order-list-img"></div>
+          <div class="order-list-img"><img src="" /></div>
           <div class="order-list-box">
             <div class="order-list-info">
-              <p class="product-name">${data.name}</p>
-              <p class="product-size">${data.size}</p>
+              <p class="product-name">${product}</p>
+              <p class="product-size">red/xl</p>
               <button class="minus-quantity">
                 <i class="fa-regular fa-circle-minus"></i>
               </button>
-               ${data.name}
+              <p class="product-price">1</p>
               <button class="plus-quantity">
                 <i class="fa-solid fa-circle-plus"></i>
               </button>
-              <p class="product-status">${data.price}</p>
+              <p class="product-status">10000원</p>
             </div>
           </div>
-          <button class="edit-button">수정하기</button>
-          <button class="delete-button">삭제하기</button>
         </li>
-      `;
+        </ul>
+        `;
+      });
 
+      orderList.appendChild(newOrderlist);
       //수량 추가,감소 버튼과 수정하기 및 취소하기 버튼
       const minusQuantityButton = newOrderlist.querySelector(".minus-quantity");
       const plusQuantityButton = newOrderlist.querySelector(".plus-quantity");
@@ -54,8 +83,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       // deleteButton.addEventListener("click", () => {
       //   deleteOrder(newOrderlist);
       // });
-
-      orderList.appendChild(newOrderlist);
     });
   } catch (error) {
     console.error("Failed to fetch order data:", error);
@@ -95,7 +122,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 //   const confirmation = confirm("주문을 삭제하시겠습니까?");
 //   if (confirmation) {
 //     try {
-//       const orderId = orderElement.dataset.orderId; 
+//       const orderId = orderElement.dataset.orderId;
 //       await deleteApi(`http://localhost:3000/api/order/:orderId`);
 //       orderElement.remove();
 //       alert("주문이 삭제되었습니다.");
