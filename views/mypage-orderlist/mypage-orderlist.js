@@ -62,21 +62,35 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       orderList.appendChild(newOrderlist);
       //수량 추가,감소 버튼과 수정하기 및 취소하기 버튼
-      const minusQuantityButton = newOrderlist.querySelector(".minus-quantity");
-      const plusQuantityButton = newOrderlist.querySelector(".plus-quantity");
+      const minusQuantityButtons = newOrderlist.querySelectorAll(".minus-quantity");
+      const plusQuantityButtons = newOrderlist.querySelectorAll(".plus-quantity");
       const editButton = newOrderlist.querySelector(".edit-button");
       const deleteButton = newOrderlist.querySelector(".delete-button");
 
-      minusQuantityButton.addEventListener("click", () => {
-        decreaseQuantity(data.);
+      minusQuantityButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (data.status === "ready") {
+            decreaseQuantity(button.nextElementSibling);
+          }
+        });
       });
 
-      plusQuantityButton.addEventListener("click", () => {
-        increaseQuantity(data.);
+      plusQuantityButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (data.status === "ready") {
+            increaseQuantity(button.previousElementSibling);
+          }
+        });
       });
 
-      editButton.addEventListener("click", () => {
-        sendQuantityUpdateRequest(data.id, data..innerText);
+      editButton.addEventListener("click", async () => {
+        if (data.status === "ready") {
+          const orderId = data.orderId;
+          const quantityElement = newOrderlist.querySelector(".product-price");
+          const quantity = parseInt(quantityElement.innerText);
+          await sendQuantityUpdateRequest(orderId, quantity);
+          quantityElement.innerText = quantity.toString();
+        }
       });
 
       deleteButton.addEventListener("click", () => {
@@ -88,33 +102,24 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 
-async function getPrice(data) {
-  let productPrice = [];
-  for (const id of data.productId) {
-    const productInfo = await getApi(`http://localhost:3000/api/product/${id}`);
-    productPrice.push(productInfo.product.price);
-  }
-  return productPrice;
-}
-
-function decreaseQuantity(data.) {
-  let quantity = parseInt(data..innerText);
+function decreaseQuantity(quantityElement) {
+  let quantity = parseInt(quantityElement.innerText);
   if (quantity > 1) {
     quantity--;
-    data..innerText = quantity;
+    quantityElement.innerText = quantity.toString();
   }
 }
 
-function increaseQuantity(data.) {
-  let quantity = parseInt(data..innerText);
+function increaseQuantity(quantityElement) {
+  let quantity = parseInt(quantityElement.innerText);
   quantity++;
-  data..innerText = quantity;
+  quantityElement.innerText = quantity.toString();
 }
 
 async function sendQuantityUpdateRequest(orderId, quantity) {
   try {
-    const response = await putApi(`http://localhost:3000/api/order/:orderId`, {
-      quantity: parseInt(quantity)
+    const response = await putApi(`http://localhost:3000/api/order/${orderId}`, {
+      quantity: quantity
     });
     if (response) {
       alert("Quantity updated successfully.");
@@ -130,8 +135,8 @@ async function deleteOrder(orderElement) {
   const confirmation = confirm("주문을 삭제하시겠습니까?");
   if (confirmation) {
     try {
-      const orderId = orderElement.dataset.orderId;
-      await deleteApi(`http://localhost:3000/api/order/:orderId`);
+      const orderId = orderElement.querySelector(".order-number").innerText;
+      await deleteApi(`http://localhost:3000/api/order/${orderId}`);
       orderElement.remove();
       alert("주문이 삭제되었습니다.");
     } catch (error) {
