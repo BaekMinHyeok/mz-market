@@ -1,13 +1,3 @@
-.navigation {
-  padding: 50px;
-  display: flex;
-  align-items: center;
-  gap: 50px;
-  width: 100%;
-  height: 80px;
-  background-color: #f2f2f2;
-}
-
 .container {
   width: 1200px;
   padding: 150px 0 200px;
@@ -81,6 +71,12 @@
   .product_text_box
   .product_text {
   font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 38px;
 }
 
 .product_container

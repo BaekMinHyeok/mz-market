@@ -67,11 +67,11 @@ function renderNewProductList(products) {
   const container = document.querySelector(".products_list_wrapper");
   container.innerHTML = "";
 
-  const newProductsToRender = products.slice(0, 4);
+  const newProductsToRender = products.slice(-4).reverse();
 
   console.log("NEWWWWW", newProductsToRender);
 
-  newProductsToRender.reverse().forEach((product) => {
+  newProductsToRender.forEach((product) => {
     const productElement = renderProduct(product);
     container.appendChild(productElement);
   });
@@ -84,7 +84,7 @@ function showProductDetail(productId) {
   console.log(productId);
 
   // 상세 페이지로 이동할 URL
-  const productDetailURL = `http://localhost:3000/category/products/${productId}`;
+  const productDetailURL = `/category/products/${productId}`;
   console.log(productDetailURL);
   window.location.href = productDetailURL;
 }
@@ -92,7 +92,7 @@ function showProductDetail(productId) {
 // API 호출 (상품 전체)
 async function fetchProductList() {
   try {
-    const response = await fetch("http://localhost:3000/api/product", {
+    const response = await fetch("/api/product", {
       method: "GET",
       headers: {
         authorization: `Bearer ${token}`,

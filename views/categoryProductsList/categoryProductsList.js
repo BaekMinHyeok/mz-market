@@ -1,3 +1,37 @@
+fetch("/header/header.html")
+  .then((res) => res.text())
+  .then((html) => {
+    document.body.insertAdjacentHTML("afterbegin", html);
+
+    // 카테고리 링크 클릭 이벤트 리스너
+    const menLink = document.querySelector('a[href="/category/men/"]');
+    menLink.addEventListener("click", (event) => {
+      handleCategoryClick(event, "men");
+
+      // 경로 이동이 안 돼서 설정
+      history.pushState(null, "", "/category/men/");
+    });
+
+    const womenLink = document.querySelector('a[href="/category/women/"]');
+    womenLink.addEventListener("click", (event) => {
+      handleCategoryClick(event, "women");
+
+      // 경로 이동이 안 돼서 설정
+      history.pushState(null, "", "/category/women/");
+    });
+
+    //css 파일 가져오기
+    const cssUrl = "/header/header.css";
+    const cssLink = document.createElement("link");
+    cssLink.rel = "stylesheet";
+    cssLink.href = cssUrl;
+    cssLink.type = "text/css";
+    document.head.appendChild(cssLink);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
 // 카테고리 링크 클릭
 function handleCategoryClick(event, category) {
   event.preventDefault();
@@ -9,26 +43,17 @@ function handleCategoryClick(event, category) {
   if (category === "men") {
     productTitle.textContent = "남성 상품";
     productSubtitle.textContent = "남성 상품 목록입니다.";
-    fetchProducts("/api/product/gender/men", productList);
 
-    history.pushState(null, "", "/category/men");
+    fetchProducts("/api/product/gender/men", productList);
+    // history.pushState(null, "", "/category/men/");
   } else if (category === "women") {
     productTitle.textContent = "여성 상품";
     productSubtitle.textContent = "여성 상품 목록입니다.";
-    fetchProducts("/api/product/gender/women", productList);
 
-    history.pushState(null, "", "/category/women");
+    fetchProducts("/api/product/gender/women", productList);
+    // history.pushState(null, "", "/category/women/");
   }
 }
-
-// 카테고리 링크 클릭 이벤트 리스너
-const menLink = document.querySelector('a[href="/category/men"]');
-menLink.addEventListener("click", (event) => handleCategoryClick(event, "men"));
-
-const womenLink = document.querySelector('a[href="/category/women"]');
-womenLink.addEventListener("click", (event) =>
-  handleCategoryClick(event, "women")
-);
 
 // 상품 리스트 가져오기
 function fetchProducts(url, productList) {
@@ -117,3 +142,9 @@ function showProductDetail(productId) {
   console.log(productDetailURL);
   window.location.href = productDetailURL;
 }
+
+// // 초기 페이지 로드 시 상품 리스트 가져오기
+// document.addEventListener("DOMContentLoaded", () => {
+//   const productList = document.querySelector(".products_list_wrapper");
+//   fetchProducts("/api/product/gender/men", productList);
+// });
