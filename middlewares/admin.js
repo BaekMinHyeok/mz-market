@@ -55,5 +55,5 @@ const adminCheck = async (req, res) => {
 
 module.exports = {
   adminAuth,
-  adminCheck,
+  adminCheck
 };

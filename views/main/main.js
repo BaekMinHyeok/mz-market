@@ -67,11 +67,11 @@ function renderNewProductList(products) {
   const container = document.querySelector(".products_list_wrapper");
   container.innerHTML = "";
 
-  const newProductsToRender = products.slice(0, 4);
+  const newProductsToRender = products.slice(-4).reverse();
 
   console.log("NEWWWWW", newProductsToRender);
 
-  newProductsToRender.reverse().forEach((product) => {
+  newProductsToRender.forEach((product) => {
     const productElement = renderProduct(product);
     container.appendChild(productElement);
   });

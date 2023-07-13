@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/reset.css" type="text/css">
-	<link rel="stylesheet" href="./adminpage_category.css" type="text/css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/reset.css" type="text/css" />
+    <link rel="stylesheet" href="./adminpage_category.css" type="text/css" />
 
-	<title>관리자 카테고리 페이지</title>
-</head>
+    <title>관리자 카테고리 페이지</title>
+  </head>
 
-<body>
-	<div class="admin-content">
-		<h1>관리자 페이지</h1>
-		<div class="admin-menu">
-			<button class="page-btn" id="listpageBtn">상품목록</button>
-			<button class="page-btn" id="addpageBtn">상품추가</button>
-			<button class="page-btn" id="categoryBtn">카테고리</button>
-			<button class="page-btn" id="management">주문관리</button>
-		</div>
-		<div class="line">
-			<p></p>
-		</div>
-		<div class="add-text">
-			<h2>카테고리</h2>
-			<p>카테고리를 확인하고 항목을 수정할 수 있어요. </p>
-		</div>
-		<h3>카테고리 추가</h3>
-		<div class="add-text2">
-			<input class="rectangle" id="addInput">
-			<button class="category" id="saveBtn">추가</button>
-		</div>
-		<h3>기존 카테고리</h3>
-		<div class="categoryList">
-		</div>
-		<script type="module" src="adminpage_category.js"></script>
-		<script src="move.js"></script>
-		<script src="/header/header.js"></script>
-</body>
+  <body>
+    <section class="admin-content">
+      <div class="admin-wrap">
+        <h1>관리자 페이지</h1>
+        <div class="admin-menu">
+          <ul>
+            <li><button class="page-btn" id="listpageBtn">상품목록</button></li>
+            <li><button class="page-btn" id="addpageBtn">상품추가</button></li>
+            <li><button class="page-btn" id="categoryBtn">카테고리</button></li>
+            <li><button class="page-btn" id="management">주문관리</button></li>
+          </ul>
+        </div>
+        <div class="add-text">
+          <h2>카테고리</h2>
+          <p>카테고리를 확인하고 항목을 수정할 수 있어요.</p>
+        </div>
+        <h3>카테고리 추가</h3>
+        <div class="add-text2">
+          <input class="rectangle" id="addInput" />
+          <button class="category" id="saveBtn">추가</button>
+        </div>
+        <h3>기존 카테고리</h3>
+        <div class="categoryList"></div>
+      </div>
+    </section>
 
+    <script type="module" src="adminpage_category.js"></script>
+    <script src="move.js"></script>
+    <script src="/header/header.js"></script>
+  </body>
 </html>
