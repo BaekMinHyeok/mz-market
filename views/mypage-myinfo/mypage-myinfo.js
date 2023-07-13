@@ -4,86 +4,68 @@ const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#email");
 const passwordInput = document.querySelector("#password");
 const passwordCheckInput = document.querySelector("#password-check");
-const nameEditButton = document.querySelector(".name-edit");
-const emailEditButton = document.querySelector(".email-edit");
-const passwordEditButton = document.querySelector(".password-edit");
+const editAccountButton = document.querySelector(".edit-account");
 const deleteAccountButton = document.querySelector(".delete-account");
 const order_history = document.querySelector(".order-history");
 
-nameEditButton.addEventListener("click", editName);
-emailEditButton.addEventListener("click", editEmail);
-passwordEditButton.addEventListener("click", editPassword);
+editAccountButton.addEventListener("click", editAccount);
 deleteAccountButton.addEventListener("click", deleteAccount);
 
-// const getData = async () => {
-//   const data = await getApi("http://localhost:3000/api/user");
-//   console.log(data.user.email);
-//   emailInput.placeholder = data.user.email;
-// };
+async function getUserData() {
+  try {
+    const data = await getApi("http://localhost:3000/api/user");
+    nameInput.value = data.user.name;
+    emailInput.value = data.user.email;
+  } catch (error) {
+    console.error("Failed to fetch user data:", error);
+  }
+}
 
-const data = await getApi("http://localhost:3000/api/user");
-console.log(data.user.email);
-emailInput.value = data.user.email;
+getUserData();
 
-async function editName() {
+async function editAccount() {
   const newName = nameInput.value;
-  try {
-    const response = await putApi("/edit-name", { name: newName });
-    if (response) {
-      alert("이름을 변경하였습니다.");
-    } else {
-      alert("이름 변경에 실패했습니다.");
-    }
-  } catch (error) {
-    alert("이름 변경에 실패했습니다.:", error);
-  }
-}
-
-async function editEmail() {
   const newEmail = emailInput.value;
-  try {
-    const response = await putApi("/edit-email", { email: newEmail });
-    if (response) {
-      alert("이메일이 변경되었습니다.");
-    } else {
-      alert("이메일변경에 실패하였습니다.");
-    }
-  } catch (error) {
-    alert("이메일변경에 실패했습니다:", error);
-  }
-}
-
-async function editPassword() {
   const newPassword = passwordInput.value;
   const newPasswordCheck = passwordCheckInput.value;
 
+  if (newName.trim() === "" || newEmail.trim() === "" || newPassword.trim() === "") {
+    alert("모든 정보를 기입해주세요.");
+    return;
+  }
+
   if (newPassword !== newPasswordCheck) {
-    alert("비밀번호가 일치하지 않습니다!");
+    alert("비밀번호가 일치하지 않습니다.");
     return;
   }
 
   try {
-    const response = await putApi("/edit-password", { password: newPassword });
+    const response = await putApi("http://localhost:3000/api/user", {
+      name: newName,
+      email: newEmail,
+      password: newPassword
+    });
+
     if (response) {
-      alert("비밀번호를 변경하였습니다.");
+      alert("회원정보가 수정되었습니다.");
     } else {
-      alert("비밀번호 변경에 실패하였습니다!");
+      alert("회원정보를 수정하는데 실패하였습니다.");
     }
   } catch (error) {
-    alert("비밀번호 변경에 실패하였습니다:", error);
+    alert("Failed to update account information:", error);
   }
 }
 
 async function deleteAccount() {
   try {
-    const response = await deleteApi("/delete-account");
+    const response = await deleteApi("http://localhost:3000/api/user/delete-account");
     if (response) {
-      alert("회원탈퇴 되었습니다.");
+      alert("회원을 탈퇴하였습니다.");
     } else {
-      alert("회원탈퇴에 실패하였습니다!");
+      alert("회원 탈퇴에 실패하였습니다.");
     }
   } catch (error) {
-    alert("회원탈퇴에 실패하였습니다:", error);
+    alert("Failed to delete the account:", error);
   }
 }
 

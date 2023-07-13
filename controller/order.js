@@ -1,4 +1,4 @@
-const { order } = require("../services/oreder");
+const { order } = require("../services/order");
 const { product } = require("../services/product");
 const jwt = require("jsonwebtoken");
 
@@ -15,20 +15,32 @@ const registerOrder = async (req, res) => {
       price,
       quantity,
       productId,
+      productCount,
+      productSize,
+      productColor,
     } = req.body;
-
     const decoded = jwt.verify(
       req.headers.authorization.split(" ")[1],
       process.env.SECRET
     );
 
-    let productName = [];
-    for (const prId of productId) {
-      const productInfo = await product.getProductById(prId);
-      // console.log(productInfo.name);
-      productName.push(productInfo.name);
+    let productInfo = [];
+    for (const [index, prId] of productId.entries()) {
+      const getproduct = await product.getProductById(prId);
+      const productChild = {
+        productId: prId,
+        productName: getproduct.name,
+        productCount: productCount[index],
+        productSize: productSize[index],
+        productColor: productColor[index],
+        productPrice: getproduct.price,
+        productImage: getproduct.images,
+        index: index, // 인덱스 값을 변수에 추가
+      };
+      productInfo.push(productChild);
     }
-    // console.log(productName);
+
+    // console.log(productInfo);
     const orderId = await order.register({
       name,
       phoneNumber,
@@ -38,8 +50,8 @@ const registerOrder = async (req, res) => {
       status: "ready",
       price,
       quantity,
-      productName,
-      email: decoded.email
+      email: decoded.email,
+      productInfo,
     });
     res.json({
       success: true,
@@ -119,8 +131,9 @@ const getOrderUser = async (req, res) => {
       req.headers.authorization.split(" ")[1],
       process.env.SECRET
     );
+    // console.log(decoded);
     const orders = await order.getOrderUser(decoded.email);
-    console.log(orders);
+    // console.log(orders);
     res.json({
       success: true,
       message: "주문정보를 조회했습니다.",

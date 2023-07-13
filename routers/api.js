@@ -39,7 +39,7 @@ const {
 //image
 const { uploadMiddleware } = require("../middlewares/image");
 const { authMail } = require("../controller/mail");
-const { adminAuth } = require("../middlewares/admin");
+const { adminAuth, adminCheck } = require("../middlewares/admin");
 router.post("/mail", authMail);
 
 //user
@@ -47,6 +47,7 @@ router.post("/user", register); //회원 가입
 router.put("/user", auth, updateUser); //회원 정보 수정
 router.get("/user", auth, getUser); //회원 정보 조회
 router.delete("/user", auth, deleteUser); //회원 탈퇴
+router.get("/admin", adminCheck); // 관리자 체크 
 
 //login
 router.post("/login", login); //로그인
@@ -63,7 +64,7 @@ router.delete("/product/:productId", adminAuth, deleteProduct); //상품 삭제
 //category
 router.post("/category", adminAuth, registerCategory); //카테고리 등록
 router.put("/category", adminAuth, updateCategory); //카테고리 업데이트
-router.get("/category", adminAuth, getAllCategory); //카테고리 조회
+router.get("/category", getAllCategory); //카테고리 조회
 router.delete("/category/:name", adminAuth, deleteCategory); //카테고리 삭제
 
 //order
