@@ -118,7 +118,7 @@ function increaseQuantity(quantityElement) {
 
 async function sendQuantityUpdateRequest(orderId, quantity) {
   try {
-    const response = await putApi(`http://localhost:3000/api/order/${orderId}`, {
+    const response = await putApi(`http://localhost:3000/api/order/:orderId`, {
       quantity: quantity
     });
     if (response) {
@@ -136,7 +136,7 @@ async function deleteOrder(orderElement) {
   if (confirmation) {
     try {
       const orderId = orderElement.querySelector(".order-number").innerText;
-      await deleteApi(`http://localhost:3000/api/order/${orderId}`);
+      await deleteApi(`http://localhost:3000/api/order/:orderId`);
       orderElement.remove();
       alert("주문이 삭제되었습니다.");
     } catch (error) {
