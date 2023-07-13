@@ -19,11 +19,11 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  productColor: {
-    //색상
-    type: String,
-    required: true,
-  },
+  // productColor: {
+  //   //색상
+  //   type: String,
+  //   required: true,
+  // },
   productPrice: {
     //가격
     type: Number,

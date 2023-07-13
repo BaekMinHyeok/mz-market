@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My page - orderlist</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
-    <link rel="stylesheet" href="mypage-orderlist.css" />
-    <script src="mypage-orderlist.js" type="module" defer></script>
-  </head>
-  <body>
-    <section class="section">
-      <div class="container">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My page - orderlist</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+  <link rel="stylesheet" href="mypage-orderlist.css" />
+  <link rel="stylesheet" href="http://localhost:3000/reset.css">
+  <script src="mypage-orderlist.js" type="module" defer></script>
+</head>
+
+<body>
+  <section class="section">
+    <div class="container">
+      <div class="container-title">
         <div>
           <h1>마이페이지</h1>
         </div>
@@ -23,8 +24,9 @@
             <li class="is-active"><a>주문내역</a></li>
           </ul>
         </div>
-        <div class="container orderlist-container" id="orderlistContainer">
-          <!-- <div class="order-container">
+      </div>
+      <div class="container orderlist-container" id="orderlistContainer">
+        <!-- <div class="order-container">
             <div class="order-info">
               <div>
                 <h1 class="order-number">주문 번호</h1>
@@ -57,44 +59,33 @@
               </li>
             </ul>
           </div> -->
-        </div>
       </div>
-    </section>
-
-    <!-- 주문 취소시 확인 Modal -->
-    <div id="modal" class="modal">
-      <div class="modal-background" id="modalBackground"></div>
-      <div class="modal-content">
-        <div class="box">
-          <p class="mb-3">
-            주문 삭제 시 복구할 수 없습니다. 정말로 취소하시겠습니까?
-          </p>
-
-          <div class="buttons">
-            <button
-              class="button mt-5"
-              id="deleteCompleteButton"
-              aria-label="close"
-            >
-              네
-            </button>
-            <button
-              class="button is-primary mt-5"
-              id="deleteCancelButton"
-              aria-label="close"
-            >
-              아니오
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <button
-        class="modal-close is-large"
-        id="modalCloseButton"
-        aria-label="close"
-      ></button>
     </div>
-    <script src="/header/header.js"></script>
-  </body>
+  </section>
+
+  <!-- 주문 취소시 확인 Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-background" id="modalBackground"></div>
+    <div class="modal-content">
+      <div class="box">
+        <p class="mb-3">
+          주문 삭제 시 복구할 수 없습니다. 정말로 취소하시겠습니까?
+        </p>
+
+        <div class="buttons">
+          <button class="button mt-5" id="deleteCompleteButton" aria-label="close">
+            네
+          </button>
+          <button class="button is-primary mt-5" id="deleteCancelButton" aria-label="close">
+            아니오
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button class="modal-close is-large" id="modalCloseButton" aria-label="close"></button>
+  </div>
+  <script src="/header/header.js"></script>
+</body>
+
 </html>

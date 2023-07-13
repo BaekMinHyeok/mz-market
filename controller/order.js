@@ -17,7 +17,7 @@ const registerOrder = async (req, res) => {
       productId,
       productCount,
       productSize,
-      productColor,
+      // productColor,
     } = req.body;
     const decoded = jwt.verify(
       req.headers.authorization.split(" ")[1],
@@ -32,7 +32,7 @@ const registerOrder = async (req, res) => {
         productName: getproduct.name,
         productCount: productCount[index],
         productSize: productSize[index],
-        productColor: productColor[index],
+        // productColor: productColor[index],
         productPrice: getproduct.price,
         productImage: getproduct.images,
         index: index, // 인덱스 값을 변수에 추가

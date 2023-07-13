@@ -185,7 +185,7 @@ const orderButton = document.querySelector(".nav_order_button");
 orderButton.addEventListener("click", placeOrder);
 
 function placeOrder() {
-  const productDetailURL = "http://localhost:3000/cart/order";
+  const productDetailURL = "/cart/order";
   console.log(productDetailURL);
   window.location.href = productDetailURL;
 
