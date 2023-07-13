@@ -1,14 +1,9 @@
-import {
-  getApi,
-  putApi,
-  deleteApi
-} from "http://localhost:3000/api.js";
+import { getApi, putApi, deleteApi } from "http://localhost:3000/api.js";
 
 const orderList = document.querySelector("#orderlistContainer");
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const result = await getApi("http://localhost:3000/api/order/user");
-    // console.log(result);
     result.orders.reverse().forEach((data) => {
       const newOrderlist = document.createElement("div");
       newOrderlist.classList.add("order-container");
@@ -19,7 +14,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (data.status === "complete") status = "배송이 완료되었습니다.";
 
       newOrderlist.innerHTML = `
-      <div class="order-title">
       <div class="order-info">
         <div>
           <h1 class="order-number">주문 번호: ${data.orderId}</h1>
@@ -27,7 +21,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         <div>
           <p class="order-status">${status}</p>
         </div>
-      </div>
         <div class="orderlist-edit">
           ${
             data.status !== "complete"
@@ -69,80 +62,85 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       orderList.appendChild(newOrderlist);
       //수량 추가,감소 버튼과 수정하기 및 취소하기 버튼
-      const minusQuantityButton = newOrderlist.querySelector(".minus-quantity");
-      const plusQuantityButton = newOrderlist.querySelector(".plus-quantity");
+      const minusQuantityButtons = newOrderlist.querySelectorAll(".minus-quantity");
+      const plusQuantityButtons = newOrderlist.querySelectorAll(".plus-quantity");
       const editButton = newOrderlist.querySelector(".edit-button");
       const deleteButton = newOrderlist.querySelector(".delete-button");
 
-      // minusQuantityButton.addEventListener("click", () => {
-      //   decreaseQuantity(data.);
-      // });
+      minusQuantityButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (data.status === "ready") {
+            decreaseQuantity(button.nextElementSibling);
+          }
+        });
+      });
 
-      // plusQuantityButton.addEventListener("click", () => {
-      //   increaseQuantity(data.);
-      // });
+      plusQuantityButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (data.status === "ready") {
+            increaseQuantity(button.previousElementSibling);
+          }
+        });
+      });
 
-      // editButton.addEventListener("click", () => {
-      //   sendQuantityUpdateRequest(data.id, data..innerText);
-      // });
+      editButton.addEventListener("click", async () => {
+        if (data.status === "ready") {
+          const orderId = data.orderId;
+          const quantityElement = newOrderlist.querySelector(".product-price");
+          const quantity = parseInt(quantityElement.innerText);
+          await sendQuantityUpdateRequest(orderId, quantity);
+          quantityElement.innerText = quantity.toString();
+        }
+      });
 
-      // deleteButton.addEventListener("click", () => {
-      //   deleteOrder(newOrderlist);
-      // });
+      deleteButton.addEventListener("click", () => {
+        deleteOrder(newOrderlist);
+      });
     });
   } catch (error) {
     console.error("Failed to fetch order data:", error);
   }
 });
 
-async function getPrice(data) {
-  let productPrice = [];
-  for (const id of data.productId) {
-    const productInfo = await getApi(`http://localhost:3000/api/product/${id}`);
-    productPrice.push(productInfo.product.price);
+function decreaseQuantity(quantityElement) {
+  let quantity = parseInt(quantityElement.innerText);
+  if (quantity > 1) {
+    quantity--;
+    quantityElement.innerText = quantity.toString();
   }
-  return productPrice;
 }
 
-// function decreaseQuantity(data.) {
-//   let quantity = parseInt(data..innerText);
-//   if (quantity > 1) {
-//     quantity--;
-//     data..innerText = quantity;
-//   }
-// }
+function increaseQuantity(quantityElement) {
+  let quantity = parseInt(quantityElement.innerText);
+  quantity++;
+  quantityElement.innerText = quantity.toString();
+}
 
-// function increaseQuantity(data.) {
-//   let quantity = parseInt(data..innerText);
-//   quantity++;
-//   data..innerText = quantity;
-// }
+async function sendQuantityUpdateRequest(orderId, quantity) {
+  try {
+    const response = await putApi(`http://localhost:3000/api/order/:orderId`, {
+      quantity: quantity
+    });
+    if (response) {
+      alert("Quantity updated successfully.");
+    } else {
+      alert("Failed to update quantity.");
+    }
+  } catch (error) {
+    alert("Failed to update quantity:", error);
+  }
+}
 
-// async function sendQuantityUpdateRequest(orderId, quantity) {
-//   try {
-//     const response = await putApi(`http://localhost:3000/api/order/:orderId`, {
-//       quantity: parseInt(quantity)
-//     });
-//     if (response) {
-//       alert("Quantity updated successfully.");
-//     } else {
-//       alert("Failed to update quantity.");
-//     }
-//   } catch (error) {
-//     alert("Failed to update quantity:", error);
-//   }
-// }
-
-// async function deleteOrder(orderElement) {
-//   const confirmation = confirm("주문을 삭제하시겠습니까?");
-//   if (confirmation) {
-//     try {
-//       const orderId = orderElement.dataset.orderId;
-//       await deleteApi(`http://localhost:3000/api/order/:orderId`);
-//       orderElement.remove();
-//       alert("주문이 삭제되었습니다.");
-//     } catch (error) {
-//       console.error("Failed to delete the order:", error);
-//     }
-//   }
-// }
+async function deleteOrder(orderElement) {
+  const confirmation = confirm("주문을 삭제하시겠습니까?");
+  if (confirmation) {
+    try {
+      const orderId = orderElement.querySelector(".order-number").innerText;
+      await deleteApi(`http://localhost:3000/api/order/:orderId`);
+      orderElement.remove();
+      alert("주문이 삭제되었습니다.");
+    } catch (error) {
+      console.error("Failed to delete the order:", error);
+    }
+  }
+}
