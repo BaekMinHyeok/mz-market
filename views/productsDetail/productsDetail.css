@@ -1,6 +1,6 @@
 .container {
   width: 1200px;
-  padding: 300px 0 200px;
+  padding: 100px 0 200px;
   margin: auto;
 }
 
@@ -164,7 +164,7 @@
   letter-spacing: 0.08px;
   line-height: 30px;
   font-weight: 500;
-  word-break: break-word;
+  word-break: keep-all;
 }
 
 .product_info_bottom .product_info_review_box {

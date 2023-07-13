@@ -182,15 +182,17 @@ window.addEventListener("load", updatePaymentInfo);
 function submitOrder() {
   console.log("TEST");
   const cart = JSON.parse(localStorage.getItem("cart"));
-  const productCount = cart.reduce(
-    (total, product) => total + product.quantity,
-    0
-  );
+  const quantity = cart.reduce((total, product) => total + product.quantity, 0);
+
+  const productCount = cart.map((product) => product.quantity);
+  const productSize = cart.map((product) => product.size);
+
   const productPrice = cart.reduce(
     (total, product) => total + product.price * product.quantity,
     0
   );
   const productIdArray = cart.map((product) => product.productId);
+  const productName = cart.map((product) => product.name);
 
   if (!cart || cart.length === 0) {
     alert("장바구니에 상품이 없습니다.");
@@ -202,6 +204,7 @@ function submitOrder() {
   const phonenumValue = phonenumInput.value.replace(regex, "");
   const address = addressInput.value.trim();
   const addressDetail = addressDetailInput.value.trim();
+  const emailValue = emailInput.value.trim();
   const etc = etcInput.value.trim();
 
   if (
@@ -221,9 +224,12 @@ function submitOrder() {
     address: address,
     address2: addressDetail,
     comments: etc,
-    productId: productIdArray,
     price: productPrice + 3000,
-    quantity: productCount,
+    quantity: quantity,
+    email: emailValue,
+    productId: productIdArray,
+    productCount: productCount,
+    productSize: productSize,
   };
 
   console.log("orderData@@@@@@@@@@@@@@@@@@@@@", orderData);
@@ -231,7 +237,7 @@ function submitOrder() {
   const token = localStorage.getItem("token");
 
   // 백엔드 API 데이터 전송
-  fetch("http://localhost:3000/api/order", {
+  fetch("/api/order", {
     method: "POST",
     headers: {
       authorization: `Bearer ${token}`,
@@ -253,8 +259,9 @@ function submitOrder() {
       // 응답에서 orderId 추출
       console.log("DATA", data);
       const orderId = data.orderId;
+      console.log(orderId);
       // 주문 완료 페이지로 이동
-      window.location.href = `http://localhost:3000/cart/order/complete/${orderId}`;
+      window.location.href = `/cart/order/complete/${orderId}`;
     })
     .catch((error) => {
       // console.log(orderData);
