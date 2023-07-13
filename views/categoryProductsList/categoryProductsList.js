@@ -7,11 +7,17 @@ fetch("/header/header.html")
     const menLink = document.querySelector('a[href="/category/men/"]');
     menLink.addEventListener("click", (event) => {
       handleCategoryClick(event, "men");
+
+      // 경로 이동이 안 돼서 설정
+      history.pushState(null, "", "/category/men/");
     });
 
     const womenLink = document.querySelector('a[href="/category/women/"]');
     womenLink.addEventListener("click", (event) => {
       handleCategoryClick(event, "women");
+
+      // 경로 이동이 안 돼서 설정
+      history.pushState(null, "", "/category/women/");
     });
 
     //css 파일 가져오기
