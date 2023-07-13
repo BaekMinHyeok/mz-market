@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               </button>
               <p class="product-price">${product.productCount}개</p>
               <button class="plus-quantity">
-                <i class="fa-solid fa-plus"></i>
+                <i class="fa-solid fa-circle-plus"></i>
               </button>
               <p class="product-status">${product.productPrice}원</p>
             </div>
