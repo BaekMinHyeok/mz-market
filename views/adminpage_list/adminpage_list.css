@@ -10,7 +10,6 @@ body {
   margin: 0 auto;
 }
 
-
 h1 {
   margin: 70px 0 30px 0;
 }
@@ -36,9 +35,8 @@ h1 {
   position: relative;
   z-index: 1;
   top: -1px;
-
 }
-.admin-menu li:hover button{
+.admin-menu li:hover button {
   color: #000;
 }
 .admin-menu li:hover::after {
@@ -51,7 +49,7 @@ h1 {
   top: -1px;
   color: #000;
 }
-.admin-menu li:nth-child(1) button{
+.admin-menu li:nth-child(1) button {
   color: #000;
 }
 .admin-menu li button {
@@ -69,7 +67,6 @@ h1 {
   line-height: normal;
 }
 
-
 .line p {
   width: calc(100% - 0px);
   height: 2px;
@@ -82,13 +79,17 @@ table {
   margin-top: 45px;
   width: calc(100% - 0px);
   border-radius: 10px;
-  border: 3px solid #F2F2F2;
-  background: #FFF;
+  border: 3px solid #f2f2f2;
+  background: #fff;
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.15);
 }
 
 td {
   text-align: center;
+}
+
+.admin-menu {
+  position: relative;
 }
 
 .page-btn {
@@ -150,18 +151,15 @@ button {
   cursor: pointer;
 }
 
-#product-table tr:nth-child(1){
+#IMG {
+  width: 80px;
   height: 80px;
-  background: #F2F2F2;
 }
 
-#product-table tr{
+#product-table tr {
   height: 100px;
 }
-#product-table tr td:nth-child(1) img{
+#product-table tr td:nth-child(1) img {
   width: 60px;
   height: 60px;
-}
-#product-table tr td:nth-child(5) img{
-  cursor: pointer;
 }
