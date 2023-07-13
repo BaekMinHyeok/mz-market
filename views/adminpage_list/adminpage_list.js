@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const deleteBtns = document.querySelectorAll("#deleteBtn");
     deleteBtns.forEach((btn) => {
-      btn.addEventListener("click", function (event) {
+      btn.addEventListener("click", async function (event) {
         const trElement = this.parentNode.parentNode;
         const dataId = event.target.dataset.product2;
         const dataName = event.target.dataset.product3;
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (confirmDelete) {
           trElement.remove();
           console.log("상품 삭제 확인:", dataId);
-          deleteData(dataId); // 상품 삭제 로직 호출
+          await deleteData(dataId); // 상품 삭제 로직 호출
         } else {
           console.log("상품 삭제 취소");
         }
