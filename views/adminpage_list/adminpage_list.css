@@ -156,3 +156,7 @@ button {
 #product-table tr{
   height: 100px;
 }
+#product-table tr td:nth-child(1) img{
+  width: 60px;
+  height: 60px;
+}
