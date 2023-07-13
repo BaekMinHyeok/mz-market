@@ -12,8 +12,6 @@ const deleteData = async (productId) => {
 
     if (response.success) {
       console.log("삭제성공", response.message);
-    } else {
-      console.log("삭제실패");
     }
   } catch (error) {
     console.error(error);

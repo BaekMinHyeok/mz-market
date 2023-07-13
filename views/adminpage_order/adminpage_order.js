@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   try {
     //주문 조회
     const result = await fetchData();
-    console.log(result);
     //주문 수정
     const selectElement = document.querySelectorAll("#shipping");
     selectElement.forEach((select, index) => {
@@ -14,7 +13,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         await ModifyData(status);
       });
     });
-    console.log(result.orders[0].name);
     //삭제 기능
     const deleteBtn = document.querySelectorAll(".delete-btn");
     deleteBtn.forEach((button, i) => {

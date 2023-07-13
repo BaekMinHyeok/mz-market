@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const res = await fetch("/header/header.html");
     const html = await res.text();
-
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -38,6 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           window.location.href = "/";
         }
       });
+      adminCheck();
     }
   } catch (error) {
     console.error("헤더 콘텐츠를 가져오는 중 오류 발생:", error);
@@ -47,18 +47,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function adminCheck() {
   try {
     const token = localStorage.getItem("token");
-    console.log(token);
     const res3 = await fetch("http://localhost:3000/api/admin", {
       method: "GET",
       headers: {
         authorization: `Bearer ${token}`,
       },
     });
-
-    const result = await res3.json();
+    const result = res3.json();
     console.log(result);
     if (result.success) {
-      console.log(result.success);
+      return result;
     } else {
       console.log("err");
     }
@@ -66,5 +64,4 @@ async function adminCheck() {
     console.log(error);
   }
 }
-
-adminCheck();
+console.log(adminCheck());

@@ -93,7 +93,6 @@ const modal = async (dataObj, dataId) => {
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const result = await fetchData();
-    console.log("받아오는 데이터: ", result);
     result.products.forEach((data) => {
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
