@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               <button class="plus-quantity">
                 <i class="fa-solid fa-circle-plus"></i>
               </button>
-              <p class="product-status">원</p>
+              <p class="product-status">${data.productPrice[index]}원</p>
             </div>
           </div>
         </li>

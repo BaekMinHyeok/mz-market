@@ -18,20 +18,29 @@ const registerOrder = async (req, res) => {
       productCount,
       productSize,
       productColor,
-      productPrice,
     } = req.body;
     const decoded = jwt.verify(
       req.headers.authorization.split(" ")[1],
       process.env.SECRET
     );
 
-    let productName = [];
-    for (const prId of productId) {
-      const productInfo = await product.getProductById(prId);
-      // console.log(productInfo.name);
-      productName.push(productInfo.name);
+    let productInfo = [];
+    for (const [index, prId] of productId.entries()) {
+      const getproduct = await product.getProductById(prId);
+      const productChild = {
+        productId: prId,
+        productName: getproduct.name,
+        productCount: productCount[index],
+        productSize: productSize[index],
+        productColor: productColor[index],
+        productPrice: getproduct.price,
+        productImage: getproduct.images,
+        index: index, // 인덱스 값을 변수에 추가
+      };
+      productInfo.push(productChild);
     }
-    // console.log(productName);
+
+    // console.log(productInfo);
     const orderId = await order.register({
       name,
       phoneNumber,
@@ -41,13 +50,8 @@ const registerOrder = async (req, res) => {
       status: "ready",
       price,
       quantity,
-      productName,
       email: decoded.email,
-      productId,
-      productCount,
-      productSize,
-      productColor,
-      productPrice,
+      productInfo,
     });
     res.json({
       success: true,

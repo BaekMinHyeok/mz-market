@@ -17,13 +17,8 @@ class OrderService {
       comments,
       price,
       quantity,
-      productName,
       email,
-      productId,
-      productCount,
-      productSize,
-      productColor,
-      productPrice,
+      productInfo,
     } = info;
     let orderId;
     // 가장 최신 값 가져오기
@@ -46,13 +41,8 @@ class OrderService {
         status: "ready",
         price,
         quantity,
-        productName,
         email,
-        productId,
-        productCount,
-        productSize,
-        productColor,
-        productPrice,
+        productInfo,
       });
       return orderId;
     } catch (error) {

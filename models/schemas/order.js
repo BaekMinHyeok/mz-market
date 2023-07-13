@@ -1,5 +1,40 @@
 const { Schema } = require("mongoose");
 
+const productSchema = new Schema({
+  productId: {
+    type: Number,
+    required: true,
+  },
+  productName: {
+    type: String,
+    required: true,
+  },
+  productCount: {
+    //개수
+    type: Number,
+    required: true,
+  },
+  productSize: {
+    //사이즈
+    type: String,
+    required: true,
+  },
+  productColor: {
+    //색상
+    type: String,
+    required: true,
+  },
+  productPrice: {
+    //가격
+    type: Number,
+    required: true,
+  },
+  productImage: {
+    type: String,
+    required: true,
+  },
+});
+
 const orderSchema = new Schema({
   orderId: {
     type: Number,
@@ -46,28 +81,8 @@ const orderSchema = new Schema({
     trim: true,
     required: true,
   },
-  productName: {
-    type: [String],
-    required: true,
-  },
-  productId: {
-    type: [Number],
-    required: true,
-  },
-  productCount: {
-    type: [Number],
-    required: true,
-  },
-  productSize: {
-    type: [String],
-    required: true,
-  },
-  productColor: {
-    type: [String],
-    required: true,
-  },
-  productPrice: {
-    type: [Number],
+  productInfo: {
+    type: [productSchema],
     required: true,
   },
 });
