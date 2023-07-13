@@ -62,6 +62,10 @@ const orderSchema = new Schema({
     type: [String],
     required: true,
   },
+  productColor: {
+    type: [String],
+    required: true,
+  },
 });
 
 module.exports = orderSchema;

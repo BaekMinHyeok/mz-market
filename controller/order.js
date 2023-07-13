@@ -17,8 +17,8 @@ const registerOrder = async (req, res) => {
       productId,
       productCount,
       productSize,
+      productColor,
     } = req.body;
-
     const decoded = jwt.verify(
       req.headers.authorization.split(" ")[1],
       process.env.SECRET
@@ -45,6 +45,7 @@ const registerOrder = async (req, res) => {
       productId,
       productCount,
       productSize,
+      productColor,
     });
     res.json({
       success: true,

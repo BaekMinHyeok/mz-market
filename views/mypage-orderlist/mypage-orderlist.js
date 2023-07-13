@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       </div>
       `;
 
-      data.productName.forEach((product) => {
+      data.productName.forEach((product, index) => {
         newOrderlist.innerHTML += `
         <ul class="orderlist">
         <li class="order-list">
@@ -45,11 +45,11 @@ document.addEventListener("DOMContentLoaded", async function () {
           <div class="order-list-box">
             <div class="order-list-info">
               <p class="product-name">${product}</p>
-              <p class="product-size">red/xl</p>
+              <p class="product-size">red/${data.productSize[index]}</p>
               <button class="minus-quantity">
                 <i class="fa-regular fa-circle-minus"></i>
               </button>
-              <p class="product-price">1</p>
+              <p class="product-price">${data.productCount[index]}개</p>
               <button class="plus-quantity">
                 <i class="fa-solid fa-circle-plus"></i>
               </button>
