@@ -4,6 +4,7 @@ const orderList = document.querySelector("#orderlistContainer");
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const result = await getApi("http://localhost:3000/api/order/user");
+    // console.log(result);
     result.orders.reverse().forEach((data) => {
       const newOrderlist = document.createElement("div");
       newOrderlist.classList.add("order-container");
@@ -36,23 +37,23 @@ document.addEventListener("DOMContentLoaded", async function () {
       </div>
       `;
 
-      data.productName.forEach(async (product, index) => {
+      data.productInfo.forEach(async (product) => {
         newOrderlist.innerHTML += `
         <ul class="orderlist">
         <li class="order-list">
           <div class="order-list-img"><img src="" /></div>
           <div class="order-list-box">
             <div class="order-list-info">
-              <p class="product-name">${product}</p>
-              <p class="product-size">${data.productColor[index]}/${data.productSize[index]}</p>
+              <p class="product-name">${product.productName}</p>
+              <p class="product-size">${product.productColor}/${product.productSize}</p>
               <button class="minus-quantity">
                 <i class="fa-regular fa-circle-minus"></i>
               </button>
-              <p class="product-price">${data.productCount[index]}개</p>
+              <p class="product-price">${product.productCount}개</p>
               <button class="plus-quantity">
                 <i class="fa-solid fa-circle-plus"></i>
               </button>
-              <p class="product-status">${data.productPrice[index]}원</p>
+              <p class="product-status">${product.productPrice}원</p>
             </div>
           </div>
         </li>
