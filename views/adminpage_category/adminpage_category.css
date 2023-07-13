@@ -47,6 +47,9 @@ h1 {
   top: -1px;
   color: #000;
 }
+.admin-menu li:hover button{
+  color: #000;
+}
 .admin-menu li:nth-child(3) button{
   color: #000;
 }
@@ -119,6 +122,7 @@ h1 {
     width: calc(83% - 0px);
     height: 52px;
     flex-shrink: 0;
+    padding-left: 20px;
 }
 
 .rectangle2 {
@@ -130,6 +134,7 @@ h1 {
     width: calc(83% - 0px);
     height: 35px;
     flex-shrink: 0;
+    padding-left: 20px;
 }
 
 .img-btn {
