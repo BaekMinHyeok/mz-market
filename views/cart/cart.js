@@ -17,13 +17,15 @@ if (cartData) {
     const listItem = document.createElement("li");
     listItem.classList.add("order_product_list");
     listItem.innerHTML = `
-      <div class="order_product_img"></div>
+      <div class="order_product_img">
+        <img src="${item.productImage}"/>
+      </div>
       <div class="order_info_box">
         <div class="order_product_info">
           <div class="order_product_top">
             <p class="product_name">${item.name}</p>
             <div class ="selected_size"><span>Size :  &nbsp;</span><p class="product_size"> ${item.size}</p></div>
-            <p class="product_price">${item.price}</p>
+            <p class="product_price">${item.price} 원</p>
           </div>
           <div class="order_product_edit_count">
               <span class="material-symbols-outlined product_remove"> remove </span>
@@ -148,6 +150,7 @@ function calculateTotalPrice() {
   productPriceElements.forEach((element, index) => {
     const priceText = element.textContent;
     const price = parseInt(priceText);
+    console.log("PRICE", price);
     const quantity = parseInt(productNumElements[index].textContent);
     const itemTotalPrice = price * quantity;
     totalPrice += itemTotalPrice;
@@ -185,7 +188,7 @@ const orderButton = document.querySelector(".nav_order_button");
 orderButton.addEventListener("click", placeOrder);
 
 function placeOrder() {
-  const productDetailURL = "http://localhost:3000/cart/order";
+  const productDetailURL = "/cart/order";
   console.log(productDetailURL);
   window.location.href = productDetailURL;
 
