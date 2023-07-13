@@ -1,13 +1,14 @@
 body {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   height: 100vh;
   text-align: center;
-  margin: 0 ;
-  padding: 0;
 }
-
+h1 {
+  margin-bottom: 50px;
+}
 .tabs {
   flex-direction: column;
 }
@@ -23,7 +24,7 @@ body {
   font-size: smaller;
 }
 
-input, button.edit-account{
+input, button.signup-button {
   width: 300px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -50,31 +51,3 @@ label[for="password-check"] {
   font-size: x-small;
 }
 
-.section {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-top: 20px;
-}
-.container{
-  max-width: 300px !important;
-  margin: 0 auto;
-}
-
-.tabs ul{
-  display: flex;
-  justify-content: center;
-}
-.tabs li {
-  width: 100%;
-}
-
-.tabs li.is-active a {
-  border-bottom-color: #000;
-  color: #000;
-}
-
-.delete-account{
-  background-color: inherit;
-  margin-top: 20px;
-}

@@ -1,62 +1,52 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>마이페이지</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+  <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
   <link rel="stylesheet" href="http://localhost:3000/reset.css">
   <link rel="stylesheet" href="./mypage-myinfo.css">
 </head>
-
 <body>
-  <section class="section">
-    <div class="container">
-    <div>
-      <h1>마이페이지</h1>
-    </div>
-    <div class="tabs">
-      <ul>
-        <li class="is-active"><a>내 정보 수정</a></li>
-        <li class="order-history"><a>주문내역</a></li>
-      </ul>
-    </div>
-    <div>
-      <h1>내 정보 수정</h1>
-    </div>
-    <div>
-      <h5>내 정보를 수정할수 있어요.</h5>
-    </div>
-    <div class="container">
-      <main id="tab-1" class="tab-content">
-        <div class="input-container">
-          <label for="name">이름</label>
-          <input type="name" id="name" placeholder="이름을 입력하세요">
-        </div>
-        <div class="input-container">
-          <label for="email">이메일</label>
-          <input type="email" id="email" placeholder="이메일을 입력하세요">
-        </div>
-        <div class="input-container">
-          <label for="password">비밀번호</label>
-          <input type="password" id="password" placeholder="비밀번호를 입력하세요">
-        </div>
-        <div class="input-container">
-          <label for="password-check">비밀번호 확인</label>
-          <input type="password" id="password-check" placeholder="비밀번호를 입력하세요">
-        </div>
-        <div class="input-container">
-          <button class="edit-account">수정</button>
-          <button class="delete-account">회원탈퇴</button>
-        </div>
-        <div>
-      </main>
-    </div>
+  <div><h1>마이페이지</h1></div>
+  <div class="tabs">
+    <ul>
+      <li class="is-active"><a>내 정보 수정</a></li>
+      <li class="order-history"><a>주문내역</a></li>
+    </ul>
   </div>
-  </section>
-  <script src="/header/header.js"></script>
-  <script src="./mypage-myinfo.js" type="module"></script>
+  <div><h1>내 정보 수정</h1></div>
+  <div><h5>내 정보를 수정할수 있어요.</h5></div>
+  <div class="container">
+    <main id="tab-1" class="tab-content">
+      <div class="input-container">
+        <label for="name">이름</label>
+        <input type="name" id="name" placeholder="이름을 입력하세요">
+      </div>
+      <div class="input-container">
+        <label for="email">이메일</label>
+        <input type="email" id="email" placeholder="이메일을 입력하세요">
+      </div>
+      <div class="input-container">
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" placeholder="비밀번호를 입력하세요">
+      </div>
+      <div class="input-container">
+        <label for="password-check">비밀번호 확인</label>
+        <input type="password" id="password-check" placeholder="비밀번호를 입력하세요">
+      </div>
+      <div class="input-container">
+        <button class="edit-account">수정</button>
+        <button class="delete-account">회원탈퇴</button>
+      </div>
+      <div>
+    </main>
+  </div>
+    <script src="/header/header.js"></script>
+    <script src="./mypage-myinfo.js" type="module"></script>
 </body>
-
 </html>
