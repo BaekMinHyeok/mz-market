@@ -23,6 +23,7 @@ class OrderService {
       productCount,
       productSize,
       productColor,
+      productPrice,
     } = info;
     let orderId;
     // 가장 최신 값 가져오기
@@ -51,6 +52,7 @@ class OrderService {
         productCount,
         productSize,
         productColor,
+        productPrice,
       });
       return orderId;
     } catch (error) {

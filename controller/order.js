@@ -1,4 +1,4 @@
-const { order } = require("../services/oreder");
+const { order } = require("../services/order");
 const { product } = require("../services/product");
 const jwt = require("jsonwebtoken");
 
@@ -18,6 +18,7 @@ const registerOrder = async (req, res) => {
       productCount,
       productSize,
       productColor,
+      productPrice,
     } = req.body;
     const decoded = jwt.verify(
       req.headers.authorization.split(" ")[1],
@@ -46,6 +47,7 @@ const registerOrder = async (req, res) => {
       productCount,
       productSize,
       productColor,
+      productPrice,
     });
     res.json({
       success: true,

@@ -1,7 +1,6 @@
 import { getApi, putApi, deleteApi } from "http://localhost:3000/api.js";
 
 const orderList = document.querySelector("#orderlistContainer");
-
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const result = await getApi("http://localhost:3000/api/order/user");
@@ -37,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       </div>
       `;
 
-      data.productName.forEach((product, index) => {
+      data.productName.forEach(async (product, index) => {
         newOrderlist.innerHTML += `
         <ul class="orderlist">
         <li class="order-list">
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           <div class="order-list-box">
             <div class="order-list-info">
               <p class="product-name">${product}</p>
-              <p class="product-size">red/${data.productSize[index]}</p>
+              <p class="product-size">${data.productColor[index]}/${data.productSize[index]}</p>
               <button class="minus-quantity">
                 <i class="fa-regular fa-circle-minus"></i>
               </button>
@@ -53,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               <button class="plus-quantity">
                 <i class="fa-solid fa-circle-plus"></i>
               </button>
-              <p class="product-status">10000원</p>
+              <p class="product-status">원</p>
             </div>
           </div>
         </li>
@@ -88,6 +87,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.error("Failed to fetch order data:", error);
   }
 });
+
+async function getPrice(data) {
+  let productPrice = [];
+  for (const id of data.productId) {
+    const productInfo = await getApi(`http://localhost:3000/api/product/${id}`);
+    productPrice.push(productInfo.product.price);
+  }
+  return productPrice;
+}
 
 // function decreaseQuantity(data.) {
 //   let quantity = parseInt(data..innerText);
