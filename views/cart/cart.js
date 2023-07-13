@@ -24,8 +24,10 @@ if (cartData) {
         <div class="order_product_info">
           <div class="order_product_top">
             <p class="product_name">${item.name}</p>
-            <div class ="selected_size"><span>Size :  &nbsp;</span><p class="product_size">${item.size}</p></div>
-            <p class="product_price">${item.price}</p>
+            <div class ="selected_size"><span>Size :  &nbsp;</span><p class="product_size">${
+              item.size
+            }</p></div>
+            <p class="product_price">${item.price.toLocaleString()}원</p>
           </div>
           <div class="order_product_edit_count">
               <span class="material-symbols-outlined product_remove"> remove </span>
@@ -150,8 +152,9 @@ function calculateTotalPrice() {
 
   productPriceElements.forEach((element, index) => {
     const priceText = element.textContent;
-    const price = parseInt(priceText);
-    console.log("PRICE", price);
+    // console.log("PRICETEXT 변환", Number(priceText.replace(/\D/g, "")));
+    const price = Number(priceText.replace(/\D/g, ""));
+    // console.log("PRICE", price);
     const quantity = parseInt(productNumElements[index].textContent);
     const itemTotalPrice = price * quantity;
     totalPrice += itemTotalPrice;
