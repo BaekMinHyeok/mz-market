@@ -56,7 +56,7 @@ async function adminCheck() {
     const result = res3.json();
     console.log(result);
     if (result.success) {
-      return result;
+      return result.success;
     } else {
       console.log("err");
     }
@@ -64,4 +64,4 @@ async function adminCheck() {
     console.log(error);
   }
 }
-console.log(adminCheck());
+adminCheck();
