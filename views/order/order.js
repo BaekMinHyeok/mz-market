@@ -231,7 +231,7 @@ function submitOrder() {
   const token = localStorage.getItem("token");
 
   // 백엔드 API 데이터 전송
-  fetch("http://localhost:3000/api/order", {
+  fetch("/api/order", {
     method: "POST",
     headers: {
       authorization: `Bearer ${token}`,
@@ -254,7 +254,7 @@ function submitOrder() {
       console.log("DATA", data);
       const orderId = data.orderId;
       // 주문 완료 페이지로 이동
-      window.location.href = `http://localhost:3000/cart/order/complete/${orderId}`;
+      window.location.href = `/cart/order/complete/${orderId}`;
     })
     .catch((error) => {
       // console.log(orderData);
