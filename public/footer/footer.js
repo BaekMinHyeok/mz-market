@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
   const footer = document.createElement('footer');
-  footer.innerHTML = '<div class="container"><p>Copyright 2023. mz-market.</p> <p>백없는 팀.</p> <p>All rights reserved.</p></div>';
-  footer.classList.add('footer-style');
+  footer.innerHTML = '<div class="container"><p>Copyright 2023. mz-market.</p> <p>Team without bag.</p> <p>All rights reserved.</p></div>';
+
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = './footer.css';
+  document.head.appendChild(link);
   document.body.appendChild(footer);
 });
