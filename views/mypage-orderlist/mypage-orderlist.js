@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           newOrderlist.innerHTML += `
         <ul class="orderlist">
         <li class="order-list">
-          <div class="order-list-img"><img src="${product.productImg}"/></div>
           <div class="order-list-box">
             <div class="order-list-info">
               <p class="product-name">${product.productName}</p>
