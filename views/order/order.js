@@ -15,6 +15,31 @@ const addressError = document.getElementById("addressError");
 const etcInput = document.querySelector(".etc_input");
 const paymentButton = document.getElementById("paymentButton");
 
+const token = localStorage.getItem("token");
+
+async function getUserData() {
+  try {
+    const response = await fetch("/api/user", {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      nameInput.value = data.user.name;
+      emailInput.value = data.user.email;
+      console.log(data);
+    } else {
+      throw new Error("API 호출 에러");
+    }
+  } catch (error) {
+    console.error("ERROR:", error);
+  }
+}
+
+getUserData();
+
 // 이름 검사
 function validateNameInput() {
   const nameValue = nameInput.value.trim();
@@ -26,7 +51,7 @@ function validateNameInput() {
     nameError.textContent = "이름을 입력해주세요.";
     paymentButton.disabled = true;
   } else if (!regex.test(nameValue)) {
-    nameError.textContent = "영문 혹은 한글만 입력해주세요.";
+    nameError.textContent = "공백 없이 영문 혹은 한글만 입력해주세요.";
     paymentButton.disabled = true;
   } else {
     nameError.textContent = "";
@@ -180,7 +205,7 @@ window.addEventListener("load", updatePaymentInfo);
 
 // 주문 정보 전송
 function submitOrder() {
-  console.log("TEST");
+  // console.log("TEST");
   const cart = JSON.parse(localStorage.getItem("cart"));
   const quantity = cart.reduce((total, product) => total + product.quantity, 0);
 
@@ -232,7 +257,7 @@ function submitOrder() {
     productSize: productSize,
   };
 
-  console.log("orderData@@@@@@@@@@@@@@@@@@@@@", orderData);
+  // console.log("orderData@@@@@@@@@@@@@@@@@@@@@", orderData);
 
   const token = localStorage.getItem("token");
 
@@ -259,7 +284,7 @@ function submitOrder() {
       // 응답에서 orderId 추출
       console.log("DATA", data);
       const orderId = data.orderId;
-      console.log(orderId);
+      // console.log(orderId);
       // 주문 완료 페이지로 이동
       window.location.href = `/cart/order/complete/${orderId}`;
     })
