@@ -4,10 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>My page - orderlist</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
+    <link rel="stylesheet" href="http://localhost:3000/reset.css">
     <link rel="stylesheet" href="mypage-orderlist.css" />
     <script src="mypage-orderlist.js" type="module" defer></script>
   </head>
@@ -17,11 +14,11 @@
         <div>
           <h1>마이페이지</h1>
         </div>
-        <div class="tabs">
-          <ul>
-            <li><a>내 정보 수정</a></li>
-            <li class="is-active"><a>주문내역</a></li>
-          </ul>
+        <div>
+          <ul class="tabs">
+            <li><button class="page-btn" id="mypage-myinfo">내 정보 수정</button></li>
+            <li><button class="page-btn" id="mypage-orderlist">주문내역</button></li>
+          </ul>	
         </div>
         <div class="container orderlist-container" id="orderlistContainer">
           <!-- <div class="order-container">
@@ -47,7 +44,7 @@
                     <button class="minus-quantity">
                       <i class="fa-regular fa-circle-minus"></i>
                     </button>
-                    <p class="product-price">1</p>
+                    <p class="product-count">1</p>
                     <button class="plus-quantity">
                       <i class="fa-solid fa-circle-plus"></i>
                     </button>
@@ -96,5 +93,6 @@
       ></button>
     </div>
     <script src="/header/header.js"></script>
+    <script src="/footer/footer.js"></script>
   </body>
 </html>

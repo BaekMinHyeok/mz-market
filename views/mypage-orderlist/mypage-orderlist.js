@@ -41,23 +41,23 @@ document.addEventListener("DOMContentLoaded", async function () {
         data.productInfo.forEach(async (product) => {
           newOrderlist.innerHTML += `
         <ul class="orderlist">
-        <li class="order-list">
-          <div class="order-list-img"><img src="" /></div>
-          <div class="order-list-box">
-            <div class="order-list-info">
-              <p class="product-name">${product.productName}</p>
-              <p class="product-size">${product.productColor}/${product.productSize}</p>
-              <button class="minus-quantity">
-                <i class="fa-regular fa-circle-minus"></i>
-              </button>
-              <p class="product-price">${product.productCount}개</p>
-              <button class="plus-quantity">
-                <i class="fa-solid fa-circle-plus"></i>
-              </button>
-              <p class="product-status">${product.productPrice}원</p>
+          <li class="order-list">
+           <div class="order-list-img"><img src="${product.productImg}" /></div>
+           <div class="order-list-box">
+           <div class="order-list-info">
+            <p class="product-name">${product.productName}</p>
+            <p class="product-size">${product.productSize}</p>
+            <button class="minus-quantity">
+              <i class="fa-solid fa-minus"></i>
+            </button>
+            <p class="product-count">${product.productCount}개</p>
+            <button class="plus-quantity">
+              <i class="fa-solid fa-circle-plus"></i>
+            </button>
+            <p class="product-status">${product.productPrice * product.productCount}원</p>
             </div>
-          </div>
-        </li>
+            </div>
+          </li>
         </ul>
         `;
         });
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           if (data.status === "ready") {
             const orderId = data.orderId;
             const quantityElement =
-              newOrderlist.querySelector(".product-price");
+              newOrderlist.querySelector(".product-count");
             const quantity = parseInt(quantityElement.innerText);
             await sendQuantityUpdateRequest(orderId, quantity);
             quantityElement.innerText = quantity.toString();
@@ -130,7 +130,7 @@ function increaseQuantity(quantityElement) {
 
 async function sendQuantityUpdateRequest(orderId, quantity) {
   try {
-    const response = await putApi(`http://localhost:3000/api/order/:orderId`, {
+    const response = await putApi(`http://localhost:3000/api/order/${orderId}`, {
       quantity: quantity,
     });
     if (response) {
@@ -148,7 +148,7 @@ async function deleteOrder(orderElement) {
   if (confirmation) {
     try {
       const orderId = orderElement.querySelector(".order-number").innerText;
-      await deleteApi(`http://localhost:3000/api/order/:orderId`);
+      await deleteApi(`http://localhost:3000/api/order/${orderId}`);
       orderElement.remove();
       alert("주문이 삭제되었습니다.");
     } catch (error) {
@@ -156,3 +156,9 @@ async function deleteOrder(orderElement) {
     }
   }
 }
+
+// Add event listener to the "Edit my info" button
+const myInfoButton = document.getElementById("mypage-myinfo");
+myInfoButton.addEventListener("click", () => {
+  window.location.href = "http://localhost:3000/user/info";
+});
