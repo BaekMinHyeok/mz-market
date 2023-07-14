@@ -35,12 +35,12 @@
   cursor: pointer;
   height: 434px;
   width: 278px;
+  margin-bottom: 200px;
 }
 
 .product_container .products_list_wrapper .product .product_img {
   width: 278px;
-  height: 278px;
-  border-radius: 20px;
+  height: 420px;
   background-color: #f2f2f2;
   margin-bottom: 35px;
 }
@@ -48,12 +48,9 @@
 .product_container .products_list_wrapper .product .product_img img {
   width: 100%;
   height: 100%;
-  border-radius: 20px;
   object-fit: cover;
 }
 
-.product_container .products_list_wrapper .product .product_text_box {
-}
 
 .product_container
   .products_list_wrapper
@@ -87,7 +84,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .product_container
