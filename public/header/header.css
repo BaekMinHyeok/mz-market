@@ -3,6 +3,7 @@
   background-color: black;
   position: fixed;
   z-index: 999;
+  top: 0;
 }
 .header-container {
   display: flex;
