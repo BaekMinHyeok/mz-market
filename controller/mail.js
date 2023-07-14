@@ -2,9 +2,10 @@ const nodemailer = require("nodemailer");
 const ejs = require("ejs");
 const path = require("path");
 var appDir = path.dirname(require.main.filename);
+let authNum;
 
 const authMail = async (req, res) => {
-  let authNum = Math.random().toString().substring(2, 6);
+  authNum = Math.random().toString().substring(2, 6);
   let emailTemplete;
   ejs.renderFile(
     appDir + "/template/authMail.ejs",
@@ -38,7 +39,10 @@ const authMail = async (req, res) => {
   try {
     const info = await transporter.sendMail(mailOptions);
     console.log("Finish sending email : " + info.response);
-    res.send(authNum);
+    // res.send(authNum);
+    res.json({
+      success: true,
+    });
     transporter.close();
   } catch (error) {
     console.log(error);
@@ -46,4 +50,4 @@ const authMail = async (req, res) => {
   }
 };
 
-module.exports = { authMail };
+module.exports = { authMail, getAuthNum: () => authNum };
