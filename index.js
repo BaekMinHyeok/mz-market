@@ -17,6 +17,8 @@ mongoose.connection.on("connected", () => {
 app.use("/", page);
 app.use("/api", api);
 
+app.use('/images', express.static('images')) //정적파일 메인 이미지 업로드
+
 app.listen(3000);
 
 
