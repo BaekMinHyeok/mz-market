@@ -1,48 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://localhost:3000/reset.css" type="text/css">
-    <link rel="stylesheet" href="adminpage_order.css" type="text/css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="http://kdt-sw-5-team11.elicecoding.com/reset.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="adminpage_order.css" type="text/css" />
     <title>관리자 상품목록 페이지</title>
-</head>
+  </head>
 
-<body>
-  <section class="admin-content">
-    <div class="admin-wrap">
-      <object data="../header/header.html" width="100%" height="100%"></object>
+  <body>
+    <section class="admin-content">
       <div class="admin-wrap">
+        <object
+          data="../header/header.html"
+          width="100%"
+          height="100%"
+        ></object>
+        <div class="admin-wrap">
           <h1>관리자 페이지</h1>
           <div class="admin-menu">
             <ul>
-              <li><button class="page-btn" id="listpageBtn">상품목록</button></li>
-              <li><button class="page-btn" id="addpageBtn">상품추가</button></li>
-              <li><button class="page-btn" id="categoryBtn">카테고리</button></li>
-              <li><button class="page-btn" id="management">주문관리</button></li>
+              <li>
+                <button class="page-btn" id="listpageBtn">상품목록</button>
+              </li>
+              <li>
+                <button class="page-btn" id="addpageBtn">상품추가</button>
+              </li>
+              <li>
+                <button class="page-btn" id="categoryBtn">카테고리</button>
+              </li>
+              <li>
+                <button class="page-btn" id="management">주문관리</button>
+              </li>
             </ul>
           </div>
           <div class="product-list">
-              <table border="1">
-                  <tbody class="orderList">
-                    <th>번호</th>
-                    <th>이름</th>
-                    <th>주문상품</th>
-                    <th>주문총액</th>
-                    <th>배송상태</th>
-                    <th>삭제</th>
-                  </tbody>
-                  </table>
+            <table border="1">
+              <tbody class="orderList">
+                <th>번호</th>
+                <th>이름</th>
+                <th>주문상품</th>
+                <th>주문총액</th>
+                <th>배송상태</th>
+                <th>삭제</th>
+              </tbody>
+            </table>
           </div>
+        </div>
       </div>
-    </div>
-  </section>
-   
+    </section>
+
     <script src="adminpage_order.js" type="module"></script>
     <script src="move.js"></script>
     <script src="/header/header.js"></script>
     <script src="/footer/footer.js"></script>
-</body>
-
+  </body>
 </html>

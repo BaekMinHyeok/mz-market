@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 async function getProductcategory() {
-  const url = "http://localhost:3000/api/category";
+  const url = "http://kdt-sw-5-team11.elicecoding.com/api/category";
   const token = localStorage.getItem("token");
 
   try {
