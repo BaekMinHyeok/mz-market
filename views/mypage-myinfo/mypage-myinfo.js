@@ -7,7 +7,6 @@ const passwordCheckInput = document.querySelector("#password-check");
 const editAccountButton = document.querySelector(".edit-account");
 const deleteAccountButton = document.querySelector(".delete-account");
 
-
 editAccountButton.addEventListener("click", editAccount);
 deleteAccountButton.addEventListener("click", deleteAccount);
 
