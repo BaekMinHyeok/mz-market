@@ -1,4 +1,4 @@
-import { putApi, deleteApi, getApi } from "../../public/api.js";
+import { putApi, deleteApi, getApi } from "/api.js";
 
 const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#email");
