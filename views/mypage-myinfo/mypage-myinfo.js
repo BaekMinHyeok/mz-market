@@ -86,5 +86,6 @@ async function deleteAccount() {
 // Add event listener to the "Order History" button
 const orderListButton = document.getElementById("mypage-orderlist");
 orderListButton.addEventListener("click", () => {
-  window.location.href = "http://localhost:3000/user/order_history";
+  window.location.href =
+    "http://kdt-sw-5-team11.elicecoding.com/user/order_history";
 });
