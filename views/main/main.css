@@ -37,6 +37,10 @@
   cursor: pointer;
   height: 434px;
 }
+.product_img :hover{
+  transform: scale(1.2);
+  transition: .5s ease-in-out;
+}
 
 .product .product_img {
   width: 278px;
@@ -89,4 +93,9 @@
 
 .swiper-slide img{
   width: 100%;
+  height: 700px;
+}
+
+:root{
+  --swiper-theme-color: #fff;
 }
