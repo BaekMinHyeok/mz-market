@@ -4,7 +4,6 @@ const orderList = document.querySelector("#orderlistContainer");
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const result = await getApi("/api/order/user");
-    console.log("유저주문", result);
     if (result.success) {
       result.orders.reverse().forEach((data) => {
         // console.log("주문내역 데이터", data);
@@ -120,7 +119,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             if (data.status === "ready") {
               decreaseQuantity(button.nextElementSibling);
               productCount[index]--;
-              console.log(productCount);
+              // console.log(productCount);
             }
           });
         });
@@ -130,7 +129,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             if (data.status === "ready") {
               increaseQuantity(button.previousElementSibling);
               productCount[index]++;
-              console.log(productCount);
+              // console.log(productCount);
             }
           });
         });
@@ -149,7 +148,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         editButton.addEventListener("click", async () => {
           if (data.status === "ready") {
-            console.log("sddddddddddddddddddddd", productCount);
+            // console.log("sddddddddddddddddddddd", productCount);
             const orderId = data.orderId;
             const quantityElement =
               newOrderlist.querySelector(".product-count");
@@ -168,7 +167,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
 
         deleteButton.addEventListener("click", () => {
-          console.log("삭제요소", newOrderlist);
+          // console.log("삭제요소", newOrderlist);
           deleteOrder(newOrderlist, data.orderId);
         });
       });
@@ -207,10 +206,10 @@ async function sendQuantityUpdateRequest(orderId, productId, productCount) {
     productCount: productCount,
   };
 
-  console.log(
-    "수량 수정을 눌렀을 때 상품 이름과 상품 카운트.........",
-    editData
-  );
+  // console.log(
+  //   "수량 수정을 눌렀을 때 상품 이름과 상품 카운트.........",
+  //   editData
+  // );
 
   try {
     const response = await fetch(`/api/order/${orderId}`, {
@@ -222,11 +221,11 @@ async function sendQuantityUpdateRequest(orderId, productId, productCount) {
       body: JSON.stringify(editData),
     });
 
-    console.log(response);
+    // console.log(response);
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
     } else {
       throw new Error("API 호출 에러");
     }
@@ -246,8 +245,8 @@ async function deleteOrder(orderElement) {
   const orderId = orderElement.querySelector(".order-id").innerText;
   const orderIdToNumber = parseInt(orderId);
 
-  console.log("ORDERID", orderId, "Typeof", typeof orderId);
-  console.log(orderIdToNumber, "변환", typeof orderIdToNumber);
+  // console.log("ORDERID", orderId, "Typeof", typeof orderId);
+  // console.log(orderIdToNumber, "변환", typeof orderIdToNumber);
 
   if (confirmation) {
     try {
@@ -261,14 +260,14 @@ async function deleteOrder(orderElement) {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("data ", data);
+        // console.log("data ", data);
 
         if (data.success) {
           orderElement.remove();
-          console.log("삭제 Element", orderElement);
+          // console.log("삭제 Element", orderElement);
           alert("주문이 삭제되었습니다.");
         } else {
-          console.log("주문 삭제 실패");
+          // console.log("주문 삭제 실패");
         }
       } else {
         throw new Error("API 호출 에러");
