@@ -68,6 +68,7 @@ async function createAccount() {
     } else {
       const errorMessage = await result.message;
       alert(errorMessage);
+      alert("에러가 발생했어요. 관리자에게 문의해주세요.");
     }
   } catch (error) {
     console.error(error);
@@ -97,6 +98,7 @@ authButton.addEventListener("click", async () => {
     completeButton.disabled = false;
   } catch (error) {
     // console.log("실패");
+    alert("에러가 발생했어요. 관리자에게 문의해주세요.");
   }
 });
 

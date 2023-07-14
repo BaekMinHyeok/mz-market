@@ -18,7 +18,7 @@ export const getApi = async (path) => {
       throw new Error("Failed to fetch data.");
     }
   } catch (error) {
-    console.error("Error in GET request:", error);
+    // console.error("Error in GET request:", error);
     throw error;
   }
 };
@@ -38,7 +38,7 @@ export const postApi = async (path, data) => {
       throw new Error("Failed to upload file.");
     }
   } catch (error) {
-    console.error("Error in POST request:", error);
+    // console.error("Error in POST request:", error);
     throw error;
   }
 };
@@ -57,7 +57,7 @@ export const putApi = async (path, data) => {
       throw new Error("Failed to update data.");
     }
   } catch (error) {
-    console.error("Error in PUT request:", error);
+    // console.error("Error in PUT request:", error);
     throw error;
   }
 };
@@ -75,7 +75,7 @@ export const deleteApi = async (path) => {
       throw new Error("Failed to delete data.");
     }
   } catch (error) {
-    console.error("Error in DELETE request:", error);
+    // console.error("Error in DELETE request:", error);
     throw error;
   }
 };

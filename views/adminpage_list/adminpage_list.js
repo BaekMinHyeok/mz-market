@@ -87,6 +87,7 @@ const modal = async (dataObj, dataId) => {
     addEventSaveBtn();
   } catch (error) {
     // console.log(error);
+    alert("에러가 발생했어요. 관리자에게 문의해주세요.");
   }
 };
 // 리스트 출력하기
@@ -132,6 +133,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           await deleteData(dataId); // 상품 삭제 로직 호출
         } else {
           // console.log("상품 삭제 취소");
+          alert("에러가 발생했어요. 관리자에게 문의해주세요.");
         }
       });
     });

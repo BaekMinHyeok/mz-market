@@ -49,6 +49,7 @@ savebtn.addEventListener("click", async function () {
     }
   } catch (error) {
     // console.log("Error:", error);
+    alert("에러가 발생했어요. 관리자에게 문의해주세요.");
     // 오류 처리 로직 추가
   }
 });

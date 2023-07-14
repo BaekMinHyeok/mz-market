@@ -17,9 +17,11 @@ const deleteData = async (orderId) => {
       location.reload();
     } else {
       // console.log("오류");
+      alert("에러가 발생했어요. 관리자에게 문의해주세요.");
     }
   } catch (error) {
     console.error(error);
+    alert("에러가 발생했어요. 관리자에게 문의해주세요.");
   }
 };
 

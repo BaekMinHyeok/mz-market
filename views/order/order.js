@@ -34,7 +34,8 @@ async function getUserData() {
       throw new Error("API 호출 에러");
     }
   } catch (error) {
-    console.error("ERROR:", error);
+    // console.error("ERROR:", error);
+    alert("에러가 발생했어요. 관리자에게 문의해주세요.");
   }
 }
 
@@ -293,6 +294,9 @@ function submitOrder() {
       console.error("주문 내용 전송 오류:", error);
       alert("오류가 발생했습니다.");
     });
+
+  // 장바구니 데이터 초기화
+  localStorage.removeItem("cart");
 }
 
 // 결제하기 버튼 클릭, 주문 정보 전송

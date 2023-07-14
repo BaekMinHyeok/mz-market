@@ -17,7 +17,8 @@ async function getUserData() {
     nameInput.value = data.user.name;
     emailInput.value = data.user.email;
   } catch (error) {
-    console.error("Failed to fetch user data:", error);
+    // console.error("Failed to fetch user data:", error);
+    alert("에러가 발생했어요. 관리자에게 문의해주세요.");
   }
 }
 
@@ -57,7 +58,8 @@ async function editAccount() {
       alert("회원정보를 수정하는데 실패하였습니다.");
     }
   } catch (error) {
-    alert("Failed to update account information:", error);
+    // alert("Failed to update account information:", error);
+    alert("에러가 발생했어요. 관리자에게 문의해주세요.");
   }
 }
 
@@ -73,7 +75,8 @@ async function deleteAccount() {
       alert("회원 탈퇴에 실패하였습니다.");
     }
   } catch (error) {
-    alert("Failed to delete the account:", error);
+    // alert("Failed to delete the account:", error);
+    alert("에러가 발생했어요. 관리자에게 문의해주세요.");
   }
 }
 

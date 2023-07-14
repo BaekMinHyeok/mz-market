@@ -23,7 +23,7 @@ async function loginBtnHandle() {
 
   // 이메일 유효성 검사
   if (!validateEmail(emailValue)) {
-    alert("이메일 형식에 맞지 않습니다!");
+    alert("이메일 형식에 맞지 않습니다.");
     return;
   }
 
@@ -57,10 +57,10 @@ async function loginBtnHandle() {
       location.href = "/";
       // 원하는 작업 수행 (예: 페이지 리다이렉션)
     } else {
-      alert(result.error); // 로그인 실패 시 에러 메시지 표시
+      alert("에러가 발생했어요. 관리자에게 문의해주세요."); // 로그인 실패 시 에러 메시지 표시
     }
   } catch (error) {
-    console.error("로그인 에러:", error);
+    // console.error("로그인 에러:", error);
     alert("로그인 중 오류가 발생하였습니다.");
   }
 }

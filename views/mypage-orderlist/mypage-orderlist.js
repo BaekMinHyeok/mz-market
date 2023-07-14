@@ -181,7 +181,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       orderList.appendChild(notFindOrder);
     }
   } catch (error) {
-    console.error("Failed to fetch order data:", error);
+    alert("에러가 발생했어요. 관리자에게 문의해주세요.");
+    // console.error("err:", error);
   }
 });
 
@@ -229,10 +230,14 @@ async function sendQuantityUpdateRequest(orderId, productId, productCount) {
       const data = await response.json();
       // console.log(data);
     } else {
+      alert("에러가 발생했어요. 관리자에게 문의해주세요.");
+
       throw new Error("API 호출 에러");
     }
   } catch (error) {
-    console.error(error);
+    alert("에러가 발생했어요. 관리자에게 문의해주세요.");
+
+    // console.error(error);
     throw error;
   }
 }
@@ -266,16 +271,17 @@ async function deleteOrder(orderElement) {
 
         if (data.success) {
           orderElement.remove();
-          console.log("삭제 Element", orderElement);
+          // console.log("삭제 Element", orderElement);
           alert("주문이 삭제되었습니다.");
         } else {
-          console.log("주문 삭제 실패");
+          alert("에러가 발생했어요. 관리자에게 문의해주세요.");
         }
       } else {
         throw new Error("API 호출 에러");
       }
     } catch (error) {
-      console.error("ERROR:", error);
+      // console.error("ERROR:", error);
+      alert("에러가 발생했어요. 관리자에게 문의해주세요.");
     }
   }
 }

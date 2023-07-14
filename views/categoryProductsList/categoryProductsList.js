@@ -13,6 +13,7 @@ fetch("/header/header.html")
   })
   .catch((error) => {
     console.error("Error:", error);
+    alert("에러가 발생했어요. 관리자에게 문의해주세요.");
   });
 
 // 상품 리스트 가져오기
@@ -42,6 +43,8 @@ function fetchProducts(url, productList) {
       });
     })
     .catch((error) => {
+      console.error("Error:", error);
+      alert("에러가 발생했어요. 관리자에게 문의해주세요.");
       // console.log("Error:", error);
     });
 }
@@ -130,6 +133,8 @@ function fetchCategories() {
       });
     })
     .catch((error) => {
+      console.error("Error:", error);
+      alert("에러가 발생했어요. 관리자에게 문의해주세요.");
       // console.log("Error:", error);
     });
 }

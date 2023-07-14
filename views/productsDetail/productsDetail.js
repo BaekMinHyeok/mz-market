@@ -119,6 +119,7 @@ async function showProductDetail() {
     }
   } catch (error) {
     // console.log(error);
+    alert("에러가 발생했어요. 관리자에게 문의해주세요.");
   }
 }
 

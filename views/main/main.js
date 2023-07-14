@@ -107,7 +107,8 @@ async function fetchProductList() {
       throw new Error("API 호출 에러");
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    alert("에러가 발생했어요. 관리자에게 문의해주세요.");
     throw error;
   }
 }
