@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           newOrderlist.innerHTML += `
         <ul class="orderlist">
         <li class="order-list">
-          <div class="order-list-img"><img src="" /></div>
+          <div class="order-list-img"><img src="${product.productImg}"/></div>
           <div class="order-list-box">
             <div class="order-list-info">
               <p class="product-name">${product.productName}</p>
@@ -89,21 +89,19 @@ document.addEventListener("DOMContentLoaded", async function () {
                   add
                 </span>
                 </button>
-                </div>
-              <p class="product-status">${product.productPrice}원</p>
-
               </div>
+              <p class="product-status">${product.productPrice}원</p>
             </div>
-          </div>
-        </li>
+         </div>
+         </li>
         </ul>
         `;
 
           productName.push(product.productName);
           productCount.push(product.productCount);
         });
-        console.log("PRODUCTNAME", productName);
-        console.log("productCount", productCount);
+        // console.log("PRODUCTNAME", productName);
+        // console.log("productCount", productCount);
 
         orderList.appendChild(newOrderlist);
         //수량 추가,감소 버튼과 수정하기 및 취소하기 버튼
@@ -140,20 +138,44 @@ document.addEventListener("DOMContentLoaded", async function () {
           });
         });
 
+        // editButton.addEventListener("click", async () => {
+        //   if (data.status === "ready") {
+        //     const orderId = data.orderId;
+        //     const quantityElement =
+        //       newOrderlist.querySelector(".product-count");
+        //     const quantity = parseInt(quantityElement.innerText);
+        //     const quantities = productCount.map((count) => parseInt(count));
+        //     await sendQuantityUpdateRequest(orderId, quantities);
+        //     quantityElement.innerText = quantity.toString();
+        //   }
+        // });
+
         editButton.addEventListener("click", async () => {
           if (data.status === "ready") {
             const orderId = data.orderId;
             const quantityElement =
               newOrderlist.querySelector(".product-count");
             const quantity = parseInt(quantityElement.innerText);
-            const quantities = productCount.map((count) => parseInt(count));
-            await sendQuantityUpdateRequest(orderId, quantities);
+
+            const productName = [];
+            const productCount = [];
+
+            // 여기서 productCount를 수정한 수량으로 가져와서 배열에 넣는 방법을 모르겠습니다.
+            data.productInfo.forEach((product) => {
+              productName.push(product.productName);
+              productCount.push(product.productCount);
+            });
+
+            console.log("aaaaaaaaaaaaa", productName);
+            console.log("aaaaaaaaaaaaa", productCount);
+
+            await sendQuantityUpdateRequest(orderId, productName, productCount);
             quantityElement.innerText = quantity.toString();
           }
         });
 
         deleteButton.addEventListener("click", () => {
-          console.log("삭제", newOrderlist);
+          console.log("삭제요소", newOrderlist);
           deleteOrder(newOrderlist, data.orderId);
         });
       });
@@ -169,28 +191,34 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 
-function decreaseQuantity(quantityElement, orderId, productName, productCount) {
+function decreaseQuantity(quantityElement) {
   let quantity = parseInt(quantityElement.innerText);
   if (quantity > 1) {
     quantity--;
     quantityElement.innerText = quantity.toString();
-    sendQuantityUpdateRequest(orderId, productName, quantity);
   }
 }
 
-function increaseQuantity(quantityElement, orderId, productName, productCount) {
+function increaseQuantity(quantityElement) {
   let quantity = parseInt(quantityElement.innerText);
   quantity++;
   quantityElement.innerText = quantity.toString();
-  sendQuantityUpdateRequest(orderId, productName, quantity);
 }
 
 const token = localStorage.getItem("token");
 
 // 수량 수정
-async function sendQuantityUpdateRequest(orderId, productName, quantity) {
-  // console.log("TYPEOF", typeof orderId);
-  console.log("TYPEOF수량수정", typeof quantity);
+async function sendQuantityUpdateRequest(orderId, productName, productCount) {
+  const editData = {
+    productName: productName,
+    productCount: productCount,
+  };
+
+  console.log(
+    "수량 수정을 눌렀을 때 상품 이름과 상품 카운트.........",
+    editData
+  );
+
   try {
     const response = await fetch(`/api/order/${orderId}`, {
       method: "PUT",
@@ -198,7 +226,7 @@ async function sendQuantityUpdateRequest(orderId, productName, quantity) {
         authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ productName, quantity }),
+      body: JSON.stringify(editData),
     });
 
     console.log(response);
