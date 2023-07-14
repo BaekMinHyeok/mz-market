@@ -75,7 +75,6 @@ async function createAccount() {
 
 joinButton.addEventListener("click", createAccount);
 
-let authCode;
 authButton.addEventListener("click", async () => {
   authButton.disabled = true;
   startTimer();
@@ -85,23 +84,34 @@ authButton.addEventListener("click", async () => {
   };
 
   try {
-    const response = await fetch("http://localhost:3000/api/mail", {
+    await fetch("http://localhost:3000/api/mail", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
-    authCode = await response.json();
-    console.log(authCode);
     completeButton.disabled = false;
-  } catch (error) {}
+  } catch (error) {
+    console.log("실패");
+  }
 });
 
-completeButton.addEventListener("click", () => {
-  if (auth.value == authCode) {
+completeButton.addEventListener("click", async () => {
+  const response = await fetch("http://localhost:3000/api/mail/auth", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ key: auth.value }),
+  });
+  const result = await response.json();
+
+  if (result.success) {
     alert("인증에 성공했습니다!");
     joinButton.disabled = false;
+  } else {
+    alert("인증에 실패했습니다!");
   }
 });
 
