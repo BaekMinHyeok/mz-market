@@ -34,7 +34,8 @@ async function loginBtnHandle() {
   };
 
   try {
-    const response = await fetch("http://localhost:3000/api/login", {
+    // const response = await fetch("http://localhost:3000/api/login", {
+    const response = await fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +53,8 @@ async function loginBtnHandle() {
       localStorage.setItem("token", token);
 
       alert("로그인에 성공하였습니다.");
-      location.href = "http://localhost:3000/";
+      // location.href = "http://localhost:3000/";
+      location.href = "/";
       // 원하는 작업 수행 (예: 페이지 리다이렉션)
     } else {
       alert(result.error); // 로그인 실패 시 에러 메시지 표시
@@ -70,5 +72,6 @@ function validateEmail(email) {
 }
 
 register.addEventListener("click", () => {
-  location.href = "http://localhost:3000/user/sign_up";
+  // location.href = "http://localhost:3000/user/sign_up";
+  location.href = "/user/sign_up";
 });

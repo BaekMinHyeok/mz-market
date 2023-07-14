@@ -1,10 +1,11 @@
 const { product } = require("../services/product");
-const serverPath = "http://localhost:3000";
+// const serverPath = "http://localhost:3000";
 
 // 상품 등록
 const registerProduct = async (req, res) => {
   try {
-    const imgPath = serverPath + req.file.path.substring(6);
+    // const imgPath = serverPath + req.file.path.substring(6);
+    const imgPath = req.file.path.substring(6);
     const data = JSON.parse(req.body.data);
     const productInfo = {
       name: data.name,

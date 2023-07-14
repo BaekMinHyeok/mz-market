@@ -1,5 +1,6 @@
 async function ModifyData(status) {
-  const url = `http://localhost:3000/api/order/status/update`;
+  // const url = `http://localhost:3000/api/order/status/update`;
+  const url = `/api/order/status/update`;
   const token = localStorage.getItem("token");
   const id = event.target.dataset.id;
   const orderModification = {

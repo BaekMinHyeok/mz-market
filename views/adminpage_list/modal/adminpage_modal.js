@@ -93,7 +93,8 @@ function addEventSaveBtn() {
 
         // 백엔드로 상품 데이터 전송
         const response = await fetch(
-          `http://localhost:3000/api/product/${parseInt(productId)}`,
+          // `http://localhost:3000/api/product/${parseInt(productId)}`,
+          `/api/product/${parseInt(productId)}`,
           {
             method: "PUT",
             headers: {
