@@ -1,12 +1,16 @@
-import { getApi, putApi, deleteApi } from "http://localhost:3000/api.js";
+import { getApi, putApi, deleteApi } from "/api.js";
 
 const orderList = document.querySelector("#orderlistContainer");
 document.addEventListener("DOMContentLoaded", async function () {
   try {
-    const result = await getApi("http://localhost:3000/api/order/user");
-    // console.log(result);
+    const result = await getApi("/api/order/user");
+    console.log("유저주문", result);
     if (result.success) {
       result.orders.reverse().forEach((data) => {
+        // console.log("주문내역 데이터", data);
+        // const userName = document.querySelector(".user_name");
+        // userName.textContent;
+        // console.log(data.name);
         const newOrderlist = document.createElement("div");
         newOrderlist.classList.add("order-container");
 
@@ -15,10 +19,32 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (data.status === "shipping") status = "배송이 시작되었습니다.";
         if (data.status === "complete") status = "배송이 완료되었습니다.";
 
+        // const productId = data.productInfo;
+        // productId.forEach((data) => console.log("d얍",data.productId));
+        // console.log("productId", productId);
+        // console.log(data.orderId);
+
+        // const order = data.find((order) => order.orderId === orderId);
+        // console.log("오더", order);
+
+        // if (order) {
+        //   const productNames = order.productInfo.map(
+        //     (product) => product.productName
+        //   );
+        //   const productCounts = order.productInfo.map(
+        //     (product) => product.productCount
+        //   );
+
+        //   console.log("주문 ID:", orderId);
+        //   console.log("상품명 배열:", productNames);
+        //   console.log("상품 수량 배열:", productCounts);
+        // }
+
         newOrderlist.innerHTML = `
       <div class="order-info">
         <div>
-          <h1 class="order-number">주문 번호: ${data.orderId}</h1>
+          <h1 class="order-number">주문 번호: 
+          <span class="order-id">${data.orderId}</span></h1>
         </div>
         <div>
           <p class="order-status">${status}</p>
@@ -38,29 +64,44 @@ document.addEventListener("DOMContentLoaded", async function () {
       </div>
       `;
 
+        const productName = [];
+        const productCount = [];
+
         data.productInfo.forEach(async (product) => {
           newOrderlist.innerHTML += `
         <ul class="orderlist">
-          <li class="order-list">
-           <div class="order-list-img"><img src="${product.productImg}" /></div>
-           <div class="order-list-box">
-           <div class="order-list-info">
-            <p class="product-name">${product.productName}</p>
-            <p class="product-size">${product.productSize}</p>
-            <button class="minus-quantity">
-              <i class="fa-solid fa-minus"></i>
-            </button>
-            <p class="product-count">${product.productCount}개</p>
-            <button class="plus-quantity">
-              <i class="fa-solid fa-circle-plus"></i>
-            </button>
-            <p class="product-status">${product.productPrice * product.productCount}원</p>
+        <li class="order-list">
+          <div class="order-list-img"><img src="${product.productImg}"/></div>
+          <div class="order-list-box">
+            <div class="order-list-info">
+              <p class="product-name">${product.productName}</p>
+              <p class="product-size">${product.productSize}</p>
+              <div class = "order_bottom_box">
+              <div class="quantity_box">
+                <button class="minus-quantity">
+                <span class="material-symbols-outlined">
+                    remove
+                  </span>
+                </button>
+                <p class="product-count">${product.productCount}</p>
+                <button class="plus-quantity">
+                  <span class="material-symbols-outlined">
+                  add
+                </span>
+                </button>
+              </div>
+              <p class="product-status">${product.productPrice}원</p>
             </div>
-            </div>
-          </li>
+         </div>
+         </li>
         </ul>
         `;
+
+          productName.push(product.productName);
+          productCount.push(product.productCount);
         });
+        // console.log("PRODUCTNAME", productName);
+        // console.log("productCount", productCount);
 
         orderList.appendChild(newOrderlist);
         //수량 추가,감소 버튼과 수정하기 및 취소하기 버튼
@@ -71,21 +112,43 @@ document.addEventListener("DOMContentLoaded", async function () {
         const editButton = newOrderlist.querySelector(".edit-button");
         const deleteButton = newOrderlist.querySelector(".delete-button");
 
-        minusQuantityButtons.forEach((button) => {
+        minusQuantityButtons.forEach((button, index) => {
           button.addEventListener("click", () => {
             if (data.status === "ready") {
-              decreaseQuantity(button.nextElementSibling);
+              decreaseQuantity(
+                button.nextElementSibling,
+                data.orderId,
+                productName[index],
+                productCount[index]
+              );
             }
           });
         });
 
-        plusQuantityButtons.forEach((button) => {
+        plusQuantityButtons.forEach((button, index) => {
           button.addEventListener("click", () => {
             if (data.status === "ready") {
-              increaseQuantity(button.previousElementSibling);
+              increaseQuantity(
+                button.previousElementSibling,
+                data.orderId,
+                productName[index],
+                productCount[index]
+              );
             }
           });
         });
+
+        // editButton.addEventListener("click", async () => {
+        //   if (data.status === "ready") {
+        //     const orderId = data.orderId;
+        //     const quantityElement =
+        //       newOrderlist.querySelector(".product-count");
+        //     const quantity = parseInt(quantityElement.innerText);
+        //     const quantities = productCount.map((count) => parseInt(count));
+        //     await sendQuantityUpdateRequest(orderId, quantities);
+        //     quantityElement.innerText = quantity.toString();
+        //   }
+        // });
 
         editButton.addEventListener("click", async () => {
           if (data.status === "ready") {
@@ -93,13 +156,27 @@ document.addEventListener("DOMContentLoaded", async function () {
             const quantityElement =
               newOrderlist.querySelector(".product-count");
             const quantity = parseInt(quantityElement.innerText);
-            await sendQuantityUpdateRequest(orderId, quantity);
+
+            const productName = [];
+            const productCount = [];
+
+            // 여기서 productCount를 수정한 수량으로 가져와서 배열에 넣는 방법을 모르겠습니다.
+            data.productInfo.forEach((product) => {
+              productName.push(product.productName);
+              productCount.push(product.productCount);
+            });
+
+            console.log("aaaaaaaaaaaaa", productName);
+            console.log("aaaaaaaaaaaaa", productCount);
+
+            await sendQuantityUpdateRequest(orderId, productName, productCount);
             quantityElement.innerText = quantity.toString();
           }
         });
 
         deleteButton.addEventListener("click", () => {
-          deleteOrder(newOrderlist);
+          console.log("삭제요소", newOrderlist);
+          deleteOrder(newOrderlist, data.orderId);
         });
       });
     } else {
@@ -128,31 +205,83 @@ function increaseQuantity(quantityElement) {
   quantityElement.innerText = quantity.toString();
 }
 
-async function sendQuantityUpdateRequest(orderId, quantity) {
+const token = localStorage.getItem("token");
+
+// 수량 수정
+async function sendQuantityUpdateRequest(orderId, productName, productCount) {
+  const editData = {
+    productName: productName,
+    productCount: productCount,
+  };
+
+  console.log(
+    "수량 수정을 눌렀을 때 상품 이름과 상품 카운트.........",
+    editData
+  );
+
   try {
-    const response = await putApi(`http://localhost:3000/api/order/${orderId}`, {
-      quantity: quantity,
+    const response = await fetch(`/api/order/${orderId}`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editData),
     });
-    if (response) {
-      alert("Quantity updated successfully.");
+
+    console.log(response);
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
     } else {
-      alert("Failed to update quantity.");
+      throw new Error("API 호출 에러");
     }
   } catch (error) {
-    alert("Failed to update quantity:", error);
+    console.error(error);
+    throw error;
   }
 }
 
+// 주문 삭제
 async function deleteOrder(orderElement) {
   const confirmation = confirm("주문을 삭제하시겠습니까?");
+  // orderId 가 string 이네요.
+  // 기존 코드는 "주문 번호: 23" 이런식으로 안에 있는 텍스트 전부를 가져옵니다.
+  // order-id span 태그 추가해서 숫자만 가져오게 수정했습니다.
+
+  const orderId = orderElement.querySelector(".order-id").innerText;
+  const orderIdToNumber = parseInt(orderId);
+
+  console.log("ORDERID", orderId, "Typeof", typeof orderId);
+  console.log(orderIdToNumber, "변환", typeof orderIdToNumber);
+
   if (confirmation) {
     try {
-      const orderId = orderElement.querySelector(".order-number").innerText;
-      await deleteApi(`http://localhost:3000/api/order/${orderId}`);
-      orderElement.remove();
-      alert("주문이 삭제되었습니다.");
+      // await deleteApi(`/api/order/${orderIdToNumber}`);
+      const response = await fetch(`/api/order/${orderIdToNumber}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("data ", data);
+
+        if (data.success) {
+          orderElement.remove();
+          console.log("삭제 Element", orderElement);
+          alert("주문이 삭제되었습니다.");
+        } else {
+          console.log("주문 삭제 실패");
+        }
+      } else {
+        throw new Error("API 호출 에러");
+      }
     } catch (error) {
-      console.error("Failed to delete the order:", error);
+      console.error("ERROR:", error);
     }
   }
 }
@@ -160,5 +289,5 @@ async function deleteOrder(orderElement) {
 // Add event listener to the "Edit my info" button
 const myInfoButton = document.getElementById("mypage-myinfo");
 myInfoButton.addEventListener("click", () => {
-  window.location.href = "http://localhost:3000/user/info";
+  window.location.href = "/user/info";
 });
