@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     // console.log("유저주문", result);
     if (result.success) {
       result.orders.reverse().forEach((data) => {
-        console.log("주문내역 데이터", data);
+        // console.log("주문내역 데이터", data);
         // const userName = document.querySelector(".user_name");
         // userName.textContent;
         // // console.log(data.name);
