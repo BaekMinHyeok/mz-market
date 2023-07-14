@@ -82,7 +82,7 @@ class OrderService {
 
   //주문 삭제
   async deleteOrder(orderId) {
-    return await this.OrderModel.deleteOne({ _id: orderId });
+    return await this.OrderModel.deleteOne({ orderId: orderId });
   }
 
   //배송 상태 수정
