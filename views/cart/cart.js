@@ -7,10 +7,15 @@ console.log(cartData);
 const noList = document.querySelector(".empty_cart_message");
 console.log(noList);
 
+// 주문하기 버튼
+let orderButton = document.querySelector(".nav_order_button");
+
 // 장바구니 데이터가 있는 경우 목록 생성
-if (cartData) {
+if (cartItems.length > 0) {
   noList.style.display = "none";
   console.log("cartItems", cartItems);
+  orderButton.style.background = "black";
+  orderButton.style.color = "white";
 
   cartItems.forEach((item) => {
     // 상품 목록 생성
@@ -90,6 +95,10 @@ if (cartData) {
       }
     });
   });
+} else {
+  // 상품이 없는 경우
+  noList.style.display = "block";
+  orderButton.disabled = true;
 }
 
 // 상품 삭제
@@ -188,7 +197,6 @@ function updateTotalQuantityAndPrice() {
 }
 
 // 주문하기 버튼 클릭
-const orderButton = document.querySelector(".nav_order_button");
 orderButton.addEventListener("click", placeOrder);
 
 function placeOrder() {
@@ -238,7 +246,7 @@ function placeOrder() {
   //     if (response.ok) {
   //       // 주문 성공
   //       console.log("주문 및 결제 페이지로 이동");
-  //       const productDetailURL = "http://localhost:3000/cart/order";
+  //       const productDetailURL = "http://kdt-sw-5-team11.elicecoding.com/cart/order";
   //       console.log(productDetailURL);
   //       window.location.href = productDetailURL;
   //     } else {

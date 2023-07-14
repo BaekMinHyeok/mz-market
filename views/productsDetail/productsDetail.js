@@ -60,6 +60,9 @@ async function showProductDetail() {
     const countNum = document.querySelector(".product_info_count_num");
     const saveButton = document.querySelector(".product_info_save_btn");
     const sizeInfo = document.querySelector(".product_info_size");
+
+    const orderButton = document.querySelector(".product_info_order_btn");
+
     console.log(sizeInfo);
     let selectedSize = "S";
     let quantity = 1;
@@ -96,6 +99,18 @@ async function showProductDetail() {
     saveButton.addEventListener("click", () => {
       addToCart(product, selectedSize, quantity);
       quantity = 1;
+      if (
+        confirm("상품을 장바구니에 담았어요.\n장바구니 페이지로 이동할까요?")
+      ) {
+        window.location.href = "/cart/";
+      }
+    });
+
+    // 주문하러가기 => 장바구니에 추가하고 주문 페이지로 이동
+    orderButton.addEventListener("click", () => {
+      addToCart(product, selectedSize, quantity);
+      quantity = 1;
+      window.location.href = "/cart";
     });
 
     // 수량 표시
@@ -159,10 +174,6 @@ function addToCart(product, selectedSize, quantity) {
     `.product_info_size_${selectedSize.toLowerCase()}`
   );
   selectedSizeButton.classList.add("on");
-
-  if (confirm("상품을 장바구니에 담았어요.\n장바구니 페이지로 이동할까요?")) {
-    window.location.href = "/cart/";
-  }
 }
 
 // 상품 정보를 상세 페이지에 표시

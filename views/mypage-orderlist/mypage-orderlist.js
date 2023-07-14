@@ -69,9 +69,11 @@ document.addEventListener("DOMContentLoaded", async function () {
         const productCount = [];
 
         data.productInfo.forEach(async (product) => {
+          console.log(data.productInfo);
           newOrderlist.innerHTML += `
         <ul class="orderlist">
         <li class="order-list">
+          <div class="order-list-img"><img src="${product.productImage}"/></div>
           <div class="order-list-box">
             <div class="order-list-info">
               <p class="product-name">${product.productName}</p>
