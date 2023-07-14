@@ -50,14 +50,23 @@ class OrderService {
     }
   }
 
-  //주문 정보 변경
-  async update(orderId, updatedInfo) {
-    const update = await this.OrderModel.findByIdAndUpdate(
-      { _id: orderId },
-      { $set: updatedInfo },
-      { new: true }
-    );
-    return update;
+  async update(orderId, productCountArray, productIdArray) {
+    const order = await this.OrderModel.findOne({ orderId: orderId });
+    if (!order) {
+      throw new Error("주문을 찾을 수 없습니다.");
+    }
+
+    // productIdArray와 동일한 순서로 productCount를 수정한다.
+    productIdArray.forEach((productId, index) => {
+      const productInfo = order.productInfo.find(
+        (product) => product.productId === productId
+      );
+      if (productInfo) {
+        productInfo.productCount = productCountArray[index];
+      }
+    });
+
+    await order.save();
   }
 
   //주문 조회 (관리자)
