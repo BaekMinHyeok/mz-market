@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               <button class="minus-quantity">
                 <i class="fa-solid fa-minus"></i>
               </button>
-              <p class="product-price">${product.productCount}개</p>
+              <p class="product-count">${product.productCount}개</p>
               <button class="plus-quantity">
                 <i class="fa-solid fa-circle-plus"></i>
               </button>
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           if (data.status === "ready") {
             const orderId = data.orderId;
             const quantityElement =
-              newOrderlist.querySelector(".product-price");
+              newOrderlist.querySelector(".product-count");
             const quantity = parseInt(quantityElement.innerText);
             await sendQuantityUpdateRequest(orderId, quantity);
             quantityElement.innerText = quantity.toString();
