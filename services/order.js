@@ -52,12 +52,14 @@ class OrderService {
 
   //주문 정보 변경
   async update(orderId, updatedInfo) {
-    const update = await this.OrderModel.findByIdAndUpdate(
-      { _id: orderId },
-      { $set: updatedInfo },
-      { new: true }
-    );
-    return update;
+    const update = await this.OrderModel.findOne({ orderId: orderId });
+
+    if (!update) {
+      throw "주문 정보를 찾을 수 없습니다.";
+    }
+
+    Object.assign(update, updatedInfo);
+    await update.save();
   }
 
   //주문 조회 (관리자)
@@ -82,7 +84,7 @@ class OrderService {
 
   //주문 삭제
   async deleteOrder(orderId) {
-    return await this.OrderModel.deleteOne({ _id: orderId });
+    return await this.OrderModel.deleteOne({ orderId: orderId });
   }
 
   //배송 상태 수정
