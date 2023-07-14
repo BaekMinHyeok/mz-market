@@ -1,38 +1,43 @@
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-}
-h1 {
-  margin-bottom: 50px;
+.myPage_contaier {
+  width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 140px;
 }
 
+.myPage_title {
+  margin-top: 140px;
+  margin-bottom: 100px;
+}
+
+.title_mypage {
+  margin-bottom: 23px;
+  font-weight: 700;
+  font-size: 35px;
+}
 .input-container {
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .input-container label {
-  margin-bottom: 1px;
   display: block;
-  margin-left: -80%;
-  font-size: smaller;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
-input, button.signup-button {
+input,
+button.signup-button {
   width: 300px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 20px;
 }
-.signup-button{
+.signup-button {
   margin-top: 70px;
   margin-bottom: 30px;
 }
-
+/* 
 label[for="name"] {
   margin-left: -85%;
 }
@@ -43,7 +48,7 @@ label[for="email"] {
 
 label[for="password-check"] {
   margin-left: -72%;
-}
+} */
 
 .login-p {
   font-size: x-small;
@@ -72,13 +77,74 @@ label[for="password-check"] {
   transition: background-color 0.3s ease;
 }
 
-.page-btn:hover {
+/* .page-btn:hover {
   background-color: #e0e0e0;
-}
+} */
 
 .page-btn:focus {
   outline: none;
 }
 
 /* Active tab style */
-.page-btn.active
+.page-btn.active {
+}
+
+/* ********************* */
+
+.tabs {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-bottom: 3px solid #e2e2e2;
+  margin-bottom: 91px;
+}
+
+.page-btn {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 700;
+  padding: 20px 30px;
+  margin-bottom: -3.5px;
+}
+
+#mypage-myinfo {
+  border-bottom: 5px solid #000;
+}
+
+.mypage_info_text {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 67px;
+}
+
+.input-container input {
+  width: 100%;
+  border: 2px solid #e2e2e2;
+  border-radius: 15px;
+  padding: 16px 19px;
+}
+
+.input-container button {
+  margin: 50px auto 0;
+  width: 103px;
+  height: 50px;
+  background-color: transparent;
+  border: 2px solid #000;
+  border-radius: 15px;
+  margin-right: 10px;
+  font-weight: 700;
+}
+
+.button_container {
+}
+
+.edit-account {
+  background-color: #000 !important;
+  color: #fff;
+}
