@@ -1,4 +1,4 @@
-import { putApi, deleteApi, getApi } from "http://localhost:3000/api.js";
+import { putApi, deleteApi, getApi } from "/api.js";
 
 const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#email");
