@@ -34,7 +34,6 @@ function renderProduct(product) {
       </p>
       <div class="product_text_box_bottom">
         <p class="product_price">${replacePrice}원</p>
-        <p class="product_review">50개의 리뷰</p>
       </div>
     </div>
   `;

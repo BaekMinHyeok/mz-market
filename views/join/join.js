@@ -9,6 +9,7 @@ joinButton.disabled = true;
 completeButton.disabled = true;
 
 // fetch("http://kdt-sw-5-team11.elicecoding.com/header/header.html")
+// fetch("http://kdt-sw-5-team11.elicecoding.com/header/header.html")
 //   .then((res) => res.text())
 //   .then((html) => {
 //     header.innerHTML = html;
@@ -59,6 +60,16 @@ async function createAccount() {
         body: JSON.stringify(data),
       }
     );
+    const response = await fetch(
+      "http://kdt-sw-5-team11.elicecoding.com/api/user",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
     const result = await response.json();
 
     console.log(data);
@@ -98,6 +109,16 @@ authButton.addEventListener("click", async () => {
         body: JSON.stringify(data),
       }
     );
+    const response = await fetch(
+      "http://kdt-sw-5-team11.elicecoding.com/api/mail",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
     authCode = await response.json();
     console.log(authCode);
     completeButton.disabled = false;
@@ -112,6 +133,7 @@ completeButton.addEventListener("click", () => {
 });
 
 login.addEventListener("click", () => {
+  location.href = "http://kdt-sw-5-team11.elicecoding.com/user/sign_in";
   location.href = "http://kdt-sw-5-team11.elicecoding.com/user/sign_in";
 });
 

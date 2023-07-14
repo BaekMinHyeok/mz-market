@@ -8,6 +8,7 @@ const {
   updateUser,
   getUser,
   deleteUser,
+  authCheck,
 } = require("../controller/user");
 //product
 const {
@@ -40,14 +41,16 @@ const {
 const { uploadMiddleware } = require("../middlewares/image");
 const { authMail } = require("../controller/mail");
 const { adminAuth, adminCheck } = require("../middlewares/admin");
-router.post("/mail", authMail);
+
+router.post("/mail", authMail); //메일 발송
+router.post("/mail/auth", authCheck);
 
 //user
 router.post("/user", register); //회원 가입
 router.put("/user", auth, updateUser); //회원 정보 수정
 router.get("/user", auth, getUser); //회원 정보 조회
 router.delete("/user", auth, deleteUser); //회원 탈퇴
-router.get("/admin", adminCheck); // 관리자 체크 
+router.get("/admin", adminCheck); // 관리자 체크
 
 //login
 router.post("/login", login); //로그인

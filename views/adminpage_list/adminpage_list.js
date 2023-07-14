@@ -4,26 +4,32 @@ import fetchData from "./adminpage_getdata.js";
 import deleteData from "./adminpage_deletdata.js";
 import getProductcategory from "./getcategory.js";
 
-// 모달창 함수 
+// 모달창 함수
 const modal = async (dataObj, dataId) => {
-  const filteredProducts = dataObj.products.filter((data) => data.productId === Number(dataId));
+  const filteredProducts = dataObj.products.filter(
+    (data) => data.productId === Number(dataId)
+  );
   // 카테고리 출력 값 담을 배열
-  
+
   console.log(filteredProducts);
   // HTML 파일 가져오기
   try {
     const response = await fetch("modal/adminpage_modal.html");
     const html = await response.text();
     modalContainer.innerHTML = html;
-    
-    const checkboxContainer = document.querySelector(".checkbox-container")
+
+    const checkboxContainer = document.querySelector(".checkbox-container");
     const imgInput = document.querySelector("#imgInput");
     const productName = document.querySelector("#productName");
-    const productDescription = document.querySelector('#productDescription');
+    const productDescription = document.querySelector("#productDescription");
     const productPrice = document.querySelector("#productPrice");
-    const selectedMen = document.querySelector(".radio-group input[value='men']")
-    const selectedWomen = document.querySelector(".radio-group input[value='women']")
-    const categoryValue = document.querySelector('#checkvalue');
+    const selectedMen = document.querySelector(
+      ".radio-group input[value='men']"
+    );
+    const selectedWomen = document.querySelector(
+      ".radio-group input[value='women']"
+    );
+    const categoryValue = document.querySelector("#checkvalue");
     imgInput.value = filteredProducts[0].images;
     productName.value = filteredProducts[0].name;
     productDescription.value = filteredProducts[0].description;
@@ -36,13 +42,13 @@ const modal = async (dataObj, dataId) => {
       selectedWomen.checked = true;
     }
 
-    const dataIdElement = document.createElement('p');
+    const dataIdElement = document.createElement("p");
     dataIdElement.textContent = dataId;
     dataIdElement.id = "productId"; // id 속성 설정
     dataIdElement.style.display = "none";
     modalContainer.appendChild(dataIdElement);
 
-    const categoryList= await getProductcategory();
+    const categoryList = await getProductcategory();
     console.log(categoryList.categorys);
 
     categoryList.categorys.forEach((ary) => {
@@ -79,7 +85,6 @@ const modal = async (dataObj, dataId) => {
     document.head.appendChild(cssLink);
 
     addEventSaveBtn();
-
   } catch (error) {
     console.log(error);
   }
@@ -88,11 +93,10 @@ const modal = async (dataObj, dataId) => {
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const result = await fetchData();
-    console.log("받아오는 데이터: ",result);
     result.products.forEach((data) => {
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
-        <td><img src="${data.images}" alt="이미지"></td>
+        <td><img id="IMG" src="${data.images}" alt="이미지"></td>
         <td>${data.name}</td>
         <td>${data.category}</td>
         <td>${data.price}</td>
@@ -105,31 +109,32 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const modifyBtns = document.querySelectorAll("#modifyBtn");
     modifyBtns.forEach((btn) => {
-      btn.addEventListener("click", async function(event) {
+      btn.addEventListener("click", async function (event) {
         const dataId = event.target.dataset.product1;
         const result = await fetchData();
-        modal(result,dataId);
+        modal(result, dataId);
       });
     });
 
     const deleteBtns = document.querySelectorAll("#deleteBtn");
     deleteBtns.forEach((btn) => {
-      btn.addEventListener("click", function(event) {
+      btn.addEventListener("click", async function (event) {
         const trElement = this.parentNode.parentNode;
         const dataId = event.target.dataset.product2;
         const dataName = event.target.dataset.product3;
 
-        const confirmDelete = confirm(`${dataName} 상품을 정말로 상품을 삭제하시겠습니까?` );
+        const confirmDelete = confirm(
+          `${dataName} 상품을 정말로 상품을 삭제하시겠습니까?`
+        );
         if (confirmDelete) {
           trElement.remove();
           console.log("상품 삭제 확인:", dataId);
-          deleteData(dataId); // 상품 삭제 로직 호출
+          await deleteData(dataId); // 상품 삭제 로직 호출
         } else {
           console.log("상품 삭제 취소");
         }
       });
     });
-
   } catch (error) {
     console.error(error);
   }

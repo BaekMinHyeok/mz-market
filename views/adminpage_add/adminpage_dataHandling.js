@@ -11,20 +11,9 @@ savebtn.addEventListener("click", async function () {
   ).value;
   const categoryValue = document.querySelector("#checkvalue").value;
   const selectedFile = document.querySelector("#selectedFile").value; // 파일 객체 가져오기
-  if (
-    !productName ||
-    !productDescription ||
-    !productPrice ||
-    !selectedValue ||
-    !categoryValue ||
-    !selectedFile
-  ) {
-    alert("값을 모두 입력해주세요.");
-    return;
-  }
+
   // 로컬 스토리지에서 JWT 토큰 가져오기
   const token = localStorage.getItem("token");
-
   // 상품 데이터 객체 생성
   const productData = {
     name: productName,
@@ -57,6 +46,8 @@ savebtn.addEventListener("click", async function () {
       alert("저장되었습니다.");
       location.reload();
       console.log(result.message);
+    } else {
+      alert("값을 다 입력해 주세요!");
     }
   } catch (error) {
     console.log("Error:", error);
