@@ -160,7 +160,9 @@ function addToCart(product, selectedSize, quantity) {
   );
   selectedSizeButton.classList.add("on");
 
-  alert("상품을 장바구니에 담았어요.");
+  if (confirm("상품을 장바구니에 담았어요.\n장바구니 페이지로 이동할까요?")) {
+    window.location.href = "/cart/";
+  }
 }
 
 // 상품 정보를 상세 페이지에 표시
