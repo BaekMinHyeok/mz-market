@@ -11,7 +11,7 @@ const adminAuth = async (req, res, next) => {
     if (decoded.admin) {
       return next();
     } else {
-      return res.josn({
+      return res.json({
         message: "관리자만 접근 가능한 페이지입니다!",
       });
     }
@@ -37,7 +37,7 @@ const adminCheck = async (req, res) => {
         success: true,
       });
     } else {
-      return res.josn({
+      return res.json({
         success: false,
         message: "관리자만 접근 가능한 페이지입니다!",
       });
@@ -55,5 +55,5 @@ const adminCheck = async (req, res) => {
 
 module.exports = {
   adminAuth,
-  adminCheck
+  adminCheck,
 };
