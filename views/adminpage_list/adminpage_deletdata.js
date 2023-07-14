@@ -1,6 +1,7 @@
 const deleteData = async (productId) => {
-  console.log(productId);
-  const url = `http://localhost:3000/api/product/${productId}`;
+  // console.log(productId);
+  // const url = `http://localhost:3000/api/product/${productId}`;
+  const url = `/api/product/${productId}`;
   const token = localStorage.getItem("token");
   try {
     const response = await fetch(url, {
@@ -11,7 +12,7 @@ const deleteData = async (productId) => {
     });
 
     if (response.success) {
-      console.log("삭제성공", response.message);
+      // console.log("삭제성공", response.message);
     }
   } catch (error) {
     console.error(error);

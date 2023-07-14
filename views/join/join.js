@@ -49,7 +49,8 @@ async function createAccount() {
 
   // 요청
   try {
-    const response = await fetch("http://localhost:3000/api/user", {
+    // const response = await fetch("http://localhost:3000/api/user", {
+    const response = await fetch("/api/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,9 +59,12 @@ async function createAccount() {
     });
     const result = await response.json();
 
+    // console.log(data);
+    // console.log(result);
     if (result.success) {
       alert("회원가입이 성공하였습니다!");
-      location.href = "http://localhost:3000/user/sign_in";
+      // location.href = "http://localhost:3000/user/sign_in";
+      location.href = "/user/sign_in";
     } else {
       const errorMessage = await result.message;
       alert(errorMessage);
@@ -82,7 +86,8 @@ authButton.addEventListener("click", async () => {
   };
 
   try {
-    await fetch("http://localhost:3000/api/mail", {
+    // await fetch("http://localhost:3000/api/mail", {
+    await fetch("/api/mail", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -91,12 +96,13 @@ authButton.addEventListener("click", async () => {
     });
     completeButton.disabled = false;
   } catch (error) {
-    alert("실패");
+    // console.log("실패");
   }
 });
 
 completeButton.addEventListener("click", async () => {
-  const response = await fetch("http://localhost:3000/api/mail/auth", {
+  // const response = await fetch("http://localhost:3000/api/mail/auth", {
+  const response = await fetch("/api/mail/auth", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -114,7 +120,8 @@ completeButton.addEventListener("click", async () => {
 });
 
 login.addEventListener("click", () => {
-  location.href = "http://localhost:3000/user/sign_in";
+  // location.href = "http://localhost:3000/user/sign_in";
+  location.href = "/user/sign_in";
 });
 
 function startTimer() {

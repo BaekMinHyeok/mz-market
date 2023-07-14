@@ -52,7 +52,7 @@ export const putApi = async (path, data) => {
     });
 
     if (response) {
-      console.log("Data updated successfully.");
+      // console.log("Data updated successfully.");
     } else {
       throw new Error("Failed to update data.");
     }
@@ -70,7 +70,7 @@ export const deleteApi = async (path) => {
     });
 
     if (response) {
-      console.log("Data deleted successfully.");
+      // console.log("Data deleted successfully.");
     } else {
       throw new Error("Failed to delete data.");
     }

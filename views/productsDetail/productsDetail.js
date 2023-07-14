@@ -2,9 +2,9 @@
 function getProductIdFromURL() {
   const path = window.location.pathname;
   const pathArray = path.split("/");
-  // console.log(pathArray);
+  // // console.log(pathArray);
   const productId = pathArray[pathArray.length - 2];
-  console.log(productId);
+  // console.log(productId);
   return productId;
 }
 
@@ -31,9 +31,9 @@ async function showProductDetail() {
     const product = (await response.json()).product;
 
     const replacePrice = product.price.toLocaleString();
-    console.log(replacePrice);
+    // console.log(replacePrice);
 
-    console.log(product);
+    // console.log(product);
 
     const productImage = document.querySelector(".product_info_image");
     const imageElement = document.createElement("img");
@@ -63,7 +63,7 @@ async function showProductDetail() {
 
     const orderButton = document.querySelector(".product_info_order_btn");
 
-    console.log(sizeInfo);
+    // console.log(sizeInfo);
     let selectedSize = "S";
     let quantity = 1;
 
@@ -77,7 +77,7 @@ async function showProductDetail() {
         selectedSize = button.textContent;
         sizeInfo.textContent = selectedSize;
 
-        console.log(sizeInfo);
+        // console.log(sizeInfo);
       });
     });
 
@@ -118,7 +118,7 @@ async function showProductDetail() {
       countNum.textContent = quantity;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 
@@ -136,13 +136,13 @@ function addToCart(product, selectedSize, quantity) {
     // 장바구니에 이미 있는 상품이면 수량 증가
     cart[existingProductIndex].quantity += quantity;
   } else {
-    console.log(
-      "productID" + product.productId,
-      product.name,
-      product.price,
-      selectedSize,
-      quantity
-    );
+    // console.log(
+    //   "productID" + product.productId,
+    //   product.name,
+    //   product.price,
+    //   selectedSize,
+    //   quantity
+    // );
     // 장바구니에 새로운 상품 추가
     const newProduct = {
       productId: product.productId,

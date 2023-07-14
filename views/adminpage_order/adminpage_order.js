@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         );
         if (confirmDelete) {
           const orderId = event.target.dataset.orderid;
-          console.log(orderId);
+          // console.log(orderId);
           const trElement = this.parentNode.parentNode;
           trElement.remove();
           await deleteData(orderId);
@@ -31,6 +31,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       });
     });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 });

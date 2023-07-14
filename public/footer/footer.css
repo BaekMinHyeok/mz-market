@@ -3,12 +3,16 @@
   padding: 20px;
   text-align: center;
 }
-
-.container {
-  max-width: 960px;
+footer {
+  padding: 100px;
+  background-color: #000;
+}
+footer .container {
+  width: 1200px;
   margin: 0 auto;
 }
 
-p {
-  margin: 0;
+footer p {
+  color: #fff;
+  margin-bottom: 5px;
 }

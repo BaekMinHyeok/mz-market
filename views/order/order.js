@@ -1,4 +1,4 @@
-console.log("TEST");
+// console.log("TEST");
 const nameInput = document.querySelector(".name_input");
 const nameError = document.getElementById("nameError");
 
@@ -29,7 +29,7 @@ async function getUserData() {
       const data = await response.json();
       nameInput.value = data.user.name;
       emailInput.value = data.user.email;
-      console.log(data);
+      // console.log(data);
     } else {
       throw new Error("API 호출 에러");
     }
@@ -43,8 +43,8 @@ getUserData();
 // 이름 검사
 function validateNameInput() {
   const nameValue = nameInput.value.trim();
-  console.log(nameValue);
-  console.log(nameError);
+  // console.log(nameValue);
+  // console.log(nameError);
   const regex = /^[a-zA-Z가-힣]+$/;
 
   if (nameValue === "") {
@@ -64,18 +64,18 @@ function validatePhonenumInput() {
   const phonenumValue = phonenumInput.value.trim();
   const regex = /[0-9]/;
 
-  console.log(phonenumValue);
+  // console.log(phonenumValue);
 
   if (phonenumValue === "") {
     phonenumError.textContent = "전화번호를 입력해주세요.";
-    console.log(phonenumValue);
+    // console.log(phonenumValue);
     paymentButton.disabled = true;
 
     paymentButton.disabled = true;
   } else if (!regex.test(phonenumValue)) {
     phonenumError.textContent =
       "숫자를 포함한 전화번호를 정확하게 입력해주세요.";
-    console.log(phonenumValue);
+    // console.log(phonenumValue);
 
     paymentButton.disabled = true;
   } else {
@@ -83,9 +83,9 @@ function validatePhonenumInput() {
     let phonenumReplaceValue = phonenumValue
       .replace(/[^0-9]/g, "")
       .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
-    // console.log(phonenumReplaceValue);
+    // // console.log(phonenumReplaceValue);
     phonenumInput.value = phonenumReplaceValue;
-    // console.log(phonenumReplaceValue);
+    // // console.log(phonenumReplaceValue);
     enablePaymentButton();
   }
 }
@@ -95,7 +95,7 @@ function validateEmailInput() {
   const emailValue = emailInput.value.trim();
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  console.log(emailValue);
+  // console.log(emailValue);
 
   if (emailValue === "") {
     emailError.textContent = "이메일을 입력해주세요.";
@@ -164,7 +164,7 @@ addressButton.addEventListener("click", searchAddress);
 // 로컬스토리지에서 상품 정보 가져오기
 function getProductData() {
   const productData = localStorage.getItem("cart");
-  console.log(productData);
+  // console.log(productData);
   return JSON.parse(productData);
 }
 
@@ -205,7 +205,7 @@ window.addEventListener("load", updatePaymentInfo);
 
 // 주문 정보 전송
 function submitOrder() {
-  // console.log("TEST");
+  // // console.log("TEST");
   const cart = JSON.parse(localStorage.getItem("cart"));
   const quantity = cart.reduce((total, product) => total + product.quantity, 0);
 
@@ -257,7 +257,7 @@ function submitOrder() {
     productSize: productSize,
   };
 
-  // console.log("orderData@@@@@@@@@@@@@@@@@@@@@", orderData);
+  // // console.log("orderData@@@@@@@@@@@@@@@@@@@@@", orderData);
 
   const token = localStorage.getItem("token");
 
@@ -273,23 +273,23 @@ function submitOrder() {
     .then((response) => {
       if (response.ok) {
         alert("주문이 완료 되었습니다.");
-        console.log(orderData);
+        // console.log(orderData);
         return response.json();
       } else {
-        console.log(orderData);
+        // console.log(orderData);
         alert("오류가 발생했습니다.");
       }
     })
     .then((data) => {
       // 응답에서 orderId 추출
-      console.log("DATA", data);
+      // console.log("DATA", data);
       const orderId = data.orderId;
-      // console.log(orderId);
+      // // console.log(orderId);
       // 주문 완료 페이지로 이동
       window.location.href = `/cart/order/complete/${orderId}`;
     })
     .catch((error) => {
-      // console.log(orderData);
+      // // console.log(orderData);
       console.error("주문 내용 전송 오류:", error);
       alert("오류가 발생했습니다.");
     });

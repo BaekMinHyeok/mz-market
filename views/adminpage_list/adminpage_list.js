@@ -11,7 +11,7 @@ const modal = async (dataObj, dataId) => {
   );
   // 카테고리 출력 값 담을 배열
 
-  console.log(filteredProducts);
+  // console.log(filteredProducts);
   // HTML 파일 가져오기
   try {
     const response = await fetch("modal/adminpage_modal.html");
@@ -49,7 +49,7 @@ const modal = async (dataObj, dataId) => {
     modalContainer.appendChild(dataIdElement);
 
     const categoryList = await getProductcategory();
-    console.log(categoryList.categorys);
+    // console.log(categoryList.categorys);
 
     categoryList.categorys.forEach((ary) => {
       const category = ary.name;
@@ -86,7 +86,7 @@ const modal = async (dataObj, dataId) => {
 
     addEventSaveBtn();
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 // 리스트 출력하기
@@ -128,10 +128,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         );
         if (confirmDelete) {
           trElement.remove();
-          console.log("상품 삭제 확인:", dataId);
+          // console.log("상품 삭제 확인:", dataId);
           await deleteData(dataId); // 상품 삭제 로직 호출
         } else {
-          console.log("상품 삭제 취소");
+          // console.log("상품 삭제 취소");
         }
       });
     });

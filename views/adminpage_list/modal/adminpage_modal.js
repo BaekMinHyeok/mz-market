@@ -76,7 +76,7 @@ function addEventSaveBtn() {
         const token = localStorage.getItem("token");
         const productId = document.querySelector("#productId").textContent;
 
-        console.log("productId", productId);
+        // console.log("productId", productId);
 
         // 상품 데이터 객체 생성
         const productData = {
@@ -93,7 +93,8 @@ function addEventSaveBtn() {
 
         // 백엔드로 상품 데이터 전송
         const response = await fetch(
-          `http://localhost:3000/api/product/${parseInt(productId)}`,
+          // `http://localhost:3000/api/product/${parseInt(productId)}`,
+          `/api/product/${parseInt(productId)}`,
           {
             method: "PUT",
             headers: {
@@ -104,7 +105,7 @@ function addEventSaveBtn() {
         );
 
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         closeModal();
         location.reload();
       } catch (error) {

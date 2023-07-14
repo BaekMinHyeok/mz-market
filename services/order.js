@@ -96,9 +96,9 @@ class OrderService {
 
   //배송 상태 수정
   async updateStatus(orderId, status) {
-    console.log(orderId);
+    // console.log(orderId);
     const order_ = await this.OrderModel.findOne({ orderId: orderId });
-    console.log("order", order_);
+    // console.log("order", order_);
     if (!order_) {
       throw "주문 정보를 찾을 수 없습니다.";
     }

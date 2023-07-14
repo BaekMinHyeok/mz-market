@@ -8,6 +8,8 @@ body {
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
+  padding-top: 150px;
+  padding-bottom: 200px;
 }
 
 h1 {
@@ -41,9 +43,8 @@ h1 {
   position: relative;
   z-index: 1;
   top: -1px;
-
 }
-.admin-menu li:hover button{
+.admin-menu li:hover button {
   color: #000;
 }
 .admin-menu li:hover::after {
@@ -55,7 +56,7 @@ h1 {
   z-index: 1;
   top: -1px;
 }
-.admin-menu li:nth-child(2) button{
+.admin-menu li:nth-child(2) button {
   color: #000;
 }
 .admin-menu li button {
@@ -63,7 +64,6 @@ h1 {
   height: 100%;
   color: #8888;
 }
-
 
 .admin-menu p {
   color: #000;
@@ -105,10 +105,10 @@ p.add-btn::after {
   display: flex;
   align-items: center;
 }
-.add-text2 .input-text{
+.add-text2 .input-text {
   width: 100%;
 }
-.add-text2 input{
+.add-text2 input {
   width: 100%;
 }
 
@@ -118,15 +118,15 @@ p.add-btn::after {
   height: 50px;
   flex-shrink: 0;
   border-radius: 15px;
-  background: #D2D2D2;
+  background: #d2d2d2;
 }
 
 .rectangle {
   width: calc(100% - 0px);
   height: 20px;
   border-radius: 15px;
-  border: 2px solid #E2E2E2;
-  background: #FFF;
+  border: 2px solid #e2e2e2;
+  background: #fff;
   margin-bottom: 15px;
   margin-top: 20px;
   padding: 20px;
@@ -136,22 +136,21 @@ p.add-btn::after {
   width: calc(100% - 0px);
   height: 150px;
   border-radius: 15px;
-  border: 2px solid #E2E2E2;
-  background: #FFF;
+  border: 2px solid #e2e2e2;
+  background: #fff;
   margin-bottom: 15px;
   vertical-align: top;
   margin-top: 20px;
   padding: 20px;
 }
 
-
 .checkbox-container {
   width: calc(100% - 0px);
   height: 250px;
   flex-shrink: 0;
   border-radius: 15px;
-  border: 2px solid #F2F2F2;
-  background: #FFF;
+  border: 2px solid #f2f2f2;
+  background: #fff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
@@ -167,7 +166,7 @@ label {
   height: 50px;
   flex-shrink: 0;
   border-radius: 15px;
-  background: #D2D2D2;
+  background: #d2d2d2;
   display: none;
 }
 
@@ -179,8 +178,8 @@ label {
   margin-top: 15px;
   margin-bottom: 12px;
   border-radius: 15px;
-  border: 2px solid #E2E2E2;
-  background: #FFF;
+  border: 2px solid #e2e2e2;
+  background: #fff;
   width: 100%;
   height: 52px;
   flex-shrink: 0;
@@ -205,7 +204,7 @@ label {
   position: absolute;
   bottom: -69%;
 }
-.save-btn{
+.save-btn {
   display: flex;
   justify-content: flex-end;
 }

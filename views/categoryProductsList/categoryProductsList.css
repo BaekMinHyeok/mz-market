@@ -1,4 +1,4 @@
-.container {
+#category_products_list .container {
   width: 1200px;
   padding: 150px 0 200px;
   margin: auto;
@@ -50,7 +50,6 @@
   height: 100%;
   object-fit: cover;
 }
-
 
 .product_container
   .products_list_wrapper

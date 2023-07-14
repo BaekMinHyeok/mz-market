@@ -4,12 +4,13 @@ const orderList = document.querySelector("#orderlistContainer");
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const result = await getApi("/api/order/user");
+    // console.log("유저주문", result);
     if (result.success) {
       result.orders.reverse().forEach((data) => {
         // console.log("주문내역 데이터", data);
         // const userName = document.querySelector(".user_name");
         // userName.textContent;
-        // console.log(data.name);
+        // // console.log(data.name);
         const newOrderlist = document.createElement("div");
         newOrderlist.classList.add("order-container");
 
@@ -19,12 +20,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (data.status === "complete") status = "배송이 완료되었습니다.";
 
         // const productId = data.productInfo;
-        // productId.forEach((data) => console.log("d얍",data.productId));
-        // console.log("productId", productId);
-        // console.log(data.orderId);
+        // productId.forEach((data) => // console.log("d얍",data.productId));
+        // // console.log("productId", productId);
+        // // console.log(data.orderId);
 
         // const order = data.find((order) => order.orderId === orderId);
-        // console.log("오더", order);
+        // // console.log("오더", order);
 
         // if (order) {
         //   const productNames = order.productInfo.map(
@@ -34,9 +35,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         //     (product) => product.productCount
         //   );
 
-        //   console.log("주문 ID:", orderId);
-        //   console.log("상품명 배열:", productNames);
-        //   console.log("상품 수량 배열:", productCounts);
+        //   // console.log("주문 ID:", orderId);
+        //   // console.log("상품명 배열:", productNames);
+        //   // console.log("상품 수량 배열:", productCounts);
         // }
 
         newOrderlist.innerHTML = `
@@ -69,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         const productCount = [];
 
         data.productInfo.forEach(async (product) => {
-          console.log(data.productInfo);
+          // console.log(data.productInfo);
           newOrderlist.innerHTML += `
         <ul class="orderlist">
         <li class="order-list">
@@ -102,8 +103,8 @@ document.addEventListener("DOMContentLoaded", async function () {
           productId.push(product.productId);
           productCount.push(product.productCount);
         });
-        // console.log("PRODUCTNAME", productName);
-        // console.log("productCount", productCount);
+        // // console.log("PRODUCTNAME", productName);
+        // // console.log("productCount", productCount);
 
         orderList.appendChild(newOrderlist);
 

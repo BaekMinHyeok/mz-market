@@ -7,7 +7,7 @@ const adminAuth = async (req, res, next) => {
       process.env.SECRET
     );
     // const decoded = jwt.verify(req.headers.authorization, process.env.SECRET);
-    // console.log(decoded.admin);
+    // // console.log(decoded.admin);
     if (decoded.admin) {
       return next();
     } else {

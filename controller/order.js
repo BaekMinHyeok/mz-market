@@ -40,7 +40,7 @@ const registerOrder = async (req, res) => {
       productInfo.push(productChild);
     }
 
-    // console.log(productInfo);
+    // // console.log(productInfo);
     const orderId = await order.register({
       name,
       phoneNumber,
@@ -53,18 +53,17 @@ const registerOrder = async (req, res) => {
       email: decoded.email,
       productInfo,
     });
-    res.json({
+    return res.json({
       success: true,
       message: "주문 등록에 성공했습니다.",
       orderId: orderId,
     });
-    console.log(register);
   } catch (error) {
-    res.json({
+    // console.log(error);
+    return res.json({
       success: false,
       message: error,
     });
-    console.log(error);
   }
 };
 
@@ -133,9 +132,9 @@ const getOrderUser = async (req, res) => {
       req.headers.authorization.split(" ")[1],
       process.env.SECRET
     );
-    // console.log(decoded);
+    // // console.log(decoded);
     const orders = await order.getOrderUser(decoded.email);
-    // console.log(orders);
+    // // console.log(orders);
     res.json({
       success: true,
       message: "주문정보를 조회했습니다.",

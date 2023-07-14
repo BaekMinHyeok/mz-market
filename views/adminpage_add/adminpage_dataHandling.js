@@ -26,9 +26,10 @@ savebtn.addEventListener("click", async function () {
   const formData = new FormData();
   formData.append("file", selectedFile);
   formData.append("data", JSON.stringify(productData));
-  // console.log(productData);
+  // // console.log(productData);
   try {
-    const response = await fetch("http://localhost:3000/api/product", {
+    // const response = await fetch("http://localhost:3000/api/product", {
+    const response = await fetch("/api/product", {
       method: "POST",
       headers: {
         authorization: `Bearer ${token}`,
@@ -37,17 +38,17 @@ savebtn.addEventListener("click", async function () {
       body: formData,
     });
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
 
     if (result.success) {
       alert("저장되었습니다.");
       location.reload();
-      console.log(result.message);
+      // console.log(result.message);
     } else {
       alert("값을 다 입력해 주세요!");
     }
   } catch (error) {
-    console.log("Error:", error);
+    // console.log("Error:", error);
     // 오류 처리 로직 추가
   }
 });

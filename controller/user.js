@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 // 회원가입
 const register = async (req, res) => {
-  // console.log(req.body);
+  // // console.log(req.body);
   try {
     await user.register({
       name: req.body.name,
@@ -110,7 +110,7 @@ const login = async (req, res) => {
 const authCheck = async (req, res) => {
   const authKey = getAuthNum();
   const clientKey = req.body.key;
-  // console.log(authKey, clientKey);
+  // // console.log(authKey, clientKey);
   if (authKey == clientKey) {
     res.json({
       success: true,

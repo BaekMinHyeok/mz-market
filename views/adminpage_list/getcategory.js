@@ -1,5 +1,6 @@
 async function getProductcategory() {
-  const url = "http://localhost:3000/api/category";
+  // const url = "http://localhost:3000/api/category";
+  const url = "/api/category";
   const token = localStorage.getItem("token");
 
   try {
@@ -13,7 +14,7 @@ async function getProductcategory() {
     const result = await response.json();
 
     if (result.success) {
-      console.log(result.message);
+      // console.log(result.message);
 
       return result;
     }
