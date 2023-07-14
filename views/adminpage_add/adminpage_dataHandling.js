@@ -28,7 +28,7 @@ savebtn.addEventListener("click", async function () {
   formData.append("data", JSON.stringify(productData));
   // console.log(productData);
   try {
-    const response = await fetch("http://localhost:3000/api/product", {
+    const response = await fetch("http://kdt-sw-5-team11.elicecoding.com/api/product", {
       method: "POST",
       headers: {
         authorization: `Bearer ${token}`,

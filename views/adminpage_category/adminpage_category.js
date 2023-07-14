@@ -1,6 +1,6 @@
 //상품 카테고리 조회
 async function getProductcategory() {
-  const url = "http://localhost:3000/api/category";
+  const url = "http://kdt-sw-5-team11.elicecoding.com/api/category";
   const token = localStorage.getItem("token");
 
   try {
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           console.log(productData.newName);
 
           try {
-            await fetch("http://localhost:3000/api/category", {
+            await fetch("http://kdt-sw-5-team11.elicecoding.com/api/category", {
               method: "PUT",
               headers: {
                 authorization: `Bearer ${token}`,
@@ -111,7 +111,7 @@ async function handleDeleteButtonClick(event) {
     event.target.parentElement.classList.remove("add-text3");
     event.target.parentElement.remove();
 
-    const url = `http://localhost:3000/api/category/${name}`;
+    const url = `http://kdt-sw-5-team11.elicecoding.com/api/category/${name}`;
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(url, {
@@ -141,7 +141,7 @@ async function addProductcategory(addInput) {
   };
   console.log(productData);
   try {
-    const response = await fetch("http://localhost:3000/api/category", {
+    const response = await fetch("http://kdt-sw-5-team11.elicecoding.com/api/category", {
       method: "POST",
       headers: {
         authorization: `Bearer ${token}`,
