@@ -1,4 +1,4 @@
-import { putApi, deleteApi, getApi } from "/api.js";
+import { putApi, deleteApi, getApi } from "../../public/api.js";
 
 const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#email");
@@ -65,7 +65,7 @@ async function deleteAccount() {
   try {
     const response = await deleteApi(
       // "http://localhost:3000/api/user/delete-account"
-      "/api/user/delete-account"
+      "/api/user"
     );
     if (response) {
       alert("회원을 탈퇴하였습니다.");
