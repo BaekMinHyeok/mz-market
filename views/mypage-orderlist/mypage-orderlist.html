@@ -4,21 +4,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>My page - orderlist</title>
-    <link rel="stylesheet" href="http://localhost:3000/reset.css">
+    <link rel="stylesheet" href="http://localhost:3000/reset.css" />
     <link rel="stylesheet" href="mypage-orderlist.css" />
     <script src="mypage-orderlist.js" type="module" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
   </head>
   <body>
     <section class="section">
       <div class="container">
         <div>
-          <h1>마이페이지</h1>
+          <h1 class="myPage_title">마이페이지</h1>
         </div>
         <div>
           <ul class="tabs">
-            <li><button class="page-btn" id="mypage-myinfo">내 정보 수정</button></li>
-            <li><button class="page-btn" id="mypage-orderlist">주문내역</button></li>
-          </ul>	
+            <li>
+              <button class="page-btn" id="mypage-myinfo">내 정보 수정</button>
+            </li>
+            <li>
+              <button class="page-btn" id="mypage-orderlist">주문내역</button>
+            </li>
+          </ul>
+        </div>
+        <div class="user_info_title">
+          <h2 class="user_name">ㅇㅇㅇ님이 주문한 상품이에요.</h2>
+          <p class="user_name_text">주문한 상품들을 확인할 수 있어요.</p>
         </div>
         <div class="container orderlist-container" id="orderlistContainer">
           <!-- <div class="order-container">
