@@ -41,7 +41,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         // }
 
         newOrderlist.innerHTML = `
-      <div class="order-info">
+      <div class="order-info my_order_info">
+      <div class = "order_info_top">
         <div>
           <h1 class="order-number">주문 번호: 
           <span class="order-id">${data.orderId}</span></h1>
@@ -49,6 +50,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         <div>
           <p class="order-status">${status}</p>
         </div>
+      </div>
         <div class="orderlist-edit">
           ${
             data.status !== "complete"
