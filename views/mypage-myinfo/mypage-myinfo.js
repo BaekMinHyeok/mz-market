@@ -47,9 +47,10 @@ async function editAccount() {
   try {
     // const response = await putApi("http://localhost:3000/api/user", {
     const response = await putApi("/api/user", {
-      name: newName,
       email: newEmail,
-      password: newPassword,
+      pw: newPassword,
+      newPw: newPasswordCheck,
+      newName: newName,
     });
 
     if (response) {
@@ -67,10 +68,16 @@ async function deleteAccount() {
   try {
     const response = await deleteApi(
       // "http://localhost:3000/api/user/delete-account"
-      "/api/user/delete-account"
+      "/api/user",
+      {
+        success: true, //성공시 true, 실패시 false 반환
+        message: "회원탈퇴에 성공했습니다.",
+      }
     );
+
     if (response) {
       alert("회원을 탈퇴하였습니다.");
+      window.location.href = "/";
     } else {
       alert("회원 탈퇴에 실패하였습니다.");
     }

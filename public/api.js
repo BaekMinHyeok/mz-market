@@ -11,7 +11,7 @@ export const getApi = async (path) => {
       headers: getHeaders(),
     });
 
-    if (response) {
+    if (response.ok) {
       const data = await response.json();
       return data;
     } else {
@@ -31,7 +31,7 @@ export const postApi = async (path, data) => {
       headers: getHeaders(true),
     });
 
-    if (response) {
+    if (response.ok) {
       const result = await response.json();
       return result;
     } else {
@@ -51,7 +51,9 @@ export const putApi = async (path, data) => {
       headers: getHeaders(),
     });
 
-    if (response) {
+    if (response.ok) {
+      const result = response.json();
+      return result;
       // console.log("Data updated successfully.");
     } else {
       throw new Error("Failed to update data.");
@@ -69,7 +71,9 @@ export const deleteApi = async (path) => {
       headers: getHeaders(),
     });
 
-    if (response) {
+    if (response.ok) {
+      const result = response.json();
+      return result;
       // console.log("Data deleted successfully.");
     } else {
       throw new Error("Failed to delete data.");
