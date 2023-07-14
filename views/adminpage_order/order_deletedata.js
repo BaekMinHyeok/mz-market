@@ -1,6 +1,6 @@
 const deleteData = async (orderId) => {
   console.log(orderId);
-  const url = `http://kdt-sw-5-team11.elicecoding.com/api/order/${orderId}`;
+  const url = `http://localhost:3000/api/order/${orderId}`;
   const token = localStorage.getItem("token");
   try {
     const response = await fetch(url, {

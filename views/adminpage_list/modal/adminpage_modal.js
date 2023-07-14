@@ -93,9 +93,7 @@ function addEventSaveBtn() {
 
         // 백엔드로 상품 데이터 전송
         const response = await fetch(
-          `http://kdt-sw-5-team11.elicecoding.com/api/product/${parseInt(
-            productId
-          )}`,
+          `http://localhost:3000/api/product/${parseInt(productId)}`,
           {
             method: "PUT",
             headers: {

@@ -238,7 +238,7 @@ function placeOrder() {
   //     if (response.ok) {
   //       // 주문 성공
   //       console.log("주문 및 결제 페이지로 이동");
-  //       const productDetailURL = "http://kdt-sw-5-team11.elicecoding.com/cart/order";
+  //       const productDetailURL = "http://localhost:3000/cart/order";
   //       console.log(productDetailURL);
   //       window.location.href = productDetailURL;
   //     } else {

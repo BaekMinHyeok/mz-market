@@ -1,5 +1,5 @@
 const { product } = require("../services/product");
-const serverPath = "http://kdt-sw-5-team11.elicecoding.com";
+const serverPath = "http://localhost:3000";
 
 // 상품 등록
 const registerProduct = async (req, res) => {

@@ -1,8 +1,4 @@
-import {
-  putApi,
-  deleteApi,
-  getApi,
-} from "http://kdt-sw-5-team11.elicecoding.com/api.js";
+import { putApi, deleteApi, getApi } from "http://localhost:3000/api.js";
 
 const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#email");
@@ -16,9 +12,7 @@ deleteAccountButton.addEventListener("click", deleteAccount);
 
 async function getUserData() {
   try {
-    const data = await getApi(
-      "http://kdt-sw-5-team11.elicecoding.com/api/user"
-    );
+    const data = await getApi("http://localhost:3000/api/user");
     nameInput.value = data.user.name;
     emailInput.value = data.user.email;
   } catch (error) {
@@ -49,14 +43,11 @@ async function editAccount() {
   }
 
   try {
-    const response = await putApi(
-      "http://kdt-sw-5-team11.elicecoding.com/api/user",
-      {
-        name: newName,
-        email: newEmail,
-        password: newPassword,
-      }
-    );
+    const response = await putApi("http://localhost:3000/api/user", {
+      name: newName,
+      email: newEmail,
+      password: newPassword,
+    });
 
     if (response) {
       alert("회원정보가 수정되었습니다.");
@@ -71,7 +62,7 @@ async function editAccount() {
 async function deleteAccount() {
   try {
     const response = await deleteApi(
-      "http://kdt-sw-5-team11.elicecoding.com/api/user/delete-account"
+      "http://localhost:3000/api/user/delete-account"
     );
     if (response) {
       alert("회원을 탈퇴하였습니다.");
@@ -86,6 +77,5 @@ async function deleteAccount() {
 // Add event listener to the "Order History" button
 const orderListButton = document.getElementById("mypage-orderlist");
 orderListButton.addEventListener("click", () => {
-  window.location.href =
-    "http://kdt-sw-5-team11.elicecoding.com/user/order_history";
+  window.location.href = "http://localhost:3000/user/order_history";
 });
