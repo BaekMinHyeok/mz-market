@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       </div>
       `;
 
-        const productName = [];
+        const productId = [];
         const productCount = [];
 
         data.productInfo.forEach(async (product) => {
@@ -97,13 +97,14 @@ document.addEventListener("DOMContentLoaded", async function () {
         </ul>
         `;
 
-          productName.push(product.productName);
+          productId.push(product.productId);
           productCount.push(product.productCount);
         });
         // console.log("PRODUCTNAME", productName);
         // console.log("productCount", productCount);
 
         orderList.appendChild(newOrderlist);
+
         //수량 추가,감소 버튼과 수정하기 및 취소하기 버튼
         const minusQuantityButtons =
           newOrderlist.querySelectorAll(".minus-quantity");
@@ -115,12 +116,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         minusQuantityButtons.forEach((button, index) => {
           button.addEventListener("click", () => {
             if (data.status === "ready") {
-              decreaseQuantity(
-                button.nextElementSibling,
-                data.orderId,
-                productName[index],
-                productCount[index]
-              );
+              decreaseQuantity(button.nextElementSibling);
+              productCount[index]--;
+              console.log(productCount);
             }
           });
         });
@@ -128,12 +126,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         plusQuantityButtons.forEach((button, index) => {
           button.addEventListener("click", () => {
             if (data.status === "ready") {
-              increaseQuantity(
-                button.previousElementSibling,
-                data.orderId,
-                productName[index],
-                productCount[index]
-              );
+              increaseQuantity(button.previousElementSibling);
+              productCount[index]++;
+              console.log(productCount);
             }
           });
         });
@@ -152,24 +147,20 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         editButton.addEventListener("click", async () => {
           if (data.status === "ready") {
+            console.log("sddddddddddddddddddddd", productCount);
             const orderId = data.orderId;
             const quantityElement =
               newOrderlist.querySelector(".product-count");
             const quantity = parseInt(quantityElement.innerText);
 
-            const productName = [];
-            const productCount = [];
+            const productId = [];
 
             // 여기서 productCount를 수정한 수량으로 가져와서 배열에 넣는 방법을 모르겠습니다.
             data.productInfo.forEach((product) => {
-              productName.push(product.productName);
-              productCount.push(product.productCount);
+              productId.push(product.productId);
             });
 
-            console.log("aaaaaaaaaaaaa", productName);
-            console.log("aaaaaaaaaaaaa", productCount);
-
-            await sendQuantityUpdateRequest(orderId, productName, productCount);
+            await sendQuantityUpdateRequest(orderId, productId, productCount);
             quantityElement.innerText = quantity.toString();
           }
         });
@@ -208,9 +199,9 @@ function increaseQuantity(quantityElement) {
 const token = localStorage.getItem("token");
 
 // 수량 수정
-async function sendQuantityUpdateRequest(orderId, productName, productCount) {
+async function sendQuantityUpdateRequest(orderId, productId, productCount) {
   const editData = {
-    productName: productName,
+    productId: productId,
     productCount: productCount,
   };
 
