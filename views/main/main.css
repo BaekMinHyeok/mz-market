@@ -1,4 +1,3 @@
-
 .swiper {
   width: 100%;
   height: 700px;
@@ -9,7 +8,7 @@
   background-color: #d2d2d2;
 }
 
-.container {
+#main .container {
   width: 1200px;
   padding: 150px 0 200px;
   margin: auto;
@@ -37,9 +36,9 @@
   cursor: pointer;
   height: 434px;
 }
-.product_img :hover{
+.product_img :hover {
   transform: scale(1.2);
-  transition: .5s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
 
 .product .product_img {
@@ -55,8 +54,6 @@
   height: 100%;
   object-fit: cover;
 }
-
-
 
 .product .product_text_box .product_name {
   font-weight: 700;
@@ -90,12 +87,11 @@
   font-size: 14px;
 }
 
-
-.swiper-slide img{
+.swiper-slide img {
   width: 100%;
   height: 700px;
 }
 
-:root{
+:root {
   --swiper-theme-color: #fff;
 }
