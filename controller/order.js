@@ -58,7 +58,7 @@ const registerOrder = async (req, res) => {
       message: "주문 등록에 성공했습니다.",
       orderId: orderId,
     });
-    console.log(register)
+    console.log(register);
   } catch (error) {
     res.json({
       success: false,
@@ -72,8 +72,9 @@ const registerOrder = async (req, res) => {
 const updateOrder = async (req, res) => {
   try {
     const orderId = req.params.orderId;
-    const updatedInfo = req.body;
-    await order.update(orderId, updatedInfo);
+    const updatedInfo = req.body.productCount;
+    const productId = req.body.productId;
+    await order.update(orderId, updatedInfo, productId);
 
     res.json({
       success: true,

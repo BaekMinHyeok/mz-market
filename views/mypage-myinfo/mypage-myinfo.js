@@ -6,7 +6,6 @@ const passwordInput = document.querySelector("#password");
 const passwordCheckInput = document.querySelector("#password-check");
 const editAccountButton = document.querySelector(".edit-account");
 const deleteAccountButton = document.querySelector(".delete-account");
-const order_history = document.querySelector(".order-history");
 
 editAccountButton.addEventListener("click", editAccount);
 deleteAccountButton.addEventListener("click", deleteAccount);
@@ -69,6 +68,8 @@ async function deleteAccount() {
   }
 }
 
-order_history.addEventListener("click", () => {
-  getData();
+// Add event listener to the "Order History" button
+const orderListButton = document.getElementById("mypage-orderlist");
+orderListButton.addEventListener("click", () => {
+  window.location.href = "http://localhost:3000/user/order_history";
 });

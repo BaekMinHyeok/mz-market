@@ -1,4 +1,5 @@
 const { user } = require("../services/user");
+const { getAuthNum } = require("../controller/mail");
 const jwt = require("jsonwebtoken");
 
 // 회원가입
@@ -106,4 +107,26 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login, updateUser, getUser, deleteUser };
+const authCheck = async (req, res) => {
+  const authKey = getAuthNum();
+  const clientKey = req.body.key;
+  // console.log(authKey, clientKey);
+  if (authKey == clientKey) {
+    res.json({
+      success: true,
+    });
+  } else {
+    res.json({
+      success: false,
+    });
+  }
+};
+
+module.exports = {
+  register,
+  login,
+  updateUser,
+  getUser,
+  deleteUser,
+  authCheck,
+};
