@@ -12,7 +12,7 @@ const authMail = async (req, res) => {
     { authCode: authNum },
     function (err, data) {
       if (err) {
-        console.log(err);
+        // console.log(err);
       }
       emailTemplete = data;
     }
@@ -38,14 +38,14 @@ const authMail = async (req, res) => {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log("Finish sending email : " + info.response);
+    // console.log("Finish sending email : " + info.response);
     // res.send(authNum);
     res.json({
       success: true,
     });
     transporter.close();
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).send("Failed to send email.");
   }
 };

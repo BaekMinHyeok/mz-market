@@ -2,7 +2,7 @@ const checkboxContainer = document.querySelector(".checkbox-container");
 document.addEventListener("DOMContentLoaded", async function () {
   try {
     const result = await getProductcategory();
-    console.log(result.categorys[0].name);
+    // console.log(result.categorys[0].name);
     result.categorys.forEach((ary) => {
       const name = ary.name;
       const newLabel = document.createElement("label");
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       checkboxContainer.appendChild(newLabel);
     });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 });
 
@@ -33,7 +33,7 @@ async function getProductcategory() {
     const result = await response.json();
 
     if (result.success) {
-      console.log(result.message);
+      // console.log(result.message);
 
       return result;
     }

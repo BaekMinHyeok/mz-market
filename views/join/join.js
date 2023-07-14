@@ -59,8 +59,8 @@ async function createAccount() {
     });
     const result = await response.json();
 
-    console.log(data);
-    console.log(result);
+    // console.log(data);
+    // console.log(result);
     if (result.success) {
       alert("회원가입이 성공하였습니다!");
       // location.href = "http://localhost:3000/user/sign_in";
@@ -96,7 +96,7 @@ authButton.addEventListener("click", async () => {
     });
     completeButton.disabled = false;
   } catch (error) {
-    console.log("실패");
+    // console.log("실패");
   }
 });
 

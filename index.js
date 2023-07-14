@@ -11,7 +11,7 @@ app.use(express.json()); // <==== parse request body as JSON
 
 mongoose.connect(process.env.DATABASE);
 mongoose.connection.on("connected", () => {
-  console.log("Successfully connected to MongoDB");
+  // console.log("Successfully connected to MongoDB");
 });
 
 app.use("/", page);

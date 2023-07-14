@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         },
       });
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
       if (result.success) {
         const res = await fetch("/header/header3.html");
         const html = await res.text();
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             return (window.location.href = "/");
           }
         });
-        console.log("관리자");
+        // console.log("관리자");
       } else {
         const res2 = await fetch("/header/header2.html");
         const html2 = await res2.text();
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             alert("로그아웃 되었습니다.");
             return (window.location.href = "/");
           }
-          console.log("관리자아닙니다.");
+          // console.log("관리자아닙니다.");
         });
       }
     }

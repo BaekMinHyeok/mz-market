@@ -41,7 +41,7 @@ async function fetchData() {
       return result;
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 

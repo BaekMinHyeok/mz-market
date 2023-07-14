@@ -21,12 +21,12 @@ function fetchProducts(url, productList) {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      console.log("DATA", data);
+      // console.log("DATA", data);
       const fragment = document.createDocumentFragment();
 
       data.product.forEach((product) => {
         const listItem = createProductItem(product);
-        // console.log("listItem", listItem);
+        // // console.log("listItem", listItem);
         fragment.appendChild(listItem);
       });
 
@@ -37,12 +37,12 @@ function fetchProducts(url, productList) {
       const productItems = productList.querySelectorAll(".product");
       productItems.forEach((item) => {
         const productId = item.dataset.productId;
-        // console.log(productId);
+        // // console.log(productId);
         item.addEventListener("click", () => showProductDetail(productId));
       });
     })
     .catch((error) => {
-      console.log("Error:", error);
+      // console.log("Error:", error);
     });
 }
 
@@ -95,12 +95,12 @@ function createProductItem(product) {
 }
 
 function showProductDetail(productId) {
-  // console.log("상세페이지 이동 함수 테스트");
-  // console.log(productId);
+  // // console.log("상세페이지 이동 함수 테스트");
+  // // console.log(productId);
 
   // 상세 페이지로 이동할 URL
   const productDetailURL = `/category/products/${productId}`;
-  // console.log(productDetailURL);
+  // // console.log(productDetailURL);
   window.location.href = productDetailURL;
 }
 
@@ -116,13 +116,13 @@ function fetchCategories() {
   }) // 카테고리 목록 조회 API
     .then((response) => response.json())
     .then((data) => {
-      console.log("카테고리데이터", data);
+      // console.log("카테고리데이터", data);
       const categorySelect = document.getElementById("category");
       // 기존 옵션 제거
       // categorySelect.innerHTML = "";
       // 카테고리 목록을 이용해 옵션 추가
       data.categorys.forEach((category) => {
-        // console.log("category", category);
+        // // console.log("category", category);
         const option = document.createElement("option");
         option.value = category.name;
         option.textContent = category.name;
@@ -130,7 +130,7 @@ function fetchCategories() {
       });
     })
     .catch((error) => {
-      console.log("Error:", error);
+      // console.log("Error:", error);
     });
 }
 
@@ -144,7 +144,7 @@ function filterProducts(category, productList) {
   const productItems = productList.querySelectorAll(".product");
   productItems.forEach((item) => {
     const productCategory = item.dataset.category;
-    console.log("DATASET", item.dataset);
+    // console.log("DATASET", item.dataset);
     if (productCategory === category || category === "") {
       item.style.display = "block";
     } else {
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchCategories();
 
   const category = location.pathname.split("category")[1].split("/")[1];
-  // console.log(category);
+  // // console.log(category);
   const productTitle = document.querySelector(".product_title");
   const productSubtitle = document.querySelector(".product_subtitle");
   const productList = document.querySelector(".products_list_wrapper");

@@ -14,7 +14,7 @@ async function getProductcategory() {
     const result = await response.json();
 
     if (result.success) {
-      console.log(result.message);
+      // console.log(result.message);
 
       return result;
     }

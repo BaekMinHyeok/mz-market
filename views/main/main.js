@@ -68,7 +68,7 @@ function renderNewProductList(products) {
 
   const newProductsToRender = products.slice(-4).reverse();
 
-  console.log("NEWWWWW", newProductsToRender);
+  // console.log("NEWWWWW", newProductsToRender);
 
   newProductsToRender.forEach((product) => {
     const productElement = renderProduct(product);
@@ -79,12 +79,12 @@ function renderNewProductList(products) {
 const token = localStorage.getItem("token");
 
 function showProductDetail(productId) {
-  console.log("상세페이지 이동 함수 테스트");
-  console.log(productId);
+  // console.log("상세페이지 이동 함수 테스트");
+  // console.log(productId);
 
   // 상세 페이지로 이동할 URL
   const productDetailURL = `/category/products/${productId}`;
-  console.log(productDetailURL);
+  // console.log(productDetailURL);
   window.location.href = productDetailURL;
 }
 
@@ -101,7 +101,7 @@ async function fetchProductList() {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       return data;
     } else {
       throw new Error("API 호출 에러");
@@ -116,7 +116,7 @@ async function fetchProductList() {
 async function init() {
   try {
     const products = await fetchProductList();
-    // console.log(products.products);
+    // // console.log(products.products);
 
     // 새로운 상품 목록 렌더링
     renderNewProductList(products.products);

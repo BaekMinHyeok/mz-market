@@ -3,9 +3,9 @@ let cartData = localStorage.getItem("cart");
 let cartItems = [];
 cartItems = JSON.parse(cartData);
 
-console.log(cartData);
+// console.log(cartData);
 const noList = document.querySelector(".empty_cart_message");
-console.log(noList);
+// console.log(noList);
 
 // 주문하기 버튼
 let orderButton = document.querySelector(".nav_order_button");
@@ -13,7 +13,7 @@ let orderButton = document.querySelector(".nav_order_button");
 // 장바구니 데이터가 있는 경우 목록 생성
 if (cartItems.length > 0) {
   noList.style.display = "none";
-  console.log("cartItems", cartItems);
+  // console.log("cartItems", cartItems);
   orderButton.style.background = "black";
   orderButton.style.color = "white";
 
@@ -55,7 +55,7 @@ if (cartItems.length > 0) {
     listItem.addEventListener("click", function (event) {
       // 수량 감소
       if (event.target.classList.contains("product_remove")) {
-        console.log("TEST");
+        // console.log("TEST");
         quantity--;
         if (quantity < 1) {
           quantity = 1;
@@ -73,7 +73,7 @@ if (cartItems.length > 0) {
         // 업데이트된 장바구니 데이터를 로컬 스토리지에 저장
         localStorage.setItem("cart", JSON.stringify(cartItems));
 
-        console.log("11111" + cartData);
+        // console.log("11111" + cartData);
         updateTotalQuantityAndPrice();
         // 수량 증가
       } else if (event.target.classList.contains("product_add")) {
@@ -91,7 +91,7 @@ if (cartItems.length > 0) {
         // 업데이트된 장바구니 데이터를 로컬 스토리지에 저장
         localStorage.setItem("cart", JSON.stringify(cartItems));
         updateTotalQuantityAndPrice();
-        console.log("22222" + cartData);
+        // console.log("22222" + cartData);
       }
     });
   });
@@ -107,14 +107,14 @@ document.addEventListener("click", function (event) {
     const listItem = event.target.closest(".order_product_list");
     listItem.remove();
 
-    console.log("삭제 리스트 아이템", listItem);
+    // console.log("삭제 리스트 아이템", listItem);
 
     // 장바구니 데이터 업데이트
     const productName = listItem.querySelector(".product_name").textContent;
-    console.log("삭제하는 상품 이름", productName);
+    // console.log("삭제하는 상품 이름", productName);
     const productSize = listItem.querySelector(".product_size").textContent;
-    console.log("삭제하는 상품 사이즈", productSize);
-    console.log(productSize);
+    // console.log("삭제하는 상품 사이즈", productSize);
+    // console.log(productSize);
 
     cartItems = cartItems.filter(
       (item) => !(item.name === productName && item.size === productSize)
@@ -122,7 +122,7 @@ document.addEventListener("click", function (event) {
 
     // 업데이트된 장바구니 데이터를 로컬 스토리지에 저장
     localStorage.setItem("cart", JSON.stringify(cartItems));
-    console.log("상품 삭제하고 나서 카트 아이템 목록", cartItems);
+    // console.log("상품 삭제하고 나서 카트 아이템 목록", cartItems);
 
     updateTotalQuantityAndPrice();
   }
@@ -161,15 +161,15 @@ function calculateTotalPrice() {
 
   productPriceElements.forEach((element, index) => {
     const priceText = element.textContent;
-    // console.log("PRICETEXT 변환", Number(priceText.replace(/\D/g, "")));
+    // // console.log("PRICETEXT 변환", Number(priceText.replace(/\D/g, "")));
     const price = Number(priceText.replace(/\D/g, ""));
-    // console.log("PRICE", price);
+    // // console.log("PRICE", price);
     const quantity = parseInt(productNumElements[index].textContent);
     const itemTotalPrice = price * quantity;
     totalPrice += itemTotalPrice;
   });
 
-  console.log("총 가격: " + totalPrice);
+  // console.log("총 가격: " + totalPrice);
 
   return totalPrice;
 }
@@ -201,7 +201,7 @@ orderButton.addEventListener("click", placeOrder);
 
 function placeOrder() {
   const productDetailURL = "/cart/order";
-  console.log(productDetailURL);
+  // console.log(productDetailURL);
   window.location.href = productDetailURL;
 
   // const orderItems = [];
@@ -245,14 +245,14 @@ function placeOrder() {
   //   .then((response) => {
   //     if (response.ok) {
   //       // 주문 성공
-  //       console.log("주문 및 결제 페이지로 이동");
+  //       // console.log("주문 및 결제 페이지로 이동");
   //       const productDetailURL = "http://kdt-sw-5-team11.elicecoding.com/cart/order";
-  //       console.log(productDetailURL);
+  //       // console.log(productDetailURL);
   //       window.location.href = productDetailURL;
   //     } else {
   //       // 주문 실패
   //       alert("주문을 처리하는 도중에 문제가 발생했습니다.");
-  //       console.log("주문을 처리하는 도중에 문제가 발생했습니다.");
+  //       // console.log("주문을 처리하는 도중에 문제가 발생했습니다.");
   //     }
   //   })
   //   .catch((error) => {
