@@ -30,7 +30,7 @@ async function fetchData() {
           </td>
           <td>
             <img src="./imges/img2.png" alt="삭제버튼" class="delete-btn" id="deleteBtn" data-orderid="${
-              data._id
+              data.orderId
             }">
           </td>`;
       orderList.appendChild(tr);

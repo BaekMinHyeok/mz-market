@@ -93,7 +93,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                 </span>
                 </button>
               </div>
-              <p class="product-status">${product.productPrice}원</p>
+              <p class="product-status">${(
+                product.productPrice * product.productCount
+              ).toLocaleString()}원</p>
             </div>
          </div>
          </li>
@@ -228,7 +230,8 @@ async function sendQuantityUpdateRequest(orderId, productId, productCount) {
 
     if (response.ok) {
       const data = await response.json();
-      // console.log(data);
+      console.log(data);
+      alert("주문을 수정했어요!");
     } else {
       alert("에러가 발생했어요. 관리자에게 문의해주세요.");
 
