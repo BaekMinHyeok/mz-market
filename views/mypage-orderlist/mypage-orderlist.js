@@ -79,24 +79,10 @@ document.addEventListener("DOMContentLoaded", async function () {
             <div class="order-list-info">
               <p class="product-name">${product.productName}</p>
               <p class="product-size">${product.productSize}</p>
-              <div class = "order_bottom_box">
-              <div class="quantity_box">
-                <button class="minus-quantity">
-                <span class="material-symbols-outlined">
-                    remove
-                  </span>
-                </button>
-                <p class="product-count">${product.productCount}</p>
-                <button class="plus-quantity">
-                  <span class="material-symbols-outlined">
-                  add
-                </span>
-                </button>
-              </div>
               <p class="product-status">${(
                 product.productPrice * product.productCount
               ).toLocaleString()}원</p>
-            </div>
+
          </div>
          </li>
         </ul>

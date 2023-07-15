@@ -62,6 +62,10 @@ header.navigation {
   background-color: transparent;
 }
 
+.orderlist-edit .edit-button {
+  display: none;
+}
+
 /* Styling for the order list items */
 .order-list {
   display: flex;
@@ -106,6 +110,7 @@ header.navigation {
 .product-size {
   font-weight: 700;
   font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .minus-quantity,
