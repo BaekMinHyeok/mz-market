@@ -1,0 +1,120 @@
+#category_products_list .container {
+  width: 1200px;
+  padding: 150px 0 200px;
+  margin: auto;
+}
+
+.product_container {
+  margin-bottom: 135px;
+}
+
+.product_container .product_title_box {
+  border-bottom: 2px solid #d9d9d9;
+  margin-bottom: 120px;
+}
+
+.product_container .product_title {
+  font-weight: 700;
+  font-size: 38px;
+  margin-bottom: 25px;
+}
+
+.product_container .product_subtitle {
+  padding-bottom: 60px;
+  font-weight: 600;
+}
+
+.product_container .products_list_wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 29px;
+}
+
+.product_container .products_list_wrapper .product {
+  cursor: pointer;
+  height: 434px;
+  width: 278px;
+  margin-bottom: 200px;
+}
+
+.product_container .products_list_wrapper .product .product_img {
+  width: 278px;
+  height: 420px;
+  background-color: #f2f2f2;
+  margin-bottom: 35px;
+}
+
+.product_container .products_list_wrapper .product .product_img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product_container
+  .products_list_wrapper
+  .product
+  .product_text_box
+  .product_name {
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.product_container
+  .products_list_wrapper
+  .product
+  .product_text_box
+  .product_text {
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 38px;
+}
+
+.product_container
+  .products_list_wrapper
+  .product
+  .product_text_box
+  .product_text_box_bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.product_container
+  .products_list_wrapper
+  .product
+  .product_text_box
+  .product_text_box_bottom
+  .product_price {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.product_container
+  .products_list_wrapper
+  .product
+  .product_text_box
+  .product_text_box_bottom
+  .product_review {
+  font-size: 14px;
+}
+
+#category {
+  border: 2px solid #000;
+  font-weight: 700;
+  border-radius: 30px;
+  text-align: center;
+  cursor: pointer;
+  width: 120px;
+  height: 50px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-bottom: 45px;
+}

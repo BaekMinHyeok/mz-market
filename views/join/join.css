@@ -1,0 +1,78 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+h1 {
+  margin-bottom: 50px;
+}
+
+.input-container {
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.input-container label {
+  margin-bottom: 1px;
+  display: block;
+  margin-left: -80%;
+  font-size: smaller;
+}
+
+input,
+button.signup-button {
+  width: 278px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+button.auth-button {
+  width: 35%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+button.auth-complete-button {
+  width: 35%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+#email {
+  width: 63%;
+}
+
+#auth {
+  width: 63%;
+}
+
+#signupBtn {
+  margin-top: 10px;
+}
+
+.signup-button {
+  margin-top: 70px;
+  margin-bottom: 30px;
+}
+
+label[for="name"] {
+  margin-left: -85%;
+}
+
+label[for="email"] {
+  margin-left: -83%;
+}
+
+label[for="password-check"] {
+  margin-left: -72%;
+}
+
+.login-p {
+  font-size: x-small;
+}

@@ -1,0 +1,18 @@
+.footer-style {
+  background-color: #f0f0f0;
+  padding: 20px;
+  text-align: center;
+}
+footer {
+  padding: 100px;
+  background-color: #000;
+}
+footer .container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+footer p {
+  color: #fff;
+  margin-bottom: 5px;
+}

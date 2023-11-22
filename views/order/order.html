@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>사용자 주문 페이지</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="/reset.css" />
+    <!-- <link rel="stylesheet" href="/public/reset.css" /> -->
+    <link rel="stylesheet" href="order.css" />
+  </head>
+  <body>
+    <div id="order">
+      <!-- container -->
+      <div class="container">
+        <!-- 상단 타이틀 -->
+        <div class="title_box">
+          <h2 class="title">주문 결제</h2>
+        </div>
+
+        <!-- 본문 -->
+
+        <div class="order_wrapper">
+          <div class="order_left">
+            <!-- 왼쪽 배송지 정보 -->
+            <div class="order_content">
+              <h3 class="address_title">배송지 정보</h3>
+
+              <!-- 이름 -->
+              <div class="input_box">
+                <label for="name_input" class="name">이름</label>
+                <input
+                  type="text"
+                  class="name_input"
+                  placeholder="이름을 입력해주세요."
+                  maxlength="20"
+                />
+                <p class="error_message" id="nameError"></p>
+              </div>
+              <!-- 연락처 -->
+              <div class="input_box">
+                <label for="phonenum_input" class="phonenum">연락처</label>
+                <input
+                  type="text"
+                  class="phonenum_input"
+                  placeholder="전화번호를 입력해주세요."
+                  maxlength="13"
+                />
+                <p class="error_message" id="phonenumError"></p>
+              </div>
+              <!-- 이메일 -->
+              <div class="input_box">
+                <label for="email_input" class="email">이메일</label>
+                <input
+                  type="text"
+                  class="email_input"
+                  placeholder="이메일을 입력해주세요."
+                  maxlength="50"
+                />
+                <p class="error_message" id="emailError"></p>
+              </div>
+              <!-- 주소 -->
+              <div class="input_box">
+                <label for="address_input" class="address">주소</label>
+                <div class="address_input_box">
+                  <input
+                    type="text"
+                    class="address_input"
+                    placeholder="주소를 입력해주세요."
+                    readonly
+                  />
+                  <button class="address_button">주소찾기</button>
+                </div>
+                <input
+                  type="text"
+                  class="address_detail_input"
+                  placeholder="상세 주소를 입력해주세요."
+                />
+                <p class="error_message" id="addressError"></p>
+              </div>
+
+              <!-- 요청사항 -->
+              <div class="input_box">
+                <label for="" class="etc">요청사항</label>
+                <input
+                  type="text"
+                  class="etc_input"
+                  placeholder="요청사항을 입력해주세요."
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- 오른쪽 네비게이션 -->
+          <div class="order_right">
+            <div class="order_nav">
+              <h3 class="nav_title">결제정보</h3>
+
+              <div class="nav_order_info_box">
+                <div class="nav_product_count">
+                  <p class="count_title">상품수</p>
+                  <span class="count"><p>개</p></span>
+                </div>
+
+                <div class="nav_product_price">
+                  <p class="price_title">상품금액</p>
+                  <span class="price"></span>
+                </div>
+
+                <div class="nav_product_deliver">
+                  <p class="deliver_title">배송비</p>
+                  <span class="deliver">3,000원</span>
+                </div>
+              </div>
+              <div class="nav_total_price_box">
+                <p class="nav_total_price_title">결제하실 금액</p>
+                <div class="nav_total_price"></div>
+              </div>
+
+              <button id="paymentButton" class="nav_order_button" disabled>
+                결제하기
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- container end -->
+    </div>
+    <!-- 주소 찾기 외부 api -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!-- order.js -->
+    <script src="order.js" type="module"></script>
+    <script src="/header/header.js"></script>
+    <script src="/footer/footer.js"></script>
+  </body>
+</html>

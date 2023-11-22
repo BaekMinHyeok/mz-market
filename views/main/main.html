@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>메인페이지</title>
+    <!-- 구글 폰트 -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <!-- 스와이퍼 슬라이더 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <!-- <header>
+      <a>Logo</a>
+      <a>MEN</a>
+      <a>WOMEN</a>
+    </header> -->
+    <div id="main">
+      <!-- 상단 슬라이더 -->
+      <div class="slider_container">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide slide01"><img src="/images/slide01.jpg" alt=""></div>
+            <div class="swiper-slide slide02"><img src="/images/slide02.jpg" alt=""></div>
+            <div class="swiper-slide slide03"><img src="/images/slide03.jpg" alt=""></div>
+            <div class="swiper-slide slide04"><img src="/images/slide04.jpg" alt=""></div>
+            <div class="swiper-slide slide05"><img src="/images/slide05.jpg" alt=""></div>
+          </div>
+
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <!-- 하단 상품 내용 -->
+      <div class="container">
+        <!-- 새로운 상품 -->
+        <div class="product_container">
+          <h2 class="product_title">새로운 상품</h2>
+
+          <!-- 상품 리스트 -->
+          <ul class="products_list_wrapper">
+            <!-- <li class="product">
+              <div class="product_img"></div>
+
+              <div class="product_text_box">
+                <h3 class="product_name">상품명이 들어가는 자리입니다.</h3>
+                <p class="product_text">
+                  상품 상세 설명이 들어가는 자리입니다.
+                </p>
+
+                <div class="product_text_box_bottom">
+                  <p class="product_price">10,000원</p>
+                  <p class="product_review">50개의 리뷰</p>
+                </div>
+              </div>
+            </li>
+
+            <li class="product">
+              <div class="product_img"></div>
+
+              <div class="product_text_box">
+                <h3 class="product_name">상품명이 들어가는 자리입니다.</h3>
+                <p class="product_text">
+                  상품 상세 설명이 들어가는 자리입니다.
+                </p>
+
+                <div class="product_text_box_bottom">
+                  <p class="product_price">10,000원</p>
+                  <p class="product_review">50개의 리뷰</p>
+                </div>
+              </div>
+            </li>
+
+            <li class="product">
+              <div class="product_img"></div>
+
+              <div class="product_text_box">
+                <h3 class="product_name">상품명이 들어가는 자리입니다.</h3>
+                <p class="product_text">
+                  상품 상세 설명이 들어가는 자리입니다.
+                </p>
+
+                <div class="product_text_box_bottom">
+                  <p class="product_price">10,000원</p>
+                  <p class="product_review">50개의 리뷰</p>
+                </div>
+              </div>
+            </li>
+            <li class="product">
+              <div class="product_img"></div>
+
+              <div class="product_text_box">
+                <h3 class="product_name">상품명이 들어가는 자리입니다.</h3>
+                <p class="product_text">
+                  상품 상세 설명이 들어가는 자리입니다.
+                </p>
+
+                <div class="product_text_box_bottom">
+                  <p class="product_price">10,000원</p>
+                  <p class="product_review">50개의 리뷰</p>
+                </div>
+              </div>
+            </li> -->
+          </ul>
+        </div>
+        <!-- product_container end -->
+
+        <!-- 여성 의류 -->
+        <div class="product_container">
+          <h2 class="product_title">여성 인기 상품</h2>
+          <div class="female_product_list">
+            <!-- 상품 리스트 -->
+            <!-- <ul class="products_list_wrapper">
+              <li class="product">
+                <div class="product_img"></div>
+
+                <div class="product_text_box">
+                  <h3 class="product_name">상품명이 들어가는 자리입니다.</h3>
+                  <p class="product_text">
+                    상품 상세 설명이 들어가는 자리입니다.
+                  </p>
+
+                  <div class="product_text_box_bottom">
+                    <p class="product_price">10,000원</p>
+                    <p class="product_review">50개의 리뷰</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="product">
+                <div class="product_img"></div>
+
+                <div class="product_text_box">
+                  <h3 class="product_name">상품명이 들어가는 자리입니다.</h3>
+                  <p class="product_text">
+                    상품 상세 설명이 들어가는 자리입니다.
+                  </p>
+
+                  <div class="product_text_box_bottom">
+                    <p class="product_price">10,000원</p>
+                    <p class="product_review">50개의 리뷰</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="product">
+                <div class="product_img"></div>
+
+                <div class="product_text_box">
+                  <h3 class="product_name">상품명이 들어가는 자리입니다.</h3>
+                  <p class="product_text">
+                    상품 상세 설명이 들어가는 자리입니다.
+                  </p>
+
+                  <div class="product_text_box_bottom">
+                    <p class="product_price">10,000원</p>
+                    <p class="product_review">50개의 리뷰</p>
+                  </div>
+                </div>
+              </li>
+              <li class="product">
+                <div class="product_img"></div>
+
+                <div class="product_text_box">
+                  <h3 class="product_name">상품명이 들어가는 자리입니다.</h3>
+                  <p class="product_text">
+                    상품 상세 설명이 들어가는 자리입니다.
+                  </p>
+
+                  <div class="product_text_box_bottom">
+                    <p class="product_price">10,000원</p>
+                    <p class="product_review">50개의 리뷰</p>
+                  </div>
+                </div>
+              </li>
+            </ul> -->
+          </div>
+        </div>
+
+        <!-- 남성 의류 -->
+
+        <div class="product_container">
+          <h2 class="product_title">남성 인기 상품</h2>
+
+          <!-- 상품 리스트 -->
+          <div class="male_product_list">
+            <!-- <ul class="products_list_wrapper">
+              <li class="product">
+                <div class="product_img"></div>
+
+                <div class="product_text_box">
+                  <h3 class="product_name">상품명이 들어가는 자리입니다.</h3>
+                  <p class="product_text">
+                    상품 상세 설명이 들어가는 자리입니다.
+                  </p>
+
+                  <div class="product_text_box_bottom">
+                    <p class="product_price">10,000원</p>
+                    <p class="product_review">50개의 리뷰</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="product">
+                <div class="product_img"></div>
+
+                <div class="product_text_box">
+                  <h3 class="product_name">상품명이 들어가는 자리입니다.</h3>
+                  <p class="product_text">
+                    상품 상세 설명이 들어가는 자리입니다.
+                  </p>
+
+                  <div class="product_text_box_bottom">
+                    <p class="product_price">10,000원</p>
+                    <p class="product_review">50개의 리뷰</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="product">
+                <div class="product_img"></div>
+
+                <div class="product_text_box">
+                  <h3 class="product_name">상품명이 들어가는 자리입니다.</h3>
+                  <p class="product_text">
+                    상품 상세 설명이 들어가는 자리입니다.
+                  </p>
+
+                  <div class="product_text_box_bottom">
+                    <p class="product_price">10,000원</p>
+                    <p class="product_review">50개의 리뷰</p>
+                  </div>
+                </div>
+              </li>
+              <li class="product">
+                <div class="product_img"></div>
+
+                <div class="product_text_box">
+                  <h3 class="product_name">상품명이 들어가는 자리입니다.</h3>
+                  <p class="product_text">
+                    상품 상세 설명이 들어가는 자리입니다.
+                  </p>
+
+                  <div class="product_text_box_bottom">
+                    <p class="product_price">10,000원</p>
+                    <p class="product_review">50개의 리뷰</p>
+                  </div>
+                </div>
+              </li>
+            </ul> -->
+          </div>
+        </div>
+      </div>
+      <!-- container end -->
+    </div>
+
+    <!-- slider -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="/header/header.js"></script>
+    <script src="/footer/footer.js"></script>
+    <!-- main.js -->
+    <script src="main.js" type="module"></script>
+  </body>
+</html>

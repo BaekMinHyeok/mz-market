@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My page - orderlist</title>
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="mypage-orderlist.css" />
+    <script src="mypage-orderlist.js" type="module" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+  </head>
+  <body>
+    <section class="section" id="my_orderlist">
+      <div class="container">
+        <div>
+          <h1 class="myPage_title">마이페이지</h1>
+        </div>
+        <div>
+          <ul class="tabs">
+            <li>
+              <button class="page-btn" id="mypage-myinfo">내 정보 수정</button>
+            </li>
+            <li>
+              <button class="page-btn" id="mypage-orderlist">주문내역</button>
+            </li>
+          </ul>
+        </div>
+        <div class="user_info_title">
+          <h2 class="user_name">주문한 상품이에요.</h2>
+          <p class="user_name_text">주문한 상품들을 확인할 수 있어요.</p>
+        </div>
+        <div class="container orderlist-container" id="orderlistContainer">
+          <!-- <div class="order-container">
+            <div class="order-info">
+              <div>
+                <h1 class="order-number">주문 번호</h1>
+              </div>
+              <div>
+                <p class="order-status">배송 준비 중입니다.</p>
+              </div>
+              <div class="orderlist-edit">
+                <button class="edit-button">수정하기</button>
+                <button class="delete-button">취소하기</button>
+              </div>
+            </div>
+            <ul class="orderlist">
+              <li class="order-list">
+                <div class="order-list-img"><img src="" /></div>
+                <div class="order-list-box">
+                  <div class="order-list-info">
+                    <p class="product-name">상품명입니다.</p>
+                    <p class="product-size">red/xl</p>
+                    <button class="minus-quantity">
+                      <i class="fa-regular fa-circle-minus"></i>
+                    </button>
+                    <p class="product-count">1</p>
+                    <button class="plus-quantity">
+                      <i class="fa-solid fa-circle-plus"></i>
+                    </button>
+                    <p class="product-status">10000원</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 주문 취소시 확인 Modal -->
+    <!-- <div id="modal" class="modal">
+      <div class="modal-background" id="modalBackground"></div>
+      <div class="modal-content">
+        <div class="box">
+          <p class="mb-3">
+            주문 삭제 시 복구할 수 없습니다. 정말로 취소하시겠습니까?
+          </p>
+
+          <div class="buttons">
+            <button
+              class="button mt-5"
+              id="deleteCompleteButton"
+              aria-label="close"
+            >
+              네
+            </button>
+            <button
+              class="button is-primary mt-5"
+              id="deleteCancelButton"
+              aria-label="close"
+            >
+              아니오
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="modal-close is-large"
+        id="modalCloseButton"
+        aria-label="close"
+      ></button>
+    </div> -->
+    <script src="/header/header.js"></script>
+    <script src="/footer/footer.js"></script>
+  </body>
+</html>
