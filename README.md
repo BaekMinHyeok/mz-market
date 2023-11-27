@@ -56,3 +56,14 @@
 
 - 상품목록, 상품추가, 카테고리, 주문관리, 4가지 페이지로 구성이 되며 상품 및 카테고리 CRUD기능으로 이루어져 있습나다.
 </details>
+
+
+## Tech Stack
+
+| FE                        | BE         | Infra     |
+| ------------------------- | ---------- | --------- |
+| Html                      | node.js    | VM        |
+| Css                       | express.js |           |
+| JavaScript                | mongodb    |           |
+
+## 역할
