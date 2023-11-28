@@ -245,3 +245,10 @@ const userSchema = new Schema({
 
 </details>
 
+## Collaboration Tools
+
+- Notion : 스터디 기간, 사용 기술 스택, 참고 문서, 업무 진행 사항, 회의록
+- Discord : 음성 채팅방 활용 의견 제시및 문제 해결
+- GitHub : Code Repository
+- Postman Teams : API 테스트 진행
+
