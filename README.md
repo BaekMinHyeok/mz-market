@@ -66,4 +66,182 @@
 | Css                       | express.js |           |
 | JavaScript                | mongodb    |           |
 
-## 역할
+## 나의 역할
+백엔드 : 전반적인 스키마 작성 , user api 작업, user 에러 핸들링 & 유효성 검사 
+
+## 스키마 명세서 
+
+<details><summary>유저 스키마</summary>
+
+```javascript
+  
+const userSchema = new Schema({
+  name: {
+    type: String,
+    trim: true,
+    required: true,
+  },
+  email: {
+    type: String,
+    trim: true,
+    required: true,
+  },
+  pw: {
+    type: String,
+    trim: true,
+    required: true,
+  },
+  // 관리자
+  admin: {
+    type: Boolean,
+    default: false,
+  },
+});
+```
+
+</details>
+
+<details><summary>상품 스키마</summary>
+
+```javascript
+  
+const productSchema = new Schema({
+  productId: {
+    type: Number,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  gender: {
+    type: String,
+    enum: ["men", "women"],
+    required: true,
+  },
+  images: {
+    type: String,
+    required: false,
+  },
+});
+```
+
+</details>
+
+
+<details><summary>주문 스키마</summary>
+
+```javascript
+  
+const orderSchema = new Schema({
+  orderId: {
+    type: Number,
+    required: true,
+  },
+  name: {
+    type: String,
+    trim: true,
+    required: true,
+  },
+  phoneNumber: {
+    type: Number,
+    trim: true,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+  address2: {
+    type: String,
+    required: false,
+  },
+  comments: {
+    type: String,
+    required: false,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ["ready", "shipping", "complete"],
+    required: true,
+  },
+  price: {
+    type: Number,
+    trim: true,
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    trim: true,
+    required: true,
+  },
+  productInfo: {
+    type: [productSchema],
+    required: true,
+  },
+});
+```
+
+</details>
+
+<details><summary>유저 스키마</summary>
+
+```javascript
+  
+const userSchema = new Schema({
+  name: {
+    type: String,
+    trim: true,
+    required: true,
+  },
+  email: {
+    type: String,
+    trim: true,
+    required: true,
+  },
+  pw: {
+    type: String,
+    trim: true,
+    required: true,
+  },
+  // 관리자
+  admin: {
+    type: Boolean,
+    default: false,
+  },
+});
+```
+
+</details>
+
+<details><summary>카테고리 스키마</summary>
+
+```javascript
+  
+const userSchema = new Schema({
+  name: {
+    type: String,
+    trim: true,
+    required: true,
+  },
+});
+```
+
+</details>
+
